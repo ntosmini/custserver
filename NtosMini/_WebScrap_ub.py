@@ -40,7 +40,7 @@ else :
 
 		driver = webdriver.Chrome("/usr/bin/chromedriver", chrome_options=chrome_options)
 	else :	# 기본 : Firefox
-		driver = webdriver.Firefox("/home/ntosmini/public_html/NtosMini/geckodriver")
+		driver = webdriver.Firefox("/usr/bin/geckodriver")
 
 	if Referer != "not" :
 		driver.get(Referer);
