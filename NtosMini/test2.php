@@ -7,8 +7,11 @@ header("Content-Type: text/html; charset=UTF-8");
 #echo $output;
 #exit;
 
+$SiteUrl = (empty($_POST['SiteUrl']))?"not":$_POST['SiteUrl'];
+$SiteUrl = base64_encode($SiteUrl);
+
 	ob_start();
-	passthru("python3 /home/ntosmini/public_html/NtosMini/test2.py");
+	passthru("python3 /home/ntosmini/public_html/NtosMini/test2.py $SiteUrl");
 	//exec("python3 /home/ntosmini/public_html/NtosMini/test.py")
 	$PageHtml = ob_get_clean(); 
 

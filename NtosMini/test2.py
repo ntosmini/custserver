@@ -3,8 +3,11 @@
 import time
 import sys
 import codecs
-
 import base64
+
+SiteUrl = sys.argv[1]
+SiteUrl = base64.b64decode(SiteUrl).decode()
+
 from selenium import webdriver
 
 from bs4 import BeautifulSoup
@@ -17,7 +20,11 @@ options = webdriver.FirefoxOptions()
 options.add_argument('-headless')
 
 driver = webdriver.Firefox(executable_path="/usr/bin/geckodriver", firefox_options=options)
-driver.get('http://ntos.co.kr')
+
+if SiteUrl == "not" :
+	driver.get('http://ntos.co.kr')
+else :
+	driver.get(SiteUrl)
 
 
 page_html = driver.page_source
