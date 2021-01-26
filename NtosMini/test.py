@@ -5,6 +5,11 @@ import sys
 import codecs
 
 import base64
+
+SiteUrl = sys.argv[1]
+SiteUrl = base64.b64decode(SiteUrl).decode()
+
+
 from selenium import webdriver
 
 from bs4 import BeautifulSoup
@@ -20,7 +25,11 @@ chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64
 
 
 driver = webdriver.Chrome("/usr/bin/chromedriver", chrome_options=chrome_options)
-driver.get('http://ntos.co.kr')
+
+if SiteUrl == "not" :
+	driver.get('http://ntos.co.kr')
+else :
+	driver.get(SiteUrl)
 
 
 page_html = driver.page_source
