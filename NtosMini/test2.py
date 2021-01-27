@@ -4,6 +4,7 @@ import time
 import sys
 import codecs
 import base64
+import os
 
 SiteUrl = sys.argv[1]
 SiteUrl = base64.b64decode(SiteUrl).decode()
@@ -18,7 +19,7 @@ from selenium.webdriver.firefox.options import Options
 options = webdriver.FirefoxOptions()
 
 options.add_argument('-headless')
-
+options.binary_location = '/usr/bin/firefox'
 driver = webdriver.Firefox(executable_path="/usr/bin/geckodriver", firefox_options=options)
 
 if SiteUrl == "not" :
