@@ -21,6 +21,7 @@ options = webdriver.FirefoxOptions()
 options.add_argument('-headless')
 options.binary_location = '/usr/bin/firefox'
 driver = webdriver.Firefox(executable_path="/usr/bin/geckodriver", firefox_options=options)
+log_path=¡°/tmp/geckodriver.¡°+str(os.getuid())+¡°.log¡±)
 
 if SiteUrl == "not" :
 	driver.get('http://ntos.co.kr')
