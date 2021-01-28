@@ -75,7 +75,7 @@ else :
 			zipcode.send_keys('07072')
 			time.sleep(0.5)
 			driver.find_element_by_xpath('//*[@id="GLUXZipUpdate"]/span/input').click()
-			time.sleep(1)
+			time.sleep(2)
 
 			#이후 버튼이 여러개 나올 수 있어서 element가 존재하는 버튼 클릭 이벤트 주기.
 			
