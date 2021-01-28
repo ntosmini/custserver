@@ -77,25 +77,6 @@ if 'amazoan.' in SiteUrl :
 		time.sleep(2)
 
 		#이후 버튼이 여러개 나올 수 있어서 element가 존재하는 버튼 클릭 이벤트 주기.
-
-
-try {
-		$driver->findElement(WebDriverBy::xpath('//*[@id="a-popover-3"]/div/div[2]/span/span/span/button'))->click();
-	} catch(Exception $e) {
-		echo "Error 1";
-	}
-	try {
-		$driver->findElement(WebDriverBy::xpath('/html/body/div[6]/div/div/div[2]/span/span/input'))->click();
-	} catch(Exception $e) {
-		echo "Error 2";
-	}
-	try {
-		$driver->findElement(WebDriverBy::xpath('//*[@id="GLUXConfirmClose"]'))->click();
-	} catch(Exception $e) {
-		echo "Error 3";
-	}
-
-
 		try :
 			driver.find_element_by_xpath('/html/body/div[4]/div/div/div[2]/span/span/span/button').click()
 		except :
