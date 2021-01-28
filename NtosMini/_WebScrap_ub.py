@@ -59,8 +59,7 @@ else :
 		pass
 
 
-	import re
-	if re.search('amazon', SiteUrl) :
+	if 'amazoan.' in SiteUrl :
 		# 배송지 위치
 		element = driver.find_element_by_xpath('//*[@id="glow-ingress-line2"]')
 		nation = element.text
