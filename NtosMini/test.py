@@ -65,6 +65,11 @@ else :
 				driver.find_element_by_xpath('//*[@id="a-popover-3"]/div/div[2]/span').click()
 			except :
 				pass
+
+			try :
+				driver.find_element_by_xpath('//*[@id="a-popover-5"]/div/div[2]/span').click()
+			except :
+				pass
 	else :
 		pass
 
