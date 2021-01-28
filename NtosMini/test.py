@@ -31,7 +31,31 @@ if SiteUrl == "not" :
 else :
 	driver.get(SiteUrl)
 
+	# 배송지 위치
+	element = driver.find_element_by_xpath('//*[@id="glow-ingress-line2"]')
+	nation = element.text
 
+	if nation.capitalize() == "carlstadt 07072‌" :
+		pass
+	else :
+		element.click()
+		time.sleep(3)
+		#zip code 넣는 부분에 키를 넣고 apply 버튼을 클릭해준다.
+		zipcode = driver.find_element_by_xpath('//*[@id="GLUXZipUpdateInput"]')
+		zipcode.send_keys('07072')
+		time.sleep(0.5)
+		driver.find_element_by_xpath('//*[@id="GLUXZipUpdate"]/span/input').click()
+		time.sleep(1)
+
+		#이후 버튼이 여러개 나올 수 있어서 element가 존재하는 버튼 클릭 이벤트 주기.
+		
+
+		try :
+			driver.find_element_by_xpath('//*[@id="a-popover-3"]/div/div[2]/span').click()
+		except :
+			pass
+
+time.sleep(3)
 page_html = driver.page_source
 driver.quit()
 
