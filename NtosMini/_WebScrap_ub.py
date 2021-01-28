@@ -59,7 +59,7 @@ else :
 		pass
 
 
-if 'amazoan.' in SiteUrl :
+if 'amazon.' in SiteUrl :
 	# 배송지 위치
 	element = driver.find_element_by_xpath('//*[@id="glow-ingress-line2"]')
 	nation = element.text
@@ -75,6 +75,7 @@ if 'amazoan.' in SiteUrl :
 		time.sleep(0.5)
 		driver.find_element_by_xpath('//*[@id="GLUXZipUpdate"]/span/input').click()
 		time.sleep(2)
+
 
 		#이후 버튼이 여러개 나올 수 있어서 element가 존재하는 버튼 클릭 이벤트 주기.
 		try :
