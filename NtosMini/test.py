@@ -27,9 +27,11 @@ chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64
 driver = webdriver.Chrome("/usr/bin/chromedriver", chrome_options=chrome_options)
 
 if SiteUrl == "not" :
-	driver.get('http://ntos.co.kr')
+	SiteUrl = 'http://ntos.co.kr'
 else :
-	driver.get(SiteUrl)
+	pass
+
+driver.get(SiteUrl)
 
 #경고창
 try :
@@ -73,9 +75,9 @@ else :
 	pass
 
 
-	time.sleep(3)
-	page_html = driver.page_source
-	driver.quit()
+time.sleep(3)
+page_html = driver.page_source
+driver.quit()
 	
 html = BeautifulSoup(page_html, 'html.parser')
 sys.stdout=codecs.getwriter("utf-8")(sys.stdout.detach())
