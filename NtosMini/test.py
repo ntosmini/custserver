@@ -59,6 +59,11 @@ if 'amazon.com' in SiteUrl :
 
 		#이후 버튼이 여러개 나올 수 있어서 element가 존재하는 버튼 클릭 이벤트 주기.
 		try :
+			driver.find_element_by_name('glowDoneButton').click()
+		except :
+			pass
+"""
+		try :
 			driver.find_element_by_xpath('/html/body/div[4]/div/div/div[2]/span/span/span/button').click()
 		except :
 			pass
@@ -87,6 +92,7 @@ if 'amazon.com' in SiteUrl :
 			driver.find_element_by_xpath('//*[@id="a-popover-5"]/div/div[2]/span/span/span/button').click()
 		except :
 			pass
+"""
 else :
 	pass
 
