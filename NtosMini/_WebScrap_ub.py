@@ -58,8 +58,10 @@ else :
 	except :
 		pass
 
+import random
 
-time.sleep(3)
+time.sleep(random.randint(1, 3))
+time.sleep(2)
 page_html = driver.page_source
 driver.quit()
 	
