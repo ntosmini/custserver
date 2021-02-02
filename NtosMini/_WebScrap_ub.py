@@ -8,10 +8,12 @@ import random
 SiteUrl = sys.argv[1]
 WebType = sys.argv[2]
 Referer = sys.argv[3]
+Agent = sys.argv[4]
 
 import base64
 SiteUrl = base64.b64decode(SiteUrl).decode()
 Referer = base64.b64decode(Referer).decode()
+Agent = base64.b64decode(Agent).decode()
 
 
 # "Chrome" or "Firefox" or "curl"
@@ -31,13 +33,17 @@ else :
 #		display = Display(visible=0, size=(1920, 1080))  
 #		display.start()
 
+
 		chrome_options = webdriver.ChromeOptions()
 		chrome_options.add_argument("-disable-notifications")
 		chrome_options.add_argument('--headless')
 		chrome_options.add_argument('--no-sandbox')
 		chrome_options.add_argument('--disable-dev-shm-usage')
 		chrome_options.add_argument("--window-size=1920x1080")
-		chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36")
+		if Agent == "not" :
+			chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36")
+		else :
+			chrome_options.add_argument("user-agent="+ Agent)
 
 		driver = webdriver.Chrome("/usr/bin/chromedriver", chrome_options=chrome_options)
 	else :	# 기본 : Firefox
