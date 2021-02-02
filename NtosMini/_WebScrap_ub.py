@@ -2,6 +2,7 @@
 import time
 import sys
 import codecs
+import random
 #pip install beautifulsoup4     <=> pip install bs4
 
 SiteUrl = sys.argv[1]
@@ -44,7 +45,7 @@ else :
 
 	if Referer != "not" :
 		driver.get(Referer);
-		time.sleep(2)
+		time.sleep(random.randint(1, 3))
 
 	driver.get(SiteUrl);
 	
@@ -58,7 +59,7 @@ else :
 	except :
 		pass
 
-import random
+
 
 time.sleep(random.randint(1, 3))
 time.sleep(2)
