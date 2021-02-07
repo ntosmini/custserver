@@ -31,9 +31,9 @@ else :
 #		chrome_options.add_argument('lang=ko_KR')
 #		chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36")
 #		driver = webdriver.Chrome("C:/xampp/htdocs/_Scrap/chromedriver", chrome_options=chrome_options)
-		driver = webdriver.Chrome("C:/xampp/htdocs/NtosMini/chromedriver")
+		driver = webdriver.Chrome("C:/xampp/htdocs/NtosMini/chromedriver.exe")
 	else :	# 기본 : Firefox
-		driver = webdriver.Firefox("C:/xampp/htdocs/NtosMini/geckodriver")
+		driver = webdriver.Firefox("C:/xampp/htdocs/NtosMini/geckodriver.exe")
 
 	if Referer != "not" :
 		driver.get(Referer);
