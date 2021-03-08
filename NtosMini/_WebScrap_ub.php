@@ -11,7 +11,7 @@ $Proxy = (empty($_POST['Proxy']))?"not":$_POST['Proxy'];
 
 
 if($SiteUrl == "not") {
-	$PageHtml = "Error";
+	$PageHtml = "SiteUrl Error";
 } else {
 
 if($WebType == "curl"){
@@ -41,7 +41,7 @@ if($WebType == "curl"){
 	if($PageHtml){
 		$PageHtml = $PageHtml;
 	} else {
-		$PageHtml = "Error";
+		$PageHtml = "PageHtml Error";
 	}	//end if
 }	//end if SiteUrl
 echo base64_encode($PageHtml);
