@@ -6,6 +6,9 @@ header("Content-Type: text/html; charset=UTF-8");
 #$output = shell_exec($command);
 #echo $output;
 #exit;
+/*
+test
+*/
 
 $SiteUrl = (empty($_GET['SiteUrl']))?"not":$_GET['SiteUrl'];
 $SiteUrl = base64_encode($SiteUrl);
