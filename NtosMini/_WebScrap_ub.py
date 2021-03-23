@@ -137,8 +137,7 @@ else :
 
 
 
-time.sleep(random.randint(1, 3))
-time.sleep(2)
+driver.implicitly_wait(4)
 page_html = driver.page_source
 driver.quit()
 	
