@@ -137,7 +137,7 @@ else :
 
 
 
-driver.implicitly_wait(4)
+driver.implicitly_wait(10)
 page_html = driver.page_source
 driver.quit()
 	
