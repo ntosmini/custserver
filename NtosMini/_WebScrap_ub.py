@@ -125,7 +125,7 @@ else :
 	driver.get(SiteUrl);
 	
 
-
+	"""
 	#경고창
 	try :
 		result = driver.switch_to_alert()
@@ -133,6 +133,7 @@ else :
 		result.dismiss()
 	except :
 		pass
+	"""
 
 
 
