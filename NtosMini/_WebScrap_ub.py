@@ -57,7 +57,7 @@ else :
 		driver = webdriver.Firefox("/usr/bin/geckodriver")
 
 	if Referer != "not" :
-		driver.get(Referer);
+		driver.get(Referer)
 		time.sleep(random.randint(1, 3))
 	
 	DriverJob = threading.Timer(120, DriverQuit)
