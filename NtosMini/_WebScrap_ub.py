@@ -84,4 +84,5 @@ page_html = driver.page_source
 #DriverJob.cancel()
 
 html = BeautifulSoup(page_html, 'html.parser')
-print("--" + html)
+print("--")
+print(html)
