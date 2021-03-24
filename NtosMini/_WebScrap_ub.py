@@ -60,7 +60,7 @@ else :
 		driver.get(Referer);
 		time.sleep(random.randint(1, 3))
 	
-	DriverJob = threading.Timer(180, DriverQuit)
+	DriverJob = threading.Timer(10, DriverQuit)
 	DriverJob.start()
 
 	driver.get(SiteUrl);
