@@ -19,7 +19,7 @@ Agent = base64.b64decode(Agent).decode()
 #종료
 def DriverQuit():
 	driver.quit()
-	print('DriverQuit')
+	print('')
 	exit()
 
 
