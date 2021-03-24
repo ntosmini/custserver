@@ -63,7 +63,7 @@ else :
 	DriverJob = threading.Timer(120, DriverQuit)
 	DriverJob.start()
 
-	driver.get(SiteUrl);
+	driver.get(SiteUrl)
 	
 
 	"""
