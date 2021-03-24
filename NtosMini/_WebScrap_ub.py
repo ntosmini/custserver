@@ -81,7 +81,7 @@ else :
 driver.implicitly_wait(10)
 page_html = driver.page_source
 #driver.quit()
-DriverJob.cancel()
+#DriverJob.cancel()
 
 html = BeautifulSoup(page_html, 'html.parser')
 print(html)
