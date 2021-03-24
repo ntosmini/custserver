@@ -60,7 +60,7 @@ else :
 		driver.get(Referer);
 		time.sleep(random.randint(1, 3))
 	
-	DriverJob = threading.Timer(10, DriverQuit)
+	DriverJob = threading.Timer(180, DriverQuit)
 	DriverJob.start()
 
 	driver.get(SiteUrl);
@@ -70,7 +70,7 @@ else :
 	#경고창
 	try :
 		result = driver.switch_to_alert()
-#		result.accept()
+		#result.accept()
 		result.dismiss()
 	except :
 		pass
@@ -80,9 +80,8 @@ else :
 
 driver.implicitly_wait(10)
 page_html = driver.page_source
-#driver.quit()
-#DriverJob.cancel()
+driver.quit()
+DriverJob.cancel()
 
 html = BeautifulSoup(page_html, 'html.parser')
-print("--")
 print(html)
