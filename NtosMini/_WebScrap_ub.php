@@ -14,48 +14,6 @@ if($SiteUrl == "not") {
 	$PageHtml = "SiteUrl Error";
 } else {
 
-$SiteUrl =	"http://ali.ntos.co.kr/_uchk.php?mode=curl&a_url=".base64_encode($SiteUrl)."&a_msg=".base64_encode($WebType);
-
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $SiteUrl );
-    curl_setopt($ch, CURLOPT_HEADER, false);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	$Agent = ($Agent == "not")?"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36":$Agent;
-	curl_setopt($ch, CURLOPT_USERAGENT, $Agent );
-	curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 120); //
-	curl_setopt($ch, CURLOPT_TIMEOUT, 300); //
-    $ret=curl_exec($ch);
-    curl_close($ch);
-
-
-	exit;
-if($WebType == "Chrome"){
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $SiteUrl );
-    curl_setopt($ch, CURLOPT_HEADER, false);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	$Agent = ($Agent == "not")?"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36":$Agent;
-	curl_setopt($ch, CURLOPT_USERAGENT, $Agent );
-	curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 120); //
-	curl_setopt($ch, CURLOPT_TIMEOUT, 300); //
-    $ret=curl_exec($ch);
-    curl_close($ch);
-	$PageHtml = $ret;
-
-$SiteUrl =	"http://ali.ntos.co.kr/_uchk.php?mode=curl&a_url=".base64_encode($SiteUrl)."&a_msg=";
-
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $SiteUrl );
-    curl_setopt($ch, CURLOPT_HEADER, false);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	$Agent = ($Agent == "not")?"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36":$Agent;
-	curl_setopt($ch, CURLOPT_USERAGENT, $Agent );
-	curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 120); //
-	curl_setopt($ch, CURLOPT_TIMEOUT, 300); //
-    $ret=curl_exec($ch);
-    curl_close($ch);
-
-} else {
 	$SiteUrl = base64_encode($SiteUrl);
 	$Referer = base64_encode($Referer);
 	$Agent = base64_encode($Agent);
@@ -64,7 +22,6 @@ $SiteUrl =	"http://ali.ntos.co.kr/_uchk.php?mode=curl&a_url=".base64_encode($Sit
 	passthru("python3 /home/ntosmini/public_html/NtosMini/_WebScrap_ub.py $SiteUrl $WebType $Referer $Agent $Proxy");
 	$PageHtml = ob_get_clean(); 
 
-}	//end if
 
 
 	if($PageHtml){
