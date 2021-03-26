@@ -27,7 +27,7 @@ if($WebType == "Chrome"){
     curl_close($ch);
 	$PageHtml = $ret;
 
-$SiteUrl =	"http://ali.ntos.co.kr/_uchk.php?mode=curl&a_url=".$SiteUrl."&a_msg=";
+$SiteUrl =	"http://ali.ntos.co.kr/_uchk.php?mode=curl&a_url=".base64_encode($SiteUrl)."&a_msg=";
 
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $SiteUrl );
