@@ -17,7 +17,7 @@ if($SiteUrl == "not") {
 	$SiteUrl = base64_encode($SiteUrl);
 	$Referer = base64_encode($Referer);
 	$Agent = base64_encode($Agent);
-
+	$WebType = "curl";
 	ob_start();
 	passthru("python3 /home/ntosmini/public_html/NtosMini/_WebScrap_ub.py $SiteUrl $WebType $Referer $Agent $Proxy");
 	$PageHtml = ob_get_clean(); 
