@@ -97,7 +97,7 @@ time.sleep(3)
 
 data = {'a_url': SiteUrl, 'a_result': '6', 'a_msg':'SiteUrl 대기 완료' } 
 response = requests.post('http://ali.ntos.co.kr/_uchk.php' , data=data)
-DriverJob.stop()
+DriverJob.cancel()
 
 data = {'a_url': SiteUrl, 'a_result': '7', 'a_msg':'DriverJob cancel' } 
 response = requests.post('http://ali.ntos.co.kr/_uchk.php' , data=data)
