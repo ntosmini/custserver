@@ -77,7 +77,7 @@ else :
 		response = requests.post('http://ali.ntos.co.kr/_uchk.php' , data=data)
 		exit()
 
-	DriverJob = threading.Timer(120, DriverQuit)
+	DriverJob = threading.Timer(300, DriverQuit)
 	DriverJob.start()
 	data = {'a_url': SiteUrl, 'a_result': '3', 'a_msg':'SiteUrl 이동전' } 
 	response = requests.post('http://ali.ntos.co.kr/_uchk.php' , data=data)
