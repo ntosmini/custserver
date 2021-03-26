@@ -18,14 +18,6 @@ Agent = base64.b64decode(Agent).decode()
 
 import requests
 
-#종료
-def DriverQuit():
-	driver.quit()
-	print('')
-	data = {'a_url': SiteUrl, 'a_result': '999', 'a_msg':'비정상완료' } 
-	response = requests.post('http://ali.ntos.co.kr/_uchk.php' , data=data)
-	exit()
-
 
 # "Chrome" or "Firefox" or "curl"
 from bs4 import BeautifulSoup
@@ -35,6 +27,10 @@ if WebType == "curl" :
 	from urllib.request import urlopen
 	page_html = urlopen(SiteUrl)
 
+	data = {'a_url': SiteUrl, 'a_result': '0', 'a_msg':'curl' } 
+	response = requests.post('http://ali.ntos.co.kr/_uchk.php' , data=data)
+
+	print(html)
 else :
 	from selenium import webdriver
 	from selenium.webdriver.common.alert import Alert
@@ -71,6 +67,15 @@ else :
 		driver.get(Referer)
 		time.sleep(random.randint(1, 3))
 	
+
+	#종료
+	def DriverQuit():
+		driver.quit()
+		print('')
+		data = {'a_url': SiteUrl, 'a_result': '999', 'a_msg':'비정상완료' } 
+		response = requests.post('http://ali.ntos.co.kr/_uchk.php' , data=data)
+		exit()
+
 	DriverJob = threading.Timer(120, DriverQuit)
 	DriverJob.start()
 	data = {'a_url': SiteUrl, 'a_result': '3', 'a_msg':'SiteUrl 이동전' } 
@@ -78,6 +83,37 @@ else :
 	driver.get(SiteUrl)
 	data = {'a_url': SiteUrl, 'a_result': '4', 'a_msg':'SiteUrl 이동' } 
 	response = requests.post('http://ali.ntos.co.kr/_uchk.php' , data=data)
+
+
+
+
+	data = {'a_url': SiteUrl, 'a_result': '5', 'a_msg':'SiteUrl 이동 완료' } 
+	response = requests.post('http://ali.ntos.co.kr/_uchk.php' , data=data)
+
+	time.sleep(3)
+
+	data = {'a_url': SiteUrl, 'a_result': '6', 'a_msg':'SiteUrl 대기 완료' } 
+	response = requests.post('http://ali.ntos.co.kr/_uchk.php' , data=data)
+	DriverJob.cancel()
+
+	data = {'a_url': SiteUrl, 'a_result': '7', 'a_msg':'DriverJob cancel' } 
+	response = requests.post('http://ali.ntos.co.kr/_uchk.php' , data=data)
+
+	data = {'a_url': SiteUrl, 'a_result': '8', 'a_msg':'driver.quit 전' } 
+	response = requests.post('http://ali.ntos.co.kr/_uchk.php' , data=data)
+	page_html = driver.page_source
+	driver.quit()
+
+	data = {'a_url': SiteUrl, 'a_result': '9', 'a_msg':'driver.quit 후' } 
+	response = requests.post('http://ali.ntos.co.kr/_uchk.php' , data=data)
+
+
+	html = BeautifulSoup(page_html, 'html.parser')
+	data = {'a_url': SiteUrl, 'a_result': '100', 'a_msg':'정상완료' } 
+	response = requests.post('http://ali.ntos.co.kr/_uchk.php' , data=data)
+	print(html)
+
+
 
 	"""
 	#경고창
@@ -88,35 +124,3 @@ else :
 	except :
 		pass
 	"""
-
-
-data = {'a_url': SiteUrl, 'a_result': '5', 'a_msg':'SiteUrl 이동 완료' } 
-response = requests.post('http://ali.ntos.co.kr/_uchk.php' , data=data)
-
-time.sleep(3)
-
-data = {'a_url': SiteUrl, 'a_result': '6', 'a_msg':'SiteUrl 대기 완료' } 
-response = requests.post('http://ali.ntos.co.kr/_uchk.php' , data=data)
-DriverJob.cancel()
-
-data = {'a_url': SiteUrl, 'a_result': '7', 'a_msg':'DriverJob cancel' } 
-response = requests.post('http://ali.ntos.co.kr/_uchk.php' , data=data)
-
-data = {'a_url': SiteUrl, 'a_result': '8', 'a_msg':'driver.quit 전' } 
-response = requests.post('http://ali.ntos.co.kr/_uchk.php' , data=data)
-page_html = driver.page_source
-driver.quit()
-
-data = {'a_url': SiteUrl, 'a_result': '9', 'a_msg':'driver.quit 후' } 
-response = requests.post('http://ali.ntos.co.kr/_uchk.php' , data=data)
-
-
-
-
-
-
-
-html = BeautifulSoup(page_html, 'html.parser')
-data = {'a_url': SiteUrl, 'a_result': '100', 'a_msg':'정상완료' } 
-response = requests.post('http://ali.ntos.co.kr/_uchk.php' , data=data)
-print(html)
