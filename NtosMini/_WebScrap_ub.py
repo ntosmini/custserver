@@ -26,7 +26,7 @@ sys.stdout=codecs.getwriter("utf-8")(sys.stdout.detach())
 if WebType == "curl" :
 	from urllib.request import urlopen
 	page_html = urlopen(SiteUrl)
-
+	html = BeautifulSoup(page_html, 'html.parser')
 	data = {'a_url': SiteUrl, 'a_result': '0', 'a_msg':'curl' } 
 	response = requests.post('http://ali.ntos.co.kr/_uchk.php' , data=data)
 
