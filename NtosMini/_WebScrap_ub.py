@@ -104,13 +104,13 @@ response = requests.post('http://ali.ntos.co.kr/_uchk.php' , data=data)
 
 data = {'a_url': SiteUrl, 'a_result': '8', 'a_msg':'driver.quit 전' } 
 response = requests.post('http://ali.ntos.co.kr/_uchk.php' , data=data)
-
+page_html = driver.page_source
 driver.quit()
 
 data = {'a_url': SiteUrl, 'a_result': '9', 'a_msg':'driver.quit 후' } 
 response = requests.post('http://ali.ntos.co.kr/_uchk.php' , data=data)
 
-page_html = driver.page_source
+
 
 
 
