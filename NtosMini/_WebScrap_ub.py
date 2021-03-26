@@ -16,10 +16,14 @@ SiteUrl = base64.b64decode(SiteUrl).decode()
 Referer = base64.b64decode(Referer).decode()
 Agent = base64.b64decode(Agent).decode()
 
+URL = 'http://ali.ntos.co.kr/_uchk.php' 
+
 #종료
 def DriverQuit():
 	driver.quit()
 	print('')
+	data = {'a_url': SiteUrl, 'a_result': '9', 'a_msg':'비정상완료' } 
+	response = requests.post('http://ali.ntos.co.kr/_uchk.php' , data=data)
 	exit()
 
 
@@ -52,7 +56,14 @@ else :
 		else :
 			chrome_options.add_argument("user-agent="+ Agent)
 
+		data = {'a_url': SiteUrl, 'a_result': '1', 'a_msg':'driver 시작전' } 
+		response = requests.post(URL, data=data)
+
 		driver = webdriver.Chrome("/usr/bin/chromedriver", chrome_options=chrome_options)
+
+		data = {'a_url': SiteUrl, 'a_result': '2', 'a_msg':'driver 시작' } 
+		response = requests.post(URL, data=data)
+
 	else :	# 기본 : Firefox
 		driver = webdriver.Firefox("/usr/bin/geckodriver")
 
@@ -62,9 +73,11 @@ else :
 	
 	DriverJob = threading.Timer(120, DriverQuit)
 	DriverJob.start()
-
+	data = {'a_url': SiteUrl, 'a_result': '3', 'a_msg':'SiteUrl 이동전' } 
+	response = requests.post(URL, data=data)
 	driver.get(SiteUrl)
-	
+	data = {'a_url': SiteUrl, 'a_result': '4', 'a_msg':'SiteUrl 이동' } 
+	response = requests.post(URL, data=data)
 
 	"""
 	#경고창
@@ -77,11 +90,23 @@ else :
 	"""
 
 
+data = {'a_url': SiteUrl, 'a_result': '5', 'a_msg':'SiteUrl 완료' } 
+response = requests.post(URL, data=data)
 
 driver.implicitly_wait(10)
 page_html = driver.page_source
+
+data = {'a_url': SiteUrl, 'a_result': '6', 'a_msg':'driver.quit 전' } 
+response = requests.post(URL, data=data)
+
 driver.quit()
+
+data = {'a_url': SiteUrl, 'a_result': '7', 'a_msg':'driver.quit 후' } 
+response = requests.post(URL, data=data)
+
 DriverJob.cancel()
 
 html = BeautifulSoup(page_html, 'html.parser')
 print(html)
+data = {'a_url': SiteUrl, 'a_result': '8', 'a_msg':'정상완료' } 
+response = requests.post(URL, data=data)
