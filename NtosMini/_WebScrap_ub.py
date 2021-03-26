@@ -97,7 +97,7 @@ time.sleep(3)
 
 data = {'a_url': SiteUrl, 'a_result': '6', 'a_msg':'SiteUrl 대기 완료' } 
 response = requests.post('http://ali.ntos.co.kr/_uchk.php' , data=data)
-DriverJob.cancel()
+DriverJob.stop()
 
 data = {'a_url': SiteUrl, 'a_result': '7', 'a_msg':'DriverJob cancel' } 
 response = requests.post('http://ali.ntos.co.kr/_uchk.php' , data=data)
@@ -117,6 +117,6 @@ page_html = driver.page_source
 
 
 html = BeautifulSoup(page_html, 'html.parser')
-print(html)
-data = {'a_url': SiteUrl, 'a_result': '10', 'a_msg':'정상완료' } 
+data = {'a_url': SiteUrl, 'a_result': '100', 'a_msg':'정상완료' } 
 response = requests.post('http://ali.ntos.co.kr/_uchk.php' , data=data)
+print(html)
