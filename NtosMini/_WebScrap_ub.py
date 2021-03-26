@@ -93,7 +93,7 @@ else :
 data = {'a_url': SiteUrl, 'a_result': '5', 'a_msg':'SiteUrl 이동 완료' } 
 response = requests.post('http://ali.ntos.co.kr/_uchk.php' , data=data)
 
-driver.implicitly_wait(10)
+time.sleep(3)
 
 data = {'a_url': SiteUrl, 'a_result': '6', 'a_msg':'SiteUrl 대기 완료' } 
 response = requests.post('http://ali.ntos.co.kr/_uchk.php' , data=data)
