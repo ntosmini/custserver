@@ -90,10 +90,14 @@ else :
 	"""
 
 
-data = {'a_url': SiteUrl, 'a_result': '5', 'a_msg':'SiteUrl 완료' } 
+data = {'a_url': SiteUrl, 'a_result': '5', 'a_msg':'SiteUrl 이동 완료' } 
 response = requests.post('http://ali.ntos.co.kr/_uchk.php' , data=data)
 
 driver.implicitly_wait(10)
+
+data = {'a_url': SiteUrl, 'a_result': '5', 'a_msg':'SiteUrl 대기 완료' } 
+response = requests.post('http://ali.ntos.co.kr/_uchk.php' , data=data)
+
 page_html = driver.page_source
 
 data = {'a_url': SiteUrl, 'a_result': '6', 'a_msg':'driver.quit 전' } 
