@@ -31,6 +31,7 @@ if WebType == "curl" :
 	response = requests.post('http://ali.ntos.co.kr/_uchk.php' , data=data)
 
 	print(html)
+	exit()
 else :
 	from selenium import webdriver
 	from selenium.webdriver.common.alert import Alert
@@ -112,6 +113,7 @@ else :
 	data = {'a_url': SiteUrl, 'a_result': '100', 'a_msg':'정상완료' } 
 	response = requests.post('http://ali.ntos.co.kr/_uchk.php' , data=data)
 	print(html)
+	exit()
 
 
 
