@@ -14,18 +14,32 @@ if($SiteUrl == "not") {
 	$PageHtml = "SiteUrl Error";
 } else {
 
-if($WebType == "curl"){
+if($WebType == "Chrome"){
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $SiteUrl );
     curl_setopt($ch, CURLOPT_HEADER, false);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	$Agent = ($Agent == "not")?"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36":$Agent;
-	curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
+	curl_setopt($ch, CURLOPT_USERAGENT, $Agent );
 	curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 120); //
 	curl_setopt($ch, CURLOPT_TIMEOUT, 300); //
     $ret=curl_exec($ch);
     curl_close($ch);
 	$PageHtml = $ret;
+
+$SiteUrl =	"http://ali.ntos.co.kr/_uchk.php?mode=curl&a_url=".$SiteUrl."&a_msg=";
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $SiteUrl );
+    curl_setopt($ch, CURLOPT_HEADER, false);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	$Agent = ($Agent == "not")?"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36":$Agent;
+	curl_setopt($ch, CURLOPT_USERAGENT, $Agent );
+	curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 120); //
+	curl_setopt($ch, CURLOPT_TIMEOUT, 300); //
+    $ret=curl_exec($ch);
+    curl_close($ch);
+
 } else {
 	$SiteUrl = base64_encode($SiteUrl);
 	$Referer = base64_encode($Referer);
