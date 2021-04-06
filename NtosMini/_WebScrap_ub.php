@@ -14,14 +14,28 @@ if($SiteUrl == "not") {
 	$PageHtml = "SiteUrl Error";
 } else {
 
-	$SiteUrl = base64_encode($SiteUrl);
-	$Referer = base64_encode($Referer);
-	$Agent = base64_encode($Agent);
+	
+	if($WebType == "phpcurl"){
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $SiteUrl );
+		curl_setopt($ch, CURLOPT_HEADER, false);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		$Agent = ($Agent == "not")?"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36":$Agent;
+		curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
+		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 120); //
+		curl_setopt($ch, CURLOPT_TIMEOUT, 300); //
+		$PageHtml=curl_exec($ch);
+		curl_close($ch);
 
-	ob_start();
-	passthru("python3 /home/ntosmini/public_html/NtosMini/_WebScrap_ub.py $SiteUrl $WebType $Referer $Agent $Proxy");
-	$PageHtml = ob_get_clean(); 
+	} else {
+		$SiteUrl = base64_encode($SiteUrl);
+		$Referer = base64_encode($Referer);
+		$Agent = base64_encode($Agent);
 
+		ob_start();
+		passthru("python3 /home/ntosmini/public_html/NtosMini/_WebScrap_ub.py $SiteUrl $WebType $Referer $Agent $Proxy");
+		$PageHtml = ob_get_clean(); 
+	}	//end if
 
 
 	if($PageHtml){
