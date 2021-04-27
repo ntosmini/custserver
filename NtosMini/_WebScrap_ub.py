@@ -34,9 +34,9 @@ else :
 	from selenium.webdriver.common.alert import Alert
 
 	if WebType == "Chrome" :
-		from pyvirtualdisplay import Display
-		display = Display(visible=0, size=(1920, 1080))  
-		display.start()
+		#from pyvirtualdisplay import Display
+		#display = Display(visible=0, size=(1920, 1080))  
+		#display.start()
 
 
 		chrome_options = webdriver.ChromeOptions()
