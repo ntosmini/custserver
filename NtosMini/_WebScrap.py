@@ -3,6 +3,7 @@ import time
 import sys
 import codecs
 #pip install beautifulsoup4     <=> pip install bs4
+import threading
 
 SiteUrl = sys.argv[1]
 WebType = sys.argv[2]
