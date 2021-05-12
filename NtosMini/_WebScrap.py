@@ -25,7 +25,7 @@ else :
 	from selenium import webdriver
 	from selenium.webdriver.common.alert import Alert
 
-	if WebType == "WinChrome" :
+	if WebType == "Chrome" :
 		driver = webdriver.Chrome("C:/xampp/htdocs/NtosMini/chromedriver.exe")
 	else :	# 기본 : Firefox
 		driver = webdriver.Firefox("C:/xampp/htdocs/NtosMini/geckodriver.exe")
