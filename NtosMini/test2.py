@@ -9,9 +9,9 @@ import requests
 import pyperclip
 
 #pip install pyautogui	키보드
-import pyautogui  
+#import pyautogui  
 
-from tkinter import Tk
+#from tkinter import Tk
 
 
 """
@@ -41,7 +41,6 @@ from selenium.webdriver.common.alert import Alert
 
 chrome_options = webdriver.ChromeOptions()
 
-
 chrome_options.add_argument('window-size=1920,1080')
 """
 chrome_options.add_argument("-disable-notifications")
@@ -49,17 +48,18 @@ chrome_options.add_argument('--headless')
 chrome_options.add_argument('--no-sandbox')
 chrome_options.add_argument('--disable-dev-shm-usage')
 chrome_options.add_argument("--window-size=1920x1080")
-"""
 chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36")
+"""
+#driver = webdriver.Chrome("C:/xampp/htdocs/_Ntos/_Trans/chromedriver.exe", chrome_options=chrome_options)
+driver = webdriver.Chrome("/usr/bin/chromedriver", chrome_options=chrome_options)
 
-driver = webdriver.Chrome("C:/xampp/htdocs/_Ntos/_Trans/chromedriver.exe", chrome_options=chrome_options)
 #driver = webdriver.Chrome("C:/xampp/htdocs/_Ntos/_Trans/chromedriver.exe")
 
 time.sleep(1)
 actions = ActionChains(driver)
 #actions.key_down(Keys.ALT).send_keys('x').key_up(Keys.ALT).perform()
 
-driver.get("https://papago.naver.com/?sk=en&tk=ko")
+driver.get("https://papago.naver.com")
 
 time.sleep(1)
 
@@ -72,7 +72,7 @@ f.close()
 
 from urllib.request import urlopen
 
-
+SiteUrl = "http://amazon.ntos.co.kr/_Mini_/_WinTrans/ItemWinTransSe.php?CustId=amazon&limit=0"
 page_html = urlopen(SiteUrl)
 html = BeautifulSoup(page_html, 'html.parser')
 html = str(html)
@@ -90,7 +90,7 @@ time.sleep(3)
 actions.key_down(Keys.CONTROL).send_keys('v').key_up(Keys.CONTROL).perform()
 
 actions = ActionChains(driver)
-pyperclip.copy('')
+
 time.sleep(3)
 ##actions.key_down(Keys.TAB).key_up(Keys.TAB).perform()
 
