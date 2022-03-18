@@ -20,7 +20,9 @@ if($SiteUrl == "not") {
 		curl_setopt($ch, CURLOPT_URL, $SiteUrl );
 		curl_setopt($ch, CURLOPT_HEADER, false);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
+		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+		curl_setopt($ch, CURLOPT_AUTOREFERER, true);
+		
 		$Agent = ($Agent == "not")?"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36":$Agent;
 		curl_setopt($ch, CURLOPT_USERAGENT, $Agent);
 
