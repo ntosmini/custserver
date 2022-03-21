@@ -31,7 +31,7 @@ chrome_options.add_argument('--no-sandbox')
 chrome_options.add_argument('--disable-dev-shm-usage')
 chrome_options.add_argument("--window-size=1920x1080")
 chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36")
-driver = webdriver.Chrome("/usr/bin/chromedriver", chrome_options=chrome_options)
+driver = webdriver.Chrome("/home/ntosmini/public_html/NtosMini/chromedriver", chrome_options=chrome_options)
 
 #종료
 def DriverQuit():
