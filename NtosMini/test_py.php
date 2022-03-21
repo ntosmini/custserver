@@ -12,4 +12,4 @@ $PageHtml = ob_get_clean();
 
 
 
-echo base64_encode($PageHtml);
+echo $PageHtml;
