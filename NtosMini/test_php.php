@@ -16,4 +16,4 @@ curl_setopt($ch, CURLOPT_TIMEOUT, 300); //
 $PageHtml=curl_exec($ch);
 curl_close($ch);
 
-echo base64_encode($PageHtml);
+echo $PageHtml;
