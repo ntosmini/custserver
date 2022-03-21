@@ -10,8 +10,6 @@ SiteUrl = sys.argv[1]
 
 import base64
 SiteUrl = base64.b64decode(SiteUrl).decode()
-Referer = base64.b64decode(Referer).decode()
-Agent = base64.b64decode(Agent).decode()
 
 
 
