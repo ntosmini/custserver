@@ -7,9 +7,6 @@ import random
 import threading
 
 SiteUrl = sys.argv[1]
-WebType = sys.argv[2]
-Referer = sys.argv[3]
-Agent = sys.argv[4]
 
 import base64
 SiteUrl = base64.b64decode(SiteUrl).decode()
