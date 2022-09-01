@@ -10,6 +10,7 @@ $WebType = (empty($_POST['WebType']))?"Chrome":$_POST['WebType'];	// "Chrome" or
 $Referer = (empty($_POST['Referer']))?"":$_POST['Referer'];
 $Agent = (empty($_POST['Agent']))?"":$_POST['Agent'];
 $Proxy = (empty($_POST['Proxy']))?"":$_POST['Proxy'];
+$CodeLen = (empty($_POST['CodeLen']))?"15":$_POST['CodeLen'];
 
 
 
@@ -41,6 +42,7 @@ if($SiteUrl == "") {
 		$RunData['Referer'] = $Referer;
 		$RunData['Agent'] = $Agent;
 		$RunData['Proxy'] = $Proxy;
+		$RunData['CodeLen'] = CodeLen;		
 
 		$MConfigData = escapeshellarg(json_encode($RunData));
 
