@@ -6,7 +6,7 @@ import random
 #pip install beautifulsoup4     <=> pip install bs4
 import threading
 import json
-
+import re
 
 #한글깨짐
 sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
