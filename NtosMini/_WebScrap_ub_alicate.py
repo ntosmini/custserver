@@ -139,7 +139,10 @@ else :
 		for codelist in ItemListSet :
 			print(codelist)
 	else :
-		print("error")
+		if ItemContentBox.text :
+			print("notitem")
+		else :
+			print("error")
 
 	driver.close()
 	driver.quit()
