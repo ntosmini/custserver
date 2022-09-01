@@ -21,6 +21,7 @@ SiteUrl = MConfig['SiteUrl']
 WebType = MConfig['WebType']
 Agent = MConfig['Agent']
 Proxy = MConfig['Proxy']
+CodeLen = int(MConfig['CodeLen'])
 
 
 def ScrollDown() :
@@ -113,7 +114,7 @@ else :
 		for Slist in ScriptListDataArr['mods']['itemList']['content'] :
 			Code1 = Slist['productId']
 			Url = '/item/'+Code1+".html";
-			if len(str(Code1)) > 15 :
+			if len(str(Code1)) > CodeLen :
 				ItemList.append(str(Code1))
 	except :
 		pass
@@ -127,7 +128,7 @@ else :
 			if re.search("aliexpress.com/item/\d+", str(href)) :
 				href_result = re.sub(r'(\.html.*)$', '.html', str(href))
 				Code2 = re.search("\d+", href_result).group()
-				if len(str(Code2)) > 15 :
+				if len(str(Code2)) > CodeLen :
 					ItemList.append(str(Code2))
 	except :
 		pass
