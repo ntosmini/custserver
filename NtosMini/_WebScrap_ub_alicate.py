@@ -121,7 +121,7 @@ else :
 		pass
 
 	try :
-		ItemContentBox = driver.find_elements_by_class_name("product-container")
+		ItemContentBox = driver.find_element_by_class_name("product-container")
 		ATagItems = ItemContentBox.find_elements_by_tag_name('a')
 
 		for ATI in ATagItems :
