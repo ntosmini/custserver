@@ -42,7 +42,7 @@ if($SiteUrl == "") {
 		$RunData['Referer'] = $Referer;
 		$RunData['Agent'] = $Agent;
 		$RunData['Proxy'] = $Proxy;
-		$RunData['CodeLen'] = CodeLen;		
+		$RunData['CodeLen'] = $CodeLen;		
 
 		$MConfigData = escapeshellarg(json_encode($RunData));
 
