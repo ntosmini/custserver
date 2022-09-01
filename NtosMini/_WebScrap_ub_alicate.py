@@ -113,7 +113,8 @@ else :
 		for Slist in ScriptListDataArr['mods']['itemList']['content'] :
 			Code1 = Slist['productId']
 			Url = '/item/'+Code1+".html";
-			ItemList.append(str(Code1))
+				if len(str(Code1)) > 15 :
+					ItemList.append(str(Code1))
 	except :
 		pass
 
@@ -126,7 +127,8 @@ else :
 			if re.search("aliexpress.com/item/\d+", str(href)) :
 				href_result = re.sub(r'(\.html.*)$', '.html', str(href))
 				Code2 = re.search("\d+", href_result).group()
-				ItemList.append(str(Code2))
+				if len(str(Code2)) > 15 :
+					ItemList.append(str(Code2))
 	except :
 		pass
 
