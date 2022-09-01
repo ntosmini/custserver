@@ -7,6 +7,7 @@ import random
 import threading
 import json
 import re
+import io
 
 #한글깨짐
 sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
