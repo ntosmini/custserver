@@ -113,8 +113,8 @@ else :
 		for Slist in ScriptListDataArr['mods']['itemList']['content'] :
 			Code1 = Slist['productId']
 			Url = '/item/'+Code1+".html";
-				if len(str(Code1)) > 15 :
-					ItemList.append(str(Code1))
+			if len(str(Code1)) > 15 :
+				ItemList.append(str(Code1))
 	except :
 		pass
 
