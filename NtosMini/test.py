@@ -79,10 +79,6 @@ else :
 	else :	# 기본 : Firefox
 		driver = webdriver.Firefox("/usr/bin/geckodriver")
 
-	if Referer != "not" :
-		driver.get(Referer)
-		time.sleep(random.randint(1, 3))
-	
 
 	#종료
 	def DriverQuit():
