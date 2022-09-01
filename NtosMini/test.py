@@ -13,8 +13,7 @@ import io
 sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
 sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
 
-MConfigData = sys.argv[1]
-MConfig = json.loads(MConfigData)
+
 
 
 SiteUrl = "https://ko.aliexpress.com/category/153709/temperature-instruments.html?trafficChannel=main&catName=temperature-instruments&CatId=153709&ltype=wholesale&SortType=default&minPrice=301&maxPrice=302&page=1&groupsort=1&isrefine=y"
