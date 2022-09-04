@@ -120,16 +120,38 @@ else :
 		pass
 
 	try :
-		ItemContentBox = driver.find_element_by_class_name("product-container")
-		ATagItems = ItemContentBox.find_elements_by_tag_name('a')
+		ItemContentBox = driver.find_element(By.CLASS_NAME, "product-container")
+		ATagItems = ItemContentBox.find_elements(By.TAG_NAME, 'a')
+
+		ItemClassName = ''
+		for ATI in ATagItems :
+			href = ATI.get_attribute('href')
+			if re.search("aliexpress.com/item/\d+", str(href)) :
+				ItemClassName = href = ATI.get_attribute('class')
+				break
+
+		if ItemClassName :
+			for ATI2 in ATagItems :
+				href = ATI2.get_attribute('href')
+				class_ = ATI2.get_attribute('class')
+				if class_ == ItemClassName and re.search("aliexpress.com/item/\d+", str(href)) :
+					href_result = re.sub(r'(\.html.*)$', '.html', str(href))
+					Code2 = re.search("\d+", href_result).group()
+					if len(str(Code2)) > 15 :
+						ItemList.append(str(Code2))
+		"""
+		ItemContentBox = driver.find_element(By.CLASS_NAME, "product-container")
+		#ItemBox = ItemContentBox.find_element(By.XPATH, "div[2]")
+		ATagItems = ItemContentBox.find_elements(By.TAG_NAME, 'a')
 
 		for ATI in ATagItems :
 			href = ATI.get_attribute('href')
 			if re.search("aliexpress.com/item/\d+", str(href)) :
 				href_result = re.sub(r'(\.html.*)$', '.html', str(href))
 				Code2 = re.search("\d+", href_result).group()
-				if len(str(Code2)) > CodeLen :
+				if len(str(Code2)) > 15 :
 					ItemList.append(str(Code2))
+		"""
 	except :
 		pass
 
