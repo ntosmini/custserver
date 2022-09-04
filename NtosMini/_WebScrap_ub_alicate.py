@@ -137,7 +137,7 @@ else :
 				if class_ == ItemClassName and re.search("aliexpress.com/item/\d+", str(href)) :
 					href_result = re.sub(r'(\.html.*)$', '.html', str(href))
 					Code2 = re.search("\d+", href_result).group()
-					if len(str(Code2)) > 15 :
+					if len(str(Code2)) > CodeLen :
 						ItemList.append(str(Code2))
 		"""
 		ItemContentBox = driver.find_element(By.CLASS_NAME, "product-container")
