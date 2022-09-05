@@ -127,7 +127,7 @@ else :
 		for ATI in ATagItems :
 			href = ATI.get_attribute('href')
 			if re.search("aliexpress.com/item/\d+", str(href)) :
-				ItemClassName = href = ATI.get_attribute('class')
+				ItemClassName = ATI.get_attribute('class')
 				break
 
 		if ItemClassName :
