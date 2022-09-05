@@ -127,12 +127,9 @@ else :
 		for ATI in ATagItems :
 			href = ATI.get_attribute('href')
 			if re.search("aliexpress.com/item/\d+", str(href)) :
-				print(ATI)
 				ItemClassName = ATI.get_attribute('class')
 				break
-		print(ItemClassName+"-")
 		if ItemClassName :
-			print(ItemClassName)
 			for ATI2 in ATagItems :
 				href = ATI2.get_attribute('href')
 				class_ = ATI2.get_attribute('class')
@@ -140,6 +137,7 @@ else :
 					href_result = re.sub(r'(\.html.*)$', '.html', str(href))
 					Code2 = re.search("\d+", href_result).group()
 					if len(str(Code2)) > CodeLen :
+						print(str(Code2))
 						ItemList.append(str(Code2))
 
 	except :
