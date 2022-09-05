@@ -137,7 +137,6 @@ else :
 					href_result = re.sub(r'(\.html.*)$', '.html', str(href))
 					Code2 = re.search("\d+", href_result).group()
 					if len(str(Code2)) > CodeLen :
-						print(str(Code2))
 						ItemList.append(str(Code2))
 
 	except :
@@ -146,6 +145,7 @@ else :
 	ItemListSet = list(set(ItemList))
 
 	if len(ItemListSet) > 0 :
+		print("success")
 		for codelist in ItemListSet :
 			print(codelist)
 	else :
