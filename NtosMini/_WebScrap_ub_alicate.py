@@ -131,6 +131,7 @@ else :
 				break
 
 		if ItemClassName :
+			print(ItemClassName)
 			for ATI2 in ATagItems :
 				href = ATI2.get_attribute('href')
 				class_ = ATI2.get_attribute('class')
