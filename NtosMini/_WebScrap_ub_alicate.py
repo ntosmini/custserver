@@ -120,8 +120,8 @@ else :
 		pass
 
 	try :
-		ItemContentBox = driver.find_element(By.CLASS_NAME, "product-container")
-		ATagItems = ItemContentBox.find_elements(By.TAG_NAME, 'a')
+		ItemContentBox = driver.find_element_by_class_name("product-container")
+		ATagItems = ItemContentBox.find_element_by_tag_name('a')
 
 		ItemClassName = ''
 		for ATI in ATagItems :
@@ -139,19 +139,7 @@ else :
 					Code2 = re.search("\d+", href_result).group()
 					if len(str(Code2)) > CodeLen :
 						ItemList.append(str(Code2))
-		"""
-		ItemContentBox = driver.find_element(By.CLASS_NAME, "product-container")
-		#ItemBox = ItemContentBox.find_element(By.XPATH, "div[2]")
-		ATagItems = ItemContentBox.find_elements(By.TAG_NAME, 'a')
 
-		for ATI in ATagItems :
-			href = ATI.get_attribute('href')
-			if re.search("aliexpress.com/item/\d+", str(href)) :
-				href_result = re.sub(r'(\.html.*)$', '.html', str(href))
-				Code2 = re.search("\d+", href_result).group()
-				if len(str(Code2)) > 15 :
-					ItemList.append(str(Code2))
-		"""
 	except :
 		pass
 
