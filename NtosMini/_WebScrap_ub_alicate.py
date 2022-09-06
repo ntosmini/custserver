@@ -8,6 +8,7 @@ import threading
 import json
 import re
 import io
+import os
 
 #한글깨짐
 sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
@@ -41,6 +42,11 @@ def ScrollDown() :
 		if new_height == last_height:
 			break
 		last_height = new_height
+try :
+	os.system("killall -o 3m chrome")
+	os.system("killall -o 3m chromedriver")
+except :
+	pass
 
 # "Chrome" or "Firefox" or "curl"
 from bs4 import BeautifulSoup
