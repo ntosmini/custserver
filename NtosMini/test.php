@@ -50,4 +50,4 @@ if($SiteUrl == "not") {
 		$PageHtml = "PageHtml Error";
 	}	//end if
 }	//end if SiteUrl
-echo base64_encode($PageHtml);
+echo $PageHtml;
