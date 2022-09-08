@@ -10,7 +10,7 @@ import base64
 SiteUrl = "http://ntos.co.kr"
 Referer = "not"
 Agent = "not"
-
+WebType = "Chrome"
 
 
 # "Chrome" or "Firefox" or "curl"
