@@ -57,31 +57,27 @@ else :
 		time.sleep(random.randint(1, 3))
 	
 
-	#종료
-	def DriverQuit():
+	try :
+
+		driver.get(SiteUrl)
+
+
+		time.sleep(3)
+
+
+
+
+		page_html = driver.page_source
 		driver.close()
 		driver.quit()
 
-	DriverJob = threading.Timer(300, DriverQuit)
-	DriverJob.start()
-
-	driver.get(SiteUrl)
-
-
-	time.sleep(3)
-
-	DriverJob.cancel()
-
-
-	page_html = driver.page_source
-	driver.close()
-	driver.quit()
-
-	html = BeautifulSoup(page_html, 'html.parser')
-	print(html)
-	exit()
-
-
+		html = BeautifulSoup(page_html, 'html.parser')
+		print(html)
+		exit()
+	except :
+		driver.close()
+		driver.quit()
+		exit()
 
 	"""
 	#경고창
