@@ -111,6 +111,7 @@ else :
 
 	page_html = driver.page_source
 	ItemList = []
+	ItemContentBox = ""
 
 	try :
 		ScriptMatched = re.search('\{"mods".*\}', page_html)
@@ -155,7 +156,7 @@ else :
 		for codelist in ItemListSet :
 			print(codelist)
 	else :
-		if ItemContentBox.text :
+		if ItemContentBox :
 			print("notitem")
 		else :
 			print("error")
