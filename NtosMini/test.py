@@ -59,9 +59,8 @@ else :
 
 	#종료
 	def DriverQuit():
+		driver.close()
 		driver.quit()
-		print('')
-		exit()
 
 	DriverJob = threading.Timer(300, DriverQuit)
 	DriverJob.start()
@@ -75,6 +74,7 @@ else :
 
 
 	page_html = driver.page_source
+	driver.close()
 	driver.quit()
 
 	html = BeautifulSoup(page_html, 'html.parser')
