@@ -111,7 +111,6 @@ else :
 
 	page_html = driver.page_source
 	ItemList = []
-	ItemContentBox = ""
 
 	try :
 		ScriptMatched = re.search('\{"mods".*\}', page_html)
@@ -147,7 +146,7 @@ else :
 						ItemList.append(str(Code2))
 
 	except :
-		pass
+		ItemContentBox = ""
 
 	ItemListSet = list(set(ItemList))
 
