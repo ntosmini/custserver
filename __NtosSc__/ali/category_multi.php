@@ -26,7 +26,7 @@ $MConfigData = escapeshellarg(json_encode($RunData));
 
 
 
-exec("python3 /home/ntos/public_html/__NtosSc__/ali/category_multi.py {$MConfigData}", $ResultArr);
+exec("python3 /home/ntosmini/public_html/__NtosSc__/ali/category_multi.py {$MConfigData}", $ResultArr);
 $PageHtml = implode("\n", $ResultArr);
 
 echo $PageHtml;
