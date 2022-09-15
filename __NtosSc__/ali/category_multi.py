@@ -140,7 +140,6 @@ def multiSelenium(process):
 
 		except :
 			ItemContentBox = ""
-			pass
 
 		ItemListSet = list(set(ItemList))
 		Result = ""
