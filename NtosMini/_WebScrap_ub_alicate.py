@@ -88,78 +88,74 @@ else :
 		driver = webdriver.Firefox("/usr/bin/geckodriver")
 
 
-	#종료
-	def DriverQuit():
+	try :
+		driver.get(SiteUrl)
+		driver.implicitly_wait(10)
+		driver.refresh()
+		driver.implicitly_wait(5)
+		time.sleep(random.randint(3, 5))
+		ScrollDown()
+
+		time.sleep(3)
+
+
+
+
+		page_html = driver.page_source
+		ItemList = []
+
+		try :
+			ScriptMatched = re.search('\{"mods".*\}', page_html)
+			ScriptListData = ScriptMatched.group()
+
+			ScriptListDataArr = json.loads(ScriptListData)
+			for Slist in ScriptListDataArr['mods']['itemList']['content'] :
+				Code1 = Slist['productId']
+				Url = '/item/'+Code1+".html";
+				if len(str(Code1)) > CodeLen :
+					ItemList.append(str(Code1))
+		except :
+			pass
+
+		try :
+			ItemContentBox = driver.find_element_by_class_name("product-container")
+			ATagItems = ItemContentBox.find_elements_by_tag_name('a')
+
+			ItemClassName = ''
+			for ATI in ATagItems :
+				href = ATI.get_attribute('href')
+				if re.search("aliexpress.com/item/\d+", str(href)) :
+					ItemClassName = ATI.get_attribute('class')
+					break
+			if ItemClassName :
+				for ATI2 in ATagItems :
+					href = ATI2.get_attribute('href')
+					class_ = ATI2.get_attribute('class')
+					if class_ == ItemClassName and re.search("aliexpress.com/item/\d+", str(href)) :
+						href_result = re.sub(r'(\.html.*)$', '.html', str(href))
+						Code2 = re.search("\d+", href_result).group()
+						if len(str(Code2)) > CodeLen :
+							ItemList.append(str(Code2))
+
+		except :
+			ItemContentBox = ""
+
+		ItemListSet = list(set(ItemList))
+
+		if len(ItemListSet) > 0 :
+			print("success")
+			for codelist in ItemListSet :
+				print(codelist)
+		else :
+			if ItemContentBox :
+				print("notitem")
+			else :
+				print("error")
+
 		driver.close()
 		driver.quit()
 		exit()
-
-	DriverJob = threading.Timer(120, DriverQuit)
-	DriverJob.start()
-
-	driver.get(SiteUrl)
-	driver.implicitly_wait(10)
-	driver.refresh()
-	driver.implicitly_wait(5)
-	time.sleep(random.randint(3, 5))
-	ScrollDown()
-
-	time.sleep(3)
-
-	DriverJob.cancel()
-
-
-	page_html = driver.page_source
-	ItemList = []
-
-	try :
-		ScriptMatched = re.search('\{"mods".*\}', page_html)
-		ScriptListData = ScriptMatched.group()
-
-		ScriptListDataArr = json.loads(ScriptListData)
-		for Slist in ScriptListDataArr['mods']['itemList']['content'] :
-			Code1 = Slist['productId']
-			Url = '/item/'+Code1+".html";
-			if len(str(Code1)) > CodeLen :
-				ItemList.append(str(Code1))
 	except :
-		pass
-
-	try :
-		ItemContentBox = driver.find_element_by_class_name("product-container")
-		ATagItems = ItemContentBox.find_elements_by_tag_name('a')
-
-		ItemClassName = ''
-		for ATI in ATagItems :
-			href = ATI.get_attribute('href')
-			if re.search("aliexpress.com/item/\d+", str(href)) :
-				ItemClassName = ATI.get_attribute('class')
-				break
-		if ItemClassName :
-			for ATI2 in ATagItems :
-				href = ATI2.get_attribute('href')
-				class_ = ATI2.get_attribute('class')
-				if class_ == ItemClassName and re.search("aliexpress.com/item/\d+", str(href)) :
-					href_result = re.sub(r'(\.html.*)$', '.html', str(href))
-					Code2 = re.search("\d+", href_result).group()
-					if len(str(Code2)) > CodeLen :
-						ItemList.append(str(Code2))
-
-	except :
-		ItemContentBox = ""
-
-	ItemListSet = list(set(ItemList))
-
-	if len(ItemListSet) > 0 :
-		print("success")
-		for codelist in ItemListSet :
-			print(codelist)
-	else :
-		if ItemContentBox :
-			print("notitem")
-		else :
-			print("error")
-
-	driver.close()
-	driver.quit()
-	exit()
+		driver.close()
+		driver.quit()
+		exit()
