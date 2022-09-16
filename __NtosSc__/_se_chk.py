@@ -32,7 +32,7 @@ chrome_options.add_argument("--window-size=1920x1080")
 driver = webdriver.Chrome("/usr/bin/chromedriver", chrome_options=chrome_options)
 
 try :
-	SiteUrl = "http://mini.ntos.co.kr/_ok.html"
+	SiteUrl = "http://mini.ntos.co.kr/_se_chk.html"
 	driver.get(SiteUrl)
 	driver.implicitly_wait(10)
 	page_html = driver.page_source
