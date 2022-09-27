@@ -149,9 +149,7 @@ def multiSelenium(process):
 
 			Result_ = ""
 			try :
-				Result__ = requests.post(
-					
-					, data=json.dumps(data), headers=headers)
+				Result__ = requests.post(NtosServer, data=json.dumps(data), headers=headers)
 				Result_ = Result__.text
 			except :
 				Result_ = "error"
