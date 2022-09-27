@@ -144,12 +144,14 @@ def multiSelenium(process):
 					Result = "error"
 
 
-			data = {'NotsKey':NotsKey, 'CustId':CustId, 'SclId':SclId, 'Result':Result, 'ItemList': ItemListSet, 'log_id': log_id }
+			data = {'NtosServer':NtosServer, 'NotsKey':NotsKey, 'CustId':CustId, 'SclId':SclId, 'Result':Result, 'ItemList': ItemListSet, 'log_id': log_id }
 			headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
 
 			Result_ = ""
 			try :
-				Result__ = requests.post(NtosServer, data=json.dumps(data), headers=headers)
+				Result__ = requests.post(
+					
+					, data=json.dumps(data), headers=headers)
 				Result_ = Result__.text
 			except :
 				Result_ = "error"
