@@ -144,7 +144,7 @@ def multiSelenium(process):
 					Result = "error"
 
 
-			data = {'NtosServer':NtosServer, 'NotsKey':NotsKey, 'CustId':CustId, 'SclId':SclId, 'Result':Result, 'ItemList': ItemListSet, 'log_id': log_id }
+			data = {'NtosServer':str(NtosServer), 'NotsKey':NotsKey, 'CustId':CustId, 'SclId':SclId, 'Result':Result, 'ItemList': ItemListSet, 'log_id': log_id }
 			headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
 
 			Result_ = ""
