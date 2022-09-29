@@ -95,7 +95,7 @@ def multiSelenium(process):
 		if page_html :
 			ItemList = []
 			
-
+			ItemBasicUrl = ""
 			try :
 				ScriptMatched = re.search('\{"mods".*\}', page_html)
 				ScriptListData = ScriptMatched.group()
@@ -103,7 +103,6 @@ def multiSelenium(process):
 				ScriptListDataArr = json.loads(ScriptListData)
 				for Slist in ScriptListDataArr['mods']['itemList']['content'] :
 					Code1 = str(Slist['productId'])
-					Url = '/item/'+Code1+".html"
 					if len(Code1) > CodeLen :
 						ItemList.append(Code1)
 						
@@ -117,14 +116,15 @@ def multiSelenium(process):
 				ItemClassName = ''
 				for ATI in ATagItems :
 					href = ATI.get_attribute('href')
-					if re.search("aliexpress.com/item/\d+", str(href)) :
+					if re.search("aliexpress.[a-zA-Z-]+/item/\d+", str(href)) :
+						ItemBasicUrl = re.sub(r'(/item/.*)$', '/item/', str(href))
 						ItemClassName = ATI.get_attribute('class')
 						break
 				if ItemClassName :
 					for ATI2 in ATagItems :
 						href = ATI2.get_attribute('href')
 						class_ = ATI2.get_attribute('class')
-						if class_ == ItemClassName and re.search("aliexpress.com/item/\d+", str(href)) :
+						if class_ == ItemClassName and re.search("aliexpress.[a-zA-Z-]+/item/\d+", str(href)) :
 							href_result = re.sub(r'(\.html.*)$', '.html', str(href))
 							Code2 = re.search("\d+", href_result).group()
 							if len(str(Code2)) > CodeLen :
@@ -144,7 +144,7 @@ def multiSelenium(process):
 					Result = "error"
 
 
-			data = {'NtosServer':str(NtosServer), 'NotsKey':NotsKey, 'CustId':CustId, 'SclId':SclId, 'Result':Result, 'ItemList': ItemListSet, 'log_id': log_id }
+			data = {'NtosServer':str(NtosServer), 'NotsKey':NotsKey, 'CustId':CustId, 'SclId':SclId, 'Result':Result, 'ItemList': ItemListSet, 'log_id': log_id, 'ItemBasicUrl':str(ItemBasicUrl) }
 			headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
 
 			Result_ = ""
