@@ -36,7 +36,7 @@ MConfig = json.loads(MConfigData)
 
 
 SiteUrl = MConfig['SiteUrl']
-
+print("SiteUrl : "+ str(SiteUrl))
 try :
 	driver.get(SiteUrl)
 	driver.implicitly_wait(10)
@@ -46,9 +46,9 @@ try :
 	nowurl = driver.current_url
 
 	page_html = driver.page_source
-	print(nowurl)
-	print("")
-	print("")
+	print("실Url : "+str(nowurl))
+	print("--------------------------------------")
+	print("--------------------------------------")
 	print(page_html)
 	driver.close()
 	driver.quit()
