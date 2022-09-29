@@ -46,7 +46,7 @@ try :
 	nowurl = driver.current_url
 
 	page_html = driver.page_source
-	print("실Url : "+str(nowurl))
+	print("<br>최종 Url : "+str(nowurl))
 	print("<br>--------------------------------------<br>")
 	print("--------------------------------------<br><br>")
 	print(page_html)
