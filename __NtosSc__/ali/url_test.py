@@ -47,8 +47,8 @@ try :
 
 	page_html = driver.page_source
 	print("실Url : "+str(nowurl))
-	print("--------------------------------------")
-	print("--------------------------------------")
+	print("<br>--------------------------------------<br>")
+	print("--------------------------------------<br><br>")
 	print(page_html)
 	driver.close()
 	driver.quit()
