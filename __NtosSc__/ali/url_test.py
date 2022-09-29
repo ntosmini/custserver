@@ -36,7 +36,7 @@ MConfig = json.loads(MConfigData)
 
 
 SiteUrl = MConfig['SiteUrl']
-print("SiteUrl : "+ str(SiteUrl))
+print("접근 Url : "+ str(SiteUrl))
 try :
 	driver.get(SiteUrl)
 	driver.implicitly_wait(10)
