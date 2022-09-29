@@ -15,6 +15,8 @@ if( empty($RunData['SiteUrl']) ){
 	exit;
 }	//end if
 
+echo "요청 url : ".$RunData['SiteUrl']."<br>";
+
 if($RunData['WebType'] == "phpcurl"){
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_URL, $RunData['SiteUrl'] );
