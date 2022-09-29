@@ -10,16 +10,14 @@ $RunData['SiteUrl'] = (empty($_POST['SiteUrl']))?"http://ntos.co.kr":$_POST['Sit
 $RunData['WebType'] = (empty($_POST['WebType']))?"phpcurl":$_POST['WebType'];
 
 
-echo $RunData['WebType'];
 if( empty($RunData['SiteUrl']) ){
 	echo 'error';
 	exit;
 }	//end if
 
 if($RunData['WebType'] == "phpcurl"){
-	echo "phpcurl";
 	$ch = curl_init();
-	curl_setopt($ch, CURLOPT_URL, $SiteUrl );
+	curl_setopt($ch, CURLOPT_URL, $RunData['SiteUrl'] );
 	curl_setopt($ch, CURLOPT_HEADER, false);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
@@ -32,8 +30,6 @@ if($RunData['WebType'] == "phpcurl"){
 	$PageHtml=curl_exec($ch);
 	curl_close($ch);
 } else {
-	echo "Chorme";
-
 	$MConfigData = escapeshellarg(json_encode($RunData));
 
 
