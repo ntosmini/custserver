@@ -6,8 +6,8 @@ header("Content-Type: text/html; charset=UTF-8");
 */
 
 $RunData = array();
-$RunData['SiteUrl'] = (empty($_POST['SiteUrl']))?"":$_POST['SiteUrl'];
-$RunData['WebType'] = (empty($_POST['WebType']))?"":$_POST['WebType'];
+$RunData['SiteUrl'] = (empty($_POST['SiteUrl']))?"http://ntos.co.kr":$_POST['SiteUrl'];
+$RunData['WebType'] = (empty($_POST['WebType']))?"phpcurl":$_POST['WebType'];
 
 
 
