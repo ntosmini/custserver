@@ -22,7 +22,7 @@ $MConfigData = escapeshellarg(json_encode($RunData));
 
 
 
-exec("python3 /home/ntosmini/public_html/__NtosSc__/ali/ali_cate_test.py {$MConfigData}", $ResultArr);
+exec("python3 /home/ntosmini/public_html/__NtosSc__/ali/url_test.py {$MConfigData}", $ResultArr);
 $PageHtml = implode("\n", $ResultArr);
 
 echo $PageHtml;
