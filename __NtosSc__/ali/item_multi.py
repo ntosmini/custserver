@@ -66,13 +66,24 @@ def multiSelenium(process):
 	try :
 		driver.get(SiteUrl)
 		driver.implicitly_wait(10)
-		time.sleep(random.randint(3, 5))
-
-
+		time.sleep(random.randint(1, 3))
 		page_html = driver.page_source
+		
+		#상품설명 추가
+		detail_url = ''
+		detail_html = ''
+		try :
+			driver.get(detail_url)
+			driver.implicitly_wait(10)
+			time.sleep(random.randint(1, 3))
+			detail_html = driver.page_source
+		except :
+			detail_url = ''
+			detail_html = ''
+		
 		if page_html :
 
-			data = {'NtosServer':str(NtosServer), 'NotsKey':NotsKey, 'CustId':CustId, 'SlId':SlId, 'PageHtml':page_html }
+			data = {'NtosServer':str(NtosServer), 'NotsKey':NotsKey, 'CustId':CustId, 'SlId':SlId, 'PageHtml':page_html, 'DetailHtml':detail_html }
 			headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
 
 			Result_ = ""
