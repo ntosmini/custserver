@@ -37,7 +37,7 @@ MConfig = json.loads(MConfigData)
 
 
 NtosServer = MConfig['NtosServer']
-process_list = MConfig['SlId_SiteUrl_Proxy']
+process_list = MConfig['SlId_SiteUrl']
 NotsKey = MConfig['NotsKey']
 CustId = MConfig['CustId']
 
@@ -47,7 +47,7 @@ start_time = time.time()
 
 
 def multiSelenium(process):
-	(SlId, SiteUrl, Proxy, log_id) = process.split("|@|")
+	(SlId, SiteUrl, log_id) = process.split("|@|")
 
 	chrome_options = webdriver.ChromeOptions()
 	chrome_options.add_argument("-disable-notifications")
