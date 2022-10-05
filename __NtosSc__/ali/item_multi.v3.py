@@ -55,56 +55,32 @@ def multiSelenium(process):
 	chrome_options.add_argument('--no-sandbox')
 	chrome_options.add_argument('--disable-dev-shm-usage')
 	chrome_options.add_argument("--window-size=1920x1080")
-	chrome_options.add_argument('--lang=ko_KR')
-	chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36")
+	chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36")
 	driver = webdriver.Chrome("/usr/bin/chromedriver", chrome_options=chrome_options)
 
+	PageHtml = ""
+	NowUrl = ""
 	try :
 		driver.get(SiteUrl)
 		driver.implicitly_wait(5)
 		PageHtml = driver.page_source
-
 		NowUrl = driver.current_url
-		"""
-		ItemInfoMatched = re.search('\{"actionModule".*\}', PageHtml)
-		ItemInfoData = ItemInfoMatched.group()
-
-		ItemInfo = json.loads(ItemInfoData)
-
-
-		DetailHtml = ''
-		DetailUrl = ItemInfo['descriptionModule']['descriptionUrl']
-
-		driver.get(DetailUrl)
-		driver.implicitly_wait(5)
-		DetailHtml = driver.page_source
-		"""
-
-		data = {'NtosServer':str(NtosServer), 'NotsKey':NotsKey, 'CustId':CustId, 'SlId':SlId, 'PageHtml':PageHtml, 'log_id': log_id, 'NowUrl':NowUrl }
-		headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
-
-		Result_ = ""
-		try :
-			Result__ = requests.post(NtosServer, data=json.dumps(data), headers=headers)
-			Result_ = Result__.text
-		except :
-			Result_ = "error"
-
-
-		print(Result_)
-
-		driver.close()
-		driver.quit()
-
 	except :
-		data = {'NtosServer':str(NtosServer), 'NotsKey':NotsKey, 'CustId':CustId, 'SlId':SlId, 'PageHtml':'', 'log_id': log_id, 'NowUrl':'' }
-		headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
+		pass
+
+	data = {'NtosServer':str(NtosServer), 'NotsKey':NotsKey, 'CustId':CustId, 'SlId':SlId, 'PageHtml':PageHtml, 'log_id': log_id, 'NowUrl':NowUrl }
+	headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
+
+	Result_ = ""
+	try :
 		Result__ = requests.post(NtosServer, data=json.dumps(data), headers=headers)
-		print("except")
-		driver.close()
-		driver.quit()
+		Result_ = Result__.text
+	except :
+		Result_ = "error"
 
-
+	print(Result_)
+	driver.close()
+	driver.quit()
 
 if __name__ == '__main__':
 	pool = multiprocessing.Pool(processes=len(process_list))
