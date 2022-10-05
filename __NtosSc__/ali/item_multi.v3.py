@@ -27,8 +27,7 @@ NtosServer = MConfig['NtosServer']
 process_list = MConfig['SlId_SiteUrl']
 NotsKey = MConfig['NotsKey']
 CustId = MConfig['CustId']
-print(CustId)
-exit()
+
 
 start_time = time.time()
 
@@ -53,6 +52,7 @@ def multiSelenium(process):
 		PageHtml = driver.page_source
 		NowUrl = driver.current_url
 	except :
+		print("not driver")
 		pass
 
 	data = {'NtosServer':str(NtosServer), 'NotsKey':NotsKey, 'CustId':CustId, 'SlId':SlId, 'PageHtml':PageHtml, 'log_id': log_id, 'NowUrl':NowUrl }
