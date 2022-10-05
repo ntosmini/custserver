@@ -3,9 +3,6 @@
 
 import time
 import sys
-import codecs
-import random
-#pip install beautifulsoup4     <=> pip install bs4
 import threading
 import json
 import re
