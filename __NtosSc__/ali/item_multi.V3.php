@@ -7,12 +7,12 @@ header("Content-Type: text/html; charset=UTF-8");
 
 $RunData = array();
 $RunData['NtosServer'] = (empty($_POST['NtosServer']))?"":$_POST['NtosServer'];
-$RunData['SlId_SiteUrl_Proxy'] = (empty($_POST['SlId_SiteUrl_Proxy']))?"":$_POST['SlId_SiteUrl_Proxy'];
+$RunData['SlId_SiteUrl'] = (empty($_POST['SlId_SiteUrl']))?"":$_POST['SlId_SiteUrl'];
 $RunData['NotsKey'] = (empty($_POST['NotsKey']))?"":$_POST['NotsKey'];
 $RunData['CustId'] = (empty($_POST['CustId']))?"":$_POST['CustId'];
 
 
-if(empty($RunData['NtosServer']) || empty($RunData['SlId_SiteUrl_Proxy']) || empty($RunData['CustId']) || empty($RunData['NotsKey'])){
+if(empty($RunData['NtosServer']) || empty($RunData['SlId_SiteUrl']) || empty($RunData['CustId']) || empty($RunData['NotsKey'])){
 	echo 'error';
 	exit;
 }	//end if
