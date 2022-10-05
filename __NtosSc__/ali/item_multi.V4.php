@@ -22,7 +22,7 @@ if(empty($RunData['NtosServer']) || empty($RunData['SlId_SiteUrl_Proxy']) || emp
 $MConfigData = escapeshellarg(json_encode($RunData));
 
 
-exec("python3 /home/ntosmini/public_html/__NtosSc__/ali/item_multi.py {$MConfigData}", $ResultArr);
+exec("python3 /home/ntosmini/public_html/__NtosSc__/ali/item_multi.V4.py {$MConfigData}", $ResultArr);
 $PageHtml = implode("\n", $ResultArr);
 
 echo $PageHtml;
