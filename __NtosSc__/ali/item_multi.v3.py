@@ -8,12 +8,11 @@ import io
 import os
 import multiprocessing
 import requests
+from selenium import webdriver
 
 #한글깨짐
 sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
 sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
-
-
 
 try :
 	os.system("killall -o 3m chrome")
@@ -21,26 +20,18 @@ try :
 except :
 	pass
 
-from selenium import webdriver
-from selenium.webdriver.common.alert import Alert
-
-process_list = []
-
-
 MConfigData = sys.argv[1]
 MConfig = json.loads(MConfigData)
-
 
 NtosServer = MConfig['NtosServer']
 process_list = MConfig['SlId_SiteUrl']
 NotsKey = MConfig['NotsKey']
 CustId = MConfig['CustId']
 
+
 start_time = time.time()
 
-
-
-
+process_list = []
 def multiSelenium(process):
 	(SlId, SiteUrl, log_id) = process.split("|@|")
 
