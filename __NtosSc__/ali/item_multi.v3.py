@@ -20,6 +20,8 @@ try :
 except :
 	pass
 
+process_list = []
+
 MConfigData = sys.argv[1]
 MConfig = json.loads(MConfigData)
 
@@ -28,19 +30,10 @@ process_list = MConfig['SlId_SiteUrl']
 NotsKey = MConfig['NotsKey']
 CustId = MConfig['CustId']
 
-print(NtosServer)
-print(process_list)
-print(NotsKey)
-print(CustId)
-exit()
 start_time = time.time()
 
-process_list = []
 def multiSelenium(process):
 	(SlId, SiteUrl, log_id) = process.split("|@|")
-	print(SlId)
-	print(SiteUrl)
-	print(log_id)
 	chrome_options = webdriver.ChromeOptions()
 	chrome_options.add_argument("-disable-notifications")
 	chrome_options.add_argument('--headless')
