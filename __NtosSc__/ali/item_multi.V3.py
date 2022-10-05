@@ -55,7 +55,7 @@ def multiSelenium(process):
 	chrome_options.add_argument('--no-sandbox')
 	chrome_options.add_argument('--disable-dev-shm-usage')
 	chrome_options.add_argument("--window-size=1920x1080")
-	hrome_options.add_argument('--lang=ko_KR')
+	chrome_options.add_argument('--lang=ko_KR')
 	chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36")
 	driver = webdriver.Chrome("/usr/bin/chromedriver", chrome_options=chrome_options)
 
