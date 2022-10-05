@@ -27,7 +27,8 @@ NtosServer = MConfig['NtosServer']
 process_list = MConfig['SlId_SiteUrl']
 NotsKey = MConfig['NotsKey']
 CustId = MConfig['CustId']
-
+print(CustId)
+exit()
 
 start_time = time.time()
 
