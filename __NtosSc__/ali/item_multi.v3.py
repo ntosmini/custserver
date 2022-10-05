@@ -34,7 +34,7 @@ start_time = time.time()
 process_list = []
 def multiSelenium(process):
 	(SlId, SiteUrl, log_id) = process.split("|@|")
-
+	print("1")
 	chrome_options = webdriver.ChromeOptions()
 	chrome_options.add_argument("-disable-notifications")
 	chrome_options.add_argument('--headless')
@@ -43,7 +43,7 @@ def multiSelenium(process):
 	chrome_options.add_argument("--window-size=1920x1080")
 	chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36")
 	driver = webdriver.Chrome("/usr/bin/chromedriver", chrome_options=chrome_options)
-
+	print("2")
 	PageHtml = ""
 	NowUrl = ""
 	try :
