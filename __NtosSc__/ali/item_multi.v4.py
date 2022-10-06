@@ -47,7 +47,7 @@ driver = chromeWebdriver()
 SiteUrl = "http://ntos.co.kr"
 driver.get(SiteUrl)
 driver.implicitly_wait(5)
-PageHtml = driver.page_sourc
+PageHtml = driver.page_source
 
 print(PageHtml)
 driver.close()
