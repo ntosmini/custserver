@@ -1,4 +1,5 @@
 <?php
+
 set_time_limit(0);
 header("Content-Type: text/html; charset=UTF-8");
 /*
@@ -7,7 +8,7 @@ header("Content-Type: text/html; charset=UTF-8");
 
 
 
-exec("python3 /home/ntosmini/public_html/__NtosSc__/ali/test.php", $ResultArr);
+exec("python3 /home/ntosmini/public_html/__NtosSc__/ali/test.py", $ResultArr);
 $PageHtml = implode("\n", $ResultArr);
 
 echo $PageHtml;
