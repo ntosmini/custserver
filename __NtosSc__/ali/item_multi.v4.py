@@ -31,7 +31,7 @@ except :
 
 start_time = time.time()
 
-def chromeWebdriver(Proxy):
+def chromeWebdriver():
 	chrome_service = ChromeService(executable_path=ChromeDriverManager().install())
 	chrome_options = Options()
 	chrome_options.add_experimental_option('detach', True)
@@ -39,15 +39,11 @@ def chromeWebdriver(Proxy):
 	chrome_options.add_argument('--headless')
 	chrome_options.add_argument('--no-sandbox')
 	chrome_options.add_argument("window-size=1920,1080")
-
-	if Proxy :	# IP:PORT or HOST:PORT
-		chrome_options.add_argument('--proxy-server=%s' % Proxy)
-
 	driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
 
 	return driver
 
-driver = chromeWebdriver('')
+driver = chromeWebdriver()
 SiteUrl = "http://ntos.co.kr"
 driver.get(SiteUrl)
 driver.implicitly_wait(5)
