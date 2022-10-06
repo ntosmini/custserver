@@ -5,7 +5,7 @@ header("Content-Type: text/html; charset=UTF-8");
 셀레니움 실행 확인용
 */
 $Type = (empty($_GET['Type']))?"":$_GET['Type'];
-$Ver = (empty($_GET['Ver']))?"v4":$_GET['Ver'];	//v3 or v4
+$Ver = (empty($_GET['Ver']))?"":$_GET['Ver'];	//v3 or v4
 
 
 if(empty($Type)){
