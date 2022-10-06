@@ -18,12 +18,6 @@ if(empty($RunData['NtosServer']) || empty($RunData['SlId_SiteUrl']) || empty($Ru
 	exit;
 }	//end if
 
-if($Ver == "v4"){
-	echo "ddddddddddddd";
-	exit;
-}
-
-
 $MConfigData = escapeshellarg(json_encode($RunData));
 
 
