@@ -38,7 +38,6 @@ NotsKey = MConfig['NotsKey']
 CustId = MConfig['CustId']
 
 start_time = time.time()
-$MiniServerGet['SlId_SiteUrl'][$i] = $sl_id."|@|".$SiteUrl."|@|".$log_id;
 
 def chromeWebdriver(Proxy):
 	chrome_service = ChromeService(executable_path=ChromeDriverManager().install())
