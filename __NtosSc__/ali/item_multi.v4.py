@@ -28,7 +28,7 @@ except :
 	pass
 
 process_list = []
-
+"""
 MConfigData = sys.argv[1]
 MConfig = json.loads(MConfigData)
 
@@ -36,6 +36,11 @@ NtosServer = MConfig['NtosServer']
 process_list = MConfig['SlId_SiteUrl']
 NotsKey = MConfig['NotsKey']
 CustId = MConfig['CustId']
+"""
+NtosServer = "http://ali3.ntos.co.kr/__NtosWb__/ali/Multi_AliItemScrap.get.php"
+process_list = ['47155521111|@|https://ko.aliexpress.com/item/2255801033533139.html|@|20548', '47156121111|@|https://ko.aliexpress.com/item/3256802591122424.html|@|20549', '47156721111|@|https://ko.aliexpress.com/item/2251832758067607.html|@|20550']
+NotsKey = "79e687bedec9f439815c886c3445ded581ff2597"
+CustId = "aliexpress"
 
 start_time = time.time()
 
