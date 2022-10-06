@@ -33,7 +33,7 @@ MConfigData = sys.argv[1]
 MConfig = json.loads(MConfigData)
 
 NtosServer = MConfig['NtosServer']
-process_list = MConfig['SlId_SiteUrl_Proxy']
+process_list = MConfig['SlId_SiteUrl']
 NotsKey = MConfig['NotsKey']
 CustId = MConfig['CustId']
 
