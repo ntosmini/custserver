@@ -21,13 +21,10 @@ from selenium.webdriver.common.by import By
 sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
 sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
 
-try :
-	os.system("killall -o 3m chrome")
-	os.system("killall -o 3m chromedriver")
-except :
-	pass
+MConfigData = sys.argv[1]
+MConfig = json.loads(MConfigData)
 
-
+SiteUrl = MConfig['SiteUrl']
 
 start_time = time.time()
 
@@ -45,7 +42,6 @@ def chromeWebdriver():
 
 driver = chromeWebdriver()
 try :
-	SiteUrl = "http://mini.ntos.co.kr/_se_chk.html"
 	driver.get(SiteUrl)
 	driver.implicitly_wait(10)
 	page_html = driver.page_source

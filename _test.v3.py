@@ -18,6 +18,10 @@ import requests
 sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
 sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
 
+MConfigData = sys.argv[1]
+MConfig = json.loads(MConfigData)
+
+SiteUrl = MConfig['SiteUrl']
 
 from selenium import webdriver
 from selenium.webdriver.common.alert import Alert
@@ -32,7 +36,6 @@ chrome_options.add_argument("--window-size=1920x1080")
 driver = webdriver.Chrome("/usr/bin/chromedriver", chrome_options=chrome_options)
 
 try :
-	SiteUrl = "http://mini.ntos.co.kr/_se_chk.html"
 	driver.get(SiteUrl)
 	driver.implicitly_wait(10)
 	page_html = driver.page_source
