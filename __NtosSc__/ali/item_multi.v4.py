@@ -38,7 +38,7 @@ NotsKey = MConfig['NotsKey']
 CustId = MConfig['CustId']
 
 start_time = time.time()
-
+$MiniServerGet['SlId_SiteUrl'][$i] = $sl_id."|@|".$SiteUrl."|@|".$log_id;
 
 def chromeWebdriver(Proxy):
 	chrome_service = ChromeService(executable_path=ChromeDriverManager().install())
@@ -58,9 +58,9 @@ def chromeWebdriver(Proxy):
 
 
 def multiSelenium(process):
-	(SlId, SiteUrl, Proxy, log_id) = process.split("|@|")
+	(SlId, SiteUrl, log_id) = process.split("|@|")
 
-	driver = chromeWebdriver(Proxy)
+	driver = chromeWebdriver('')
 	PageHtml = ""
 	NowUrl = ""
 	try :
