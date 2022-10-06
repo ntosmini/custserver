@@ -15,7 +15,7 @@ if(empty($Type)){
 		$RunData = array();
 		$RunData['SiteUrl'] = (empty($_GET['SiteUrl']))?"http://mini.ntos.co.kr/_se_chk.html":$_GET['SiteUrl'];
 		$MConfigData = escapeshellarg(json_encode($RunData));
-		exec("python3 /home/ntosmini/public_html/__NtosSc__/_test.{$Ver}.py {$MConfigData}", $ResultArr);
+		exec("python3 /home/ntosmini/public_html/_test.{$Ver}.py {$MConfigData}", $ResultArr);
 		$PageHtml = implode("\n", $ResultArr);
 	} else {
 		$PageHtml = "error : Not Ver";
