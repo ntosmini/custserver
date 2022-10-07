@@ -21,6 +21,23 @@ from selenium.webdriver.common.by import By
 sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
 sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
 
-executable_path=ChromeDriverManager().install()
-chrome_service = ChromeService(executable_path)
-print(executable_path)
+def chromeWebdriver():
+	chrome_service = ChromeService(executable_path=ChromeDriverManager().install())
+	chrome_options = Options()
+	chrome_options.add_experimental_option('detach', True)
+	chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
+	chrome_options.add_argument('--headless')
+	chrome_options.add_argument('--no-sandbox')
+	chrome_options.add_argument("window-size=1920,1080")
+	driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
+
+	return driver
+
+SiteUrl = "http://ntos.co.kr"
+driver = chromeWebdriver()
+driver.implicitly_wait(10)
+page_html = driver.page_source
+print(page_html)
+driver.close()
+driver.quit()
+driver.get(SiteUrl)
