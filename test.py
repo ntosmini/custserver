@@ -23,6 +23,14 @@ sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
 
 executable_path=ChromeDriverManager().install()
 
+chrome_service = ChromeService(executable_path)
+chrome_options = Options()
+chrome_options.add_experimental_option('detach', True)
+chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
+chrome_options.add_argument('--headless')
+chrome_options.add_argument('--no-sandbox')
+chrome_options.add_argument("window-size=1920,1080")
+driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
+
 print(executable_path)
 print("")
-
