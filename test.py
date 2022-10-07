@@ -24,6 +24,5 @@ sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
 executable_path=ChromeDriverManager().install()
 
 print(executable_path)
-driver.close()
-driver.quit()
+print("")
 
