@@ -38,5 +38,7 @@ except Exception:
     err = traceback.format_exc()
     print(str(err))
 
+print("")
+print("")	
 print(executable_path)
 print("")
