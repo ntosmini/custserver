@@ -8,6 +8,7 @@ import io
 import os
 import multiprocessing
 import requests
+import traceback
 
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
@@ -49,6 +50,7 @@ try :
 	driver.close()
 	driver.quit()
 except :
-	print("except")
+	err = traceback.format_exc()
+	print(str(err))
 	driver.close()
 	driver.quit()
