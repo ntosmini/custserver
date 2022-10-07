@@ -34,3 +34,5 @@ driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
 
 print(executable_path)
 print("")
+driver.close()
+driver.quit()
