@@ -27,6 +27,8 @@ try :
 except :
 	pass
 
+process_list = []
+
 MConfigData = sys.argv[1]
 MConfig = json.loads(MConfigData)
 
@@ -37,7 +39,6 @@ CustId = MConfig['CustId']
 
 start_time = time.time()
 
-process_list = []
 def chromeWebdriver():
 	chrome_service = ChromeService(executable_path=ChromeDriverManager().install())
 	chrome_options = Options()
