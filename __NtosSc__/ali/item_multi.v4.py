@@ -46,7 +46,9 @@ def chromeWebdriver():
 	chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
 	chrome_options.add_argument('--headless')
 	chrome_options.add_argument('--no-sandbox')
+	chrome_options.add_argument("--blink-settings=imagesEnabled=false")
 	chrome_options.add_argument("window-size=1920,1080")
+	
 	"""
 	if Proxy :	# IP:PORT or HOST:PORT
 		chrome_options.add_argument('--proxy-server=%s' % Proxy)
