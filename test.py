@@ -21,7 +21,8 @@ from selenium.webdriver.common.by import By
 sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
 sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
 
-chrome_service = ChromeService(executable_path=ChromeDriverManager().install())
+executable_path=ChromeDriverManager().install()
+chrome_service = ChromeService(executable_path)
 chrome_options = Options()
 chrome_options.add_experimental_option('detach', True)
 chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
@@ -35,7 +36,7 @@ driver.get(SiteUrl)
 driver.implicitly_wait(10)
 page_html = driver.page_source
 print(page_html)
-print(chrome_service)
+print(executable_path)
 driver.close()
 driver.quit()
 
