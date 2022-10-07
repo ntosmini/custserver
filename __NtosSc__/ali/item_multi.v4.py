@@ -27,10 +27,17 @@ try :
 except :
 	pass
 
+MConfigData = sys.argv[1]
+MConfig = json.loads(MConfigData)
 
+NtosServer = MConfig['NtosServer']
+process_list = MConfig['SlId_SiteUrl']
+NotsKey = MConfig['NotsKey']
+CustId = MConfig['CustId']
 
 start_time = time.time()
 
+process_list = []
 def chromeWebdriver():
 	chrome_service = ChromeService(executable_path=ChromeDriverManager().install())
 	chrome_options = Options()
@@ -39,16 +46,49 @@ def chromeWebdriver():
 	chrome_options.add_argument('--headless')
 	chrome_options.add_argument('--no-sandbox')
 	chrome_options.add_argument("window-size=1920,1080")
+	"""
+	if Proxy :	# IP:PORT or HOST:PORT
+		chrome_options.add_argument('--proxy-server=%s' % Proxy)
+	"""
 	driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
 
 	return driver
 
-driver = chromeWebdriver()
-SiteUrl = "http://ntos.co.kr"
-driver.get(SiteUrl)
-driver.implicitly_wait(5)
-PageHtml = driver.page_source
 
-print(PageHtml)
-driver.close()
-driver.quit()
+def multiSelenium(process):
+	(SlId, SiteUrl, log_id) = process.split("|@|")
+
+	driver = chromeWebdriver()
+	PageHtml = ""
+	NowUrl = ""
+	try :
+		driver.get(SiteUrl)
+		driver.implicitly_wait(5)
+		PageHtml = driver.page_source
+
+		NowUrl = driver.current_url
+	except :
+		pass
+
+	data = {'NtosServer':str(NtosServer), 'NotsKey':NotsKey, 'CustId':CustId, 'SlId':SlId, 'PageHtml':PageHtml, 'log_id': log_id, 'NowUrl':NowUrl }
+	headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
+
+	Result_ = ""
+	try :
+		Result__ = requests.post(NtosServer, data=json.dumps(data), headers=headers)
+		Result_ = Result__.text
+	except :
+		Result_ = "error"
+
+	print(Result_)
+	driver.close()
+	driver.quit()
+
+
+if __name__ == '__main__':
+	pool = multiprocessing.Pool(processes=len(process_list))
+	pool.map(multiSelenium, process_list)
+	print("\n\n--- %s seconds ---" % (time.time() - start_time))
+	pool.close()
+	pool.join()
+	sys.exit()
