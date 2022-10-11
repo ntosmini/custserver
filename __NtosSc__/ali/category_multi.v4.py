@@ -152,7 +152,7 @@ def multiSelenium(process):
 			if ItemContentBox :
 				Result = "notitem"
 			else :
-				Result = "error"
+				Result = "ItemContentBox error"
 
 		data = {'NtosServer':str(NtosServer), 'NotsKey':NotsKey, 'CustId':CustId, 'SclId':SclId, 'Result':Result, 'ItemList': ItemListSet, 'log_id': log_id, 'ItemBasicUrl':str(ItemBasicUrl) }
 		headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
@@ -161,7 +161,7 @@ def multiSelenium(process):
 			Result__ = requests.post(NtosServer, data=json.dumps(data), headers=headers)
 			Result_ = Result__.text
 		except :
-			Result_ = "error"
+			Result_ = "requests error"
 
 	else :
 		Result_ = "error"
