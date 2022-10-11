@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*- 
-# 알리 카테고리 멀티
+#상품 멀티-v3
 
 import time
 import sys
