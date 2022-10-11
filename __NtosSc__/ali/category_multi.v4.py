@@ -27,7 +27,12 @@ except :
 	pass
 
 from selenium import webdriver
-from selenium.webdriver.common.alert import Alert
+from selenium.webdriver.chrome.service import Service as ChromeService
+from selenium.webdriver.chrome.options import Options
+
+#pip3 install webdriver_manager
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.by import By
 
 process_list = []
 
