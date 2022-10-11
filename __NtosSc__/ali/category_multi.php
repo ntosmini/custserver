@@ -6,6 +6,7 @@ header("Content-Type: text/html; charset=UTF-8");
 */
 
 $RunData = array();
+$Ver = (empty($_POST['Ver']))?"v3":$_POST['Ver'];	//v3 or v4
 $RunData['NtosServer'] = (empty($_POST['NtosServer']))?"":$_POST['NtosServer'];
 $RunData['SclId_SiteUrl'] = (empty($_POST['SclId_SiteUrl']))?"":$_POST['SclId_SiteUrl'];
 $RunData['Agent'] = (empty($_POST['Agent']))?"":$_POST['Agent'];
@@ -26,7 +27,7 @@ $MConfigData = escapeshellarg(json_encode($RunData));
 
 
 
-exec("python3 /home/ntosmini/public_html/__NtosSc__/ali/category_multi.py {$MConfigData}", $ResultArr);
+exec("python3 /home/ntosmini/public_html/__NtosSc__/ali/category_multi.{$Ver}.py {$MConfigData}", $ResultArr);
 $PageHtml = implode("\n", $ResultArr);
 
 echo $PageHtml;
