@@ -60,11 +60,7 @@ def chromeWebdriver():
 	chrome_options.add_argument('--no-sandbox')
 	chrome_options.add_argument("--blink-settings=imagesEnabled=false")
 	chrome_options.add_argument("window-size=1920,1080")
-	
-	"""
-	if Proxy :	# IP:PORT or HOST:PORT
-		chrome_options.add_argument('--proxy-server=%s' % Proxy)
-	"""
+
 	driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
 
 	return driver
@@ -75,6 +71,7 @@ def multiSelenium(process):
 	driver = chromeWebdriver()
 	PageHtml = ""
 	NowUrl = ""
+	ItemBasicUrl = ""
 	try :
 		driver.get(SiteUrl)
 		driver.implicitly_wait(5)
