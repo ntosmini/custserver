@@ -2,7 +2,7 @@
 set_time_limit(0);
 header("Content-Type: text/html; charset=UTF-8");
 /*
-알리 카테고리 - 멀티
+카테고리 - 멀티
 */
 
 $RunData = array();
