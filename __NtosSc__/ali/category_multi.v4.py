@@ -51,7 +51,7 @@ CustId = MConfig['CustId']
 
 start_time = time.time()
 
-executable_path = "/var/www/.wdm/drivers/chromedriver/linux64/106.0.5249/chromedriver"	#ChromeDriverManager().install()
+executable_path = ChromeDriverManager().install()
 
 def chromeWebdriver():
 	chrome_service = ChromeService(executable_path)
