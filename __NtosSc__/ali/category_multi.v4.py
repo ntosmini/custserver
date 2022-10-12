@@ -54,7 +54,8 @@ start_time = time.time()
 
 
 def chromeWebdriver():
-	chrome_service = ChromeService(executable_path=ChromeDriverManager().install())
+	executable_path=ChromeDriverManager().install()
+	chrome_service = ChromeService(executable_path)
 	chrome_options = Options()
 	chrome_options.add_experimental_option('detach', True)
 	chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
@@ -65,7 +66,7 @@ def chromeWebdriver():
 	chrome_options.add_argument("window-size=1920,1080")
 
 	driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
-
+	print(executable_path)
 	return driver
 
 def multiSelenium(process):
