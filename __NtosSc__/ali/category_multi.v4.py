@@ -65,7 +65,7 @@ def chromeWebdriver():
 	chrome_options.add_argument("window-size=1920,1080")
 
 	driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
-	print(executable_path)
+
 	return driver
 
 def multiSelenium(process):
