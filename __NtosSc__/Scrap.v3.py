@@ -35,15 +35,17 @@ chrome_options.add_argument("--blink-settings=imagesEnabled=false")
 chrome_options.add_argument("--window-size=1920x1080")
 
 driver = webdriver.Chrome("/usr/bin/chromedriver", chrome_options=chrome_options)
-
+NowUrl = ""
 try :
 	driver.get(SiteUrl)
 	driver.implicitly_wait(10)
 	driver.refresh()
 	driver.implicitly_wait(5)
 	time.sleep(random.randint(1, 3))
-
+	NowUrl = driver.current_url
+	
 	page_html = driver.page_source
+	print(NowUrl)
 	print(page_html)
 	driver.close()
 	driver.quit()
