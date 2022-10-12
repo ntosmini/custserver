@@ -42,7 +42,7 @@ def chromeWebdriver():
 	driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
 
 	return driver
-
+NowUrl = ""
 try :
 	driver = chromeWebdriver()
 	driver.get(SiteUrl)
@@ -50,8 +50,10 @@ try :
 	driver.refresh()
 	driver.implicitly_wait(5)
 	time.sleep(random.randint(1, 3))
+	NowUrl = driver.current_url
 
 	page_html = driver.page_source
+	print(NowUrl)
 	print(page_html)
 	driver.close()
 	driver.quit()
