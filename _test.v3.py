@@ -13,6 +13,7 @@ import io
 import os
 import multiprocessing
 import requests
+import traceback
 
 #한글깨짐
 sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
@@ -43,6 +44,7 @@ try :
 	driver.close()
 	driver.quit()
 except :
-	print("except")
+	err = traceback.format_exc()
+	print(str(err))
 	driver.close()
 	driver.quit()
