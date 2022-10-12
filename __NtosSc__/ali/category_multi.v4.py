@@ -72,6 +72,9 @@ def multiSelenium(process):
 	PageHtml = ""
 	NowUrl = ""
 	ItemBasicUrl = ""
+	Result_ = ""
+	ItemList = []
+	ItemContentBox = ""
 	try :
 		driver.get(SiteUrl)
 		driver.implicitly_wait(5)
@@ -98,71 +101,73 @@ def multiSelenium(process):
 		
 		PageHtml = driver.page_source
 		NowUrl = driver.current_url
+
+
+		if PageHtml :
+			try :
+				ScriptMatched = re.search('\{"mods".*\}', page_html)
+				ScriptListData = ScriptMatched.group()
+
+				ScriptListDataArr = json.loads(ScriptListData)
+				for Slist in ScriptListDataArr['mods']['itemList']['content'] :
+					Code1 = str(Slist['productId'])
+					if len(Code1) > CodeLen :
+						ItemList.append(Code1)
+						
+			except :
+				pass
+
+
+			try :
+				ItemContentBox = driver.find_element(By.CLASS_NAME, "product-container")
+				ATagItems = ItemContentBox.find_elements(By.TAG_NAME, 'a')
+
+				ItemClassName = ''
+				for ATI in ATagItems :
+					href = ATI.get_attribute('href')
+					if re.search("aliexpress.[a-zA-Z-]+/item/\d+", str(href)) :
+						ItemBasicUrl = re.sub(r'(/item/.*)$', '/item/', str(href))
+						ItemClassName = ATI.get_attribute('class')
+						break
+				if ItemClassName :
+					for ATI2 in ATagItems :
+						href = ATI2.get_attribute('href')
+						class_ = ATI2.get_attribute('class')
+						if class_ == ItemClassName and re.search("aliexpress.[a-zA-Z-]+/item/\d+", str(href)) :
+							href_result = re.sub(r'(\.html.*)$', '.html', str(href))
+							Code2 = re.search("\d+", href_result).group()
+							if len(str(Code2)) > CodeLen :
+								ItemList.append(str(Code2))
+
+			except :
+				pass
+
+
+		else :
+			pass
+
+
 	except :
 		pass
-	
-	Result_ = ""
-	if PageHtml :
-		ItemList = []
-		try :
-			ScriptMatched = re.search('\{"mods".*\}', page_html)
-			ScriptListData = ScriptMatched.group()
 
-			ScriptListDataArr = json.loads(ScriptListData)
-			for Slist in ScriptListDataArr['mods']['itemList']['content'] :
-				Code1 = str(Slist['productId'])
-				if len(Code1) > CodeLen :
-					ItemList.append(Code1)
-					
-		except :
-			pass
+	ItemListSet = list(set(ItemList))
 
-		ItemContentBox = ""
-		try :
-			ItemContentBox = driver.find_element(By.CLASS_NAME, "product-container")
-			ATagItems = ItemContentBox.find_elements(By.TAG_NAME, 'a')
-
-			ItemClassName = ''
-			for ATI in ATagItems :
-				href = ATI.get_attribute('href')
-				if re.search("aliexpress.[a-zA-Z-]+/item/\d+", str(href)) :
-					ItemBasicUrl = re.sub(r'(/item/.*)$', '/item/', str(href))
-					ItemClassName = ATI.get_attribute('class')
-					break
-			if ItemClassName :
-				for ATI2 in ATagItems :
-					href = ATI2.get_attribute('href')
-					class_ = ATI2.get_attribute('class')
-					if class_ == ItemClassName and re.search("aliexpress.[a-zA-Z-]+/item/\d+", str(href)) :
-						href_result = re.sub(r'(\.html.*)$', '.html', str(href))
-						Code2 = re.search("\d+", href_result).group()
-						if len(str(Code2)) > CodeLen :
-							ItemList.append(str(Code2))
-
-		except :
-			pass
-		
-		ItemListSet = list(set(ItemList))
-
-		if len(ItemListSet) > 0 :
-			Result = "success"
-		else :
-			if ItemContentBox :
-				Result = "notitem"
-			else :
-				Result = "ItemContentBox_error"
-
-		data = {'NtosServer':str(NtosServer), 'NotsKey':NotsKey, 'CustId':CustId, 'SclId':SclId, 'Result':Result, 'ItemList': ItemListSet, 'log_id': log_id, 'ItemBasicUrl':str(ItemBasicUrl) }
-		headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
-
-		try :
-			Result__ = requests.post(NtosServer, data=json.dumps(data), headers=headers)
-			Result_ = Result__.text
-		except :
-			Result_ = "requests_error"
-
+	if len(ItemListSet) > 0 :
+		Result = "success"
 	else :
-		Result_ = "html_error"
+		if ItemContentBox :
+			Result = "notitem"
+		else :
+			Result = "ItemContentBox_error"
+
+	data = {'NtosServer':str(NtosServer), 'NotsKey':NotsKey, 'CustId':CustId, 'SclId':SclId, 'Result':Result, 'ItemList': ItemListSet, 'log_id': log_id, 'ItemBasicUrl':str(ItemBasicUrl) }
+	headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
+	
+	try :
+		Result__ = requests.post(NtosServer, data=json.dumps(data), headers=headers)
+		Result_ = Result__.text
+	except :
+		Result_ = "requests_error"
 
 	print(Result_)
 	driver.close()
