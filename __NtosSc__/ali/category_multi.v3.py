@@ -53,6 +53,7 @@ def multiSelenium(process):
 	chrome_options.add_argument('--headless')
 	chrome_options.add_argument('--no-sandbox')
 	chrome_options.add_argument('--disable-dev-shm-usage')
+	chrome_options.add_argument("--blink-settings=imagesEnabled=false")
 	chrome_options.add_argument("--window-size=1920x1080")
 	if Agent == "" :
 		chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36")
@@ -67,11 +68,10 @@ def multiSelenium(process):
 		driver.get(SiteUrl)
 		driver.implicitly_wait(10)
 		driver.refresh()
-		driver.implicitly_wait(5)
-		time.sleep(random.randint(3, 5))
+		driver.implicitly_wait(10)
 
 
-		SCROLL_PAUSE_SEC = 1
+		SCROLL_PAUSE_SEC = 0.5
 		# 스크롤 높이 가져옴
 		last_height = driver.execute_script("return document.body.scrollHeight")
 
@@ -89,8 +89,7 @@ def multiSelenium(process):
 			last_height = new_height
 
 
-		time.sleep(3)
-
+		
 		page_html = driver.page_source
 		if page_html :
 			ItemList = []
