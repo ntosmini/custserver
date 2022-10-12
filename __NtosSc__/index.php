@@ -5,11 +5,13 @@ header("Content-Type: text/html; charset=UTF-8");
 Scrap 폴더
 */
 $Ver = (empty($_POST['Ver']))?"":$_POST['Ver'];	//v3 or v4
-$SiteUrl = $_POST['SiteUrl'];
+$RunData['SiteUrl'] = (empty($_POST['SiteUrl']))?"":$_POST['SiteUrl'];
 
-if(empty($SiteUrl)){
+if(empty($RunData['SiteUrl'])){
   $PageHtml = "not SiteUrl"; 
 } else {
-  exec("python3 /home/ntosmini/public_html/Scrap.{$Ver}.py {$SiteUrl}", $ResultArr);
+  $MConfigData = escapeshellarg(json_encode($RunData));
+  exec("python3 /home/ntosmini/public_html/Scrap.{$Ver}.py {$MConfigData}", $ResultArr);
   $PageHtml = implode("\n", $ResultArr);
 }
+echo $PageHtml;
