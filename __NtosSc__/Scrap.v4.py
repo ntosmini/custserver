@@ -55,7 +55,8 @@ try :
 	driver.close()
 	driver.quit()
 except :
-	print("except")
+	err = traceback.format_exc()
+	print(str(err))
 	driver.close()
 	driver.quit()
 
