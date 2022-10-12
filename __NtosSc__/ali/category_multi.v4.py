@@ -51,10 +51,9 @@ CustId = MConfig['CustId']
 
 start_time = time.time()
 
-
+executable_path=ChromeDriverManager().install()
 
 def chromeWebdriver():
-	executable_path=ChromeDriverManager().install()
 	chrome_service = ChromeService(executable_path)
 	chrome_options = Options()
 	chrome_options.add_experimental_option('detach', True)
