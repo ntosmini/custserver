@@ -51,11 +51,10 @@ CustId = MConfig['CustId']
 
 start_time = time.time()
 
-chrome_service = ChromeService(executable_path=ChromeDriverManager().install())
+
 
 def chromeWebdriver():
-	global chrome_service
-	
+	chrome_service = ChromeService(executable_path=ChromeDriverManager().install())
 	chrome_options = Options()
 	chrome_options.add_experimental_option('detach', True)
 	chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
