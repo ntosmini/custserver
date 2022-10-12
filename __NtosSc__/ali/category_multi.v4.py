@@ -171,7 +171,7 @@ def multiSelenium(process):
 if __name__ == '__main__':
 	pool = multiprocessing.Pool(processes=len(process_list))
 	pool.map(multiSelenium, process_list)
-	#print("\n\n--- %s seconds ---" % (time.time() - start_time))
+	print("\n\n--- %s seconds ---" % (time.time() - start_time))
 	pool.close()
 	pool.join()
 	sys.exit()
