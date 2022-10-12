@@ -9,6 +9,7 @@ import os
 import multiprocessing
 import requests
 import traceback
+import random
 
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
