@@ -74,12 +74,11 @@ def multiSelenium(process):
 	ItemBasicUrl = ""
 	try :
 		driver.get(SiteUrl)
-		driver.implicitly_wait(5)
+		driver.implicitly_wait(10)
 		driver.refresh()
-		driver.implicitly_wait(5)
-		time.sleep(random.randint(1, 3))
+		driver.implicitly_wait(10)
 
-		SCROLL_PAUSE_SEC = 1
+		SCROLL_PAUSE_SEC = 0.5
 		# 스크롤 높이 가져옴
 		last_height = driver.execute_script("return document.body.scrollHeight")
 
@@ -96,8 +95,7 @@ def multiSelenium(process):
 				break
 			last_height = new_height
 
-		time.sleep(random.randint(1, 3))
-
+		
 		PageHtml = driver.page_source
 		NowUrl = driver.current_url
 	except :
