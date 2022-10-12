@@ -52,16 +52,6 @@ CustId = MConfig['CustId']
 start_time = time.time()
 
 def chromeWebdriver():
-
-	try :
-		f = open("/home/ntosmini/public_html/__NtosSc__/ali/ServiceDate.txt", 'r', encoding="utf8")
-		ServiceDate = f.read()
-		f.close()
-	except :
-		f = open("/home/ntosmini/public_html/__NtosSc__/ali/ServiceDate.txt", 'w', encoding="utf8")
-		f.write(time.strftime('%Y%m%d', time.localtime(time.time())))
-		f.close()
-
 	chrome_service = ChromeService(executable_path=ChromeDriverManager().install())
 	chrome_options = Options()
 	chrome_options.add_experimental_option('detach', True)
