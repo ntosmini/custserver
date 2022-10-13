@@ -43,8 +43,12 @@ CodeLen = int(MConfig['CodeLen'])
 NotsKey = MConfig['NotsKey']
 CustId = MConfig['CustId']
 Scroll = MConfig['Scroll']
+Refresh = MConfig['Refresh']
+TimeChk = MConfig['TimeChk']
 
-start_time = time.time()
+if TimeChk == "Y" :
+	start_time = time.time()
+	
 def multiSelenium(process):
 	
 	(SclId, SiteUrl, log_id) = process.split("|@|")
@@ -68,8 +72,9 @@ def multiSelenium(process):
 	try :
 		driver.get(SiteUrl)
 		driver.implicitly_wait(10)
-		driver.refresh()
-		driver.implicitly_wait(10)
+		if Refresh == "Y" :
+			driver.refresh()
+			driver.implicitly_wait(10)
 
 		if Scroll == "Y" :
 			SCROLL_PAUSE_SEC = 0.5
@@ -119,7 +124,8 @@ def multiSelenium(process):
 if __name__ == '__main__':
 	pool = multiprocessing.Pool(processes=len(process_list))
 	pool.map(multiSelenium, process_list)
-	print("\n\n--- %s seconds ---" % (time.time() - start_time))
+	if TimeChk == "Y" :
+		print("\n\n--- %s seconds ---" % (time.time() - start_time))
 	pool.close()
 	pool.join()
 	sys.exit()
