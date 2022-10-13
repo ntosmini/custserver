@@ -108,7 +108,7 @@ def multiSelenium(process):
 						
 			except :
 				pass
-
+			"""
 			try :
 				ItemContentBox = driver.find_element_by_class_name("product-container")
 				ATagItems = ItemContentBox.find_elements_by_tag_name('a')
@@ -132,7 +132,7 @@ def multiSelenium(process):
 
 			except :
 				ItemContentBox = ""
-
+			"""
 			ItemListSet = list(set(ItemList))
 			Result = ""
 			if len(ItemListSet) > 0 :
