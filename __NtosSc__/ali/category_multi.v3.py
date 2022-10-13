@@ -138,10 +138,13 @@ def multiSelenium(process):
 			if len(ItemListSet) > 0 :
 				Result = "success"
 			else :
+				Result = "error"
+				"""
 				if ItemContentBox :
 					Result = "notitem"
 				else :
 					Result = "error"
+				"""
 
 
 			data = {'NtosServer':str(NtosServer), 'NotsKey':NotsKey, 'CustId':CustId, 'SclId':SclId, 'Result':Result, 'ItemList': ItemListSet, 'log_id': log_id, 'ItemBasicUrl':str(ItemBasicUrl) }
