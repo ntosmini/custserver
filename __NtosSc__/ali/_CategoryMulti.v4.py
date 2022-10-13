@@ -19,7 +19,6 @@ sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
 sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
 
 
-
 try :
 	os.system("killall -o 3m chrome")
 	os.system("killall -o 3m chromedriver")
@@ -47,9 +46,11 @@ Agent = MConfig['Agent']
 NotsKey = MConfig['NotsKey']
 CustId = MConfig['CustId']
 Scroll = MConfig['Scroll']
+Refresh = MConfig['Refresh']
+TimeChk = MConfig['TimeChk']
 
-
-start_time = time.time()
+if TimeChk == "Y" :
+	start_time = time.time()
 
 executable_path = ChromeDriverManager().install()
 
@@ -78,8 +79,10 @@ def multiSelenium(process):
 	try :
 		driver.get(SiteUrl)
 		driver.implicitly_wait(5)
-		driver.refresh()
-		driver.implicitly_wait(5)
+
+		if Refresh == "Y" :
+			driver.refresh()
+			driver.implicitly_wait(5)
 
 		if Scroll == "Y" :
 			SCROLL_PAUSE_SEC = 0.5
@@ -100,11 +103,15 @@ def multiSelenium(process):
 				last_height = new_height
 
 		
-		PageHtml = driver.page_source
+		Source = driver.page_source
 		NowUrl = driver.current_url
+
+		ScriptMatched = re.search('window._dida_config_._init_data_=.*?</script>', Source)
+		PageHtml = ScriptMatched.group()
+		
+
 	except :
 		pass
-
 
 	data = {'NtosServer':str(NtosServer), 'NotsKey':NotsKey, 'CustId':CustId, 'SclId':SclId, 'log_id': log_id, 'NowUrl':str(NowUrl), 'PageHtml':PageHtml }
 	headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
@@ -122,7 +129,8 @@ def multiSelenium(process):
 if __name__ == '__main__':
 	pool = multiprocessing.Pool(processes=len(process_list))
 	pool.map(multiSelenium, process_list)
-	print("\n\n--- %s seconds ---" % (time.time() - start_time))
+	if TimeChk == "Y" :
+		print("\n\n--- %s seconds ---" % (time.time() - start_time))
 	pool.close()
 	pool.join()
 	sys.exit()
