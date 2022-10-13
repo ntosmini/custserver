@@ -164,10 +164,13 @@ def multiSelenium(process):
 	if len(ItemListSet) > 0 :
 		Result = "success"
 	else :
+		Result = "notitem"
+		"""
 		if ItemContentBox :
 			Result = "notitem"
 		else :
 			Result = "ItemContentBox_error"
+		"""
 
 	data = {'NtosServer':str(NtosServer), 'NotsKey':NotsKey, 'CustId':CustId, 'SclId':SclId, 'Result':Result, 'ItemList': ItemListSet, 'log_id': log_id, 'ItemBasicUrl':str(ItemBasicUrl), 'NowUrl':str(NowUrl) }
 	headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
