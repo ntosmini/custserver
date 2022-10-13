@@ -91,14 +91,17 @@ def multiSelenium(process):
 
 
 		
-		PageHtml = driver.page_source
+		Source = driver.page_source
 		NowUrl = driver.current_url
+
+		ScriptMatched = re.search('window._dida_config_._init_data_=.*?</script>', Source)
+		PageHtml = ScriptMatched.group()
 	except :
 		pass
 
 
 
-	data = {'NtosServer':str(NtosServer), 'NotsKey':NotsKey, 'CustId':CustId, 'SclId':SclId, 'log_id': log_id, 'NowUrl':str(NowUrl), 'PageHtml':PageHtml }
+	data = {'NtosServer':str(NtosServer), 'NotsKey':NotsKey, 'CustId':CustId, 'SclId':SclId, 'log_id': log_id, 'NowUrl':str(NowUrl), 'PageHtml':str(PageHtml) }
 	headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
 
 	Result_ = ""
