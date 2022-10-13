@@ -13,6 +13,7 @@ $RunData['Agent'] = (empty($_POST['Agent']))?"":$_POST['Agent'];
 $RunData['CodeLen'] = (empty($_POST['CodeLen']))?"15":$_POST['CodeLen'];
 $RunData['NotsKey'] = (empty($_POST['NotsKey']))?"":$_POST['NotsKey'];
 $RunData['CustId'] = (empty($_POST['CustId']))?"":$_POST['CustId'];
+$RunData['Scroll'] = (empty($_POST['Scroll']))?"N":$_POST['Scroll'];
 
 
 if(empty($RunData['NtosServer']) || empty($RunData['SclId_SiteUrl']) || empty($RunData['CustId']) || empty($RunData['NotsKey'])){
