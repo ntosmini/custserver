@@ -90,17 +90,18 @@ def multiSelenium(process):
 
 
 		
-		page_html = driver.page_source
-		if page_html :
+		PageHtml = driver.page_source
+		if PageHtml :
 			ItemList = []
 			
 			ItemBasicUrl = ""
 			try :
-				ScriptMatched = re.search('\{"mods".*\}', page_html)
+				ScriptMatched = re.search('window._dida_config_._init_data_=.*?</script>', PageHtml)
 				ScriptListData = ScriptMatched.group()
-
+				ScriptListData = ScriptListData.replace("window._dida_config_._init_data_= { data:", "{ \"data\":")
+				ScriptListData = ScriptListData.replace("</script>", "")
 				ScriptListDataArr = json.loads(ScriptListData)
-				for Slist in ScriptListDataArr['mods']['itemList']['content'] :
+				for Slist in ScriptListDataArr['data']['data']['root']['fields']['mods']['itemList']['content'] :
 					Code1 = str(Slist['productId'])
 					if len(Code1) > CodeLen :
 						ItemList.append(Code1)
