@@ -121,7 +121,7 @@ def multiSelenium(process):
 			except :
 				pass
 
-
+			"""
 			try :
 				try :
 					ItemContentBox = driver.find_element(By.CLASS_NAME, "product-container")
@@ -150,7 +150,7 @@ def multiSelenium(process):
 
 			except :
 				pass
-
+			"""
 
 		else :
 			pass
