@@ -84,7 +84,7 @@ def multiSelenium(process):
 		driver.implicitly_wait(5)
 		driver.refresh()
 		driver.implicitly_wait(5)
-
+		"""
 		SCROLL_PAUSE_SEC = 0.5
 		# 스크롤 높이 가져옴
 		last_height = driver.execute_script("return document.body.scrollHeight")
@@ -101,7 +101,7 @@ def multiSelenium(process):
 			if new_height == last_height:
 				break
 			last_height = new_height
-
+		"""
 		
 		PageHtml = driver.page_source
 		NowUrl = driver.current_url
