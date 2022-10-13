@@ -78,6 +78,7 @@ def multiSelenium(process):
 	Result_ = ""
 	ItemList = []
 	ItemContentBox = ""
+
 	try :
 		driver.get(SiteUrl)
 		driver.implicitly_wait(5)
@@ -105,14 +106,14 @@ def multiSelenium(process):
 		PageHtml = driver.page_source
 		NowUrl = driver.current_url
 
-
 		if PageHtml :
 			try :
-				ScriptMatched = re.search('\{"mods".*\}', page_html)
+				ScriptMatched = re.search('window._dida_config_._init_data_=.*?</script>', PageHtml)
 				ScriptListData = ScriptMatched.group()
-
+				ScriptListData = ScriptListData.replace("window._dida_config_._init_data_= { data:", "{ \"data\":")
+				ScriptListData = ScriptListData.replace("</script>", "")
 				ScriptListDataArr = json.loads(ScriptListData)
-				for Slist in ScriptListDataArr['mods']['itemList']['content'] :
+				for Slist in ScriptListDataArr['data']['data']['root']['fields']['mods']['itemList']['content'] :
 					Code1 = str(Slist['productId'])
 					if len(Code1) > CodeLen :
 						ItemList.append(Code1)
@@ -122,7 +123,12 @@ def multiSelenium(process):
 
 
 			try :
-				ItemContentBox = driver.find_element(By.CLASS_NAME, "product-container")
+				try :
+					ItemContentBox = driver.find_element(By.CLASS_NAME, "product-container")
+				except :
+					ItemContentBox = driver.find_element(By.CLASS_NAME, "list--gallery--34TropR")
+					
+
 				ATagItems = ItemContentBox.find_elements(By.TAG_NAME, 'a')
 
 				ItemClassName = ''
@@ -163,7 +169,7 @@ def multiSelenium(process):
 		else :
 			Result = "ItemContentBox_error"
 
-	data = {'NtosServer':str(NtosServer), 'NotsKey':NotsKey, 'CustId':CustId, 'SclId':SclId, 'Result':Result, 'ItemList': ItemListSet, 'log_id': log_id, 'ItemBasicUrl':str(ItemBasicUrl) }
+	data = {'NtosServer':str(NtosServer), 'NotsKey':NotsKey, 'CustId':CustId, 'SclId':SclId, 'Result':Result, 'ItemList': ItemListSet, 'log_id': log_id, 'ItemBasicUrl':str(ItemBasicUrl), 'NowUrl':str(NowUrl) }
 	headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
 	
 	try :
