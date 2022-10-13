@@ -138,7 +138,7 @@ def multiSelenium(process):
 			if len(ItemListSet) > 0 :
 				Result = "success"
 			else :
-				Result = "error"
+				Result = "notitem"
 				"""
 				if ItemContentBox :
 					Result = "notitem"
