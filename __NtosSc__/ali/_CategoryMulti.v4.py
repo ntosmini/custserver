@@ -78,11 +78,11 @@ def multiSelenium(process):
 
 	try :
 		driver.get(SiteUrl)
-		driver.implicitly_wait(5)
+		driver.implicitly_wait(10)
 
 		if Refresh == "Y" :
 			driver.refresh()
-			driver.implicitly_wait(5)
+			driver.implicitly_wait(10)
 
 		if Scroll == "Y" :
 			SCROLL_PAUSE_SEC = 0.5
