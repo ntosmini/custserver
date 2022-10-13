@@ -95,7 +95,7 @@ def multiSelenium(process):
 				last_height = new_height
 
 
-		
+		time.sleep(random.randint(1, 2))
 		Source = driver.page_source
 		NowUrl = driver.current_url
 
