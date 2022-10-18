@@ -106,12 +106,20 @@ def multiSelenium(process):
 		Source = driver.page_source
 		NowUrl = driver.current_url
 
-		ScriptMatched = re.search('window._dida_config_._init_data_=.*?</script>', Source)
-		PageHtml = ScriptMatched.group()
-		
+
+		try :
+			ScriptMatched = re.search('window._dida_config_._init_data_=.*</html>?', Source, re.DOTALL)
+			PageHtml = ScriptMatched.group()
+		except :
+			ScriptMatched = re.search('window.runParams\s=.*</html>?', Source, re.DOTALL)
+			PageHtml = ScriptMatched.group()
+
 
 	except :
 		pass
+	finally:
+		driver.close()
+		driver.quit()
 
 	data = {'NtosServer':str(NtosServer), 'NotsKey':NotsKey, 'CustId':CustId, 'SclId':SclId, 'log_id': log_id, 'NowUrl':str(NowUrl), 'PageHtml':str(PageHtml) }
 	headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
@@ -122,9 +130,6 @@ def multiSelenium(process):
 	except :
 		Result_ = "requests_error"
 
-	print(Result_)
-	driver.close()
-	driver.quit()
 
 if __name__ == '__main__':
 	pool = multiprocessing.Pool(processes=len(process_list))
