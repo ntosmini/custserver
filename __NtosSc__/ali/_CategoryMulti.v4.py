@@ -85,7 +85,7 @@ def multiSelenium(process):
 			driver.implicitly_wait(10)
 
 		if Scroll == "Y" :
-			SCROLL_PAUSE_SEC = 1
+			SCROLL_PAUSE_SEC = 0.5
 			# 스크롤 높이 가져옴
 			last_height = driver.execute_script("return document.body.scrollHeight")
 
@@ -117,9 +117,6 @@ def multiSelenium(process):
 
 	except :
 		pass
-	finally:
-		driver.close()
-		driver.quit()
 
 	data = {'NtosServer':str(NtosServer), 'NotsKey':NotsKey, 'CustId':CustId, 'SclId':SclId, 'log_id': log_id, 'NowUrl':str(NowUrl), 'PageHtml':str(PageHtml) }
 	headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
@@ -130,6 +127,8 @@ def multiSelenium(process):
 	except :
 		Result_ = "requests_error"
 
+	driver.close()
+	driver.quit()
 
 if __name__ == '__main__':
 	pool = multiprocessing.Pool(processes=len(process_list))
