@@ -93,7 +93,7 @@ def multiSelenium(process):
                                 # 끝까지 스크롤 다운
                                 driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
-                                # 1초 대기
+                                # SCROLL_PAUSE_SEC 초 대기
                                 time.sleep(SCROLL_PAUSE_SEC)
 
                                 # 스크롤 다운 후 스크롤 높이 다시 가져옴
@@ -106,8 +106,15 @@ def multiSelenium(process):
                 Source = driver.page_source
                 NowUrl = driver.current_url
 
-                ScriptMatched = re.search('window._dida_config_._init_data_=.*?</script>', Source)
-                PageHtml = ScriptMatched.group()
+                ScriptMatched_1 = re.search(r'(?P<PageHtml>window._dida_config_._init_data_=.*(</script>){1})', Source, re.DOTALL)
+		ScriptMatched_2 = re.search(r'(?P<PageHtml>window.runParams =.*(</script>){1})', Source, re.DOTALL)
+		
+               	if ScriptMatched_1 :
+			PageHtml = ScriptMatched_1.group('PageHtml')
+		elif ScriptMatched_2 :
+			PageHtml = ScriptMatched_2.group('PageHtml')
+		else :
+			PageHtml = ""
 
 
         except :
@@ -123,7 +130,6 @@ def multiSelenium(process):
                 Result_ = "requests_error"
 
         print(Result_)
-        driver.close()
         driver.quit()
 
 
