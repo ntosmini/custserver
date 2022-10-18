@@ -85,7 +85,7 @@ def multiSelenium(process):
 			driver.implicitly_wait(10)
 
 		if Scroll == "Y" :
-			SCROLL_PAUSE_SEC = 0.5
+			SCROLL_PAUSE_SEC = 1
 			# 스크롤 높이 가져옴
 			last_height = driver.execute_script("return document.body.scrollHeight")
 
@@ -102,7 +102,7 @@ def multiSelenium(process):
 					break
 				last_height = new_height
 
-		time.sleep(random.randint(1, 2))
+		time.sleep(random.randint(2, 3))
 		Source = driver.page_source
 		NowUrl = driver.current_url
 
