@@ -118,6 +118,7 @@ def multiSelenium(process):
 
 
         except :
+		print('except')
                 pass
 
         data = {'NtosServer':str(NtosServer), 'NotsKey':NotsKey, 'CustId':CustId, 'SclId':SclId, 'log_id': log_id, 'NowUrl':str(NowUrl), 'PageHtml':str(PageHtml) }
