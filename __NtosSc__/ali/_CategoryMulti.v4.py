@@ -70,65 +70,62 @@ def chromeWebdriver():
 	return driver
 
 def multiSelenium(process):
-	(SclId, SiteUrl, log_id) = process.split("|@|")
+        (SclId, SiteUrl, log_id) = process.split("|@|")
 
-	driver = chromeWebdriver()
-	PageHtml = ""
-	NowUrl = ""
+        driver = chromeWebdriver()
+        PageHtml = ""
+        NowUrl = ""
 
-	try :
-		driver.get(SiteUrl)
-		driver.implicitly_wait(10)
+        try :
+                driver.get(SiteUrl)
+                driver.implicitly_wait(10)
 
-		if Refresh == "Y" :
-			driver.refresh()
-			driver.implicitly_wait(10)
+                if Refresh == "Y" :
+                        driver.refresh()
+                        driver.implicitly_wait(10)
 
-		if Scroll == "Y" :
-			SCROLL_PAUSE_SEC = 0.5
-			# 스크롤 높이 가져옴
-			last_height = driver.execute_script("return document.body.scrollHeight")
+                if Scroll == "Y" :
+                        SCROLL_PAUSE_SEC = 0.5
+                        # 스크롤 높이 가져옴
+                        last_height = driver.execute_script("return document.body.scrollHeight")
 
-			while True:
-				# 끝까지 스크롤 다운
-				driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+                        while True:
+                                # 끝까지 스크롤 다운
+                                driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
-				# 1초 대기
-				time.sleep(SCROLL_PAUSE_SEC)
+                                # 1초 대기
+                                time.sleep(SCROLL_PAUSE_SEC)
 
-				# 스크롤 다운 후 스크롤 높이 다시 가져옴
-				new_height = driver.execute_script("return document.body.scrollHeight")
-				if new_height == last_height:
-					break
-				last_height = new_height
+                                # 스크롤 다운 후 스크롤 높이 다시 가져옴
+                                new_height = driver.execute_script("return document.body.scrollHeight")
+                                if new_height == last_height:
+                                        break
+                                last_height = new_height
 
-		time.sleep(random.randint(2, 3))
-		Source = driver.page_source
-		NowUrl = driver.current_url
+                time.sleep(random.randint(1, 2))
+                Source = driver.page_source
+                NowUrl = driver.current_url
 
-
-		try :
-			ScriptMatched = re.search('window._dida_config_._init_data_=.*</html>?', Source, re.DOTALL)
-			PageHtml = ScriptMatched.group()
-		except :
-			ScriptMatched = re.search('window.runParams\s=.*</html>?', Source, re.DOTALL)
-			PageHtml = ScriptMatched.group()
+                ScriptMatched = re.search('window._dida_config_._init_data_=.*?</script>', Source)
+                PageHtml = ScriptMatched.group()
 
 
-	except :
-		pass
+        except :
+                pass
 
-	data = {'NtosServer':str(NtosServer), 'NotsKey':NotsKey, 'CustId':CustId, 'SclId':SclId, 'log_id': log_id, 'NowUrl':str(NowUrl), 'PageHtml':str(PageHtml) }
-	headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
-	
-	try :
-		Result__ = requests.post(NtosServer, data=json.dumps(data), headers=headers)
-		Result_ = Result__.text
-	except :
-		Result_ = "requests_error"
+        data = {'NtosServer':str(NtosServer), 'NotsKey':NotsKey, 'CustId':CustId, 'SclId':SclId, 'log_id': log_id, 'NowUrl':str(NowUrl), 'PageHtml':str(PageHtml) }
+        headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
 
-	driver.close()
-	driver.quit()
+        try :
+                Result__ = requests.post(NtosServer, data=json.dumps(data), headers=headers)
+                Result_ = Result__.text
+        except :
+                Result_ = "requests_error"
+
+        print(Result_)
+        driver.close()
+        driver.quit()
+
 
 if __name__ == '__main__':
 	pool = multiprocessing.Pool(processes=len(process_list))
