@@ -67,7 +67,6 @@ def multiSelenium(process):
 		Result_ = "error"
 
 	print(Result_)
-	driver.close()
 	driver.quit()
 
 if __name__ == '__main__':
