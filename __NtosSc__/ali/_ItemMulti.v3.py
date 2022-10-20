@@ -6,6 +6,7 @@ import sys
 import json
 import io
 import os
+import re
 import multiprocessing
 import requests
 from selenium import webdriver
