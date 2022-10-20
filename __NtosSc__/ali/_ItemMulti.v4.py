@@ -69,7 +69,6 @@ def multiSelenium(process):
 		driver.get(SiteUrl)
 		driver.implicitly_wait(5)
 		PageHtml = driver.page_source
-
 		NowUrl = driver.current_url
 	except :
 		pass
