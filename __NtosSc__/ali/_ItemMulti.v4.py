@@ -73,7 +73,7 @@ def multiSelenium(process):
 	except :
 		pass
 
-	data = {'NtosServer':str(NtosServer), 'NotsKey':NotsKey, 'CustId':CustId, 'SlId':SlId, 'PageHtml':PageHtml, 'log_id': log_id, 'NowUrl':NowUrl }
+	data = {'NtosServer':str(NtosServer), 'NotsKey':NotsKey, 'CustId':CustId, 'SlId':SlId, 'PageHtml':str(PageHtml), 'log_id': log_id, 'NowUrl':str(NowUrl) }
 	headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
 
 	Result_ = ""
@@ -84,7 +84,6 @@ def multiSelenium(process):
 		Result_ = "error"
 
 	print(Result_)
-	driver.close()
 	driver.quit()
 
 
