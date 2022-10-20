@@ -51,17 +51,8 @@ def multiSelenium(process):
 	try :
 		driver.get(SiteUrl)
 		driver.implicitly_wait(5)
-		Source = driver.page_source
+		PageHtml = driver.page_source
 		NowUrl = driver.current_url
-
-		ScriptMatched = re.search(r'(?P<PageHtml>window.runParams =.*(</script>){1})', Source, re.DOTALL)
-
-		if ScriptMatched :
-			PageHtml = ScriptMatched_1.group('PageHtml')
-		else :
-			PageHtml = ""
-
-
 	except :
 		pass
 
