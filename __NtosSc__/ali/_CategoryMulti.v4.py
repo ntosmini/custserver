@@ -48,6 +48,7 @@ CustId = MConfig['CustId']
 Scroll = MConfig['Scroll']
 Refresh = MConfig['Refresh']
 TimeChk = MConfig['TimeChk']
+Referer = MConfig['Referer']
 
 if TimeChk == "Y" :
 	start_time = time.time()
