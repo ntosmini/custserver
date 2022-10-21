@@ -45,6 +45,8 @@ driver = chromeWebdriver()
 try :
 	driver.get(SiteUrl)
 	driver.implicitly_wait(10)
+	driver.refresh()
+	driver.implicitly_wait(10)
 	page_html = driver.page_source
 	print(page_html)
 	driver.close()
