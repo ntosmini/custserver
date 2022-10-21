@@ -9,6 +9,9 @@ $Ver = (empty($_GET['Ver']))?"":$_GET['Ver'];	//v3 or v4
 
 
 if(empty($Type)){
+	if($_GET['time']){
+		sleep($_GET['time']);
+	}
 	$PageHtml = "success";
 } else if($Type == "py"){
 	if($Ver == "v4" || $Ver == "v3"){
