@@ -79,6 +79,10 @@ def multiSelenium(process):
 		driver.get(SiteUrl)
 		driver.implicitly_wait(10)
 
+		if Referer :
+			driver.get(Referer)
+			driver.implicitly_wait(10)
+			
 		if Refresh == "Y" :
 			driver.refresh()
 			driver.implicitly_wait(10)
