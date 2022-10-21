@@ -44,6 +44,7 @@ NotsKey = MConfig['NotsKey']
 CustId = MConfig['CustId']
 Scroll = MConfig['Scroll']
 Refresh = MConfig['Refresh']
+Referer = MConfig['Referer']
 TimeChk = MConfig['TimeChk']
 
 if TimeChk == "Y" :
@@ -72,6 +73,11 @@ def multiSelenium(process):
 	try :
 		driver.get(SiteUrl)
 		driver.implicitly_wait(10)
+		
+		if Referer :
+			driver.get(Referer)
+			driver.implicitly_wait(10)
+			
 		if Refresh == "Y" :
 			driver.refresh()
 			driver.implicitly_wait(10)
