@@ -111,7 +111,7 @@ def multiSelenium(process):
 		NowUrl = driver.current_url
 	except :
 		pass
-
+	PageHtml = "a"
 	data = {'NtosServer':str(NtosServer), 'NotsKey':NotsKey, 'CustId':CustId, 'CslId':CslId, 'log_id': log_id, 'NowUrl':str(NowUrl), 'PageHtml':str(PageHtml) }
 	headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
 
