@@ -75,7 +75,16 @@ def multiSelenium(process):
 	driver = chromeWebdriver()
 	PageHtml = ""
 	NowUrl = ""
-	
+
+	try :
+		driver.get(SiteUrl)
+		driver.implicitly_wait(10)
+		
+		time.sleep(random.randint(1, 2))
+		PageHtml = driver.page_source
+	except :
+		pass
+		
 	data = {'NtosServer':str(NtosServer), 'NotsKey':NotsKey, 'CustId':CustId, 'CslId':CslId, 'log_id': log_id, 'NowUrl':str(NowUrl), 'PageHtml':str(PageHtml) }
 	headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
 	
