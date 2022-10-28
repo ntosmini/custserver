@@ -79,26 +79,52 @@ def multiSelenium(process):
 	try :
 		driver.get(SiteUrl)
 		driver.implicitly_wait(10)
-		
+
+		if Referer :
+			driver.get(Referer)
+			driver.implicitly_wait(10)
+			
+		if Refresh == "Y" :
+			driver.refresh()
+			driver.implicitly_wait(10)
+
+		if Scroll == "Y" :
+			SCROLL_PAUSE_SEC = 0.5
+			# 스크롤 높이 가져옴
+			last_height = driver.execute_script("return document.body.scrollHeight")
+
+			while True:
+				# 끝까지 스크롤 다운
+				driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+
+				# SCROLL_PAUSE_SEC 초 대기
+				time.sleep(SCROLL_PAUSE_SEC)
+
+				# 스크롤 다운 후 스크롤 높이 다시 가져옴
+				new_height = driver.execute_script("return document.body.scrollHeight")
+				if new_height == last_height:
+					break
+				last_height = new_height
+
 		time.sleep(random.randint(1, 2))
 		PageHtml = driver.page_source
+		NowUrl = driver.current_url
 	except :
-		pass
-		
+		PageHtml = ""
+		NowUrl = ""
+
 	data = {'NtosServer':str(NtosServer), 'NotsKey':NotsKey, 'CustId':CustId, 'CslId':CslId, 'log_id': log_id, 'NowUrl':str(NowUrl), 'PageHtml':str(PageHtml) }
 	headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
-	
+
 	try :
 		Result__ = requests.post(NtosServer, data=json.dumps(data), headers=headers)
 		Result_ = Result__.text
 	except :
-		err = traceback.format_exc()
-		print(str(err))
 		Result_ = "requests_error"
 
 	print(Result_)
 	driver.quit()
-	
+
 if __name__ == '__main__':
 	pool = multiprocessing.Pool(processes=len(process_list))
 	pool.map(multiSelenium, process_list)
