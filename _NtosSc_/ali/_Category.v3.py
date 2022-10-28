@@ -49,7 +49,7 @@ if TimeChk == "Y" :
 	
 
 	
-(SclId, SiteUrl, log_id) = CslId_SiteUrl.split("|@|")
+(CslId, SiteUrl, log_id) = CslId_SiteUrl.split("|@|")
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument("-disable-notifications")
 chrome_options.add_argument('--headless')
@@ -106,7 +106,7 @@ except :
 
 
 
-data = {'NtosServer':str(NtosServer), 'NotsKey':NotsKey, 'CustId':CustId, 'SclId':SclId, 'log_id': log_id, 'NowUrl':str(NowUrl), 'PageHtml':str(PageHtml) }
+data = {'NtosServer':str(NtosServer), 'NotsKey':NotsKey, 'CustId':CustId, 'CslId':CslId, 'log_id': log_id, 'NowUrl':str(NowUrl), 'PageHtml':str(PageHtml) }
 headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
 
 Result_ = ""
