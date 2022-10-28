@@ -68,7 +68,7 @@ def chromeWebdriver():
 	return driver
 
 
-(SclId, SiteUrl, log_id) = CslId_SiteUrl.split("|@|")
+(CslId, SiteUrl, log_id) = CslId_SiteUrl.split("|@|")
 driver = chromeWebdriver()
 PageHtml = ""
 NowUrl = ""
@@ -109,7 +109,7 @@ try :
 except :
 	pass
 
-data = {'NtosServer':str(NtosServer), 'NotsKey':NotsKey, 'CustId':CustId, 'SclId':SclId, 'log_id': log_id, 'NowUrl':str(NowUrl), 'PageHtml':str(PageHtml) }
+data = {'NtosServer':str(NtosServer), 'NotsKey':NotsKey, 'CustId':CustId, 'CslId':CslId, 'log_id': log_id, 'NowUrl':str(NowUrl), 'PageHtml':str(PageHtml) }
 headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
 
 try :
