@@ -13,7 +13,7 @@ import io
 import os
 import multiprocessing
 import requests
-import traceback
+
 #한글깨짐
 sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
 sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
@@ -71,8 +71,25 @@ def chromeWebdriver():
 	return driver
 
 def multiSelenium(process):
-	print(process)
+	(CslId, SiteUrl, log_id) = process.split("|@|")
+	driver = chromeWebdriver()
+	PageHtml = ""
+	NowUrl = ""
+	
+	data = {'NtosServer':str(NtosServer), 'NotsKey':NotsKey, 'CustId':CustId, 'CslId':CslId, 'log_id': log_id, 'NowUrl':str(NowUrl), 'PageHtml':str(PageHtml) }
+	headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
+	
+	try :
+		Result__ = requests.post(NtosServer, data=json.dumps(data), headers=headers)
+		Result_ = Result__.text
+	except :
+		err = traceback.format_exc()
+		print(str(err))
+		Result_ = "requests_error"
 
+	print(Result_)
+	driver.quit()
+	
 if __name__ == '__main__':
 	pool = multiprocessing.Pool(processes=len(process_list))
 	pool.map(multiSelenium, process_list)
