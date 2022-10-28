@@ -13,7 +13,7 @@ import io
 import os
 import multiprocessing
 import requests
-
+import traceback
 #한글깨짐
 sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
 sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
@@ -110,6 +110,8 @@ def multiSelenium(process):
 		PageHtml = driver.page_source
 		NowUrl = driver.current_url
 	except :
+		err = traceback.format_exc()
+		print(str(err))
 		pass
 	PageHtml = "a"
 	data = {'NtosServer':str(NtosServer), 'NotsKey':NotsKey, 'CustId':CustId, 'CslId':CslId, 'log_id': log_id, 'NowUrl':str(NowUrl), 'PageHtml':str(PageHtml) }
@@ -119,6 +121,8 @@ def multiSelenium(process):
 		Result__ = requests.post(NtosServer, data=json.dumps(data), headers=headers)
 		Result_ = Result__.text
 	except :
+		err = traceback.format_exc()
+		print(str(err))
 		Result_ = "requests_error"
 
 	print(Result_)
