@@ -37,6 +37,7 @@ process_list = MConfig['IslId_SiteUrl']
 NotsKey = MConfig['NotsKey']
 CustId = MConfig['CustId']
 TimeChk = MConfig['TimeChk']
+LogChkUrl = MConfig['LogChkUrl']
 
 if TimeChk == "Y" :
 	start_time = time.time()
@@ -58,10 +59,15 @@ def chromeWebdriver():
 
 	return driver
 
-
 def multiSelenium(process):
 	(IslId, SiteUrl, log_id) = process.split("|@|")
-
+	
+	if LogChkUrl :
+		try :
+			requests.get(LogChkUrl+"?step=1&log_id="+log_id)
+		except :
+			pass
+		
 	driver = chromeWebdriver()
 	PageHtml = ""
 	NowUrl = ""
@@ -70,6 +76,14 @@ def multiSelenium(process):
 		driver.implicitly_wait(5)
 		PageHtml = driver.page_source
 		NowUrl = driver.current_url
+		
+
+		if LogChkUrl :
+			try :
+				requests.get(LogChkUrl+"?step=2&log_id="+log_id)
+			except :
+				pass
+		
 	except :
 		pass
 
@@ -80,6 +94,13 @@ def multiSelenium(process):
 	try :
 		Result__ = requests.post(NtosServer, data=json.dumps(data), headers=headers)
 		Result_ = Result__.text
+		
+		if LogChkUrl :
+			try :
+				requests.get(LogChkUrl+"?step=3&log_id="+log_id)
+			except :
+				pass
+		
 	except :
 		Result_ = "error"
 
