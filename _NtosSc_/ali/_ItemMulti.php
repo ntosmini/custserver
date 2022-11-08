@@ -12,6 +12,7 @@ $RunData['IslId_SiteUrl'] = (empty($_POST['IslId_SiteUrl']))?"":$_POST['IslId_Si
 $RunData['NotsKey'] = (empty($_POST['NotsKey']))?"":$_POST['NotsKey'];
 $RunData['CustId'] = (empty($_POST['CustId']))?"":$_POST['CustId'];
 $RunData['TimeChk'] = (empty($_POST['TimeChk']))?"N":$_POST['TimeChk'];
+$RunData['LogChkUrl'] = (empty($_POST['LogChkUrl']))?"":$_POST['LogChkUrl'];
 
 if(empty($RunData['NtosServer']) || empty($RunData['IslId_SiteUrl']) || empty($RunData['CustId']) || empty($RunData['NotsKey'])){
 	echo 'error';
