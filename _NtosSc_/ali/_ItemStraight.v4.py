@@ -110,3 +110,5 @@ for val in IslId_SiteUrl :
 	time.sleep(2)
 
 driver.quit()
+if TimeChk == "Y" :
+	print("\n\n--- %s seconds ---" % (time.time() - start_time))
