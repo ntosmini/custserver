@@ -7,7 +7,6 @@ import json
 import io
 import os
 import re
-import multiprocessing
 import requests
 from selenium import webdriver
 
@@ -96,3 +95,5 @@ for val in IslId_SiteUrl :
 	time.sleep(1)
 
 driver.quit()
+if TimeChk == "Y" :
+	print("\n\n--- %s seconds ---" % (time.time() - start_time))
