@@ -64,7 +64,7 @@ def multiSelenium(process):
 	
 	if LogChkUrl :
 		try :
-			requests.post(LogChkUrl, data=json.dumps({'log_id':log_id, 'Step':'1' }), headers={'Content-Type': 'application/json', 'Accept': 'application/json'})
+			requests.post(LogChkUrl, data=json.dumps({'CustId':CustId, 'log_id':log_id, 'Step':'1' }), headers={'Content-Type': 'application/json', 'Accept': 'application/json'})
 		except :
 			pass
 		
@@ -80,7 +80,7 @@ def multiSelenium(process):
 
 		if LogChkUrl :
 			try :
-				requests.post(LogChkUrl, data=json.dumps({'log_id':log_id, 'Step':'2' }), headers={'Content-Type': 'application/json', 'Accept': 'application/json'})
+				requests.post(LogChkUrl, data=json.dumps({'CustId':CustId, 'log_id':log_id, 'Step':'2' }), headers={'Content-Type': 'application/json', 'Accept': 'application/json'})
 			except :
 				pass
 		
@@ -97,7 +97,7 @@ def multiSelenium(process):
 		
 		if LogChkUrl :
 			try :
-				requests.post(LogChkUrl, data=json.dumps({'log_id':log_id, 'Step':'3' }), headers={'Content-Type': 'application/json', 'Accept': 'application/json'})
+				requests.post(LogChkUrl, data=json.dumps({'CustId':CustId, 'log_id':log_id, 'Step':'3' }), headers={'Content-Type': 'application/json', 'Accept': 'application/json'})
 			except :
 				pass
 		
