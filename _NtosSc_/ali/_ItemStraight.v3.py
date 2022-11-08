@@ -21,7 +21,7 @@ try :
 except :
 	pass
 
-process_list = []
+IslId_SiteUrl = []
 
 
 MConfigData = sys.argv[1]
