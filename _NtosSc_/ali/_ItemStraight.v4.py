@@ -40,7 +40,7 @@ NotsKey = MConfig['NotsKey']
 CustId = MConfig['CustId']
 TimeChk = MConfig['TimeChk']
 LogChkUrl = MConfig['LogChkUrl']
-
+waitChk = MConfig['waitChk']
 
 if TimeChk == "Y" :
 	start_time = time.time()
@@ -81,18 +81,17 @@ for val in IslId_SiteUrl :
 	
 	try :
 		driver.get(SiteUrl)
-		
-		# 기본적으로 10초를 기다리고 다음 스크립트 실행
-		wait = WebDriverWait(driver, 10, 2)
-		
-		#driver.implicitly_wait(10)
-		
-		# logo-base 클래스가 나타날때까지 기다린다.
-		wait.until(
-			EC.presence_of_element_located((By.CLASS_NAME, "logo-base"))
-		)
-		# javascript 실행을 중지시킨다.
-		driver.execute_script("window.stop();")
+		if waitChk == "Y" :
+			# 기본적으로 10초를 기다리고 다음 스크립트 실행
+			wait = WebDriverWait(driver, 10, 2)
+			# logo-base 클래스가 나타날때까지 기다린다.
+			wait.until(
+				EC.presence_of_element_located((By.CLASS_NAME, "logo-base"))
+			)
+			# javascript 실행을 중지시킨다.
+			driver.execute_script("window.stop();")
+		else :
+			driver.implicitly_wait(10)
 		
 		PageHtml = driver.page_source
 		NowUrl = driver.current_url
