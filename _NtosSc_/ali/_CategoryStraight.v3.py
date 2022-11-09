@@ -1,12 +1,16 @@
 # -*- coding: utf-8 -*- 
-#상품 스트레이트-v3
+# 카테고리 멀티-v3
 
 import time
 import sys
+import codecs
+import random
+#pip install beautifulsoup4     <=> pip install bs4
+import threading
 import json
+import re
 import io
 import os
-import re
 import requests
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -17,25 +21,29 @@ from selenium.webdriver.support import expected_conditions as EC
 sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
 sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
 
+
+
 try :
 	os.system("killall -o 3m chrome")
 	os.system("killall -o 3m chromedriver")
 except :
 	pass
 
-IslId_SiteUrl = []
+
+CslId_SiteUrl = []
 
 
 MConfigData = sys.argv[1]
 MConfig = json.loads(MConfigData)
 
+
 NtosServer = MConfig['NtosServer']
-IslId_SiteUrl = MConfig['IslId_SiteUrl']
+CslId_SiteUrl = MConfig['CslId_SiteUrl']
+Agent = MConfig['Agent']
 NotsKey = MConfig['NotsKey']
 CustId = MConfig['CustId']
+Scroll = MConfig['Scroll']
 TimeChk = MConfig['TimeChk']
-LogChkUrl = MConfig['LogChkUrl']
-
 
 if TimeChk == "Y" :
 	start_time = time.time()
@@ -46,67 +54,69 @@ chrome_options.add_argument("-disable-notifications")
 chrome_options.add_argument('--headless')
 chrome_options.add_argument('--no-sandbox')
 chrome_options.add_argument("--window-size=1920x1080")
-chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36")
 chrome_options.add_argument('--disable-dev-shm-usage')
 chrome_options.add_argument('--disable-blink-features=AutomationControlled')
 chrome_options.add_argument('--disable-infobars')
 chrome_options.page_load_strategy = 'normal'
+	if Agent == "" :
+		chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36")
+	else :
+		chrome_options.add_argument("user-agent="+ Agent)
 
 driver = webdriver.Chrome("/usr/bin/chromedriver", chrome_options=chrome_options)
 
 wait = WebDriverWait(driver, 10, 1)
 
-for val in IslId_SiteUrl :
-	(IslId, SiteUrl, log_id) = val.split("|@|")
+driver.get("http://aliexpress.com")
+wait.until( 	EC.presence_of_element_located((By.CLASS_NAME, "logo-base")) )
 
-	if LogChkUrl :
-		try :
-			requests.post(LogChkUrl, data=json.dumps({'CustId':CustId, 'log_id':log_id, 'Step':'1' }), headers={'Content-Type': 'application/json', 'Accept': 'application/json'})
-		except :
-			pass
 
+
+for val in CslId_SiteUrl :
+	(CslId, SiteUrl, log_id) = val.split("|@|")
 	PageHtml = ""
 	NowUrl = ""
-	
-
 
 	try :
 		driver.get(SiteUrl)
 		wait.until( 	EC.presence_of_element_located((By.CLASS_NAME, "logo-base")) )
 		#driver.execute_script("window.stop();")
 
+		if Scroll == "Y" :
+			SCROLL_PAUSE_SEC = 0.5
+			# 스크롤 높이 가져옴
+			last_height = driver.execute_script("return document.body.scrollHeight")
+
+			while True:
+				# 끝까지 스크롤 다운
+				driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+
+				# SCROLL_PAUSE_SEC 초 대기
+				time.sleep(SCROLL_PAUSE_SEC)
+
+				# 스크롤 다운 후 스크롤 높이 다시 가져옴
+				new_height = driver.execute_script("return document.body.scrollHeight")
+				if new_height == last_height:
+					break
+				last_height = new_height
+
+
 		PageHtml = driver.page_source
 		NowUrl = driver.current_url
-		
-
-		if LogChkUrl :
-			try :
-				requests.post(LogChkUrl, data=json.dumps({'CustId':CustId, 'log_id':log_id, 'Step':'2' }), headers={'Content-Type': 'application/json', 'Accept': 'application/json'})
-			except :
-				pass
-		
 	except :
 		pass
 
-	data = {'NtosServer':str(NtosServer), 'NotsKey':NotsKey, 'CustId':CustId, 'IslId':IslId, 'PageHtml':str(PageHtml), 'log_id': log_id, 'NowUrl':str(NowUrl) }
+	data = {'NtosServer':str(NtosServer), 'NotsKey':NotsKey, 'CustId':CustId, 'CslId':CslId, 'log_id': log_id, 'NowUrl':str(NowUrl), 'PageHtml':str(PageHtml) }
 	headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
 
 	Result_ = ""
 	try :
 		Result__ = requests.post(NtosServer, data=json.dumps(data), headers=headers)
 		Result_ = Result__.text
-		
-		if LogChkUrl :
-			try :
-				requests.post(LogChkUrl, data=json.dumps({'CustId':CustId, 'log_id':log_id, 'Step':'3' }), headers={'Content-Type': 'application/json', 'Accept': 'application/json'})
-			except :
-				pass
-		
 	except :
 		Result_ = "error"
 
 	print(Result_)
-	
 
 driver.quit()
 if TimeChk == "Y" :
