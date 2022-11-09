@@ -86,11 +86,11 @@ for val in IslId_SiteUrl :
 		driver.get(SiteUrl)
 		# logo-base 클래스가 나타날때까지 기다린다.
 		wait.until(
-			#EC.presence_of_element_located((By.CLASS_NAME, "logo-base"))
-			EC.presence_of_element_located((By.ID, "criteo-tags-div"))
+			EC.presence_of_element_located((By.CLASS_NAME, "logo-base"))
+			#EC.presence_of_element_located((By.ID, "criteo-tags-div"))
 		)
 		# javascript 실행을 중지시킨다.
-		#driver.execute_script("window.stop();")
+		driver.execute_script("window.stop();")
 
 		PageHtml = driver.page_source
 		NowUrl = driver.current_url
