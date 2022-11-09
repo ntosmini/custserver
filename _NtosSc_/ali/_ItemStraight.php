@@ -11,7 +11,8 @@ $RunData['NtosServer'] = (empty($_POST['NtosServer']))?"":$_POST['NtosServer'];
 $RunData['IslId_SiteUrl'] = (empty($_POST['IslId_SiteUrl']))?"":$_POST['IslId_SiteUrl'];
 $RunData['NotsKey'] = (empty($_POST['NotsKey']))?"":$_POST['NotsKey'];
 $RunData['CustId'] = (empty($_POST['CustId']))?"":$_POST['CustId'];
-$RunData['TimeChk'] = (empty($_POST['TimeChk']))?"N":$_POST['TimeChk'];
+$RunData['Agent'] = (empty($_POST['Agent']))?"":$_POST['Agent'];
+$RunData['TimeChk'] = (empty($_POST['TimeChk']))?"":$_POST['TimeChk'];
 $RunData['LogChkUrl'] = (empty($_POST['LogChkUrl']))?"":$_POST['LogChkUrl'];
 $RunData['WaitChk'] = (empty($_POST['WaitChk']))?"":$_POST['WaitChk'];
 
