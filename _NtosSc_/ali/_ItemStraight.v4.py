@@ -57,10 +57,10 @@ def chromeWebdriver():
 	chrome_options.add_argument('--no-sandbox')
 	chrome_options.add_argument('--blink-settings=imagesEnabled=false')
 	chrome_options.add_argument('window-size=1920,1080')
-    chrome_options.add_argument('--disable-dev-shm-usage')
-    chrome_options.add_argument('--disable-blink-features=AutomationControlled')
-    chrome_options.add_argument('--disable-infobars')
-    chrome_options.page_load_strategy = 'none'
+	chrome_options.add_argument('--disable-dev-shm-usage')
+	chrome_options.add_argument('--disable-blink-features=AutomationControlled')
+	chrome_options.add_argument('--disable-infobars')
+	chrome_options.page_load_strategy = 'none'
 
 	driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
 
