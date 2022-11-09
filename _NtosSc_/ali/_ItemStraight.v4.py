@@ -128,7 +128,7 @@ for val in IslId_SiteUrl :
 		Result_ = "error"
 
 	print(Result_)
-	time.sleep(0.5)
+
 
 driver.quit()
 if TimeChk == "Y" :
