@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*- 
-#상품 스트레이트-v4
+#상품 스트레이트-v3
 
 import time
 import sys
@@ -9,6 +9,8 @@ import os
 import re
 import requests
 from selenium import webdriver
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 #한글깨짐
 sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
@@ -45,6 +47,11 @@ chrome_options.add_argument('--no-sandbox')
 chrome_options.add_argument('--disable-dev-shm-usage')
 chrome_options.add_argument("--window-size=1920x1080")
 chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36")
+chrome_options.add_argument('--disable-dev-shm-usage')
+chrome_options.add_argument('--disable-blink-features=AutomationControlled')
+chrome_options.add_argument('--disable-infobars')
+chrome_options.page_load_strategy = 'none'
+
 driver = webdriver.Chrome("/usr/bin/chromedriver", chrome_options=chrome_options)
 
 for val in IslId_SiteUrl :
@@ -58,9 +65,19 @@ for val in IslId_SiteUrl :
 
 	PageHtml = ""
 	NowUrl = ""
+	
+	# 기본적으로 10초를 기다리고 다음 스크립트 실행
+	wait = WebDriverWait(driver, 10)
+
 	try :
 		driver.get(SiteUrl)
-		driver.implicitly_wait(5)
+		# logo-base 클래스가 나타날때까지 기다린다.
+		wait.until(
+			EC.presence_of_element_located((By.CLASS_NAME, "logo-base"))
+		)
+		# javascript 실행을 중지시킨다.
+		driver.execute_script("window.stop();")
+
 		PageHtml = driver.page_source
 		NowUrl = driver.current_url
 		
