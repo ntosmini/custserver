@@ -38,6 +38,7 @@ NtosServer = MConfig['NtosServer']
 IslId_SiteUrl = MConfig['IslId_SiteUrl']
 NotsKey = MConfig['NotsKey']
 CustId = MConfig['CustId']
+Agent = MConfig['Agent']
 TimeChk = MConfig['TimeChk']
 LogChkUrl = MConfig['LogChkUrl']
 
