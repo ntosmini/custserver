@@ -35,6 +35,7 @@ NotsKey = MConfig['NotsKey']
 CustId = MConfig['CustId']
 TimeChk = MConfig['TimeChk']
 LogChkUrl = MConfig['LogChkUrl']
+chk_idx = MConfig['chk_idx']
 
 
 if TimeChk == "Y" :
@@ -72,7 +73,7 @@ for val in IslId_SiteUrl :
 
 	try :
 		driver.get(SiteUrl)
-		wait.until( 	EC.presence_of_element_located((By.CLASS_NAME, "logo-base")) )
+		wait.until( EC.presence_of_element_located((By.CLASS_NAME, "logo-base")) )
 		#driver.execute_script("window.stop();")
 
 		PageHtml = driver.page_source
@@ -88,7 +89,7 @@ for val in IslId_SiteUrl :
 	except :
 		pass
 
-	data = {'NtosServer':str(NtosServer), 'NotsKey':NotsKey, 'CustId':CustId, 'IslId':IslId, 'PageHtml':str(PageHtml), 'log_id': log_id, 'NowUrl':str(NowUrl) }
+	data = {'NtosServer':str(NtosServer), 'NotsKey':NotsKey, 'CustId':CustId, 'IslId':IslId, 'PageHtml':str(PageHtml), 'log_id': log_id, 'chk_idx': chk_idx, 'NowUrl':str(NowUrl) }
 	headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
 
 	Result_ = ""
