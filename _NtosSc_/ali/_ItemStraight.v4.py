@@ -80,19 +80,19 @@ for val in IslId_SiteUrl :
 	NowUrl = ""
 	
 	# 기본적으로 10초를 기다리고 다음 스크립트 실행
-	#wait = WebDriverWait(driver, 10, 2)
+	wait = WebDriverWait(driver, 10, 2)
 	
 	try :
 		driver.get(SiteUrl)
-		driver.implicitly_wait(10)
-		"""
+		#driver.implicitly_wait(10)
+		
 		# logo-base 클래스가 나타날때까지 기다린다.
 		wait.until(
 			EC.presence_of_element_located((By.CLASS_NAME, "logo-base"))
 		)
 		# javascript 실행을 중지시킨다.
 		driver.execute_script("window.stop();")
-		"""
+		
 		PageHtml = driver.page_source
 		NowUrl = driver.current_url
 		
@@ -125,7 +125,7 @@ for val in IslId_SiteUrl :
 		Result_ = "error"
 
 	print(Result_)
-	
+	time.sleep(0.5)
 
 driver.quit()
 if TimeChk == "Y" :
