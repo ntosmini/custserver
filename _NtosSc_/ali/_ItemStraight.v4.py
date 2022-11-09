@@ -38,7 +38,6 @@ NtosServer = MConfig['NtosServer']
 IslId_SiteUrl = MConfig['IslId_SiteUrl']
 NotsKey = MConfig['NotsKey']
 CustId = MConfig['CustId']
-Agent = MConfig['Agent']
 TimeChk = MConfig['TimeChk']
 LogChkUrl = MConfig['LogChkUrl']
 
@@ -60,11 +59,6 @@ def chromeWebdriver():
 	chrome_options.add_argument('--disable-blink-features=AutomationControlled')
 	chrome_options.add_argument('--disable-infobars')
 	chrome_options.page_load_strategy = 'normal'
-	if Agent == "" :
-		chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36")
-	else :
-		chrome_options.add_argument("user-agent="+ Agent)
-
 	driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
 
 	return driver
