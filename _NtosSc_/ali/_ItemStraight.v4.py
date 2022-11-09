@@ -40,7 +40,8 @@ NotsKey = MConfig['NotsKey']
 CustId = MConfig['CustId']
 TimeChk = MConfig['TimeChk']
 LogChkUrl = MConfig['LogChkUrl']
-waitChk = MConfig['waitChk']
+WaitChk = MConfig['WaitChk']
+StrategyChk = MConfig['StrategyChk']
 
 if TimeChk == "Y" :
 	start_time = time.time()
@@ -59,7 +60,8 @@ def chromeWebdriver():
 	chrome_options.add_argument('--disable-dev-shm-usage')
 	chrome_options.add_argument('--disable-blink-features=AutomationControlled')
 	chrome_options.add_argument('--disable-infobars')
-	#chrome_options.page_load_strategy = 'normal'
+	if StrategyChk :
+		chrome_options.page_load_strategy = StrategyChk
 
 	driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
 
@@ -81,7 +83,7 @@ for val in IslId_SiteUrl :
 	
 	try :
 		driver.get(SiteUrl)
-		if waitChk == "Y" :
+		if WaitChk == "Y" :
 			# 기본적으로 10초를 기다리고 다음 스크립트 실행
 			wait = WebDriverWait(driver, 10, 2)
 			# logo-base 클래스가 나타날때까지 기다린다.
