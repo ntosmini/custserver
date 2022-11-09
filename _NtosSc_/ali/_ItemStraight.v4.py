@@ -90,7 +90,7 @@ for val in IslId_SiteUrl :
 			EC.presence_of_element_located((By.CLASS_NAME, "footer-copywrite"))
 		)
 		# javascript 실행을 중지시킨다.
-		driver.execute_script("window.stop();")
+		#driver.execute_script("window.stop();")
 
 		PageHtml = driver.page_source
 		NowUrl = driver.current_url
