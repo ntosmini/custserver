@@ -80,7 +80,7 @@ for val in IslId_SiteUrl :
 	NowUrl = ""
 	
 	# 기본적으로 10초를 기다리고 다음 스크립트 실행
-	wait = WebDriverWait(driver, 10)
+	wait = WebDriverWait(driver, 10, 4)
 	
 	try :
 		driver.get(SiteUrl)
