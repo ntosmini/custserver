@@ -13,6 +13,8 @@ $RunData['NotsKey'] = (empty($_POST['NotsKey']))?"":$_POST['NotsKey'];
 $RunData['CustId'] = (empty($_POST['CustId']))?"":$_POST['CustId'];
 $RunData['TimeChk'] = (empty($_POST['TimeChk']))?"N":$_POST['TimeChk'];
 $RunData['LogChkUrl'] = (empty($_POST['LogChkUrl']))?"":$_POST['LogChkUrl'];
+$RunData['waitChk'] = (empty($_POST['waitChk']))?"":$_POST['waitChk'];
+
 
 if(empty($RunData['NtosServer']) || empty($RunData['IslId_SiteUrl']) || empty($RunData['CustId']) || empty($RunData['NotsKey'])){
 	echo 'error';
