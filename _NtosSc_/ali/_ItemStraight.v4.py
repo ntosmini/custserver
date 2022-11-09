@@ -87,7 +87,7 @@ for val in IslId_SiteUrl :
 	
 	try :
 		driver.get(SiteUrl)
-		wait.until( 	EC.presence_of_element_located((By.CLASS_NAME, "logo-base")) )
+		wait.until( EC.presence_of_element_located((By.CLASS_NAME, "logo-base")) )
 		#driver.execute_script("window.stop();")
 		
 		PageHtml = driver.page_source
