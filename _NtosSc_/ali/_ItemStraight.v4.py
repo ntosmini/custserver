@@ -41,7 +41,6 @@ CustId = MConfig['CustId']
 TimeChk = MConfig['TimeChk']
 LogChkUrl = MConfig['LogChkUrl']
 WaitChk = MConfig['WaitChk']
-StrategyChk = MConfig['StrategyChk']
 
 if TimeChk == "Y" :
 	start_time = time.time()
@@ -60,8 +59,8 @@ def chromeWebdriver():
 	chrome_options.add_argument('--disable-dev-shm-usage')
 	chrome_options.add_argument('--disable-blink-features=AutomationControlled')
 	chrome_options.add_argument('--disable-infobars')
-	if StrategyChk :
-		chrome_options.page_load_strategy = StrategyChk
+	if WaitChk == "Y" :
+		chrome_options.page_load_strategy = 'normal'
 
 	driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
 
