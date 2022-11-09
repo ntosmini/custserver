@@ -14,6 +14,7 @@ $RunData['CustId'] = (empty($_POST['CustId']))?"":$_POST['CustId'];
 $RunData['TimeChk'] = (empty($_POST['TimeChk']))?"N":$_POST['TimeChk'];
 $RunData['LogChkUrl'] = (empty($_POST['LogChkUrl']))?"":$_POST['LogChkUrl'];
 $RunData['WaitChk'] = (empty($_POST['WaitChk']))?"":$_POST['WaitChk'];
+$RunData['chk_idx'] = (empty($_POST['chk_idx']))?"":$_POST['chk_idx'];
 
 
 if(empty($RunData['NtosServer']) || empty($RunData['IslId_SiteUrl']) || empty($RunData['CustId']) || empty($RunData['NotsKey'])){
