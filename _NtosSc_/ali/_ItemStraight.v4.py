@@ -12,6 +12,8 @@ import requests
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 #pip3 install webdriver_manager
 from webdriver_manager.chrome import ChromeDriverManager
@@ -53,9 +55,13 @@ def chromeWebdriver():
 	chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
 	chrome_options.add_argument('--headless')
 	chrome_options.add_argument('--no-sandbox')
-	chrome_options.add_argument("--blink-settings=imagesEnabled=false")
-	chrome_options.add_argument("window-size=1920,1080")
-	
+	chrome_options.add_argument('--blink-settings=imagesEnabled=false')
+	chrome_options.add_argument('window-size=1920,1080')
+    chrome_options.add_argument('--disable-dev-shm-usage')
+    chrome_options.add_argument('--disable-blink-features=AutomationControlled')
+    chrome_options.add_argument('--disable-infobars')
+    chrome_options.page_load_strategy = 'none'
+
 	driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
 
 	return driver
@@ -73,9 +79,19 @@ for val in IslId_SiteUrl :
 
 	PageHtml = ""
 	NowUrl = ""
+	
+	# 기본적으로 10초를 기다리고 다음 스크립트 실행
+	wait = WebDriverWait(driver, 10)
+	
 	try :
 		driver.get(SiteUrl)
-		driver.implicitly_wait(5)
+		# logo-base 클래스가 나타날때까지 기다린다.
+		wait.until(
+			EC.presence_of_element_located((By.CLASS_NAME, "logo-base"))
+		)
+		# javascript 실행을 중지시킨다.
+		driver.execute_script("window.stop();")
+
 		PageHtml = driver.page_source
 		NowUrl = driver.current_url
 		
@@ -87,6 +103,7 @@ for val in IslId_SiteUrl :
 				pass
 		
 	except :
+		print("except")
 		pass
 
 	data = {'NtosServer':str(NtosServer), 'NotsKey':NotsKey, 'CustId':CustId, 'IslId':IslId, 'PageHtml':str(PageHtml), 'log_id': log_id, 'NowUrl':str(NowUrl) }
