@@ -35,7 +35,7 @@ NotsKey = MConfig['NotsKey']
 CustId = MConfig['CustId']
 TimeChk = MConfig['TimeChk']
 LogChkUrl = MConfig['LogChkUrl']
-
+chk_idx = MConfig['chk_idx']
 
 if TimeChk == "Y" :
 	start_time = time.time()
@@ -92,7 +92,7 @@ for val in IslId_SiteUrl :
 	except :
 		pass
 
-	data = {'NtosServer':str(NtosServer), 'NotsKey':NotsKey, 'CustId':CustId, 'IslId':IslId, 'PageHtml':str(PageHtml), 'log_id': log_id, 'NowUrl':str(NowUrl) }
+	data = {'NtosServer':str(NtosServer), 'NotsKey':NotsKey, 'CustId':CustId, 'IslId':IslId, 'PageHtml':str(PageHtml), 'log_id': log_id, 'chk_idx': chk_idx, 'NowUrl':str(NowUrl) }
 	headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
 
 	Result_ = ""
