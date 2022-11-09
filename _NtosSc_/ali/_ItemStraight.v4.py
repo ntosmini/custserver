@@ -79,11 +79,12 @@ for val in IslId_SiteUrl :
 	PageHtml = ""
 	NowUrl = ""
 	
-	# 기본적으로 10초를 기다리고 다음 스크립트 실행
-	wait = WebDriverWait(driver, 10, 2)
-	
 	try :
 		driver.get(SiteUrl)
+		
+		# 기본적으로 10초를 기다리고 다음 스크립트 실행
+		wait = WebDriverWait(driver, 10, 2)
+		
 		#driver.implicitly_wait(10)
 		
 		# logo-base 클래스가 나타날때까지 기다린다.
