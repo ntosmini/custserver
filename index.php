@@ -13,7 +13,7 @@ if(empty($Type)){
 } else if($Type == "py"){
 	if($Ver == "v4" || $Ver == "v3"){
 		$RunData = array();
-		$RunData['SiteUrl'] = (empty($_GET['SiteUrl']))?"http://mini.ntos.co.kr/_se_chk.html":$_GET['SiteUrl'];
+		$RunData['SiteUrl'] = (empty($_GET['SiteUrl']))?"http://product.ntos.co.kr/_SeleniumChk.php":$_GET['SiteUrl'];
 		$MConfigData = escapeshellarg(json_encode($RunData));
 		exec("python3 /home/ntosmini/public_html/_test.{$Ver}.py {$MConfigData}", $ResultArr);
 		$PageHtml = implode("\n", $ResultArr);
