@@ -23,7 +23,7 @@ sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
 sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
 
 
-SiteUrl = "http://mini.ntos.co.kr/_se_chk.html"
+SiteUrl = "http://product.ntos.co.kr/_SeleniumChk.php"
 
 start_time = time.time()
 
