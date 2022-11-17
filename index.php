@@ -9,7 +9,7 @@ $Ver = (empty($_GET['Ver']))?"":$_GET['Ver'];	//v3 or v4
 
 
 if(empty($Type)){
-	$PageHtml = "success";
+	$PageHtml = "ntoswebsuccess";
 } else if($Type == "py"){
 	if($Ver == "v4" || $Ver == "v3"){
 		$RunData = array();
