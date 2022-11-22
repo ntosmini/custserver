@@ -69,7 +69,7 @@ driver = webdriver.Chrome("/usr/bin/chromedriver", chrome_options=chrome_options
 
 wait = WebDriverWait(driver, 10, 1)
 
-driver.get("http://aliexpress.com")
+driver.get("https://aliexpress.com")
 wait.until( 	EC.presence_of_element_located((By.CLASS_NAME, "logo-base")) )
 
 
