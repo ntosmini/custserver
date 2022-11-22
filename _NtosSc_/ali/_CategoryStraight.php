@@ -11,6 +11,7 @@ $RunData['CslId_SiteUrl'] = (empty($_POST['CslId_SiteUrl']))?"":$_POST['CslId_Si
 $RunData['Agent'] = (empty($_POST['Agent']))?"":$_POST['Agent'];
 $RunData['NotsKey'] = (empty($_POST['NotsKey']))?"":$_POST['NotsKey'];
 $RunData['CustId'] = (empty($_POST['CustId']))?"":$_POST['CustId'];
+$RunData['ScrapServer'] = (empty($_POST['ScrapServer']))?"":$_POST['ScrapServer'];
 $RunData['Scroll'] = (empty($_POST['Scroll']))?"N":$_POST['Scroll'];
 $RunData['TimeChk'] = (empty($_POST['TimeChk']))?"N":$_POST['TimeChk'];
 
