@@ -42,8 +42,10 @@ CslId_SiteUrl = MConfig['CslId_SiteUrl']
 Agent = MConfig['Agent']
 NotsKey = MConfig['NotsKey']
 CustId = MConfig['CustId']
+ScrapServer = MConfig['ScrapServer']
 Scroll = MConfig['Scroll']
 TimeChk = MConfig['TimeChk']
+
 
 if TimeChk == "Y" :
 	start_time = time.time()
@@ -106,7 +108,7 @@ for val in CslId_SiteUrl :
 	except :
 		pass
 
-	data = {'NtosServer':str(NtosServer), 'NotsKey':NotsKey, 'CustId':CustId, 'CslId':CslId, 'log_id': log_id, 'NowUrl':str(NowUrl), 'PageHtml':str(PageHtml) }
+	data = {'NtosServer':str(NtosServer), 'NotsKey':NotsKey, 'CustId':CustId, 'ScrapServer':str(ScrapServer), 'CslId':CslId, 'log_id': log_id, 'NowUrl':str(NowUrl), 'PageHtml':str(PageHtml) }
 	headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
 
 	Result_ = ""
