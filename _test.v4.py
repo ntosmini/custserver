@@ -22,12 +22,12 @@ from selenium.webdriver.common.by import By
 sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
 sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
 
-#MConfigData = sys.argv[1]
-#MConfig = json.loads(MConfigData)
+MConfigData = sys.argv[1]
+MConfig = json.loads(MConfigData)
 
-SiteUrl = "http://ntos.co.kr" #MConfig['SiteUrl']
-refresh = "n" #MConfig['refresh']
-log = "y" #MConfig['log']
+SiteUrl = MConfig['SiteUrl']
+refresh = MConfig['refresh']
+log = MConfig['log']
 
 start_time = time.time()
 
