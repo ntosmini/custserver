@@ -15,6 +15,7 @@ if(empty($Type)){
 		$RunData = array();
 		$RunData['SiteUrl'] = (empty($_GET['SiteUrl']))?"http://product.ntos.co.kr/_SeleniumChk.php":$_GET['SiteUrl'];
 		$RunData['log'] = (empty($_GET['log']))?"n":"y";
+		$RunData['refresh'] = (empty($_GET['refresh']))?"n":"y";
 		$MConfigData = escapeshellarg(json_encode($RunData));
 		exec("python3 /home/ntosmini/public_html/_test.{$Ver}.py {$MConfigData}", $ResultArr);
 		$PageHtml = implode("\n", $ResultArr);
