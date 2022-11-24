@@ -32,17 +32,11 @@ log = "y" #MConfig['log']
 start_time = time.time()
 
 
-logfile = "/home/ntosmini/public_html/log/"+time.strftime('%Y%m%d', time.localtime(time.time()))+".txt"
+logfile = "/var/log/nginx/scrap_log_"+time.strftime('%Y%m%d', time.localtime(time.time()))+".txt"
 
 def logsave(text) :
 	if log == "n" :
 		return
-	try :
-		os.mkdir("/home/ntosmini/public_html/log")
-	except :
-		pass
-	
-	
 	filechk = ''
 	logdata = ''
 	if os.path.isfile(logfile) :
@@ -62,7 +56,7 @@ def logsave(text) :
 		elif text == "end" :
 			val = "\n============================= end "+time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))+" >> "+chktime+" seconds \n\n\n"
 		else :
-			val = "\n"+str(text)+" >> "+chktime+" seconds"
+			val = "\n"+str(text)+" >> "+chktime+" seconds "+time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
 		
 		f = open(logfile, 'w', encoding="utf8")
 		f.write(str(logdata)+str(val))
