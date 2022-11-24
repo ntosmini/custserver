@@ -37,6 +37,11 @@ logfile = "/home/ntosmini/public_html/log/"+time.strftime('%Y%m%d', time.localti
 def logsave(text) :
 	if log == "n" :
 		return
+	try :
+		os.mkdir("/home/ntosmini/public_html/log")
+	except :
+		pass
+	
 	
 	filechk = ''
 	logdata = ''
