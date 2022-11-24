@@ -40,25 +40,25 @@ def logsave(text) :
 	
 	filechk = ''
 	logdata = ''
-	if os.path.isfile(logfile):
+	if os.path.isfile(logfile) :
 		f = open(logfile, 'r', encoding="utf8")
 		logdata = f.read()
 		f.close()
 		filechk = 'y'
 	else :
 		filechk = 'n'
-
+	
 	if text :
 		val = ""
 		chktime = str( round((time.time() - start_time), 2))
 		if text == "start" :
 			val = "============================= start "+time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
-
+			
 		elif text == "end" :
 			val = "\n============================= end "+time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))+" >> "+chktime+" seconds \n\n\n"
 		else :
 			val = "\n"+str(text)+" >> "+chktime+" seconds"
-
+		
 		f = open(logfile, 'w', encoding="utf8")
 		f.write(str(logdata)+str(val))
 		f.close()
