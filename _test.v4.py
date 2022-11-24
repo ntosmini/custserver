@@ -85,10 +85,10 @@ logsave("chromeWebdriver 실행전")
 driver = chromeWebdriver()
 logsave("chromeWebdriver 실행완료")
 try :
-	logsave("chromeWebdriver 이동전")
+	logsave("chromeWebdriver 이동전"+str(SiteUrl))
 	driver.get(SiteUrl)
 	driver.implicitly_wait(10)
-	logsave("chromeWebdriver 이동완료")
+	logsave("chromeWebdriver 이동완료"+str(SiteUrl))
 	if refresh == "y" :
 		logsave("refresh 전")
 		driver.refresh()
