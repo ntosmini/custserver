@@ -56,7 +56,7 @@ def logsave(text) :
 		elif text == "end" :
 			val = "\n============================= end "+time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))+" >> "+chktime+" seconds \n\n\n"
 		else :
-			val = "\n"+str(text)+" >> "+chktime+" seconds "+time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
+			val = "\n"+str(text)+" "+time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))+" >> "+chktime+" seconds "
 		
 		f = open(logfile, 'w', encoding="utf8")
 		f.write(str(logdata)+str(val))
