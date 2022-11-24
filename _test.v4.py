@@ -26,8 +26,8 @@ MConfigData = sys.argv[1]
 MConfig = json.loads(MConfigData)
 
 SiteUrl = MConfig['SiteUrl']
-refresh = MConfig['refresh']
-log = MConfig['log']
+RefreshUsed = MConfig['refresh']
+LogUsed = MConfig['log']
 
 start_time = time.time()
 
@@ -35,7 +35,7 @@ start_time = time.time()
 logfile = "/var/log/nginx/scrap_log_"+time.strftime('%Y%m%d', time.localtime(time.time()))+".txt"
 
 def logsave(text) :
-	if log == "n" :
+	if LogUsed == "n" :
 		return
 	filechk = ''
 	logdata = ''
@@ -88,7 +88,7 @@ try :
 	driver.get(SiteUrl)
 	driver.implicitly_wait(10)
 	logsave("chromeWebdriver 이동완료"+str(SiteUrl))
-	if refresh == "y" :
+	if RefreshUsed == "y" :
 		logsave("refresh 전")
 		driver.refresh()
 		driver.implicitly_wait(10)
