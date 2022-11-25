@@ -86,7 +86,6 @@ wait = WebDriverWait(driver, 10, 1)
 driver.get("https://aliexpress.com")
 wait.until( 	EC.presence_of_element_located((By.CLASS_NAME, "logo-base")) )
 
-LoopCnt = int(0)
 for val in CslId_SiteUrl :
 	(CslId, SiteUrl, log_id) = val.split("|@|")
 	PageHtml = ""
@@ -130,7 +129,6 @@ for val in CslId_SiteUrl :
 		Result_ = Result__.text
 	except :
 		Result_ = "requests_error"
-	LoopCnt = LoopCnt + 1
 	print(Result_)
 
 driver.quit()
