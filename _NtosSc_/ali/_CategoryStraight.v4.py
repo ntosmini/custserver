@@ -121,7 +121,7 @@ for val in CslId_SiteUrl :
 	except :
 		pass
 
-	data = {'NtosServer':str(NtosServer), 'NotsKey':NotsKey, 'CustId':CustId, 'ScrapServer':str(ScrapServer), 'CslId':CslId, 'log_id': log_id, 'NowUrl':str(NowUrl), 'PageHtml':str(PageHtml) }
+	data = {'NtosServer':str(NtosServer), 'NotsKey':NotsKey, 'CustId':CustId, 'ScrapServer':ScrapServer, 'CslId':CslId, 'log_id': log_id, 'NowUrl':str(NowUrl), 'PageHtml':str(PageHtml) }
 	headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
 
 	try :
