@@ -100,7 +100,7 @@ for val in IslId_SiteUrl :
 		print("except")
 		pass
 
-	data = {'NtosServer':str(NtosServer), 'NotsKey':NotsKey, 'CustId':CustId, 'ScrapServer':str(ScrapServer), 'IslId':IslId, 'PageHtml':str(PageHtml), 'log_id': log_id, 'chk_idx': chk_idx, 'NowUrl':str(NowUrl) }
+	data = {'NtosServer':str(NtosServer), 'NotsKey':NotsKey, 'CustId':CustId, 'ScrapServer':ScrapServer, 'IslId':IslId, 'PageHtml':str(PageHtml), 'log_id': log_id, 'chk_idx': chk_idx, 'NowUrl':str(NowUrl) }
 	headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
 
 	Result_ = ""
