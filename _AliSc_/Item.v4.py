@@ -43,7 +43,7 @@ if CustId == "aliexpress" :
 	FileDir = "/home/ntosmini/ali_item_en/;"
 elif CustId == "aliexpresskr" :
 	FileDir = "/home/ntosmini/ali_item_kr/"
-else
+else :
 	print("allerror")
 	exit()
 
