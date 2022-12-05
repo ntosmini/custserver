@@ -17,8 +17,8 @@ if(empty($Ver) || ($Ver != 'v3' && $Ver != 'v4') ){
 	exit;
 }	//end if(empty($Ver))
 
-if(empty($RunData['IslId_SiteUrl'])){
-	echo 'not IslId_SiteUrl';
+if(empty($RunData['CslId_SiteUrl'])){
+	echo 'not CslId_SiteUrl';
 	exit;
 }
 
