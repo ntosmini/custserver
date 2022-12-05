@@ -35,6 +35,7 @@ MConfig = json.loads(MConfigData)
 
 IslId_SiteUrl = MConfig['IslId_SiteUrl']
 CustId = MConfig['CustId']
+ScrapServerId = MConfig['ScrapServerId']
 
 
 FileDir = ""
@@ -75,7 +76,7 @@ wait = WebDriverWait(driver, 10, 1)
 
 """
 파일명
-item_{IslId}.html
+item_{IslId}_{server_id}.html
 
 상단 내용++
 <ntosoriginurl></ntosoriginurl>
@@ -88,7 +89,7 @@ for val in IslId_SiteUrl :
 	OriginUrl = "<ntosoriginurl>"+str(SiteUrl)+"</ntosoriginurl>"
 
 	#저장파일명
-	SaveFile = FileDir+"item_"+str(IslId)+".html"
+	SaveFile = FileDir+"category_"+str(IslId)+"_"+str(ScrapServerId)+".html"
 
 	if IslId == "" or SiteUrl == "" :
 		f = open(SaveFile, 'w', encoding="utf8")

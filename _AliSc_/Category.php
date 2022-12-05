@@ -9,7 +9,7 @@ $Ver = (empty($_POST['Ver']))?"v4":$_POST['Ver'];	//v3 or v4
 $RunData['CslId_SiteUrl'] = (empty($_POST['CslId_SiteUrl']))?"":$_POST['CslId_SiteUrl'];
 $RunData['CustId'] = (empty($_POST['CustId']))?"":$_POST['CustId'];
 $RunData['Scroll'] = (empty($_POST['Scroll']))?"N":$_POST['Scroll'];	//스크롤
-$RunData['ScrapServer'] = (empty($_POST['ScrapServer']))?"":$_POST['ScrapServer'];	//server id
+$RunData['ScrapServerId'] = (empty($_POST['ScrapServerId']))?"":$_POST['ScrapServerId'];	//server id
 
 
 if(empty($Ver) || ($Ver != 'v3' && $Ver != 'v4') ){

@@ -37,6 +37,7 @@ MConfig = json.loads(MConfigData)
 CslId_SiteUrl = MConfig['CslId_SiteUrl']
 CustId = MConfig['CustId']
 Scroll = MConfig['Scroll']
+ScrapServerId = MConfig['ScrapServerId']
 
 
 FileDir = ""
@@ -80,7 +81,7 @@ wait.until( EC.presence_of_element_located((By.CLASS_NAME, "logo-base")) )
 
 """
 파일명
-item_{CslId}.html
+item_{CslId}_{server_id}.html
 
 상단 내용++
 <ntosoriginurl></ntosoriginurl>
@@ -93,7 +94,7 @@ for val in CslId_SiteUrl :
 	OriginUrl = "<ntosoriginurl>"+str(SiteUrl)+"</ntosoriginurl>"
 
 	#저장파일명
-	SaveFile = FileDir+"category_"+str(CslId)+".html"
+	SaveFile = FileDir+"category_"+str(CslId)+"_"+str(ScrapServerId)+".html"
 
 	if CslId == "" or SiteUrl == "" :
 		f = open(SaveFile, 'w', encoding="utf8")
