@@ -7,7 +7,7 @@ header("Content-Type: text/html; charset=UTF-8");
 
 $RunData = array();
 $Ver = (empty($_POST['Ver']))?"v4":$_POST['Ver'];	//v3 or v4
-$RunData['IslId_SiteUrl'] = (empty($_POST['IslId_SiteUrl']))?"test1|@|http://ntos.co.kr|@|test2":$_POST['IslId_SiteUrl'];
+$RunData['IslId_SiteUrl'] = (empty($_POST['IslId_SiteUrl']))?array("test1|@|http://ntos.co.kr|@|test2"):$_POST['IslId_SiteUrl'];
 $RunData['CustId'] = (empty($_POST['CustId']))?"aliexpress":$_POST['CustId'];
 
 
