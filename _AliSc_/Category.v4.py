@@ -1,11 +1,22 @@
 # -*- coding: utf-8 -*- 
-#상품 스트레이트-v4
+# 카테고리 멀티-v4
 
 import time
 import sys
 import json
 import io
 import os
+
+#한글깨짐
+sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
+sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
+
+
+try :
+	os.system("killall -o 3m chrome")
+	os.system("killall -o 3m chromedriver")
+except :
+	pass
 
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
@@ -17,31 +28,20 @@ from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 
-#한글깨짐
-sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
-sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
-
-try :
-	os.system("killall -o 3m chrome")
-	os.system("killall -o 3m chromedriver")
-except :
-	pass
-
-IslId_SiteUrl = []
+CslId_SiteUrl = []
 
 
 MConfigData = sys.argv[1]
 MConfig = json.loads(MConfigData)
 
-IslId_SiteUrl = MConfig['IslId_SiteUrl']
+CslId_SiteUrl = MConfig['CslId_SiteUrl']
 CustId = MConfig['CustId']
+Scroll = MConfig['Scroll']
 
 
 FileDir = ""
 if CustId == "aliexpress" :
-	FileDir = "/home/ntosmini/ali_item_en/"
-elif CustId == "aliexpresskr" :
-	FileDir = "/home/ntosmini/ali_item_kr/"
+	FileDir = "/home/ntosmini/ali_category/"
 else :
 	print("allerror")
 	exit()
@@ -65,32 +65,37 @@ def chromeWebdriver():
 	chrome_options.add_argument('--disable-blink-features=AutomationControlled')
 	chrome_options.add_argument('--disable-infobars')
 	chrome_options.page_load_strategy = 'normal'
+
 	driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
 
 	return driver
+
 
 driver = chromeWebdriver()
 
 wait = WebDriverWait(driver, 10, 1)
 
+driver.get("https://aliexpress.com")
+wait.until( EC.presence_of_element_located((By.CLASS_NAME, "logo-base")) )
+
 """
 파일명
-item_{IslId}.html
+item_{CslId}.html
 
 상단 내용++
 <ntosoriginurl></ntosoriginurl>
 <ntosnowurl></ntosnowurl>
 """
 
-for val in IslId_SiteUrl :
-	(IslId, SiteUrl) = val.split("|@|")
+for val in CslId_SiteUrl :
+	(CslId, SiteUrl) = val.split("|@|")
 
 	OriginUrl = "<ntosoriginurl>"+str(SiteUrl)+"</ntosoriginurl>"
 
 	#저장파일명
-	SaveFile = FileDir+"item_"+str(IslId)+".html"
+	SaveFile = FileDir+"category_"+str(CslId)+".html"
 
-	if IslId == "" or SiteUrl == "" :
+	if CslId == "" or SiteUrl == "" :
 		f = open(SaveFile, 'w', encoding="utf8")
 		f.write(OriginUrl)
 		f.close()
@@ -101,14 +106,29 @@ for val in IslId_SiteUrl :
 			driver.get(SiteUrl)
 			wait.until( EC.presence_of_element_located((By.CLASS_NAME, "logo-base")) )
 			#driver.execute_script("window.stop();")
-			
+
+			if Scroll == "Y" :
+				SCROLL_PAUSE_SEC = 0.5
+				# 스크롤 높이 가져옴
+				last_height = driver.execute_script("return document.body.scrollHeight")
+
+				while True:
+					# 끝까지 스크롤 다운
+					driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+
+					# SCROLL_PAUSE_SEC 초 대기
+					time.sleep(SCROLL_PAUSE_SEC)
+
+					# 스크롤 다운 후 스크롤 높이 다시 가져옴
+					new_height = driver.execute_script("return document.body.scrollHeight")
+					if new_height == last_height:
+						break
+					last_height = new_height
 			PageHtml = driver.page_source
 			NowUrl = driver.current_url
-
 		except :
 			PageHtml = ""
 			NowUrl = ""
-
 
 		WriteFile = ""
 		WriteFile = WriteFile + OriginUrl+"\n"
