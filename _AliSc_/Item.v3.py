@@ -77,7 +77,7 @@ for val in IslId_SiteUrl :
 	OriginUrl = "<ntosoriginurl>"+str(SiteUrl)+"</ntosoriginurl>"
 
 	#저장파일명
-	SaveFile = FileDir+"category_"+str(IslId)+"_"+str(ScrapServerId)+".html"
+	SaveFile = FileDir+"category_"+str(CustId)+"_"+str(CslId)+"_"+str(ScrapServerId)+".html"
 
 	if IslId == "" or SiteUrl == "" :
 		f = open(SaveFile, 'w', encoding="utf8")
