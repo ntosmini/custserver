@@ -47,6 +47,10 @@ else :
 	print("allerror")
 	exit()
 
+
+def osgzip(File) :
+	os.system("gzip "+File)
+
 executable_path = ChromeDriverManager().install()
 
 def chromeWebdriver():
@@ -72,7 +76,7 @@ wait = WebDriverWait(driver, 10, 1)
 
 """
 파일명
-item_{IslId}_{log_id}.html
+item_{IslId}.html
 
 상단 내용++
 <ntosoriginurl></ntosoriginurl>
@@ -80,17 +84,18 @@ item_{IslId}_{log_id}.html
 """
 
 for val in IslId_SiteUrl :
-	(IslId, SiteUrl, log_id) = val.split("|@|")
+	(IslId, SiteUrl) = val.split("|@|")
 
 	originurl = "<ntosoriginurl>"+str(SiteUrl)+"</ntosoriginurl>"
 
 	#저장파일명
-	SaveFile = FileDir+"item_"+str(IslId)+"_"+str(log_id)+".html"
+	SaveFile = FileDir+"item_"+str(IslId)+".html"
 
 	if IslId == "" or SiteUrl == "" :
 		f = open(SaveFile, 'w', encoding="utf8")
 		f.write(originurl)
 		f.close()
+		osgzip(SaveFile)
 		continue
 	else :
 		try :
@@ -116,5 +121,6 @@ for val in IslId_SiteUrl :
 		f = open(SaveFile, 'w', encoding="utf8")
 		f.write(WriteFile)
 		f.close()
+		osgzip(SaveFile)
 
 driver.quit()
