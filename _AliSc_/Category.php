@@ -10,6 +10,7 @@ $RunData['CslId_SiteUrl'] = (empty($_POST['CslId_SiteUrl']))?"":$_POST['CslId_Si
 $RunData['CustId'] = (empty($_POST['CustId']))?"":$_POST['CustId'];
 $RunData['Scroll'] = (empty($_POST['Scroll']))?"N":$_POST['Scroll'];	//스크롤
 $RunData['ScrapServerId'] = (empty($_POST['ScrapServerId']))?"":$_POST['ScrapServerId'];	//server id
+$RunData['LogId'] = (empty($_POST['LogId']))?"":$_POST['LogId'];	//LogId id
 
 
 if(empty($Ver) || ($Ver != 'v3' && $Ver != 'v4') ){
