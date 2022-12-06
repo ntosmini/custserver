@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*- 
-# 카테고리 멀티-v4
+# 카테고리 파일-v4
 
 import time
 import sys
@@ -38,6 +38,7 @@ CslId_SiteUrl = MConfig['CslId_SiteUrl']
 CustId = MConfig['CustId']
 Scroll = MConfig['Scroll']
 ScrapServerId = MConfig['ScrapServerId']
+LogId = MConfig['LogId']
 
 
 FileDir = ""
@@ -81,7 +82,7 @@ wait.until( EC.presence_of_element_located((By.CLASS_NAME, "logo-base")) )
 
 """
 파일명
-category_{CustId}_{CslId}_{server_id}.html
+category_{CustId}_{CslId}_{server_id}_{LogId}.html
 
 상단 내용++
 <ntosoriginurl></ntosoriginurl>
@@ -94,7 +95,7 @@ for val in CslId_SiteUrl :
 	OriginUrl = "<ntosoriginurl>"+str(SiteUrl)+"</ntosoriginurl>"
 
 	#저장파일명
-	SaveFile = FileDir+"category_"+str(CustId)+"_"+str(CslId)+"_"+str(ScrapServerId)+".html"
+	SaveFile = FileDir+"category_"+str(CustId)+"_"+str(CslId)+"_"+str(ScrapServerId)+"_"+str(LogId)+".html"
 
 	if CslId == "" or SiteUrl == "" :
 		f = open(SaveFile, 'w', encoding="utf8")
