@@ -64,7 +64,7 @@ wait = WebDriverWait(driver, 10, 1)
 
 """
 파일명
-item_{IslId}_{server_id}.html
+category_{CustId}_{IslId}_{server_id}.html
 
 상단 내용++
 <ntosoriginurl></ntosoriginurl>
@@ -77,7 +77,7 @@ for val in IslId_SiteUrl :
 	OriginUrl = "<ntosoriginurl>"+str(SiteUrl)+"</ntosoriginurl>"
 
 	#저장파일명
-	SaveFile = FileDir+"category_"+str(CustId)+"_"+str(CslId)+"_"+str(ScrapServerId)+".html"
+	SaveFile = FileDir+"category_"+str(CustId)+"_"+str(IslId)+"_"+str(ScrapServerId)+".html"
 
 	if IslId == "" or SiteUrl == "" :
 		f = open(SaveFile, 'w', encoding="utf8")
