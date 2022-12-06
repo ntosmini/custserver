@@ -29,13 +29,24 @@ except :
 
 IslId_SiteUrl = []
 
-
+"""
 MConfigData = sys.argv[1]
 MConfig = json.loads(MConfigData)
 
 IslId_SiteUrl = MConfig['IslId_SiteUrl']
 CustId = MConfig['CustId']
 ScrapServerId = MConfig['ScrapServerId']
+"""
+IslId_SiteUrl.append("1|@|https://ko.aliexpress.com/item/3256802640251697.html|@|6955215")
+IslId_SiteUrl.append("2|@|https://ko.aliexpress.com/item/3256804516344781.html|@|6955216")
+IslId_SiteUrl.append("3|@|https://ko.aliexpress.com/item/3256804516317114.html|@|6955217")
+IslId_SiteUrl.append("4|@|https://ko.aliexpress.com/item/3256803456813458.html|@|6955218")
+IslId_SiteUrl.append("5|@|https://ko.aliexpress.com/item/3256803456424879.html|@|6955219")
+IslId_SiteUrl.append("6|@|https://ko.aliexpress.com/item/3256804516307242.html|@|6955220")
+IslId_SiteUrl.append("7|@|https://ko.aliexpress.com/item/3256804516368570.html|@|6955221")
+CustId = "aliexpress"
+ScrapServerId = "151"
+
 
 
 FileDir = ""
