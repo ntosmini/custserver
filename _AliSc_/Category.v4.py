@@ -38,7 +38,6 @@ CslId_SiteUrl = MConfig['CslId_SiteUrl']
 CustId = MConfig['CustId']
 Scroll = MConfig['Scroll']
 ScrapServerId = MConfig['ScrapServerId']
-LogId = MConfig['LogId']
 
 
 FileDir = ""
@@ -90,7 +89,7 @@ category_{CustId}_{CslId}_{server_id}_{LogId}.html
 """
 
 for val in CslId_SiteUrl :
-	(CslId, SiteUrl) = val.split("|@|")
+	(CslId, SiteUrl, LogId) = val.split("|@|")
 
 	OriginUrl = "<ntosoriginurl>"+str(SiteUrl)+"</ntosoriginurl>"
 
