@@ -64,7 +64,7 @@ wait.until( EC.presence_of_element_located((By.CLASS_NAME, "logo-base")) )
 
 """
 파일명
-item_{CustId}_{CslId}_{server_id}.html
+category_{CustId}_{CslId}_{server_id}.html
 
 상단 내용++
 <ntosoriginurl></ntosoriginurl>
