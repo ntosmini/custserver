@@ -21,6 +21,7 @@ if(empty($RunData['IslId_SiteUrl'])){
 	echo 'not IslId_SiteUrl';
 	exit;
 }
+$RunData['IslId_SiteUrl'] = explode("|^|", $RunData['IslId_SiteUrl']);
 
 if(empty($RunData['CustId'])){
 	echo 'not CustId';
