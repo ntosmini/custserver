@@ -81,7 +81,7 @@ wait.until( EC.presence_of_element_located((By.CLASS_NAME, "logo-base")) )
 
 """
 파일명
-category_{CustId}_{CslId}_{server_id}_{LogId}.html
+category_{CustId}_{ca_id}_{CslId}_{server_id}_{LogId}.html
 
 상단 내용++
 <ntosoriginurl></ntosoriginurl>
@@ -89,12 +89,12 @@ category_{CustId}_{CslId}_{server_id}_{LogId}.html
 """
 
 for val in CslId_SiteUrl :
-	(CslId, SiteUrl, LogId) = val.split("|@|")
+	(CslId, CaId, SiteUrl, LogId) = val.split("|@|")
 
 	OriginUrl = "<ntosoriginurl>"+str(SiteUrl)+"</ntosoriginurl>"
 
 	#저장파일명
-	SaveFile = FileDir+"category_"+str(CustId)+"_"+str(CslId)+"_"+str(ScrapServerId)+"_"+str(LogId)+".html"
+	SaveFile = FileDir+"category_"+str(CustId)+"_"+str(CslId)+"_"+str(CaId)+"_"+str(ScrapServerId)+"_"+str(LogId)+".html"
 
 	if CslId == "" or SiteUrl == "" :
 		f = open(SaveFile, 'w', encoding="utf8")
