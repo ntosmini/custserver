@@ -73,12 +73,9 @@ item_{CustId}_{IslId}_{CaId}_{server_id}_{LogId}.html
 
 for val in IslId_SiteUrl :
 	(IslId, CaId, SiteUrl, LogId) = val.split("|@|")
-
 	OriginUrl = "<ntosoriginurl>"+str(SiteUrl)+"</ntosoriginurl>"
-
 	#저장파일명
 	SaveFile = FileDir+"item_"+str(CustId)+"_"+str(IslId)+"_"+str(CaId)+"_"+str(ScrapServerId)+"_"+str(LogId)+".html"
-
 	if IslId == "" or SiteUrl == "" :
 		f = open(SaveFile, 'w', encoding="utf8")
 		f.write(OriginUrl)
@@ -90,24 +87,18 @@ for val in IslId_SiteUrl :
 			driver.get(SiteUrl)
 			wait.until( EC.presence_of_element_located((By.CLASS_NAME, "logo-base")) )
 			#driver.execute_script("window.stop();")
-
 			PageHtml = driver.page_source
 			NowUrl = driver.current_url
 		except :
 			PageHtml = ""
 			NowUrl = ""
-
-
 		WriteFile = ""
 		WriteFile = WriteFile + OriginUrl+"\n"
 		if NowUrl :
 			WriteFile = WriteFile + "<ntosnowurl>"+NowUrl+"</ntosnowurl>\n"
-
 		WriteFile = WriteFile + PageHtml
-
 		f = open(SaveFile, 'w', encoding="utf8")
 		f.write(WriteFile)
 		f.close()
 		osgzip(SaveFile)
-
 driver.quit()
