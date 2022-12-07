@@ -64,7 +64,7 @@ wait = WebDriverWait(driver, 10, 1)
 
 """
 파일명
-item_{CustId}_{IslId}_{server_id}_{LogId}.html
+item_{CustId}_{IslId}_{CaId}_{server_id}_{LogId}.html
 
 상단 내용++
 <ntosoriginurl></ntosoriginurl>
@@ -72,12 +72,12 @@ item_{CustId}_{IslId}_{server_id}_{LogId}.html
 """
 
 for val in IslId_SiteUrl :
-	(IslId, SiteUrl, LogId) = val.split("|@|")
+	(IslId, CaId, SiteUrl, LogId) = val.split("|@|")
 
 	OriginUrl = "<ntosoriginurl>"+str(SiteUrl)+"</ntosoriginurl>"
 
 	#저장파일명
-	SaveFile = FileDir+"item_"+str(CustId)+"_"+str(IslId)+"_"+str(ScrapServerId)+"_"+str(LogId)+".html"
+	SaveFile = FileDir+"item_"+str(CustId)+"_"+str(IslId)+"_"+str(CaId)+"_"+str(ScrapServerId)+"_"+str(LogId)+".html"
 
 	if IslId == "" or SiteUrl == "" :
 		f = open(SaveFile, 'w', encoding="utf8")
