@@ -17,7 +17,7 @@ if(empty($Type)){
 		$RunData['log'] = (empty($_GET['log']))?"n":"y";
 		$RunData['refresh'] = (empty($_GET['refresh']))?"n":"y";
 		$MConfigData = escapeshellarg(json_encode($RunData));
-		exec("python3 /home/ntosmini/public_html/_test.{$Ver}.py {$MConfigData}", $ResultArr);
+		exec("python3 /home/ntosmini/public_html/index.{$Ver}.py {$MConfigData}", $ResultArr);
 		$PageHtml = implode("\n", $ResultArr);
 	} else {
 		$PageHtml = "error : Not Ver";
