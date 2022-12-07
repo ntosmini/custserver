@@ -66,9 +66,7 @@ def chromeWebdriver():
 	chrome_options.add_argument('--disable-blink-features=AutomationControlled')
 	chrome_options.add_argument('--disable-infobars')
 	chrome_options.page_load_strategy = 'normal'
-
 	driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
-
 	return driver
 
 
@@ -90,12 +88,9 @@ cate_{CustId}_{CslId}_{CaId}_{server_id}_{LogId}.html
 
 for val in CslId_SiteUrl :
 	(CslId, CaId, SiteUrl, LogId) = val.split("|@|")
-
 	OriginUrl = "<ntosoriginurl>"+str(SiteUrl)+"</ntosoriginurl>"
-
 	#저장파일명
 	SaveFile = FileDir+"cate_"+str(CustId)+"_"+str(CslId)+"_"+str(CaId)+"_"+str(ScrapServerId)+"_"+str(LogId)+".html"
-
 	if CslId == "" or SiteUrl == "" :
 		f = open(SaveFile, 'w', encoding="utf8")
 		f.write(OriginUrl)
@@ -107,19 +102,15 @@ for val in CslId_SiteUrl :
 			driver.get(SiteUrl)
 			wait.until( EC.presence_of_element_located((By.CLASS_NAME, "logo-base")) )
 			#driver.execute_script("window.stop();")
-
 			if Scroll == "Y" :
 				SCROLL_PAUSE_SEC = 0.5
 				# 스크롤 높이 가져옴
 				last_height = driver.execute_script("return document.body.scrollHeight")
-
 				while True:
 					# 끝까지 스크롤 다운
 					driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-
 					# SCROLL_PAUSE_SEC 초 대기
 					time.sleep(SCROLL_PAUSE_SEC)
-
 					# 스크롤 다운 후 스크롤 높이 다시 가져옴
 					new_height = driver.execute_script("return document.body.scrollHeight")
 					if new_height == last_height:
@@ -130,17 +121,13 @@ for val in CslId_SiteUrl :
 		except :
 			PageHtml = ""
 			NowUrl = ""
-
 		WriteFile = ""
 		WriteFile = WriteFile + OriginUrl+"\n"
 		if NowUrl :
 			WriteFile = WriteFile + "<ntosnowurl>"+NowUrl+"</ntosnowurl>\n"
-
 		WriteFile = WriteFile + PageHtml
-
 		f = open(SaveFile, 'w', encoding="utf8")
 		f.write(WriteFile)
 		f.close()
 		osgzip(SaveFile)
-
 driver.quit()
