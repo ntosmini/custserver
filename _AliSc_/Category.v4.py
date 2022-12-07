@@ -94,7 +94,7 @@ for val in CslId_SiteUrl :
 	OriginUrl = "<ntosoriginurl>"+str(SiteUrl)+"</ntosoriginurl>"
 
 	#저장파일명
-	SaveFile = FileDir+"category_"+str(CustId)+"_"+str(CslId)+"_"+str(CaId)+"_"+str(ScrapServerId)+"_"+str(LogId)+".html"
+	SaveFile = FileDir+"cate_"+str(CustId)+"_"+str(CslId)+"_"+str(CaId)+"_"+str(ScrapServerId)+"_"+str(LogId)+".html"
 
 	if CslId == "" or SiteUrl == "" :
 		f = open(SaveFile, 'w', encoding="utf8")
