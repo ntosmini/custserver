@@ -143,6 +143,4 @@ for val in CslId_SiteUrl :
 			Result = Result_.text
 			if Result == "success" and os.path.exists(gzfile) :
 				os.remove(gzfile)
-
-
 driver.quit()
