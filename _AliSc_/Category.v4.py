@@ -6,6 +6,7 @@ import sys
 import json
 import io
 import os
+import requests
 
 #한글깨짐
 sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
@@ -39,6 +40,8 @@ CustId = MConfig['CustId']
 Scroll = MConfig['Scroll']
 ScrapServerId = MConfig['ScrapServerId']
 
+FileSendSave = MConfig['FileSendSave']
+NtosServer = MConfig['NtosServer']
 
 FileDir = ""
 if CustId == "aliexpress" :
@@ -130,4 +133,15 @@ for val in CslId_SiteUrl :
 		f.write(WriteFile)
 		f.close()
 		osgzip(SaveFile)
+
+		if FileSendSave == "Y" and NtosServer <> "" :
+			files = open(SaveFile, 'rb')
+			upload = {'file': files}
+			data = {'CustId':CustId, 'ScrapType':'cate' }
+			headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
+			res = requests.post(NtosServer, data=json.dumps(data), files = upload, headers=headers)
+			if res == "success" and os.path.exists(SaveFile) :
+				os.remove(SaveFile)
+
+
 driver.quit()
