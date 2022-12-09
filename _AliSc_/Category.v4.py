@@ -134,7 +134,7 @@ for val in CslId_SiteUrl :
 		f.close()
 		osgzip(SaveFile)
 
-		if FileSendSave == "Y" and NtosServer <> "" :
+		if FileSendSave == "Y" and NtosServer != "" :
 			files = open(SaveFile, 'rb')
 			upload = {'file': files}
 			data = {'CustId':CustId, 'ScrapType':'cate' }
