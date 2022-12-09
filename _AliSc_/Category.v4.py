@@ -139,8 +139,9 @@ for val in CslId_SiteUrl :
 			files = open(gzfile, 'rb')
 			upload = {'file': files}
 			data = {'CustId':CustId, 'ScrapType':'cate' }
-			res = requests.post(NtosServer, data=data, files=upload)
-			if res == "success" and os.path.exists(gzfile) :
+			Result_ = requests.post(NtosServer, data=data, files=upload)
+			Result = Result_.text
+			if Result == "success" and os.path.exists(gzfile) :
 				os.remove(gzfile)
 
 
