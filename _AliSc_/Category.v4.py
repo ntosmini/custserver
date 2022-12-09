@@ -135,7 +135,7 @@ for val in CslId_SiteUrl :
 		osgzip(SaveFile)
 
 		if FileSendSave == "Y" and NtosServer != "" :
-			files = open(SaveFile, 'rb')
+			files = open(SaveFile+".gz", 'rb')
 			upload = {'file': files}
 			data = {'CustId':CustId, 'ScrapType':'cate' }
 			headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
