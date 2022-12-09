@@ -11,6 +11,8 @@ $RunData['CustId'] = (empty($_POST['CustId']))?"":$_POST['CustId'];
 $RunData['Scroll'] = (empty($_POST['Scroll']))?"N":$_POST['Scroll'];	//스크롤
 $RunData['ScrapServerId'] = (empty($_POST['ScrapServerId']))?"":$_POST['ScrapServerId'];	//server id
 
+$RunData['NtosServer'] = (empty($_POST['NtosServer']))?"":$_POST['NtosServer'];	//받을 url
+$RunData['FileSendSave'] = (empty($_POST['FileSendSave']))?"N":$_POST['FileSendSave'];	//파일 저장 전송 사용여부 Y/N
 
 if(empty($Ver) || ($Ver != 'v3' && $Ver != 'v4') ){
 	echo 'not Ver';
