@@ -119,7 +119,6 @@ for val in CslId_SiteUrl :
 		f.write(WriteFile)
 		f.close()
 		osgzip(SaveFile)
-
 		if FileSendSave == "Y" and NtosServer != "" :
 			gzfile = SaveFile+".gz"
 			files = open(gzfile, 'rb')
