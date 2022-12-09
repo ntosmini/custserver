@@ -135,13 +135,13 @@ for val in CslId_SiteUrl :
 		osgzip(SaveFile)
 
 		if FileSendSave == "Y" and NtosServer != "" :
-			files = open(SaveFile+".gz", 'rb')
+			gzfile = SaveFile+".gz"
+			files = open(gzfile, 'rb')
 			upload = {'file': files}
 			data = {'CustId':CustId, 'ScrapType':'cate' }
-			headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
-			res = requests.post(NtosServer, data=json.dumps(data), files = upload, headers=headers)
-			if res == "success" and os.path.exists(SaveFile) :
-				os.remove(SaveFile)
+			res = requests.post(NtosServer, data=json.dumps(data), files=upload)
+			if res == "success" and os.path.exists(gzfile) :
+				os.remove(gzfile)
 
 
 driver.quit()
