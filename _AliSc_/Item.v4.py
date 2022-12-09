@@ -6,6 +6,7 @@ import sys
 import json
 import io
 import os
+import requests
 
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
@@ -36,6 +37,9 @@ MConfig = json.loads(MConfigData)
 IslId_SiteUrl = MConfig['IslId_SiteUrl']
 CustId = MConfig['CustId']
 ScrapServerId = MConfig['ScrapServerId']
+
+FileSendSave = MConfig['FileSendSave']
+NtosServer = MConfig['NtosServer']
 
 
 
@@ -114,5 +118,13 @@ for val in IslId_SiteUrl :
 		f.write(WriteFile)
 		f.close()
 		osgzip(SaveFile)
-
+		if FileSendSave == "Y" and NtosServer != "" :
+			gzfile = SaveFile+".gz"
+			files = open(gzfile, 'rb')
+			upload = {'file': files}
+			data = {'CustId':CustId, 'ScrapType':'cate' }
+			Result_ = requests.post(NtosServer, data=data, files=upload)
+			Result = Result_.text
+			if os.path.exists(gzfile) :
+				os.remove(gzfile)
 driver.quit()
