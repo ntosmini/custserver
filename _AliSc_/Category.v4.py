@@ -141,6 +141,6 @@ for val in CslId_SiteUrl :
 			data = {'CustId':CustId, 'ScrapType':'cate' }
 			Result_ = requests.post(NtosServer, data=data, files=upload)
 			Result = Result_.text
-			if Result == "success" and os.path.exists(gzfile) :
+			if os.path.exists(gzfile) :
 				os.remove(gzfile)
 driver.quit()
