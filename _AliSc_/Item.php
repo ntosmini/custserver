@@ -9,7 +9,6 @@ $RunData = array();
 $Ver = (empty($_POST['Ver']))?"v4":$_POST['Ver'];	//v3 or v4
 $RunData['IslId_SiteUrl'] = (empty($_POST['IslId_SiteUrl']))?"":$_POST['IslId_SiteUrl'];
 $RunData['CustId'] = (empty($_POST['CustId']))?"":$_POST['CustId'];
-$RunData['ScrapServerId'] = (empty($_POST['ScrapServerId']))?"":$_POST['ScrapServerId'];	//server id
 
 $RunData['FileSendSave'] = (empty($_POST['FileSendSave']))?"N":$_POST['FileSendSave'];	//파일 저장 전송 사용여부 Y/N
 $RunData['NtosServer'] = (empty($_POST['NtosServer']))?"":$_POST['NtosServer'];	//받을 url
