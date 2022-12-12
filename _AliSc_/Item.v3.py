@@ -31,7 +31,6 @@ MConfig = json.loads(MConfigData)
 
 IslId_SiteUrl = MConfig['IslId_SiteUrl']
 CustId = MConfig['CustId']
-ScrapServerId = MConfig['ScrapServerId']
 
 FileSendSave = MConfig['FileSendSave']
 NtosServer = MConfig['NtosServer']
@@ -75,11 +74,11 @@ item_{CustId}_{IslId}_{CaId}_{server_id}_{LogId}.html
 """
 
 for val in IslId_SiteUrl :
-	(IslId, CaId, SiteUrl, LogId) = val.split("|@|")
+	(SiteUrl, SaveFileName) = val.split("|@|")
 	OriginUrl = "<ntosoriginurl>"+str(SiteUrl)+"</ntosoriginurl>"
 	#저장파일명
 	SaveFile = FileDir+"item_"+str(CustId)+"_"+str(IslId)+"_"+str(CaId)+"_"+str(ScrapServerId)+"_"+str(LogId)+".html"
-	if IslId == "" or SiteUrl == "" :
+	if SiteUrl == "" or SaveFileName == "" :
 		f = open(SaveFile, 'w', encoding="utf8")
 		f.write(OriginUrl)
 		f.close()
