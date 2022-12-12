@@ -80,10 +80,6 @@ for val in CslId_SiteUrl :
 	#저장파일명
 	SaveFile = FileDir+str(SaveFileName)
 	if SiteUrl == "" or SaveFileName == "" :
-		f = open(SaveFile, 'w', encoding="utf8")
-		f.write(OriginUrl)
-		f.close()
-		osgzip(SaveFile)
 		continue
 	else :
 		try :
