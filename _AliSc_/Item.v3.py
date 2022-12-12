@@ -77,12 +77,8 @@ for val in IslId_SiteUrl :
 	(SiteUrl, SaveFileName) = val.split("|@|")
 	OriginUrl = "<ntosoriginurl>"+str(SiteUrl)+"</ntosoriginurl>"
 	#저장파일명
-	SaveFile = FileDir+"item_"+str(CustId)+"_"+str(IslId)+"_"+str(CaId)+"_"+str(ScrapServerId)+"_"+str(LogId)+".html"
+	SaveFile = FileDir+str(SaveFileName)
 	if SiteUrl == "" or SaveFileName == "" :
-		f = open(SaveFile, 'w', encoding="utf8")
-		f.write(OriginUrl)
-		f.close()
-		osgzip(SaveFile)
 		continue
 	else :
 		try :
