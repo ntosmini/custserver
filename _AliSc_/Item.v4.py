@@ -76,7 +76,7 @@ def chromeWebdriver():
 
 driver = chromeWebdriver()
 
-wait = WebDriverWait(driver, 10, 1)
+wait = WebDriverWait(driver, 10, 2)
 
 """
 파일명
