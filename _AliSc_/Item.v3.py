@@ -62,7 +62,7 @@ chrome_options.page_load_strategy = 'normal'
 
 driver = webdriver.Chrome("/usr/bin/chromedriver", chrome_options=chrome_options)
 
-wait = WebDriverWait(driver, 10, 1)
+wait = WebDriverWait(driver, 10, 2)
 
 """
 파일명
