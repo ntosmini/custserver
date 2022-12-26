@@ -8,7 +8,6 @@ $RunData = array();
 $Ver = (empty($_POST['Ver']))?"v4":$_POST['Ver'];	//v3 or v4
 $RunData['CustId'] = (empty($_POST['CustId']))?"":$_POST['CustId'];
 $RunData['SiteUrl'] = (empty($_POST['SiteUrl']))?"http://product.ntos.co.kr/_SeleniumChk.php":$_POST['SiteUrl'];
-$RunData['Scroll'] = (empty($_POST['Scroll']))?"N":$_POST['Scroll'];	//스크롤
 $RunData['NtosServer'] = (empty($_POST['NtosServer']))?"":$_POST['NtosServer'];	//받을 url
 
 
