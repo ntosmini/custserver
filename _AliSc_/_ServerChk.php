@@ -9,6 +9,7 @@ $Ver = (empty($_POST['Ver']))?"v4":$_POST['Ver'];	//v3 or v4
 $RunData['CustId'] = (empty($_POST['CustId']))?"":$_POST['CustId'];
 $RunData['SiteUrl'] = (empty($_POST['SiteUrl']))?"http://product.ntos.co.kr/_SeleniumChk.php":$_POST['SiteUrl'];
 $RunData['NtosServer'] = (empty($_POST['NtosServer']))?"":$_POST['NtosServer'];	//받을 url
+$RunData['Sid'] = (empty($_POST['Sid']))?"":$_POST['Sid'];	//서버 ID
 
 
 if(empty($Ver) || ($Ver != 'v3' && $Ver != 'v4') ){
