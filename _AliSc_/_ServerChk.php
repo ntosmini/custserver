@@ -2,7 +2,7 @@
 set_time_limit(0);
 header("Content-Type: text/html; charset=UTF-8");
 /*
-카테고리 - 스트레이트
+서버체크
 */
 $RunData = array();
 $Ver = (empty($_POST['Ver']))?"v4":$_POST['Ver'];	//v3 or v4
