@@ -28,10 +28,10 @@ MConfig = json.loads(MConfigData)
 
 
 CustId = MConfig['CustId']
-SiteUrl = MConfig['CustId']
-Server = MConfig['CustId']
-ReturnUrl = MConfig['CustId']
-Sid = MConfig['CustId']
+SiteUrl = MConfig['SiteUrl']
+Server = MConfig['Server']
+ReturnUrl = MConfig['ReturnUrl']
+Sid = MConfig['Sid']
 
 executable_path = ChromeDriverManager().install()
 
