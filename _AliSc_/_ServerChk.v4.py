@@ -28,9 +28,10 @@ MConfig = json.loads(MConfigData)
 
 
 CustId = MConfig['CustId']
-SiteUrl = MConfig['SiteUrl']
-NtosServer = MConfig['NtosServer']
-Sid = MConfig['Sid']
+SiteUrl = MConfig['CustId']
+Server = MConfig['CustId']
+ReturnUrl = MConfig['CustId']
+Sid = MConfig['CustId']
 
 executable_path = ChromeDriverManager().install()
 
@@ -63,9 +64,9 @@ except :
 	PageHtml = ''
 	NowUrl = ''
 
-data = {'CustId':CustId, 'Sid':Sid, 'NowUrl':str(NowUrl), 'PageHtml':str(PageHtml) }
+data = {'CustId':str(CustId), 'Server':str(Server), 'Sid':str(Sid), 'NowUrl':str(NowUrl), 'PageHtml':str(PageHtml) }
 headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
 
-requests.post(NtosServer, data=json.dumps(data), headers=headers)
+requests.post(ReturnUrl, data=json.dumps(data), headers=headers)
 
 driver.quit()
