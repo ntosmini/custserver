@@ -6,6 +6,7 @@ Scrap 폴더
 */
 $Ver = (empty($_POST['Ver']))?"":$_POST['Ver'];	//v3 or v4
 $RunData['SiteUrl'] = (empty($_POST['SiteUrl']))?"":$_POST['SiteUrl'];
+$RunData['Scroll'] = (empty($_POST['Scroll']))?"N":$_POST['Scroll'];
 
 if(empty($RunData['SiteUrl'])){
   $PageHtml = "not SiteUrl"; 
