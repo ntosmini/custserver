@@ -71,7 +71,8 @@ try :
 	NowUrl = driver.current_url
 
 	page_html = driver.page_source
-	print(NowUrl)
+	print("<ntosoriginurl>"+str(SiteUrl)+"</ntosoriginurl>")
+	print("<ntosnowurl>"+str(NowUrl)+"</ntosnowurl>")
 	print(page_html)
 	driver.close()
 	driver.quit()
