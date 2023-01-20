@@ -11,7 +11,7 @@ import requests
 import traceback
 import random
 
-SaveFile = "/home/ntosmini/public_html/_NtosSc_/test.html"
+SaveFile = "/home/ntosmini/scrapdata/test.html"
 try :
   page_html = "test\n test"
   f = open(SaveFile, 'w', encoding="utf8")
