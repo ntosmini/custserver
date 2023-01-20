@@ -12,9 +12,12 @@ import traceback
 import random
 
 SaveFile = "/home/ntosmini/public_html/_NtosSc_/test.html"
-
-page_html = "test\n test"
-f = open(SaveFile, 'w', encoding="utf8")
-f.write(page_html)
-f.close()
-os.system("gzip "+SaveFile)
+try :
+  page_html = "test\n test"
+  f = open(SaveFile, 'w', encoding="utf8")
+  f.write(page_html)
+  f.close()
+  os.system("gzip "+SaveFile)
+except :
+  err = traceback.format_exc()
+  print(str(err))
