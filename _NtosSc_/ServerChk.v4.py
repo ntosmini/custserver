@@ -37,12 +37,12 @@ def chromeWebdriver():
 
 driver = chromeWebdriver()
 try :
-  driver.get(SiteUrl)
-  driver.implicitly_wait(10)
-  PageHtml = driver.page_source
+	driver.get(SiteUrl)
+	driver.implicitly_wait(10)
+	PageHtml = driver.page_source
 	driver.close()
 	driver.quit()
-  print(PageHtml)
+	print(PageHtml)
 except :
 	err = traceback.format_exc()
 	print(str(err))
