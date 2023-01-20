@@ -35,7 +35,7 @@ Scroll = MConfig['Scroll']
 Refresh = MConfig['Refresh']
 FileSaveSendUrl = MConfig['FileSaveSendUrl']
 
-SaveFile = "/home/ntosmini/public_html/_AliSc_/"+str(CustId)+"_"+str(ScrapType)+"_"+str(DataId)+".html"
+SaveFile = "/home/ntosmini/scrap/"+str(CustId)+"_"+str(ScrapType)+"_"+str(DataId)+".html"
 
 def chromeWebdriver():
 	chrome_service = ChromeService(executable_path=ChromeDriverManager().install())
