@@ -26,10 +26,16 @@ sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
 MConfigData = sys.argv[1]
 MConfig = json.loads(MConfigData)
 
+CustId = MConfig['CustId'];
+ScrapType = MConfig['ScrapType'];
+DataId = MConfig['DataId'];
 SiteUrl = MConfig['SiteUrl']
 Scroll = MConfig['Scroll']
 
-start_time = time.time()
+Refresh = MConfig['Refresh']
+FileSaveSendUrl = MConfig['FileSaveSendUrl']
+
+SaveFile = "/home/ntosmini/public_html/_AliSc_/"+str(CustId)+"_"+str(ScrapType)+"_"+str(DataId)+".html"
 
 def chromeWebdriver():
 	chrome_service = ChromeService(executable_path=ChromeDriverManager().install())
@@ -67,15 +73,33 @@ try :
 				break
 			last_height = new_height
 
+	if Refresh == "Y" :
+		driver.refresh()
+		
 	time.sleep(random.randint(1, 3))
 	NowUrl = driver.current_url
 
 	page_html = driver.page_source
-	print("<ntosoriginurl>"+str(SiteUrl)+"</ntosoriginurl>")
-	print("<ntosnowurl>"+str(NowUrl)+"</ntosnowurl>")
-	print(page_html)
+	page_html = "<ntosoriginurl>"+str(SiteUrl)+"</ntosoriginurl>\n"+ "<ntosnowurl>"+str(NowUrl)+"</ntosnowurl>\n" + page_html
 	driver.close()
 	driver.quit()
+	
+	if FileSaveSendUrl == "N" :
+		print(page_html)
+	else :
+		f = open(SaveFile, 'w', encoding="utf8")
+		f.write(page_html)
+		f.close()
+		os.system("gzip "+SaveFile)
+		gzfile = SaveFile+".gz"
+		files = open(gzfile, 'rb')
+		upload = {'file': files}
+		data = {'CustId':str(CustId), 'ScrapType':str(ScrapType), 'DataId':str(DataId) }
+		Result_ = requests.post(FileSaveSendUrl, data=data, files=upload)
+		Result = Result_.text
+		if os.path.exists(gzfile) :
+			pass
+			#os.remove(gzfile)
 except :
 	err = traceback.format_exc()
 	print(str(err))
