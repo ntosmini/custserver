@@ -7,7 +7,10 @@ Scrap 폴더
 $Ver = (empty($_POST['Ver']))?"":$_POST['Ver'];	//v3 or v4
 $RunData['CustId'] = (empty($_POST['CustId']))?"":$_POST['CustId'];
 $RunData['DataId'] = (empty($_POST['DataId']))?"":$_POST['DataId'];
+$RunData['ScrapType'] = (empty($_POST['ScrapType']))?"":$_POST['ScrapType'];  //cate, prod
+
 $RunData['SiteUrl'] = (empty($_POST['SiteUrl']))?"":$_POST['SiteUrl'];
+
 $RunData['Scroll'] = (empty($_POST['Scroll']))?"N":$_POST['Scroll']; //Y,N
 
 $RunData['Refresh'] = (empty($_POST['Refresh']))?"N":$_POST['Refresh']; //Y,N
