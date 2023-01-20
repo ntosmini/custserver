@@ -6,7 +6,11 @@ Scrap 폴더
 */
 $Ver = (empty($_POST['Ver']))?"":$_POST['Ver'];	//v3 or v4
 $RunData['SiteUrl'] = (empty($_POST['SiteUrl']))?"":$_POST['SiteUrl'];
-$RunData['Scroll'] = (empty($_POST['Scroll']))?"N":$_POST['Scroll'];
+$RunData['Scroll'] = (empty($_POST['Scroll']))?"N":$_POST['Scroll']; //Y,N
+
+$RunData['Refresh'] = (empty($_POST['Refresh']))?"N":$_POST['Refresh']; //Y,N
+
+$RunData['FileSaveSendUrl'] = (empty($_POST['FileSaveSendUrl']))?"N":$_POST['FileSaveSendUrl']; //N, URL
 
 if(empty($RunData['SiteUrl'])){
   $PageHtml = "not SiteUrl"; 
