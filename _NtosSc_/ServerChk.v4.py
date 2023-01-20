@@ -18,6 +18,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 
+executable_path = ChromeDriverManager().install()
 def chromeWebdriver():
 	chrome_service = ChromeService(executable_path)
 	chrome_options = Options()
