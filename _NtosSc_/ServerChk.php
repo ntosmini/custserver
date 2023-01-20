@@ -13,10 +13,10 @@ if(empty($SiteUrl)){
   if($Type == "web"){
     $PageHtml = 'ntoswebsuccess';
   } else if($Type == "selenium"){
-    $RunData['SiteUrl'] = $SiteUrl;
-		$MConfigData = escapeshellarg(json_encode($RunData));
-		exec("python3 /home/ntosmini/public_html/_NtosSc_/ServerChk.{$Ver}.py {$MConfigData}", $ResultArr);
-		$PageHtml = implode("\n", $ResultArr);
+	$RunData['SiteUrl'] = $SiteUrl;
+	$MConfigData = escapeshellarg(json_encode($RunData));
+	exec("python3 /home/ntosmini/public_html/_NtosSc_/ServerChk.{$Ver}.py {$MConfigData}", $ResultArr);
+	$PageHtml = implode("\n", $ResultArr);
   } else {
     $PageHtml = 'not Type';
   }
