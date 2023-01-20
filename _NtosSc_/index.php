@@ -5,6 +5,7 @@ header("Content-Type: text/html; charset=UTF-8");
 Scrap 폴더
 */
 $Ver = (empty($_POST['Ver']))?"":$_POST['Ver'];	//v3 or v4
+$RunData['DataId'] = (empty($_POST['DataId']))?"":$_POST['DataId'];
 $RunData['SiteUrl'] = (empty($_POST['SiteUrl']))?"":$_POST['SiteUrl'];
 $RunData['Scroll'] = (empty($_POST['Scroll']))?"N":$_POST['Scroll']; //Y,N
 
