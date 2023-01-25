@@ -39,7 +39,6 @@ chrome_options.add_argument("--window-size=1920x1080")
 driver = webdriver.Chrome("/usr/bin/chromedriver", chrome_options=chrome_options)
 NowUrl = ""
 try :
-	driver = chromeWebdriver()
 	driver.get(SiteUrl)
 	driver.implicitly_wait(10)
 
