@@ -7,7 +7,7 @@ Scrap
 
 $RunData = array();
 $Ver = (empty($_POST['Ver']))?"v4":$_POST['Ver'];	//v3 or v4
-$RunData['RunId_SiteUrl'] = (empty($_POST['RunId_SiteUrl']))?"":$_POST['RunId_SiteUrl'];
+$RunData['RunSiteUrl'] = (empty($_POST['RunSiteUrl']))?"":$_POST['RunSiteUrl'];
 $RunData['CustId'] = (empty($_POST['CustId']))?"":$_POST['CustId'];
 $RunData['ScrapType'] = (empty($_POST['ScrapType']))?"":$_POST['ScrapType'];  //prod or cate
 
@@ -24,11 +24,11 @@ if(empty($Ver) || ($Ver != 'v3' && $Ver != 'v4') ){
 	exit;
 }	//end if(empty($Ver))
 
-if(empty($RunData['RunId_SiteUrl'])){
-	echo 'not RunId_SiteUrl';
+if(empty($RunData['RunSiteUrl'])){
+	echo 'not RunSiteUrl';
 	exit;
 }
-$RunData['RunId_SiteUrl'] = explode("|^|", $RunData['RunId_SiteUrl']);
+$RunData['RunSiteUrl'] = explode("|^|", $RunData['RunSiteUrl']);
 
 if(empty($RunData['CustId'])){
 	echo 'not CustId';
