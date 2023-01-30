@@ -14,7 +14,7 @@ $RunData['ScrapType'] = "cate";
 $RunData['Scroll'] = "N";
 $RunData['Refresh'] = "N";
 
-$RunData['FileSaveDir'] = "/home/ntosmini/scrapdata/"
+$RunData['FileSaveDir'] = "/home/ntosmini/scrapdata/";
 $RunData['FileSave'] = "Y";
 $RunData['NtosServer'] = "http://product.ntos.co.kr/_NtosWb_/_FileSave.php";
 
