@@ -46,7 +46,7 @@ if(empty($RunData['ScrapType'])){
 $MConfigData = escapeshellarg(json_encode($RunData));
 
 echo "/home/ntosmini/public_html/_NtosSc_/Scrap.{$Ver}.py";
-exec("python3 /home/ntosmini/public_html/_NtosSc_/Scrap.{$Ver}.py {$MConfigData}", $ResultArr);
+exec("python3 /home/ntosmini/public_html/_NtosSc_/ScrapSend.{$Ver}.py {$MConfigData}", $ResultArr);
 
 $PageHtml = implode("\n", $ResultArr);
 
