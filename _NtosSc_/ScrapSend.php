@@ -15,7 +15,6 @@ $RunData['Scroll'] = (empty($_POST['Scroll']))?"N":$_POST['Scroll']; //Y,N
 $RunData['Refresh'] = (empty($_POST['Refresh']))?"N":$_POST['Refresh']; //Y,N
 
 $RunData['FileSaveDir'] = (empty($_POST['FileSaveDir']))?"N":$_POST['FileSaveDir']; //파일저장 폴더
-$RunData['FileSave'] = (empty($_POST['FileSave']))?"N":$_POST['FileSave'];	//파일 저장 사용여부 Y/N
 $RunData['NtosServer'] = (empty($_POST['NtosServer']))?"":$_POST['NtosServer'];	//파일 저장 후 전송시 받을 url
 
 
