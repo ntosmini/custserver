@@ -124,9 +124,8 @@ for val in RunSiteUrl :
 		Result_ = requests.post(NtosServer, data=data, files=upload)
 		res = Result_.text
 		time.sleep(3)
-		#os.remove(gzfile)
+		os.remove(gzfile)
 	else :
 		data = {'CustId':CustId, 'ScrapType':str(ScrapType), 'PageHtml':str(PageHtml), 'SaveFileName':str(SaveFileName) }
 		res = requests.post(NtosServer, data=json.dumps(data), headers=headers)
 driver.quit()
-print('end')
