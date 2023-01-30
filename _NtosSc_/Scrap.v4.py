@@ -60,7 +60,7 @@ def chromeWebdriver():
 	chrome_options.add_argument('--disable-blink-features=AutomationControlled')
 	chrome_options.add_argument('--disable-infobars')
 	chrome_options.page_load_strategy = 'normal'
-  driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
+	driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
 	return driver
 
 driver = chromeWebdriver()
