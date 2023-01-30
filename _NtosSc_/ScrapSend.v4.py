@@ -41,7 +41,6 @@ CustId = MConfig['CustId']
 ScrapType = MConfig['ScrapType']
 Refresh = MConfig['Refresh']
 Scroll = MConfig['Scroll']
-FileSave = MConfig['FileSave']
 FileSaveDir = MConfig['FileSaveDir']
 NtosServer = MConfig['NtosServer']
 
