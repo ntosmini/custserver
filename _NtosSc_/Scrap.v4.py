@@ -99,6 +99,7 @@ for val in RunSiteUrl :
 	except :
 		err = traceback.format_exc()
 		PageHtml = str(err)
+		print(PageHtml)
 
 	PageHtml = "<ntosoriginurl>"+str(SiteUrl)+"</ntosoriginurl>\n"+ "<ntosnowurl>"+str(NowUrl)+"</ntosnowurl>\n" + PageHtml
 
@@ -128,3 +129,4 @@ for val in RunSiteUrl :
 		data = {'CustId':CustId, 'ScrapType':str(ScrapType), 'PageHtml':str(PageHtml), 'SaveFileName':str(SaveFileName) }
 		res = requests.post(NtosServer, data=json.dumps(data), headers=headers)
 driver.quit()
+print('end')
