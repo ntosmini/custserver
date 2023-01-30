@@ -21,7 +21,7 @@ if(empty($RunData['SiteUrl'])){
   $PageHtml = "not SiteUrl"; 
 } else {
   $MConfigData = escapeshellarg(json_encode($RunData));
-  exec("python3 /home/ntosmini/public_html/_NtosSc_/Scrap.{$Ver}.py {$MConfigData}", $ResultArr);
+  exec("python3 /home/ntosmini/public_html/_NtosSc_/index.{$Ver}.py {$MConfigData}", $ResultArr);
   $PageHtml = implode("\n", $ResultArr);
 }
 echo $PageHtml;
