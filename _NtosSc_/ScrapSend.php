@@ -15,7 +15,7 @@ $RunData['Scroll'] = (empty($_POST['Scroll']))?"N":$_POST['Scroll']; //Y,N
 $RunData['Refresh'] = (empty($_POST['Refresh']))?"N":$_POST['Refresh']; //Y,N
 
 $RunData['FileSaveDir'] = (empty($_POST['FileSaveDir']))?"N":$_POST['FileSaveDir']; //파일저장 폴더
-$RunData['NtosServer'] = (empty($_POST['NtosServer']))?"":$_POST['NtosServer'];	//파일 저장 후 전송시 받을 url
+$RunData['NtosServer'] = (empty($_POST['NtosServer']))?"":$_POST['NtosServer'];	//받을 url
 
 
 if(empty($Ver) || ($Ver != 'v3' && $Ver != 'v4') ){
@@ -36,6 +36,11 @@ if(empty($RunData['CustId'])){
 
 if(empty($RunData['ScrapType'])){
 	echo 'not ScrapType';
+	exit;
+}
+
+if(empty($RunData['NtosServer'])){
+	echo 'not NtosServer';
 	exit;
 }
 
