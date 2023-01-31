@@ -47,7 +47,7 @@ if(empty($RunData['NtosServer'])){
 $MConfigData = escapeshellarg(json_encode($RunData));
 
 
-exec("python3 /home/ntosmini/public_html/_NtosSc_/ScrapSend.{$Ver}.py {$MConfigData}", $ResultArr);
+exec("python3 /home/ntosmini/public_html/_NtosSc_/ScrapSave.{$Ver}.py {$MConfigData}", $ResultArr);
 
 $PageHtml = implode("\n", $ResultArr);
 
