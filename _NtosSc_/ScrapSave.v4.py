@@ -109,7 +109,6 @@ for val in RunSiteUrl :
 			PageHtml = str(err)
 
 	PageHtml = "<ntosoriginurl>"+str(SiteUrl)+"</ntosoriginurl>\n"+ "<ntosnowurl>"+str(NowUrl)+"</ntosnowurl>\n" + PageHtml
-	headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
 	SaveFileName = str(NtosServer)+"_"+str(CustId)+"_"+str(ScrapType)+"_"+str(SaveFileName)
 
 	if FileSaveDir and SaveFileName :
