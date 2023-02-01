@@ -43,6 +43,7 @@ Refresh = MConfig['Refresh']
 Scroll = MConfig['Scroll']
 FileSaveDir = MConfig['FileSaveDir']
 NtosServer = MConfig['NtosServer']
+NtosSendServer = MConfig['NtosSendServer']
 
 
 executable_path = ChromeDriverManager().install()
@@ -108,10 +109,8 @@ for val in RunSiteUrl :
 			PageHtml = str(err)
 
 	PageHtml = "<ntosoriginurl>"+str(SiteUrl)+"</ntosoriginurl>\n"+ "<ntosnowurl>"+str(NowUrl)+"</ntosnowurl>\n" + PageHtml
-
 	headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
-
-	SaveFileName = str(ScrapType)+"_"+str(CustId)+"_"+str(SaveFileName)
+	SaveFileName = str(NtosServer)+"_"+str(CustId)+"_"+str(ScrapType)+"_"+str(SaveFileName)
 
 
 	if FileSaveDir and SaveFileName :
@@ -133,5 +132,5 @@ for val in RunSiteUrl :
 		os.remove(gzfile)
 	else :
 		data = {'CustId':CustId, 'ScrapType':str(ScrapType), 'PageHtml':str(PageHtml), 'SaveFileName':str(SaveFileName) }
-		res = requests.post(NtosServer, data=json.dumps(data), headers=headers)
+		res = requests.post(NtosSendServer, data=json.dumps(data), headers=headers)
 driver.quit()
