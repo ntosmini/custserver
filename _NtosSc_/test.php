@@ -12,10 +12,11 @@ $RunData['CustId'] = "banggood";
 $RunData['ScrapType'] = "cate";
 
 $RunData['Scroll'] = "N";
-$RunData['Refresh'] = "N";
+$RunData['Refresh'] = "Y";
 
 $RunData['FileSaveDir'] = "/home/ntosmini/scrapdata/";
-$RunData['NtosServer'] = "amazon.ntos.co.kr";
+$RunData['NtosServer'] = "amazonde.ntos.co.kr";
+$RunData['NtosSendServer'] = "http://amazonde.ntos.co.kr/_NtosWb_/_FileSave.php";
 
 
 
@@ -45,7 +46,7 @@ if(empty($RunData['ScrapType'])){
 $MConfigData = escapeshellarg(json_encode($RunData));
 
 
-exec("python3 /home/ntosmini/public_html/_NtosSc_/ScrapSave.{$Ver}.py {$MConfigData}", $ResultArr);
+exec("python3 /home/ntosmini/public_html/_NtosSc_/ScrapSend.{$Ver}.py {$MConfigData}", $ResultArr);
 
 $PageHtml = implode("\n", $ResultArr);
 
