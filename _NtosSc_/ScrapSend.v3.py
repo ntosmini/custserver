@@ -18,9 +18,14 @@ except :
 	pass
 
 from selenium import webdriver
-from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service as ChromeService
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+
+#pip3 install webdriver_manager
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.by import By
 
 #한글깨짐
 sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
@@ -112,7 +117,7 @@ for val in RunSiteUrl :
 		gzfile = SaveFile+".gz"
 		files = open(gzfile, 'rb')
 		upload = {'file': files}
-		data = {'CustId':CustId, 'ScrapType':'item' }
+		data = {'CustId':CustId, 'ScrapType':str(ScrapType) }
 		Result_ = requests.post(NtosSendServer, data=data, files=upload)
 		res = Result_.text
 		time.sleep(3)
