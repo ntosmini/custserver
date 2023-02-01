@@ -38,6 +38,7 @@ Refresh = MConfig['Refresh']
 Scroll = MConfig['Scroll']
 FileSaveDir = MConfig['FileSaveDir']
 NtosServer = MConfig['NtosServer']
+NtosSendServer = MConfig['NtosSendServer']
 
 
 chrome_options = webdriver.ChromeOptions()
@@ -95,10 +96,8 @@ for val in RunSiteUrl :
 			PageHtml = str(err)
 
 	PageHtml = "<ntosoriginurl>"+str(SiteUrl)+"</ntosoriginurl>\n"+ "<ntosnowurl>"+str(NowUrl)+"</ntosnowurl>\n" + PageHtml
-
 	headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
-
-	SaveFileName = str(ScrapType)+"_"+str(CustId)+"_"+str(SaveFileName)
+	SaveFileName = str(NtosServer)+"_"+str(CustId)+"_"+str(ScrapType)+"_"+str(SaveFileName)
 
 
 	if FileSaveDir and SaveFileName :
@@ -114,11 +113,11 @@ for val in RunSiteUrl :
 		files = open(gzfile, 'rb')
 		upload = {'file': files}
 		data = {'CustId':CustId, 'ScrapType':'item' }
-		Result_ = requests.post(NtosServer, data=data, files=upload)
+		Result_ = requests.post(NtosSendServer, data=data, files=upload)
 		res = Result_.text
 		time.sleep(3)
 		os.remove(gzfile)
 	else :
 		data = {'CustId':CustId, 'ScrapType':str(ScrapType), 'PageHtml':str(PageHtml), 'SaveFileName':str(SaveFileName) }
-		res = requests.post(NtosServer, data=json.dumps(data), headers=headers)
+		res = requests.post(NtosSendServer, data=json.dumps(data), headers=headers)
 driver.quit()
