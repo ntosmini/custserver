@@ -126,7 +126,7 @@ for val in RunSiteUrl :
 		files = open(gzfile, 'rb')
 		upload = {'file': files}
 		data = {'CustId':CustId, 'ScrapType':'item' }
-		Result_ = requests.post(NtosServer, data=data, files=upload)
+		Result_ = requests.post(NtosSendServer, data=data, files=upload)
 		res = Result_.text
 		time.sleep(3)
 		os.remove(gzfile)
