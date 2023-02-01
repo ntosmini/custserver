@@ -125,7 +125,7 @@ for val in RunSiteUrl :
 		gzfile = SaveFile+".gz"
 		files = open(gzfile, 'rb')
 		upload = {'file': files}
-		data = {'CustId':CustId, 'ScrapType':'item' }
+		data = {'CustId':CustId, 'ScrapType':str(ScrapType) }
 		Result_ = requests.post(NtosSendServer, data=data, files=upload)
 		res = Result_.text
 		time.sleep(3)
