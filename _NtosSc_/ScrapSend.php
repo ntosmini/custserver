@@ -14,7 +14,7 @@ $RunData['ScrapType'] = (empty($_POST['ScrapType']))?"":$_POST['ScrapType'];  //
 $RunData['Scroll'] = (empty($_POST['Scroll']))?"N":$_POST['Scroll']; //Y,N
 $RunData['Refresh'] = (empty($_POST['Refresh']))?"N":$_POST['Refresh']; //Y,N
 
-$RunData['FileSaveDir'] = (empty($_POST['FileSaveDir']))?"N":$_POST['FileSaveDir']; //파일저장 폴더
+$RunData['FileSaveDir'] = (empty($_POST['FileSaveDir']))?"":$_POST['FileSaveDir']; //파일저장 폴더
 $RunData['NtosServer'] = (empty($_POST['NtosServer']))?"":$_POST['NtosServer'];	//실행서버
 $RunData['NtosSendServer'] = (empty($_POST['NtosSendServer']))?"":$_POST['NtosSendServer'];	//받을 url
 
