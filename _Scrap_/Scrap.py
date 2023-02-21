@@ -131,7 +131,7 @@ if SiteUrlOne == "N" :
 			f.write(WriteContent)
 			f.close()
 			os.system("gzip "+SaveFile)
-
+			print("4")
 			gzfile = SaveFile+".gz"
 			files = open(gzfile, 'rb')
 			upload = {'file': files}
@@ -140,7 +140,7 @@ if SiteUrlOne == "N" :
 			res = Result_.text
 			time.sleep(3)
 			os.remove(gzfile)
-			print("4")
+			print("5")
 		else :
 			pass
 
