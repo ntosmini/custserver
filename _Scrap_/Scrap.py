@@ -6,7 +6,6 @@ import sys
 import json
 import io
 import os
-import multiprocessing
 import requests
 import traceback
 import random
@@ -131,7 +130,7 @@ if SiteUrlOne == "N" :
 			f.write(WriteContent)
 			f.close()
 			os.system("gzip "+SaveFile)
-			print("4")
+			print(SaveFile)
 			gzfile = SaveFile+".gz"
 			files = open(gzfile, 'rb')
 			upload = {'file': files}
