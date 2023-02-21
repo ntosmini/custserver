@@ -82,11 +82,9 @@ if SiteUrlOne == "N" :
 		except :
 			err = traceback.format_exc()
 			PageHtml = str(err)+"\n"
-		print("1")
 		try :
 			driver.get(SiteUrl)
 			driver.implicitly_wait(10)
-			print("2")
 			if Refresh == "Y" :
 				driver.refresh()
 				driver.implicitly_wait(10)
@@ -125,8 +123,19 @@ if SiteUrlOne == "N" :
 		elif ScrapResultType == "send" :
 			SaveFile = str(FileSaveDir)+str(SaveFileName)
 			WriteContent = PageHtml
-			print(FileSaveDir)
-			print(SaveFile)
+			f = open(SaveFile, 'w', encoding="utf8")
+			f.write(WriteContent)
+			f.close()
+			os.system("gzip "+SaveFile)
+
+			gzfile = SaveFile+".gz"
+			files = open(gzfile, 'rb')
+			upload = {'file': files}
+			data = {'CustId':CustId }
+			Result_ = requests.post(NtosSendServer, data=data, files=upload)
+			res = Result_.text
+			time.sleep(3)
+			os.remove(gzfile)
 		else :
 			pass
 
