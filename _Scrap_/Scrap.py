@@ -123,10 +123,10 @@ if SiteUrlOne == "N" :
 			f.close()
 			os.system("gzip "+SaveFile)
 		elif ScrapResultType == "send" :
-			print("3")
 			SaveFile = str(FileSaveDir)+str(SaveFileName)
+			WriteContent = PageHtml
+			print(FileSaveDir)
 			print(SaveFile)
-
 		else :
 			pass
 
