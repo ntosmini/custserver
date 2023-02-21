@@ -124,22 +124,26 @@ if SiteUrlOne == "N" :
 			os.system("gzip "+SaveFile)
 		elif ScrapResultType == "send" :
 			print("3")
-			SaveFile = str(FileSaveDir)+str(SaveFileName)
-			WriteContent = PageHtml
-			f = open(SaveFile, 'w', encoding="utf8")
-			f.write(WriteContent)
-			f.close()
-			os.system("gzip "+SaveFile)
-			print(SaveFile)
-			gzfile = SaveFile+".gz"
-			files = open(gzfile, 'rb')
-			upload = {'file': files}
-			data = {'CustId':CustId }
-			Result_ = requests.post(NtosSendServer, data=data, files=upload)
-			res = Result_.text
-			time.sleep(3)
-			os.remove(gzfile)
-			print("5")
+			try :
+				SaveFile = str(FileSaveDir)+str(SaveFileName)
+				WriteContent = PageHtml
+				f = open(SaveFile, 'w', encoding="utf8")
+				f.write(WriteContent)
+				f.close()
+				os.system("gzip "+SaveFile)
+				print(SaveFile)
+				gzfile = SaveFile+".gz"
+				files = open(gzfile, 'rb')
+				upload = {'file': files}
+				data = {'CustId':CustId }
+				Result_ = requests.post(NtosSendServer, data=data, files=upload)
+				res = Result_.text
+				time.sleep(3)
+				os.remove(gzfile)
+				print("5")
+			except :
+				err = traceback.format_exc()
+				PageHtml = PageHtml+str(err)+"\n"
 		else :
 			pass
 
