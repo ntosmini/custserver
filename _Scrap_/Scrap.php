@@ -71,7 +71,7 @@ if($ScrapType == "self"){
 
 	$RunData['NtosSendServer'] = ($RunData['ScrapResultType'] == "send" && $RunData['NtosSendServer'])?$RunData['NtosSendServer']:"";	//전송서버 폴더까지
 	if(empty($RunData['NtosSendServer']) && $RunData['ScrapResultType'] == "send"){
-		echo "not NtosSendServer (".$RunData['ScrapResultType'].")";
+		echo "not NtosSendServer (".$RunData['ScrapResultType'].")".$RunData['NtosSendServer'];
 		exit;
 	}
 
