@@ -52,7 +52,7 @@ if($ScrapType == "self"){
 	$RunData['ScrapResultType'] = (empty($_POST['ScrapResultType']))?"view":$_POST['ScrapResultType'];	//수집파일 방식 - save or send or view
 
 	if($RunData['SiteUrlOne'] == "N" && $RunData['ScrapResultType'] == "view"){
-		echo 'not SiteUrlOne : '.$RunData['SiteUrlOne'].', ScrapResultType : '.$RunData['ScrapResultType'];
+		echo "not SiteUrlOne : ".$RunData['SiteUrlOne'].", ScrapResultType : ".$RunData['ScrapResultType'];
 		exit;
 	}
 	/*
@@ -65,13 +65,13 @@ if($ScrapType == "self"){
 	*/
 	$RunData['FileSaveDir'] = ($RunData['ScrapResultType'] == "save" && $RunData['FileSaveDir'])?$RunData['FileSaveDir']:"";
 	if(empty($RunData['FileSaveDir']) && $RunData['ScrapResultType'] == "save"){
-		echo 'not FileSaveDir ('.$RunData['ScrapResultType'].')';
+		echo "not FileSaveDir (".$RunData['ScrapResultType'].")";
 		exit;
 	}
 
 	$RunData['NtosSendServer'] = ($RunData['ScrapResultType'] == "send" && $RunData['NtosSendServer'])?$RunData['NtosSendServer']:"";	//전송서버 폴더까지
 	if(empty($RunData['NtosSendServer']) && $RunData['ScrapResultType'] == "send"){
-		echo 'not NtosSendServer ('.$RunData['ScrapResultType'].')';
+		echo "not NtosSendServer (".$RunData['ScrapResultType'].")";
 		exit;
 	}
 
