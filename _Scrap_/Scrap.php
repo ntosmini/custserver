@@ -68,7 +68,7 @@ if($ScrapType == "self"){
 		echo "not FileSaveDir (".$RunData['ScrapResultType'].")";
 		exit;
 	}
-	echo "----".$RunData['NtosSendServer'];
+	echo "----".$RunData['NtosSendServer']."-".$RunData['FileSaveDir'];
 	$RunData['NtosSendServer'] = ($RunData['ScrapResultType'] == "send" && $RunData['NtosSendServer'])?$RunData['NtosSendServer']:"";	//전송서버 폴더까지
 	if(empty($RunData['NtosSendServer']) && $RunData['ScrapResultType'] == "send"){
 		echo "not NtosSendServer (".$RunData['ScrapResultType'].")".$RunData['NtosSendServer'];
