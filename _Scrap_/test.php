@@ -3,17 +3,17 @@ set_time_limit(0);
 header("Content-Type: text/html; charset=UTF-8");
 
 
-$_POST[SiteUrl_SaveFileName] = "https://www.banggood.com/ko/GaN-TechKUULAA-RY-U33-33W-2-Port-USB-PD-Charger-33W-PD3_0+QC3_0-PPS-QC4_0-QC3_0-QC2_0-FCP-SCP-AFC-Fast-Charging-Wall-Charger-Adapter-EU-Plug-for-iPhone13-Pro-Max-for-iPad-Pro-for-Huawei-Mate-50-for-Xiaomi-Mi11-for-Samsung-Galaxy-Note-20-p-1975540.html?cur_warehouse=CN&amp;ID=6287830&amp;rmmds=CategoryPhonesPop&amp;rmmds=CategoryPx&amp;trace_id=82181675754640815|@|123_2107031303_1_2481573.html";
-$_POST[ScrapResultType] = "send";
-$_POST[NtosSendServer] = "http://amazonde.ntos.co.kr/_NtosWb_/_FileSave.php";
-$_POST[FileSaveDir] = "/home/ntosmini/scrapdata/";
-$_POST[NtosServer] = "amazonde.ntos.co.kr";
-$_POST[ScrapType] = "selenium";
-$_POST[CustId] = "banggood";
-$_POST[StartSiteUrl] = "";
-$_POST[SiteUrlOne] = "N";
-$_POST[Scroll] = "Y";
-$_POST[Refresh] = "N";
+$_POST['SiteUrl_SaveFileName'] = "https://www.banggood.com/ko/GaN-TechKUULAA-RY-U33-33W-2-Port-USB-PD-Charger-33W-PD3_0+QC3_0-PPS-QC4_0-QC3_0-QC2_0-FCP-SCP-AFC-Fast-Charging-Wall-Charger-Adapter-EU-Plug-for-iPhone13-Pro-Max-for-iPad-Pro-for-Huawei-Mate-50-for-Xiaomi-Mi11-for-Samsung-Galaxy-Note-20-p-1975540.html?cur_warehouse=CN&amp;ID=6287830&amp;rmmds=CategoryPhonesPop&amp;rmmds=CategoryPx&amp;trace_id=82181675754640815|@|123_2107031303_1_2481573.html";
+$_POST['ScrapResultType'] = "send";
+$_POST['NtosSendServer'] = "http://amazonde.ntos.co.kr/_NtosWb_/_FileSave.php";
+$_POST['FileSaveDir'] = "/home/ntosmini/scrapdata/";
+$_POST['NtosServer'] = "amazonde.ntos.co.kr";
+$_POST['ScrapType'] = "selenium";
+$_POST['CustId'] = "banggood";
+$_POST['StartSiteUrl'] = "";
+$_POST['SiteUrlOne'] = "N";
+$_POST['Scroll'] = "Y";
+$_POST['Refresh'] = "N";
 
 
 $RunData = array();
