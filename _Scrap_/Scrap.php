@@ -63,8 +63,8 @@ if($ScrapType == "self"){
 
 	/home/ntosmini/scrapdata/
 	*/
-	$RunData['FileSaveDir'] = ($RunData['ScrapResultType'] == "save" && $_POST['FileSaveDir'])?$_POST['FileSaveDir']:"";
-	if(empty($RunData['FileSaveDir']) && $RunData['ScrapResultType'] == "save"){
+	$RunData['FileSaveDir'] = (($RunData['ScrapResultType'] == "save" || $RunData['ScrapResultType'] == "send") && $_POST['FileSaveDir'])?$_POST['FileSaveDir']:"";
+	if(empty($RunData['FileSaveDir']) && ($RunData['ScrapResultType'] == "save" || $RunData['ScrapResultType'] == "send")){
 		echo "not FileSaveDir (".$RunData['ScrapResultType'].")";
 		exit;
 	}
