@@ -83,7 +83,7 @@ if SiteUrlOne == "N" :
 		except :
 			err = traceback.format_exc()
 			PageHtml = str(err)+"\n"
-
+		print(str(SiteUrl))
 		try :
 			driver.get(SiteUrl)
 			driver.implicitly_wait(10)
