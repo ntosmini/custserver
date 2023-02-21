@@ -63,15 +63,15 @@ if($ScrapType == "self"){
 
 	/home/ntosmini/scrapdata/
 	*/
-	$RunData['FileSaveDir'] = ($RunData['ScrapResultType'] == "save" && $RunData['FileSaveDir'])?$RunData['FileSaveDir']:"";
+	$RunData['FileSaveDir'] = ($RunData['ScrapResultType'] == "save" && $_POST['FileSaveDir'])?$_POST['FileSaveDir']:"";
 	if(empty($RunData['FileSaveDir']) && $RunData['ScrapResultType'] == "save"){
 		echo "not FileSaveDir (".$RunData['ScrapResultType'].")";
 		exit;
 	}
-	echo "----".$RunData['NtosSendServer']."-".$RunData['FileSaveDir']."=".$RunData['CustId'];
-	$RunData['NtosSendServer'] = ($RunData['ScrapResultType'] == "send" && $RunData['NtosSendServer'])?$RunData['NtosSendServer']:"";	//전송서버 폴더까지
+	
+	$RunData['NtosSendServer'] = ($RunData['ScrapResultType'] == "send" && $_POST['NtosSendServer'])?$_POST['NtosSendServer']:"";	//전송서버 폴더까지
 	if(empty($RunData['NtosSendServer']) && $RunData['ScrapResultType'] == "send"){
-		echo "not NtosSendServer (".$RunData['ScrapResultType'].")".$RunData['NtosSendServer'];
+		echo "not NtosSendServer (".$RunData['ScrapResultType'].")";
 		exit;
 	}
 
