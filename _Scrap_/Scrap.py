@@ -83,11 +83,11 @@ if SiteUrlOne == "N" :
 		except :
 			err = traceback.format_exc()
 			PageHtml = str(err)+"\n"
-		print(str(SiteUrl))
+		print("1")
 		try :
 			driver.get(SiteUrl)
 			driver.implicitly_wait(10)
-
+			print("2")
 			if Refresh == "Y" :
 				driver.refresh()
 				driver.implicitly_wait(10)
@@ -124,6 +124,7 @@ if SiteUrlOne == "N" :
 			f.close()
 			os.system("gzip "+SaveFile)
 		elif ScrapResultType == "send" :
+			print("3")
 			SaveFile = str(FileSaveDir)+str(SaveFileName)
 			WriteContent = PageHtml
 			f = open(SaveFile, 'w', encoding="utf8")
@@ -139,6 +140,7 @@ if SiteUrlOne == "N" :
 			res = Result_.text
 			time.sleep(3)
 			os.remove(gzfile)
+			print("4")
 		else :
 			pass
 
