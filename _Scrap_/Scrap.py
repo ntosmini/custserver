@@ -44,6 +44,9 @@ Scroll = MConfig['Scroll']
 ScrapResultType = MConfig['ScrapResultType']
 FileSaveDir = MConfig['FileSaveDir']
 NtosSendServer = MConfig['NtosSendServer']
+UserAgent = MConfig['UserAgent']
+if UserAgent == "" :
+	UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
 
 
 executable_path = ChromeDriverManager().install()
@@ -60,6 +63,7 @@ def chromeWebdriver():
 	chrome_options.add_argument('--disable-dev-shm-usage')
 	chrome_options.add_argument('--disable-blink-features=AutomationControlled')
 	chrome_options.add_argument('--disable-infobars')
+	chrome_options.add_argument('user-agent=' + UserAgent)
 	chrome_options.page_load_strategy = 'normal'
 	driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
 	return driver
