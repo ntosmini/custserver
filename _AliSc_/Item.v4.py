@@ -39,7 +39,7 @@ CustId = MConfig['CustId']
 
 FileSendSave = MConfig['FileSendSave']
 NtosServer = MConfig['NtosServer']
-
+UserAgent = MConfig['UserAgent']
 
 
 
@@ -70,6 +70,7 @@ def chromeWebdriver():
 	chrome_options.add_argument('--disable-dev-shm-usage')
 	chrome_options.add_argument('--disable-blink-features=AutomationControlled')
 	chrome_options.add_argument('--disable-infobars')
+	chrome_options.add_argument('user-agent=' + UserAgent)
 	chrome_options.page_load_strategy = 'normal'
 	driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
 	return driver
