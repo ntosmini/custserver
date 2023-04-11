@@ -43,7 +43,6 @@ def LockChk(PageHtml) :
 
 	try :
 		if re.search('Sorry, we have detected unusual traffic from your network', str(PageHtml)) :
-			return "Y"
 			clickable = driver.find_element(By.ID, "nc_1_n1z")
 			ActionChains(driver)\
 				.move_to_element(clickable)\
