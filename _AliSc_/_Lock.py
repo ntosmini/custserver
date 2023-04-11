@@ -5,6 +5,7 @@ import sys
 import json
 import io
 import os
+import re
 
 
 from selenium import webdriver
