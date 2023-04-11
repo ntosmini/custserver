@@ -25,38 +25,46 @@ sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
 sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
 
 def LockChk(PageHtml) :
+	action = ActionChains(driver)
 	try :
 		if re.search('.com:443/display', str(PageHtml)) :
 			driver.switch_to.frame("baxia-dialog-content")
 
 			clickable = driver.find_element(By.ID, "nc_1_n1z")
-			ActionChains(driver)\
-				.move_to_element(clickable)\
-				.pause(3)\
-				.click_and_hold()\
-				.pause(3)\
-				.drag_and_drop_by_offset(clickable, 600, 0)\
+			(
+			action.move_to_element(clickable)
+				.pause(3)
+				.click_and_hold()
+				.pause(3)
+				.drag_and_drop_by_offset(clickable, 600, 0)
 				.perform()
+			)
 			return "Y"
+		else :
+			pass
 	except :
 		pass
 
 	try :
 		if re.search('Sorry, we have detected unusual traffic from your network', str(PageHtml)) :
 			clickable = driver.find_element(By.ID, "nc_1_n1z")
-			ActionChains(driver)\
-				.move_to_element(clickable)\
-				.pause(3)\
-				.click_and_hold()\
-				.pause(3)\
-				.drag_and_drop_by_offset(clickable, 600, 0)\
+			(
+			action.move_to_element(clickable)
+				.pause(3)
+				.click_and_hold()
+				.pause(3)
+				.drag_and_drop_by_offset(clickable, 600, 0)
 				.perform()
-			#driver.refresh()
+			)
+			time.sleep(random.randint(2, 3))
+			driver.refresh()
+			driver.implicitly_wait(10)
 			return "Y"
 		else :
 			pass
 	except :
 		pass
+	return "pass"
 
 
 MConfigData = sys.argv[1]
@@ -99,14 +107,14 @@ time.sleep(random.randint(1, 3))
 
 PageHtml = driver.page_source
 NowUrl = driver.current_url
-
+Ret = "N"
 if LockChkUsed == "Y" :
-	LockChk(PageHtml)
+	Ret = LockChk(PageHtml)
 	time.sleep(random.randint(1, 3))
 	PageHtml = driver.page_source
 	NowUrl = driver.current_url
 
-print(NowUrl)
+print(NowUrl + " = "+str(Ret))
 print(PageHtml)
 
 driver.quit()
