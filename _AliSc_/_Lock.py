@@ -51,6 +51,7 @@ def LockChk(PageHtml) :
 
 	try :
 		if re.search('Sorry, we have detected unusual traffic from your network', str(PageHtml)) :
+			"""
 			try :
 				clickable = driver.find_element(By.ID, "nc_1_n1z")
 				(
@@ -64,6 +65,25 @@ def LockChk(PageHtml) :
 				time.sleep(random.randint(2, 3))
 				driver.refresh()
 				driver.implicitly_wait(10)
+				return "page"
+			except :
+				err = traceback.format_exc()
+				return str(err)
+			"""
+			try :
+				slider = driver.find_element(By.ID, "nc_1_n1z")
+				slider.click()
+				action.move_to_element(slider)
+				action.click_and_hold(slider)
+				xoffset = 0
+				while xoffset < 350 :
+					xmove = random.randint(10, 50)
+					ymove = random.randint(-1, 1)
+					action.move_by_offset(xmove, ymove)
+					xoffset += xmove
+				action.release()
+				action.perform()
+				time.sleep(3)
 				return "page"
 			except :
 				err = traceback.format_exc()
