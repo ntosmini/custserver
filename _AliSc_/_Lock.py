@@ -84,7 +84,7 @@ def LockChk(PageHtml) :
 				action.release()
 				action.perform()
 				time.sleep(3)
-				return "page"
+				return "page2"
 			except :
 				err = traceback.format_exc()
 				return str(err)
