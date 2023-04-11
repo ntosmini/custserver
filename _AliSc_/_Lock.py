@@ -47,7 +47,7 @@ MConfig = json.loads(MConfigData)
 
 UserAgent = MConfig['UserAgent']
 SiteUrl = MConfig['SiteUrl']
-LockUsed = MConfig['LockUsed']
+LockChkUsed = MConfig['LockChkUsed']
 
 executable_path = ChromeDriverManager().install()
 
@@ -83,7 +83,7 @@ time.sleep(random.randint(1, 3))
 PageHtml = driver.page_source
 NowUrl = driver.current_url
 
-if LockUsed == "Y" :
+if LockChkUsed == "Y" :
 	LockChk(PageHtml)
 	time.sleep(random.randint(1, 3))
 	PageHtml = driver.page_source
