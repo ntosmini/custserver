@@ -26,7 +26,24 @@ sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
 
 def LockChk(PageHtml) :
 	try :
+		if re.search('.com:443', str(PageHtml)) :
+			driver.switch_to.frame("baxia-dialog-content")
+
+			clickable = driver.find_element(By.ID, "nc_1_n1z")
+			ActionChains(driver)\
+				.move_to_element(clickable)\
+				.pause(3)\
+				.click_and_hold()\
+				.pause(3)\
+				.drag_and_drop_by_offset(clickable, 600, 0)\
+				.perform()
+			return "Y"
+	except :
+		pass
+
+	try :
 		if re.search('Sorry, we have detected unusual traffic from your network', str(PageHtml)) :
+			return "Y"
 			clickable = driver.find_element(By.ID, "nc_1_n1z")
 			ActionChains(driver)\
 				.move_to_element(clickable)\
@@ -36,6 +53,7 @@ def LockChk(PageHtml) :
 				.drag_and_drop_by_offset(clickable, 600, 0)\
 				.perform()
 			#driver.refresh()
+			return "Y"
 		else :
 			pass
 	except :
