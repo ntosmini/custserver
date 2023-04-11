@@ -39,7 +39,7 @@ def LockChk(PageHtml) :
 				.drag_and_drop_by_offset(clickable, 600, 0)
 				.perform()
 			)
-			return "Y"
+			return "iframe"
 		else :
 			pass
 	except :
@@ -59,7 +59,7 @@ def LockChk(PageHtml) :
 			time.sleep(random.randint(2, 3))
 			driver.refresh()
 			driver.implicitly_wait(10)
-			return "Y"
+			return "page"
 		else :
 			pass
 	except :
