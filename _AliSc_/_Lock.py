@@ -40,12 +40,12 @@ def LockChk(PageHtml) :
 		pass
 
 
-MConfigData = sys.argv[1]
-MConfig = json.loads(MConfigData)
+#MConfigData = sys.argv[1]
+#MConfig = json.loads(MConfigData)
 
-UserAgent = MConfig['UserAgent']
-SiteUrl = MConfig['SiteUrl']
-LockChk = MConfig['LockChk']
+UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36" # MConfig['UserAgent']
+SiteUrl = "http://ntos.co.kr" # MConfig['SiteUrl']
+LockChk = "N" # MConfig['LockChk']
 
 executable_path = ChromeDriverManager().install()
 
