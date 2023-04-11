@@ -26,7 +26,7 @@ sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
 
 def LockChk(PageHtml) :
 	try :
-		if re.search('.com:443', str(PageHtml)) :
+		if re.search('.com:443/display', str(PageHtml)) :
 			driver.switch_to.frame("baxia-dialog-content")
 
 			clickable = driver.find_element(By.ID, "nc_1_n1z")
