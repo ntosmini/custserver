@@ -7,6 +7,7 @@ import io
 import os
 import re
 import random
+import traceback
 
 
 from selenium import webdriver
@@ -28,18 +29,21 @@ def LockChk(PageHtml) :
 	action = ActionChains(driver)
 	try :
 		if re.search('.com:443/display', str(PageHtml)) :
-			driver.switch_to.frame("baxia-dialog-content")
-
-			clickable = driver.find_element(By.ID, "nc_1_n1z")
-			(
-			action.move_to_element(clickable)
-				.pause(3)
-				.click_and_hold()
-				.pause(3)
-				.drag_and_drop_by_offset(clickable, 600, 0)
-				.perform()
-			)
-			return "iframe"
+			try :
+				driver.switch_to.frame("baxia-dialog-content")
+				clickable = driver.find_element(By.ID, "nc_1_n1z")
+				(
+				action.move_to_element(clickable)
+					.pause(3)
+					.click_and_hold()
+					.pause(3)
+					.drag_and_drop_by_offset(clickable, 600, 0)
+					.perform()
+				)
+				return "iframe"
+			except :
+				err = traceback.format_exc()
+				return str(err)
 		else :
 			pass
 	except :
@@ -47,19 +51,23 @@ def LockChk(PageHtml) :
 
 	try :
 		if re.search('Sorry, we have detected unusual traffic from your network', str(PageHtml)) :
-			clickable = driver.find_element(By.ID, "nc_1_n1z")
-			(
-			action.move_to_element(clickable)
-				.pause(3)
-				.click_and_hold()
-				.pause(3)
-				.drag_and_drop_by_offset(clickable, 600, 0)
-				.perform()
-			)
-			time.sleep(random.randint(2, 3))
-			driver.refresh()
-			driver.implicitly_wait(10)
-			return "page"
+			try :
+				clickable = driver.find_element(By.ID, "nc_1_n1z")
+				(
+				action.move_to_element(clickable)
+					.pause(3)
+					.click_and_hold()
+					.pause(3)
+					.drag_and_drop_by_offset(clickable, 600, 0)
+					.perform()
+				)
+				time.sleep(random.randint(2, 3))
+				driver.refresh()
+				driver.implicitly_wait(10)
+				return "page"
+			except :
+				err = traceback.format_exc()
+				return str(err)
 		else :
 			pass
 	except :
