@@ -31,15 +31,18 @@ def LockChk(PageHtml) :
 		if re.search('.com:443/display', str(PageHtml)) :
 			try :
 				driver.switch_to.frame("baxia-dialog-content")
-				clickable = driver.find_element(By.ID, "nc_1_n1z")
-				(
-				action.move_to_element(clickable)
-					.pause(3)
-					.click_and_hold()
-					.pause(3)
-					.drag_and_drop_by_offset(clickable, 600, 0)
-					.perform()
-				)
+				slider = driver.find_element(By.ID, "nc_1_n1z")
+				slider.click()
+				action.move_to_element(slider)
+				action.click_and_hold(slider)
+				xoffset = 0
+				while xoffset < 400 :
+					xmove = random.randint(10, 50)
+					ymove = random.randint(-1, 1)
+					action.move_by_offset(xmove, ymove)
+					xoffset += xmove
+				action.release()
+				action.perform()
 				return "iframe"
 			except :
 				err = traceback.format_exc()
@@ -71,19 +74,18 @@ def LockChk(PageHtml) :
 				return str(err)
 			"""
 			try :
-				slider = driver.find_element(By.ID, "nc_1_n1z")
-				slider.click()
-				action.move_to_element(slider)
-				action.click_and_hold(slider)
+				slider2 = driver.find_element(By.ID, "nc_1_n1z")
+				slider2.click()
+				action.move_to_element(slider2)
+				action.click_and_hold(slider2)
 				xoffset = 0
-				while xoffset < 350 :
+				while xoffset < 400 :
 					xmove = random.randint(10, 50)
 					ymove = random.randint(-1, 1)
 					action.move_by_offset(xmove, ymove)
 					xoffset += xmove
 				action.release()
 				action.perform()
-				time.sleep(3)
 				return "page2"
 			except :
 				err = traceback.format_exc()
