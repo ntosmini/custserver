@@ -166,10 +166,15 @@ for val in IslId_SiteUrl :
 			WriteFile = WriteFile + "<ntosnowurl>"+NowUrl+"</ntosnowurl>\n"
 
 		#lock 체크
-		lock_chk = ""
-		lock_chk = LockChk(PageHtml)
-		if lock_chk != "" :
-			WriteFile = WriteFile + "<lock_chk>"+lock_chk+"</lock_chk>\n"
+		if PageHtml != "" :
+			lock_chk = ""
+			lock_chk = LockChk(PageHtml)
+			if lock_chk != "" :
+				WriteFile = WriteFile + "<lock_chk>"+lock_chk+"</lock_chk>\n"
+
+			wait.until( EC.presence_of_element_located((By.CLASS_NAME, "logo-base")) )
+			PageHtml = driver.page_source
+			NowUrl = driver.current_url
 
 
 		WriteFile = WriteFile + PageHtml
