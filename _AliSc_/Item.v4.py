@@ -14,6 +14,8 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+from selenium.webdriver.common.action_chains import ActionChains
+
 #pip3 install webdriver_manager
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
@@ -77,6 +79,59 @@ def chromeWebdriver():
 
 driver = chromeWebdriver()
 
+#lock 체크
+def LockChk(PageHtml) :
+	action = ActionChains(driver)
+	try :
+		if re.search('.com:443/display', str(PageHtml)) :
+			try :
+				driver.switch_to.frame("baxia-dialog-content")
+				slider = driver.find_element(By.ID, "nc_1_n1z")
+				slider.click()
+				action.move_to_element(slider)
+				action.click_and_hold(slider)
+				xoffset = 0
+				while xoffset < 400 :
+					xmove = random.randint(10, 50)
+					ymove = random.randint(-1, 1)
+					action.move_by_offset(xmove, ymove)
+					xoffset += xmove
+				action.release()
+				action.perform()
+				return "iframe"
+			except :
+				err = traceback.format_exc()
+				return str(err)
+		else :
+			pass
+	except :
+		pass
+
+	try :
+		if re.search('Sorry, we have detected unusual traffic from your network', str(PageHtml)) :
+			try :
+				slider2 = driver.find_element(By.ID, "nc_1_n1z")
+				slider2.click()
+				action.move_to_element(slider2)
+				action.click_and_hold(slider2)
+				xoffset = 0
+				while xoffset < 400 :
+					xmove = random.randint(10, 50)
+					ymove = random.randint(-1, 1)
+					action.move_by_offset(xmove, ymove)
+					xoffset += xmove
+				action.release()
+				action.perform()
+				return "page"
+			except :
+				err = traceback.format_exc()
+				return str(err)
+		else :
+			pass
+	except :
+		pass
+	return "pass"
+
 wait = WebDriverWait(driver, 10, 2)
 
 """
@@ -109,7 +164,16 @@ for val in IslId_SiteUrl :
 		WriteFile = WriteFile + OriginUrl+"\n"
 		if NowUrl :
 			WriteFile = WriteFile + "<ntosnowurl>"+NowUrl+"</ntosnowurl>\n"
+
+		#lock 체크
+		lock_chk = ""
+		lock_chk = LockChk(PageHtml)
+		if lock_chk != "" :
+			WriteFile = WriteFile + "<lock_chk>"+lock_chk+"</lock_chk>\n"
+
+
 		WriteFile = WriteFile + PageHtml
+
 		f = open(SaveFile, 'w', encoding="utf8")
 		f.write(WriteFile)
 		f.close()
