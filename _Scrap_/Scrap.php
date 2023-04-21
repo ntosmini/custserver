@@ -20,8 +20,9 @@ if($ScrapType == "self"){
 		echo 'not SiteUrlOne';
 		exit;
 	}
+	$SiteUrlOne = urldecode($SiteUrlOne);
 	$ch = curl_init();
-	curl_setopt($ch, CURLOPT_URL, $SiteUrlOne );
+	curl_setopt($ch, CURLOPT_URL, $SiteUrlOne);
 	curl_setopt($ch, CURLOPT_HEADER, false);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
