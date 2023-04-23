@@ -3,7 +3,7 @@ set_time_limit(0);
 header("Content-Type: text/html; charset=UTF-8");
 
 $RunData = array();
-$ScrapType = (empty($_POST['ScrapType']))?"selenium":$_POST['ScrapType'];	//수집방식 - curl or self or selenium
+$ScrapType = (empty($_POST['ScrapType']))?"selenium":$_POST['ScrapType'];	//수집방식 - curl or self or selenium or pyget
 $RunData['UserAgent'] = (empty($_POST['UserAgent']))?"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36":$_POST['UserAgent'];
 
 if($ScrapType == "self"){
@@ -84,6 +84,20 @@ if($ScrapType == "self"){
 
 	echo $PageHtml;
 	exit;
+} else if($ScrapType == "pyget") {
+	$RunData['SiteUrlOne'] = (empty($_POST['SiteUrlOne']))?"N":$_POST['SiteUrlOne'];
+	if($RunData['SiteUrlOne'] == "N"){
+		echo "not SiteUrlOne";
+		exit;
+	}
+	$MConfigData = escapeshellarg(json_encode($RunData));
+	exec("python3 /home/ntosmini/public_html/_Scrap_/Get.py {$MConfigData}", $ResultArr);
+
+	$PageHtml = implode("\n", $ResultArr);
+
+	echo $PageHtml;
+	exit;
+	
 } else {
 	echo 'not ScrapType';
 	exit;
