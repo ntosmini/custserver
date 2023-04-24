@@ -33,6 +33,6 @@ ResultStr = translator.translate(TransStr, dest = g_dest, src = g_src)
 
 data = {'CustId':str(CustId), 'it_id':str(it_id), 'OrgField':str(OrgField), 'TargetField':str(TargetField), 'TransStr':str(TransStr) 'ResultStr':str(ResultStr.text) }
 headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
-requests.post(NtosServer, data=json.dumps(data), headers=headers)
-
+result = requests.post(NtosServer, data=json.dumps(data), headers=headers)
+print(result.text)
 
