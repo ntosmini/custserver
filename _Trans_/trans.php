@@ -11,20 +11,9 @@ $RunData['OrgField'] = (empty($_POST['OrgField']))?"":$_POST['OrgField'];
 $RunData['TargetField'] = (empty($_POST['TargetField']))?"":$_POST['TargetField'];
 $RunData['g_dest'] = (empty($_POST['g_dest']))?"":$_POST['g_dest']; //번역
 $RunData['g_src'] = (empty($_POST['g_src']))?"":$_POST['g_src'];  //원문
+$RunData['ResultType'] = (empty($_POST['ResultType']))?"View":$_POST['ResultType'];  //처리방식
 
-if(
-empty($RunData['NtosServer'])
-|| empty($RunData['CustId'])
-|| empty($RunData['it_id'])
-|| empty($RunData['TransStr'])
-|| empty($RunData['OrgField'])
-|| empty($RunData['TargetField'])
-|| empty($RunData['g_dest'])
-|| empty($RunData['g_src'])
-){
-	echo "Not Data";
-  exit;
-}
+
 
 $MConfigData = escapeshellarg(json_encode($RunData));
 
