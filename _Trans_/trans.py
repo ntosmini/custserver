@@ -33,7 +33,7 @@ try :
   translator = googletrans.Translator()
   ResultStr = translator.translate(TransStr, dest = str(g_dest), src = str(g_src))
   if ResultType == "View" :
-    print(ResultStr)
+    print(ResultStr.text)
   else :
     data = {'CustId':str(CustId), 'it_id':str(it_id), 'OrgField':str(OrgField), 'TargetField':str(TargetField), 'TransStr':str(TransStr), 'ResultStr':str(ResultStr.text) }
     headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
