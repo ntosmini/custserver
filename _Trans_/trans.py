@@ -8,6 +8,7 @@ import io
 import os
 import requests
 import googletrans
+import traceback
 
 #한글깨짐
 sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
@@ -27,12 +28,12 @@ TargetField = MConfig['TargetField']
 g_dest = MConfig['g_dest']
 g_src = MConfig['g_src']
 
-translator = googletrans.Translator()
-
-ResultStr = translator.translate(TransStr, dest = g_dest, src = g_src)
-
-data = {'CustId':str(CustId), 'it_id':str(it_id), 'OrgField':str(OrgField), 'TargetField':str(TargetField), 'TransStr':str(TransStr), 'ResultStr':str(ResultStr.text) }
-headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
-result = requests.post(NtosServer, data=json.dumps(data), headers=headers)
-print(result.text)
-
+try :
+  translator = googletrans.Translator()
+  ResultStr = translator.translate(TransStr, dest = g_dest, src = g_src)
+  data = {'CustId':str(CustId), 'it_id':str(it_id), 'OrgField':str(OrgField), 'TargetField':str(TargetField), 'TransStr':str(TransStr), 'ResultStr':str(ResultStr.text) }
+  headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
+  result = requests.post(NtosServer, data=json.dumps(data), headers=headers)
+except :
+  err = traceback.format_exc()
+  print(str(err))
