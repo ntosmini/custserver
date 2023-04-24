@@ -15,7 +15,7 @@ sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
 sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
 
 translator = googletrans.Translator()
+TransStr = "hello"
+ResultStr = translator.translate(str(TransStr), dest = 'ko', src = 'en')
 
-ResultStr = translator.translate("hello", dest = 'ko', src = 'en')
-
-print(ResultStr.text)
+print(str(TransStr)+" >> "+ResultStr.text)
