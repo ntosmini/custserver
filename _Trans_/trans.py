@@ -41,4 +41,4 @@ try :
     print(result.text)
 except :
   err = traceback.format_exc()
-  print(str(err))
+  print("trans_error : "+str(err))
