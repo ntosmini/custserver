@@ -29,3 +29,7 @@ empty($RunData['NtosServer'])
 $MConfigData = escapeshellarg(json_encode($RunData));
 
 exec("python3 /home/ntosmini/public_html/_Trans_/trans.py {$MConfigData}", $ResultArr);
+
+$PageHtml = implode("\n", $ResultArr);
+
+echo $PageHtml;
