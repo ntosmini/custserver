@@ -30,7 +30,7 @@ g_src = MConfig['g_src']
 
 try :
   translator = googletrans.Translator()
-  ResultStr = translator.translate(TransStr, dest = g_dest, src = g_src)
+  ResultStr = translator.translate(TransStr, dest = str(g_dest), src = str(g_src))
   data = {'CustId':str(CustId), 'it_id':str(it_id), 'OrgField':str(OrgField), 'TargetField':str(TargetField), 'TransStr':str(TransStr), 'ResultStr':str(ResultStr.text) }
   headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
   result = requests.post(NtosServer, data=json.dumps(data), headers=headers)
