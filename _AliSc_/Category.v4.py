@@ -7,6 +7,7 @@ import json
 import io
 import os
 import requests
+import traceback
 
 #한글깨짐
 sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
@@ -95,6 +96,7 @@ for val in CslId_SiteUrl :
 	OriginUrl = "<ntosoriginurl>"+str(SiteUrl)+"</ntosoriginurl>"
 	#저장파일명
 	SaveFile = FileDir+str(SaveFileName)
+	ErrHtml = ''
 	if SiteUrl == "" or SaveFileName == "" :
 		continue
 	else :
@@ -121,11 +123,14 @@ for val in CslId_SiteUrl :
 		except :
 			PageHtml = ""
 			NowUrl = ""
+			ErrHtml = traceback.format_exc()
 		WriteFile = ""
 		WriteFile = WriteFile + OriginUrl+"\n"
 		if NowUrl :
 			WriteFile = WriteFile + "<ntosnowurl>"+NowUrl+"</ntosnowurl>\n"
 		WriteFile = WriteFile + PageHtml
+		if ErrHtml :
+			WriteFile = WriteFile + "\n\n" + str(ErrHtml)
 		f = open(SaveFile, 'w', encoding="utf8")
 		f.write(WriteFile)
 		f.close()
