@@ -20,7 +20,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 
-#import undetected_chromedriver as uc
+import undetected_chromedriver as uc
 
 #한글깨짐
 sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
@@ -64,7 +64,7 @@ executable_path = ChromeDriverManager().install()
 
 def chromeWebdriver():
 	chrome_service = ChromeService(executable_path)
-	chrome_options = Options()
+	chrome_options = uc.ChromeOptions()
 	chrome_options.add_argument('--headless')
 	chrome_options.add_argument('--no-sandbox')
 	chrome_options.add_argument('--blink-settings=imagesEnabled=false')
@@ -75,7 +75,7 @@ def chromeWebdriver():
 	chrome_options.add_argument('--ignore-certificate-errors')
 	chrome_options.add_argument('--ignore-ssl-errors=yes')
 	chrome_options.add_argument('--disable-gpu')
-	driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
+	driver = uc.Chrome(service=chrome_service, options=chrome_options, use_subprocess=True)
 	return driver
 
 driver = chromeWebdriver()
