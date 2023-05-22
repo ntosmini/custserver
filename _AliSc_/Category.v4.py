@@ -79,7 +79,7 @@ print("1")
 driver = chromeWebdriver()
 
 driver.get("https://aliexpress.com")
-driver.implicitly_wait(10)
+
 
 """
 파일명
@@ -102,7 +102,6 @@ for val in CslId_SiteUrl :
 	else :
 		try :
 			driver.get(SiteUrl)
-			driver.implicitly_wait(10)
 			#driver.execute_script("window.stop();")
 			if Scroll == "Y" :
 				SCROLL_PAUSE_SEC = 0.5
