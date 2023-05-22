@@ -29,10 +29,9 @@ import undetected_chromedriver as uc
 sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
 sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
 
-executable_path = ChromeDriverManager().install()
 ErrHtml = ''
 def chromeWebdriver():
-	chrome_service = ChromeService(executable_path)
+	chrome_service = ChromeService(ChromeDriverManager().install())
 	chrome_options = uc.ChromeOptions()
 	chrome_options.add_argument('--headless')
 	chrome_options.add_argument('--no-sandbox')
