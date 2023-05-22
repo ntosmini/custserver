@@ -52,14 +52,9 @@ except :
 	ErrHtml = traceback.format_exc()
 
 print(str(ErrHtml))
-driver.delete_all_cookies()
+#driver.delete_all_cookies()
 
-driver.get("https://aliexpress.com")
-time.sleep(3)
-driver.get( 'https://unit808.com/shop/goods_view.php?id=3891426314' )
-
-time.sleep(10)
-driver.get( 'https://naver.com' )
+driver.get( 'http://ntos.co.kr' )
 
 
 PageHtml = driver.page_source
