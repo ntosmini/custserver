@@ -5,7 +5,7 @@ import sys
 import io
 import random
 import time
-
+import traceback
 
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
@@ -30,7 +30,7 @@ sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
 sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
 
 executable_path = ChromeDriverManager().install()
-
+ErrHtml = ''
 def chromeWebdriver():
 	chrome_service = ChromeService(executable_path)
 	chrome_options = uc.ChromeOptions()
@@ -47,9 +47,11 @@ def chromeWebdriver():
 	driver = uc.Chrome(service=chrome_service, options=chrome_options, use_subprocess=True)
 	return driver
 
-
-driver = chromeWebdriver()
-
+try :
+	driver = chromeWebdriver()
+except :
+	ErrHtml = traceback.format_exc()
+print(str(ErrHtml))
 driver.delete_all_cookies()
 
 driver.get("https://aliexpress.com")
