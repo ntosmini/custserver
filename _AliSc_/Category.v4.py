@@ -77,10 +77,8 @@ def chromeWebdriver():
 
 driver = chromeWebdriver()
 
-wait = WebDriverWait(driver, 10, 2)
-
 driver.get("https://aliexpress.com")
-wait.until( EC.presence_of_element_located((By.CLASS_NAME, "logo-base")) )
+driver.implicitly_wait(10)
 
 """
 파일명
@@ -102,7 +100,7 @@ for val in CslId_SiteUrl :
 	else :
 		try :
 			driver.get(SiteUrl)
-			wait.until( EC.presence_of_element_located((By.CLASS_NAME, "logo-base")) )
+			driver.implicitly_wait(10)
 			#driver.execute_script("window.stop();")
 			if Scroll == "Y" :
 				SCROLL_PAUSE_SEC = 0.5
