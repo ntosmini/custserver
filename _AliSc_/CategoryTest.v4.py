@@ -50,7 +50,7 @@ try :
 	driver = chromeWebdriver()
 except :
 	ErrHtml = traceback.format_exc()
-print(str(executable_path))
+
 print(str(ErrHtml))
 driver.delete_all_cookies()
 
