@@ -21,9 +21,6 @@ executable_path = ChromeDriverManager().install()
 
 import undetected_chromedriver as uc
 
-uc.install(
-    executable_path = executable_path ,
-    )
 
 
 
