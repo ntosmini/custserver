@@ -59,7 +59,7 @@ def osgzip(File) :
 
 def chromeWebdriver():
 	chrome_service = ChromeService(ChromeDriverManager().install())
-	chrome_options = Options()
+	chrome_options = uc.ChromeOptions()
 	chrome_options.add_argument('--headless')
 	chrome_options.add_argument('--no-sandbox')
 	chrome_options.add_argument('--blink-settings=imagesEnabled=false')
@@ -70,7 +70,7 @@ def chromeWebdriver():
 	chrome_options.add_argument('--ignore-certificate-errors')
 	chrome_options.add_argument('--ignore-ssl-errors=yes')
 	chrome_options.add_argument('--disable-gpu')
-	driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
+	driver = uc.Chrome(service=chrome_service, options=chrome_options, use_subprocess=True)
 	return driver
 
 driver = chromeWebdriver()
