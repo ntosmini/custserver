@@ -75,7 +75,7 @@ def chromeWebdriver():
 	driver = uc.Chrome(service=chrome_service, options=chrome_options, use_subprocess=True)
 	return driver
 
-
+print("1")
 driver = chromeWebdriver()
 
 driver.get("https://aliexpress.com")
@@ -91,6 +91,7 @@ cate_{CustId}_{CslId}_{CaId}_{server_id}_{LogId}.html
 """
 
 for val in CslId_SiteUrl :
+	print("2")
 	(SiteUrl, SaveFileName) = val.split("|@|")
 	OriginUrl = "<ntosoriginurl>"+str(SiteUrl)+"</ntosoriginurl>"
 	#저장파일명
@@ -123,6 +124,9 @@ for val in CslId_SiteUrl :
 			PageHtml = ""
 			NowUrl = ""
 			ErrHtml = traceback.format_exc()
+			print("3")
+			
+		print("4")
 		WriteFile = ""
 		WriteFile = WriteFile + OriginUrl+"\n"
 		if NowUrl :
@@ -134,6 +138,7 @@ for val in CslId_SiteUrl :
 		f.write(WriteFile)
 		f.close()
 		osgzip(SaveFile)
+		print("5")
 		if FileSendSave == "Y" and NtosServer != "" :
 			gzfile = SaveFile+".gz"
 			files = open(gzfile, 'rb')
