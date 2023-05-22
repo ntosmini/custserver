@@ -18,7 +18,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 
 import undetected_chromedriver as uc
-uc.TARGET_VERSION = 103
+uc.TARGET_VERSION = 113
 
 
 
