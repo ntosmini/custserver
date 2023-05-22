@@ -22,8 +22,8 @@ if(empty($Ver) || ($Ver != 'v3' && $Ver != 'v4') ){
 }	//end if(empty($Ver))
 
 if(empty($RunData['CslId_SiteUrl'])){
-	echo 'not CslId_SiteUrl';
-	exit;
+	//echo 'not CslId_SiteUrl';
+	//exit;
 }
 $RunData['CslId_SiteUrl'] = explode("|^|", $RunData['CslId_SiteUrl']);
 
