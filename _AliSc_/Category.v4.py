@@ -76,8 +76,12 @@ def chromeWebdriver():
 	return driver
 
 print("1")
-driver = chromeWebdriver()
+try :
+	driver = chromeWebdriver()
+except :
+	ErrHtml = traceback.format_exc()
 print("1-1")
+print(str(ErrHtml))
 driver.get("https://aliexpress.com")
 print("1-2")
 
