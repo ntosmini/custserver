@@ -132,7 +132,7 @@ def LockChk(PageHtml) :
 		pass
 	return "pass"
 
-wait = WebDriverWait(driver, 10, 2)
+
 
 """
 파일명
@@ -153,7 +153,7 @@ for val in IslId_SiteUrl :
 	else :
 		try :
 			driver.get(SiteUrl)
-			wait.until( EC.presence_of_element_located((By.CLASS_NAME, "logo-base")) )
+			driver.implicitly_wait(10)
 			#driver.execute_script("window.stop();")
 			PageHtml = driver.page_source
 			NowUrl = driver.current_url
@@ -172,7 +172,7 @@ for val in IslId_SiteUrl :
 			if lock_chk != "" :
 				WriteFile = WriteFile + "<lock_chk>"+lock_chk+"</lock_chk>\n"
 
-			wait.until( EC.presence_of_element_located((By.CLASS_NAME, "logo-base")) )
+			driver.implicitly_wait(10)
 			PageHtml = driver.page_source
 			NowUrl = driver.current_url
 
