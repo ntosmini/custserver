@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*- 
-# 카테고리 파일-v4 test
+# 카테고리 파일-v4
 
 import time
 import sys
