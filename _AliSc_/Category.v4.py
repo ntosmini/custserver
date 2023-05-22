@@ -89,7 +89,7 @@ cate_{CustId}_{CslId}_{CaId}_{server_id}_{LogId}.html
 <ntosoriginurl></ntosoriginurl>
 <ntosnowurl></ntosnowurl>
 """
-
+print("1-1")
 for val in CslId_SiteUrl :
 	print("2")
 	(SiteUrl, SaveFileName) = val.split("|@|")
