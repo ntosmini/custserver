@@ -57,27 +57,22 @@ else :
 def osgzip(File) :
 	os.system("gzip "+File)
 
-def chromeWebdriver():
-	chrome_service = ChromeService(ChromeDriverManager().install())
-	chrome_options = uc.ChromeOptions()
-	chrome_options.add_argument('--headless')
-	chrome_options.add_argument('--no-sandbox')
-	chrome_options.add_argument('--blink-settings=imagesEnabled=false')
-	chrome_options.add_argument('--start-maximized')
-	chrome_options.add_argument('--disable-dev-shm-usage')
-	chrome_options.add_argument('--disable-blink-features=AutomationControlled')
-	chrome_options.add_argument('--disable-infobars')
-	chrome_options.add_argument('--ignore-certificate-errors')
-	chrome_options.add_argument('--ignore-ssl-errors=yes')
-	chrome_options.add_argument('--disable-gpu')
-	driver = uc.Chrome(service=chrome_service, options=chrome_options, use_subprocess=True)
-	return driver
+chrome_service = ChromeService(ChromeDriverManager().install())
+chrome_options = uc.ChromeOptions()
+chrome_options.add_argument('--headless')
+chrome_options.add_argument('--no-sandbox')
+chrome_options.add_argument('--blink-settings=imagesEnabled=false')
+chrome_options.add_argument('--start-maximized')
+chrome_options.add_argument('--disable-dev-shm-usage')
+chrome_options.add_argument('--disable-blink-features=AutomationControlled')
+chrome_options.add_argument('--disable-infobars')
+chrome_options.add_argument('--ignore-certificate-errors')
+chrome_options.add_argument('--ignore-ssl-errors=yes')
+chrome_options.add_argument('--disable-gpu')
+driver = uc.Chrome(service=chrome_service, options=chrome_options, use_subprocess=True)
+
 
 print("1")
-try :
-	driver = chromeWebdriver()
-except :
-	ErrHtml = traceback.format_exc()
 print("1-1")
 print(str(ErrHtml))
 driver.get("https://aliexpress.com")
