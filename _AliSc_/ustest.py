@@ -17,10 +17,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 
-PATH = ChromeDriverManager().install()
-
 import undetected_chromedriver as uc
-
+uc.TARGET_VERSION = 103
 
 
 
@@ -33,7 +31,7 @@ sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
 
 ErrHtml = ''
 def chromeWebdriver():
-	chrome_service = ChromeService(PATH)
+	chrome_service = ChromeService(ChromeDriverManager().install())
 	chrome_options = uc.ChromeOptions()
 	chrome_options.add_argument('--headless')
 	chrome_options.add_argument('--no-sandbox')
