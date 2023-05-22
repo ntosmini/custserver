@@ -59,7 +59,7 @@ def osgzip(File) :
 
 def chromeWebdriver():
 	chrome_service = ChromeService(ChromeDriverManager().install())
-	chrome_options = uc.ChromeOptions()
+	chrome_options = Options()
 	chrome_options.add_argument('--headless')
 	chrome_options.add_argument('--no-sandbox')
 	chrome_options.add_argument('--blink-settings=imagesEnabled=false')
@@ -70,18 +70,13 @@ def chromeWebdriver():
 	chrome_options.add_argument('--ignore-certificate-errors')
 	chrome_options.add_argument('--ignore-ssl-errors=yes')
 	chrome_options.add_argument('--disable-gpu')
-	driver = uc.Chrome(service=chrome_service, options=chrome_options, use_subprocess=True)
+	driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
 	return driver
 
-print("1")
-try :
-	driver = chromeWebdriver()
-except :
-	ErrHtml = traceback.format_exc()
-print("1-1")
-print(str(ErrHtml))
+driver = chromeWebdriver()
+
 driver.get("https://aliexpress.com")
-print("1-2")
+
 
 """
 파일명
@@ -91,9 +86,8 @@ cate_{CustId}_{CslId}_{CaId}_{server_id}_{LogId}.html
 <ntosoriginurl></ntosoriginurl>
 <ntosnowurl></ntosnowurl>
 """
-print("1-1")
+
 for val in CslId_SiteUrl :
-	print("2")
 	(SiteUrl, SaveFileName) = val.split("|@|")
 	OriginUrl = "<ntosoriginurl>"+str(SiteUrl)+"</ntosoriginurl>"
 	#저장파일명
@@ -125,9 +119,7 @@ for val in CslId_SiteUrl :
 			PageHtml = ""
 			NowUrl = ""
 			ErrHtml = traceback.format_exc()
-			print("3")
 			
-		print("4")
 		WriteFile = ""
 		WriteFile = WriteFile + OriginUrl+"\n"
 		if NowUrl :
@@ -139,7 +131,6 @@ for val in CslId_SiteUrl :
 		f.write(WriteFile)
 		f.close()
 		osgzip(SaveFile)
-		print("5")
 		if FileSendSave == "Y" and NtosServer != "" :
 			gzfile = SaveFile+".gz"
 			files = open(gzfile, 'rb')
