@@ -57,10 +57,8 @@ else :
 def osgzip(File) :
 	os.system("gzip "+File)
 
-executable_path = ChromeDriverManager().install()
-
 def chromeWebdriver():
-	chrome_service = ChromeService(executable_path)
+	chrome_service = ChromeService(ChromeDriverManager().install())
 	chrome_options = uc.ChromeOptions()
 	chrome_options.add_argument('--headless')
 	chrome_options.add_argument('--no-sandbox')
