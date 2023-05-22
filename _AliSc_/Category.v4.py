@@ -77,9 +77,9 @@ def chromeWebdriver():
 
 print("1")
 driver = chromeWebdriver()
-
+print("1-1")
 driver.get("https://aliexpress.com")
-
+print("1-2")
 
 """
 파일명
