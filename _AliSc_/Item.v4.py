@@ -54,7 +54,6 @@ if CustId == "aliexpress" :
 elif CustId == "aliexpresskr" :
 	FileDir = "/home/ntosmini/ali_item_kr/"
 else :
-	print("allerror")
 	exit()
 
 
