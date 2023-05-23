@@ -7,6 +7,7 @@ import json
 import io
 import os
 import requests
+import traceback
 
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
@@ -149,6 +150,8 @@ for val in IslId_SiteUrl :
 	OriginUrl = "<ntosoriginurl>"+str(SiteUrl)+"</ntosoriginurl>"
 	#저장파일명
 	SaveFile = FileDir+str(SaveFileName)
+	#에러msg
+	ErrMsg = ''
 	if SiteUrl == "" or SaveFileName == "" :
 		continue
 	else :
@@ -161,12 +164,17 @@ for val in IslId_SiteUrl :
 		except :
 			PageHtml = ""
 			NowUrl = ""
+			ErrMsg = traceback.format_exc()
 		WriteFile = ""
 		WriteFile = WriteFile + OriginUrl+"\n"
 		if NowUrl :
 			WriteFile = WriteFile + "<ntosnowurl>"+NowUrl+"</ntosnowurl>\n"
 
+		if ErrMsg :
+			WriteFile = WriteFile + "<ErrMsg>"+str(ErrMsg)+"</ErrMsg>\n"
+			
 		#lock 체크
+		"""
 		if PageHtml != "" :
 			lock_chk = ""
 			lock_chk = LockChk(PageHtml)
@@ -176,7 +184,7 @@ for val in IslId_SiteUrl :
 			driver.implicitly_wait(10)
 			PageHtml = driver.page_source
 			NowUrl = driver.current_url
-
+		"""
 
 		WriteFile = WriteFile + PageHtml
 
