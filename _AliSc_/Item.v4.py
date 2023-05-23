@@ -80,61 +80,6 @@ def chromeWebdriver():
 
 driver = chromeWebdriver()
 
-#lock 체크
-def LockChk(PageHtml) :
-	action = ActionChains(driver)
-	try :
-		if re.search('.com:443/display', str(PageHtml)) :
-			try :
-				driver.switch_to.frame("baxia-dialog-content")
-				slider = driver.find_element(By.ID, "nc_1_n1z")
-				slider.click()
-				action.move_to_element(slider)
-				action.click_and_hold(slider)
-				xoffset = 0
-				while xoffset < 400 :
-					xmove = random.randint(10, 50)
-					ymove = random.randint(-1, 1)
-					action.move_by_offset(xmove, ymove)
-					xoffset += xmove
-				action.release()
-				action.perform()
-				return "iframe"
-			except :
-				err = traceback.format_exc()
-				return str(err)
-		else :
-			pass
-	except :
-		pass
-
-	try :
-		if re.search('Sorry, we have detected unusual traffic from your network', str(PageHtml)) :
-			try :
-				slider2 = driver.find_element(By.ID, "nc_1_n1z")
-				slider2.click()
-				action.move_to_element(slider2)
-				action.click_and_hold(slider2)
-				xoffset = 0
-				while xoffset < 400 :
-					xmove = random.randint(10, 50)
-					ymove = random.randint(-1, 1)
-					action.move_by_offset(xmove, ymove)
-					xoffset += xmove
-				action.release()
-				action.perform()
-				return "page"
-			except :
-				err = traceback.format_exc()
-				return str(err)
-		else :
-			pass
-	except :
-		pass
-	return "pass"
-
-
-
 """
 파일명
 item_{CustId}_{IslId}_{CaId}_{server_id}_{LogId}.html
@@ -164,7 +109,7 @@ for val in IslId_SiteUrl :
 			PageHtml = ""
 			NowUrl = ""
 			ErrMsg = traceback.format_exc()
-		WriteFile = ""
+		WriteFile = "<time>"+time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))+"</time>\n"
 		WriteFile = WriteFile + OriginUrl+"\n"
 		if NowUrl :
 			WriteFile = WriteFile + "<ntosnowurl>"+NowUrl+"</ntosnowurl>\n"
@@ -172,19 +117,6 @@ for val in IslId_SiteUrl :
 		if ErrMsg :
 			WriteFile = WriteFile + "<ErrMsg>"+str(ErrMsg)+"</ErrMsg>\n"
 			
-		#lock 체크
-		"""
-		if PageHtml != "" :
-			lock_chk = ""
-			lock_chk = LockChk(PageHtml)
-			if lock_chk != "" :
-				WriteFile = WriteFile + "<lock_chk>"+lock_chk+"</lock_chk>\n"
-
-			driver.implicitly_wait(10)
-			PageHtml = driver.page_source
-			NowUrl = driver.current_url
-		"""
-
 		WriteFile = WriteFile + PageHtml
 
 		f = open(SaveFile, 'w', encoding="utf8")
