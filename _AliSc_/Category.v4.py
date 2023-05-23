@@ -50,7 +50,6 @@ FileDir = ""
 if CustId == "aliexpress" :
 	FileDir = "/home/ntosmini/ali_category/"
 else :
-	print("allerror")
 	exit()
 
 
