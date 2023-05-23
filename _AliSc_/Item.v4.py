@@ -156,7 +156,7 @@ for val in IslId_SiteUrl :
 	else :
 		try :
 			driver.get(SiteUrl)
-			driver.implicitly_wait(10)
+			driver.implicitly_wait(3)
 			#driver.execute_script("window.stop();")
 			PageHtml = driver.page_source
 			NowUrl = driver.current_url
