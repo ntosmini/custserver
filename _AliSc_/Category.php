@@ -33,8 +33,4 @@ if(empty($RunData['CustId'])){
 $MConfigData = escapeshellarg(json_encode($RunData));
 
 
-exec("PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin python3 /home/ntosmini/public_html/_AliSc_/Category.{$Ver}.py {$MConfigData}", $ResultArr);
-
-$PageHtml = implode("\n", $ResultArr);
-
-echo $PageHtml;
+exec("PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin python3 /home/ntosmini/public_html/_AliSc_/Category.{$Ver}.py {$MConfigData}");
