@@ -94,7 +94,7 @@ for val in IslId_SiteUrl :
 	OriginUrl = "<ntosoriginurl>"+str(SiteUrl)+"</ntosoriginurl>"
 	#저장파일명
 	SaveFile = FileDir+str(SaveFileName)
-	SaveFile = SaveFile.replace('.html', str(time.strftime('%H%M', time.localtime(time.time())))+'.html')
+	SaveFile = SaveFile.replace('.html', '_'+str(time.strftime('%H%M', time.localtime(time.time())))+'.html')
 	#에러msg
 	ErrMsg = ''
 	if SiteUrl == "" or SaveFileName == "" :
