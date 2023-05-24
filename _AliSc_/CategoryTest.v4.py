@@ -7,6 +7,10 @@ import random
 import time
 import traceback
 
+MConfigData = sys.argv[1]
+MConfig = json.loads(MConfigData)
+PathUsed = MConfig['PathUsed']
+
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.chrome.options import Options
@@ -17,7 +21,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 
-import undetected_chromedriver as uc
+if PathUsed == "Y" :
+	import undetected_chromedriver as uc
 
 
 
@@ -32,7 +37,10 @@ sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
 ErrHtml = ''
 def chromeWebdriver():
 	chrome_service = ChromeService(ChromeDriverManager().install())
-	chrome_options = uc.ChromeOptions()
+	if PathUsed == "Y" :
+		chrome_options = uc.ChromeOptions()
+	else :
+		chrome_options = ChromeOptions()
 	chrome_options.add_argument('--headless')
 	chrome_options.add_argument('--no-sandbox')
 	chrome_options.add_argument('--blink-settings=imagesEnabled=false')
@@ -43,7 +51,10 @@ def chromeWebdriver():
 	chrome_options.add_argument('--ignore-certificate-errors')
 	chrome_options.add_argument('--ignore-ssl-errors=yes')
 	chrome_options.add_argument('--disable-gpu')
-	driver = uc.Chrome(service=chrome_service, options=chrome_options, use_subprocess=True)
+	if PathUsed == "Y" :
+		driver = uc.Chrome(service=chrome_service, options=chrome_options, use_subprocess=True)
+	else :
+		driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
 	return driver
 
 try :
