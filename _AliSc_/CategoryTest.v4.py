@@ -40,9 +40,7 @@ def chromeWebdriver():
 	if PathUsed == "Y" :
 		chrome_options = uc.ChromeOptions()
 	else :
-		chrome_options = ChromeOptions()
-		chrome_options.add_experimental_option('detach', True)
-		chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
+		chrome_options = Options()
 	chrome_options.add_argument('--headless')
 	chrome_options.add_argument('--no-sandbox')
 	chrome_options.add_argument('--blink-settings=imagesEnabled=false')
