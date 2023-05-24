@@ -4,7 +4,7 @@ header("Content-Type: text/html; charset=UTF-8");
 
 $RunData = array();
 $PATH = (empty($_GET['path']))?"":$_GET['path'];
-$RunData['pathused'] = (empty($PATH))?"N":"Y";
+$RunData['PathUsed'] = (empty($PATH))?"N":"Y";
 $MConfigData = escapeshellarg(json_encode($RunData));
 if(empty($PATH)){
   exec("python3 /home/ntosmini/public_html/_AliSc_/CategoryTest.v4.py {$MConfigData}", $ResultArr);
