@@ -28,6 +28,8 @@ NtosServer = MConfig['NtosServer']  #전송서버 url
 FileDir = MConfig['FileDir']  #저장폴더
 UserAgent = MConfig['UserAgent']
 
+headers = {'User-Agent': UserAgent}
+
 for val in IslId_SiteUrl :
   #저장html
   SaveHtml = ''
@@ -43,7 +45,7 @@ for val in IslId_SiteUrl :
 		continue
   
 	try :
-		PageHtml = requests.get(SiteUrl)
+		PageHtml = requests.get(SiteUrl, headers=headers)
 		PageHtml = PageHtml.text
 		PageHtmlRecode = PageHtml.status_code
 	except :
@@ -72,7 +74,7 @@ for val in IslId_SiteUrl :
 
 		if DetailUrl :
 			try :
-				DetailHtml = requests.get(str(DetailUrl))
+				DetailHtml = requests.get(str(DetailUrl), headers=headers)
 				DetailHtml = DetailHtml.text
 				DetailHtmlRecode = DetailHtml.status_code
 			except :
