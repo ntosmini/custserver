@@ -10,7 +10,7 @@ if(empty($PATH)){
   exec("python3 /home/ntosmini/public_html/_AliSc_/CategoryTest.v4.py {$MConfigData}", $ResultArr);
 } else {
   echo $PATH;
-  exec($PATH." python3 /home/ntosmini/public_html/_AliSc_/CategoryTest.v4.py {$MConfigData}", $ResultArr);
+  exec("PATH=".$PATH." python3 /home/ntosmini/public_html/_AliSc_/CategoryTest.v4.py {$MConfigData}", $ResultArr);
 }
 
 $PageHtml = implode("\n", $ResultArr);
