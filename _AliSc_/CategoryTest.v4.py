@@ -22,8 +22,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 
-if PathUsed == "Y" :
-	import undetected_chromedriver as uc
+import undetected_chromedriver as uc
 
 
 
