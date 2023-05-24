@@ -49,7 +49,7 @@ NtosSendServer = MConfig['NtosSendServer']
 UserAgent = MConfig['UserAgent']
 
 executable_path = ChromeDriverManager().install()
-
+print("ChromeType = uc")
 def chromeWebdriver():
 	chrome_service = ChromeService(executable_path)
 	chrome_options = uc.ChromeOptions()
