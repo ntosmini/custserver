@@ -5,7 +5,7 @@ header("Content-Type: text/html; charset=UTF-8");
 $RunData = array();
 $ScrapType = (empty($_POST['ScrapType']))?"selenium":$_POST['ScrapType'];	//수집방식 - curl or self or selenium or pyget
 $RunData['UserAgent'] = (empty($_POST['UserAgent']))?"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36":$_POST['UserAgent'];
-
+$ChromeType = (empty($_POST['ChromeType']))?"":$_POST['ChromeType'];
 if($ScrapType == "self"){
 
 	echo "ntoswebsuccess";
@@ -78,7 +78,11 @@ if($ScrapType == "self"){
 	$RunData['SiteUrl_SaveFileName'] = explode("|^|", $RunData['SiteUrl_SaveFileName']);
 
 	$MConfigData = escapeshellarg(json_encode($RunData));
-	exec("python3 /home/ntosmini/public_html/_Scrap_/Scrap.py {$MConfigData}", $ResultArr);
+	if($ChromeType == "uc"){
+		exec("PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin python3 /home/ntosmini/public_html/_Scrap_/Scrap.uc.py {$MConfigData}", $ResultArr);		
+	} else {
+		exec("python3 /home/ntosmini/public_html/_Scrap_/Scrap.py {$MConfigData}", $ResultArr);
+	}
 
 	$PageHtml = implode("\n", $ResultArr);
 
@@ -91,7 +95,11 @@ if($ScrapType == "self"){
 		exit;
 	}
 	$MConfigData = escapeshellarg(json_encode($RunData));
-	exec("python3 /home/ntosmini/public_html/_Scrap_/Get.py {$MConfigData}", $ResultArr);
+	if($ChromeType == "uc"){
+		exec("PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin python3 /home/ntosmini/public_html/_Scrap_/Scrap.uc.py {$MConfigData}", $ResultArr);		
+	} else {
+		exec("python3 /home/ntosmini/public_html/_Scrap_/Scrap.py {$MConfigData}", $ResultArr);
+	}
 
 	$PageHtml = implode("\n", $ResultArr);
 
