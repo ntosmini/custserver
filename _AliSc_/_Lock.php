@@ -8,7 +8,7 @@ $RunData['UserAgent'] = (empty($_POST['UserAgent']))?"Mozilla/5.0 (Windows NT 10
 $RunData['SiteUrl'] = (empty($_POST['SiteUrl']))?"":$_POST['SiteUrl'];	//사이트 url
 
 $RunData['LockChkUsed'] = (empty($_POST['LockChkUsed']))?"N":"Y";	//lock chk
-
+$ChromeType = (empty($_POST['ChromeType']))?"":$_POST['ChromeType'];
 if(empty($RunData['SiteUrl'])){
 	echo 'not SiteUrl';
 	exit;
@@ -16,6 +16,11 @@ if(empty($RunData['SiteUrl'])){
 
 $MConfigData = escapeshellarg(json_encode($RunData));
 
+if($ChromeType == "uc"){
+	exec("PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin python3 /home/ntosmini/public_html/_Scrap_/Scrap.uc.py {$MConfigData}", $ResultArr);		
+} else {
+	exec("python3 /home/ntosmini/public_html/_Scrap_/Scrap.py {$MConfigData}", $ResultArr);
+}
 exec("python3 /home/ntosmini/public_html/_AliSc_/_Lock.py {$MConfigData}", $ResultArr);
 
 $PageHtml = implode("\n", $ResultArr);
