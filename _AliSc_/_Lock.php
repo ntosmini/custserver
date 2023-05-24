@@ -18,11 +18,26 @@ $MConfigData = escapeshellarg(json_encode($RunData));
 
 if($ChromeType == "uc"){
 	exec("PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin python3 /home/ntosmini/public_html/_Scrap_/_Lock.uc.py {$MConfigData}", $ResultArr);		
+	$PageHtml = implode("\n", $ResultArr);
+} else if($ChromeType == "curl"){
+	
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, $RunData['SiteUrl'] );
+curl_setopt($ch, CURLOPT_HEADER, false);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+curl_setopt($ch, CURLOPT_AUTOREFERER, true);
+
+curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 300); //
+curl_setopt($ch, CURLOPT_TIMEOUT, 300); //
+$PageHtml=curl_exec($ch);
+$http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+curl_close($ch);
+	
 } else {
 	exec("python3 /home/ntosmini/public_html/_Scrap_/Scrap.py {$MConfigData}", $ResultArr);
+	$PageHtml = implode("\n", $ResultArr);
 }
-exec("python3 /home/ntosmini/public_html/_AliSc_/_Lock.py {$MConfigData}", $ResultArr);
 
-$PageHtml = implode("\n", $ResultArr);
 
 echo $PageHtml;
