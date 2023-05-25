@@ -28,7 +28,7 @@ NtosServer = MConfig['NtosServer']  #전송서버 url
 FileDir = MConfig['FileDir']  #저장폴더
 UserAgent = MConfig['UserAgent']
 
-
+TotMsg = ''
 for val in IslId_SiteUrl :
 	#저장html
 	SaveHtml = ''
@@ -89,7 +89,7 @@ for val in IslId_SiteUrl :
 
 		WriteFile = "<time>"+time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))+"</time>\n\n"
 		WriteFile = WriteFile + OriginUrl + SaveHtml + ErrMsg
-
+		TotMsg = TotMsg + WriteFile
 		f = open(SaveFile, 'w', encoding="utf8")
 		f.write(WriteFile)
 		f.close()
@@ -105,3 +105,4 @@ for val in IslId_SiteUrl :
 			if os.path.exists(gzfile) :
 				os.remove(gzfile)
 	time.sleep(random.randint(1, 3))
+print(TotMsg)
