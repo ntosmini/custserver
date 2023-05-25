@@ -75,8 +75,8 @@ for val in IslId_SiteUrl :
 		if DetailUrl :
 			try :
 				DetailHtml = requests.get(str(DetailUrl))
-				DetailHtml = DetailHtml.text
 				DetailHtmlRecode = DetailHtml.status_code
+				DetailHtml = DetailHtml.text
 			except :
 				DetailHtml = ''
 				DetailHtmlRecode = 'error'
