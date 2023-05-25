@@ -17,8 +17,12 @@ sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
 IslId_SiteUrl = []
 
 MConfigData = sys.argv[1]
-MConfig = json.loads(MConfigData)
-
+try :
+	MConfig = json.loads(MConfigData)
+	err = 'ok'
+except :
+	err = "<br><br>"+traceback.format_exc()
+print(str(err))
 IslId_SiteUrl = MConfig['IslId_SiteUrl']
 CustId = MConfig['CustId']
 
