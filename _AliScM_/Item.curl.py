@@ -39,6 +39,8 @@ for val in IslId_SiteUrl :
 	DetailHtml = ''
 	#상품정보
 	PageHtmlJsonData = ''
+	#상품정보 Json
+	PageHtmlJson = ''
 	(SiteUrl, SaveFileName) = val.split("|@|")
 	OriginUrl = "<ntosoriginurl>"+str(SiteUrl)+"</ntosoriginurl>\n\n"
 	#저장파일명
