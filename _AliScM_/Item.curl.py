@@ -45,8 +45,8 @@ for val in IslId_SiteUrl :
 
 	try :
 		PageHtml = requests.get(SiteUrl)
-		PageHtml = PageHtml.text
 		PageHtmlRecode = PageHtml.status_code
+		PageHtml = PageHtml.text
 	except :
 		PageHtml = ''
 		PageHtmlRecode = 'error'
