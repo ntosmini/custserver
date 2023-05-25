@@ -31,7 +31,7 @@ if(empty($RunData['FileDir'])){
 	echo 'not FileDir';
 	exit;
 }
-$MConfigData = escapeshellarg(json_encode($RunData));
+//$MConfigData = escapeshellarg(json_encode($RunData));
 
 switch($ScrapType){
 	case 'curl' :
