@@ -35,6 +35,8 @@ for val in IslId_SiteUrl :
 	SaveHtml = ''
 	#에러msg
 	ErrMsg = ''
+	#상세설명
+	DetailHtml = ''
 	(SiteUrl, SaveFileName) = val.split("|@|")
 	OriginUrl = "<ntosoriginurl>"+str(SiteUrl)+"</ntosoriginurl>\n\n"
 	#저장파일명
