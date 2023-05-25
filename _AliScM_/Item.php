@@ -44,7 +44,7 @@ switch($ScrapType){
 		exec("python3 /home/ntosmini/public_html/_AliScM_/Item.selenium.py {$MConfigData}", $ResultArr);
 	break;
 }
-$PageHtml = implode("\n", $ResultArr);
-
-echo $PageHtml;
-
+if(isset($ResultArr) && count($ResultArr) > 0){
+	$PageHtml = implode("\n", $ResultArr);
+	echo $PageHtml;
+}
