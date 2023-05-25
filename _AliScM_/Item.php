@@ -35,14 +35,16 @@ $MConfigData = escapeshellarg(json_encode($RunData));
 
 switch($ScrapType){
 	case 'curl' :
-		exec("python3 /home/ntosmini/public_html/_AliScM_/Item.curl.py {$MConfigData}");
+		exec("python3 /home/ntosmini/public_html/_AliScM_/Item.curl.py {$MConfigData}", $ResultArr);
 	break;
 	case 'uc' :
-		exec("PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin python3 /home/ntosmini/public_html/_AliScM_/Item.uc.py {$MConfigData}");
+		exec("PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin python3 /home/ntosmini/public_html/_AliScM_/Item.uc.py {$MConfigData}", $ResultArr);
 	break;
 	default :
-		exec("python3 /home/ntosmini/public_html/_AliScM_/Item.selenium.py {$MConfigData}");
+		exec("python3 /home/ntosmini/public_html/_AliScM_/Item.selenium.py {$MConfigData}", $ResultArr);
 	break;
 }
+$PageHtml = implode("\n", $ResultArr);
 
+echo $PageHtml;
 
