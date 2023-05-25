@@ -30,6 +30,7 @@ UserAgent = MConfig['UserAgent']
 
 TotMsg = ''
 for val in IslId_SiteUrl :
+	
 	#저장html
 	SaveHtml = ''
 	#에러msg
@@ -51,58 +52,4 @@ for val in IslId_SiteUrl :
 		PageHtml = ''
 		PageHtmlRecode = 'error'
 		ErrMsg = ErrMsg + str(traceback.format_exc()) + "\n\n"
-
-	if PageHtml :
-		try :
-			PageHtml = re.sub('\n', '', PageHtml)
-			PageHtmlJsonSearch = re.search(r'window.runParams\s+=\s+{\s+ data:(?P<JsonData>.*)};\s+</script>', str(PageHtml), re.DOTALL)
-			PageHtmlJsonData = PageHtmlJsonSearch.group('JsonData')
-			PageHtmlJson = json.loads(PageHtmlJsonData)
-		except :
-			PageHtmlJson = ''
-			ErrMsg = ErrMsg + str(traceback.format_exc()) + "\n\n"
-
-	if PageHtmlJson :
-		SaveHtml = SaveHtml + "<PageHtmlRecode>" + str(PageHtmlRecode) + "<PageHtmlRecode>\n\n"
-		SaveHtml = SaveHtml + "<PageHtmlJson>" + str(PageHtmlJson) + "<PageHtmlJson>\n\n"
-		try :
-			DetailUrl = PageHtmlJson['descInfo']['productDescUrl']
-		except :
-			DetailUrl = '';
-			ErrMsg = ErrMsg + str(traceback.format_exc()) + "\n\n"
-
-		if DetailUrl :
-			try :
-				DetailHtml = requests.get(str(DetailUrl))
-				DetailHtml = DetailHtml.text
-				DetailHtmlRecode = DetailHtml.status_code
-			except :
-				DetailHtml = ''
-				DetailHtmlRecode = 'error'
-				ErrMsg = ErrMsg + str(traceback.format_exc()) + "\n\n"
-
-		if DetailHtml :
-			DetailHtml = re.sub('(<script[^<]+</script>)', '', DetailHtml)
-			DetailHtml = re.sub('(<a[^<]+</a>)', '', DetailHtml)
-			DetailHtml = re.sub('(<link[^>]+>)', '', DetailHtml)
-			SaveHtml = SaveHtml + "<DetailHtml>" + str(DetailHtml) + "<DetailHtml>\n\n"
-
-		WriteFile = "<time>"+time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))+"</time>\n\n"
-		WriteFile = WriteFile + OriginUrl + SaveHtml + ErrMsg
-		TotMsg = TotMsg + WriteFile
-		f = open(SaveFile, 'w', encoding="utf8")
-		f.write(WriteFile)
-		f.close()
-		os.system("gzip "+SaveFile)
-
-		if FileSendSave == "Y" and NtosServer != "" :
-			gzfile = SaveFile+".gz"
-			files = open(gzfile, 'rb')
-			upload = {'file': files}
-			data = {'CustId':CustId, 'ScrapType':'item' }
-			Result_ = requests.post(NtosServer, data=data, files=upload)
-			Result = Result_.text
-			if os.path.exists(gzfile) :
-				os.remove(gzfile)
-	time.sleep(random.randint(1, 3))
-print(TotMsg)
+	print(str(PageHtml))
