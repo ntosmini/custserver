@@ -30,4 +30,4 @@ UserAgent = MConfig['UserAgent']
 
 TotMsg = ''
 for val in IslId_SiteUrl :
-	print(val+"\n")
+	print(val+"<br>")
