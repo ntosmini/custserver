@@ -17,10 +17,14 @@ sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
 IslId_SiteUrl = []
 
 MConfigData = sys.argv[1]
-try :
-	MConfig = json.loads(MConfigData)
-	err = 'ok'
-except :
-	err = "<br><br>"+traceback.format_exc()
-print(str(err))
+MConfig = json.loads(MConfigData)
+IslId_SiteUrl = MConfig['IslId_SiteUrl']
+CustId = MConfig['CustId']
 
+FileSendSave = MConfig['FileSendSave']  #저장후 전송여부
+NtosServer = MConfig['NtosServer']  #전송서버 url
+
+FileDir = MConfig['FileDir']  #저장폴더
+UserAgent = MConfig['UserAgent']
+
+print(CustId)
