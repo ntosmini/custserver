@@ -64,8 +64,8 @@ for val in IslId_SiteUrl :
 			ErrMsg = ErrMsg + str(traceback.format_exc()) + "\n\n"
 
 	if PageHtmlJson :
-		SaveHtml = SaveHtml + "<PageHtmlRecode>" + str(PageHtmlRecode) + "<PageHtmlRecode>\n\n"
-		SaveHtml = SaveHtml + "<PageHtmlJson>" + str(PageHtmlJson) + "<PageHtmlJson>\n\n"
+		SaveHtml = SaveHtml + "<PageHtmlRecode>" + str(PageHtmlRecode) + "</PageHtmlRecode>\n\n"
+		SaveHtml = SaveHtml + "<PageHtmlJson>" + str(PageHtmlJson) + "</PageHtmlJson>\n\n"
 		try :
 			DetailUrl = PageHtmlJson['descInfo']['productDescUrl']
 		except :
@@ -86,7 +86,7 @@ for val in IslId_SiteUrl :
 			DetailHtml = re.sub('(<script[^<]+</script>)', '', DetailHtml)
 			DetailHtml = re.sub('(<a[^<]+</a>)', '', DetailHtml)
 			DetailHtml = re.sub('(<link[^>]+>)', '', DetailHtml)
-			SaveHtml = SaveHtml + "<DetailHtml>" + str(DetailHtml) + "<DetailHtml>\n\n"
+			SaveHtml = SaveHtml + "<DetailHtml>" + str(DetailHtml) + "</DetailHtml>\n\n"
 
 		WriteFile = "<time>"+time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))+"</time>\n\n"
 		WriteFile = WriteFile + OriginUrl + SaveHtml + ErrMsg
