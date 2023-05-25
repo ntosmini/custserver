@@ -53,3 +53,4 @@ for val in IslId_SiteUrl :
 		PageHtmlRecode = 'error'
 		ErrMsg = ErrMsg + str(traceback.format_exc()) + "\n\n"
 	print(str(PageHtml))
+	print(str(ErrMsg))
