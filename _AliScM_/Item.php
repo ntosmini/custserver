@@ -15,10 +15,7 @@ $RunData['FileDir']  =(empty($_POST['FileDir ']))?"":$_POST['FileDir '];  //ì €ì
 $RunData['UserAgent'] = (empty($_POST['UserAgent']))?"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36":$_POST['UserAgent'];
 
 
-echo "<pre>";
-print_r($_POST);
-echo "</pre>";
-exit;
+
 
 if(empty($RunData['IslId_SiteUrl'])){
 	echo 'not IslId_SiteUrl';
@@ -39,6 +36,10 @@ $MConfigData = escapeshellarg(json_encode($RunData));
 
 switch($ScrapType){
 	case 'curl' :
+		echo "<pre>";
+print_r($_POST);
+echo "</pre>";
+exit;
 		exec("python3 /home/ntosmini/public_html/_AliScM_/item.curl.py {$MConfigData}");
 	break;
 	case 'uc' :
