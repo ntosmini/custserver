@@ -34,17 +34,3 @@ if(empty($RunData['FileDir'])){
 $MConfigData = escapeshellarg(json_encode($RunData));
 
 
-switch($ScrapType){
-	case 'curl' :
-		echo "1";
-		//exec("python3 /home/ntosmini/public_html/_AliScM_/Item.curl.py {$MConfigData}");
-	break;
-	case 'uc' :
-		echo "2";
-		//exec("PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin python3 /home/ntosmini/public_html/_AliScM_/Item.uc.py {$MConfigData}");
-	break;
-	default :
-		echo "3";
-		//exec("python3 /home/ntosmini/public_html/_AliScM_/Item.selenium.py {$MConfigData}");
-	break;
-}
