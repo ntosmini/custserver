@@ -42,7 +42,7 @@ for val in IslId_SiteUrl :
   
 	if SiteUrl == "" or SaveFileName == "" :
 		continue
-	print(SiteUrl+"<br>")
+
 	try :
 		PageHtml = requests.get(SiteUrl)
 		PageHtml = PageHtml.text
@@ -51,3 +51,20 @@ for val in IslId_SiteUrl :
 		PageHtml = ''
 		PageHtmlRecode = 'error'
 		ErrMsg = ErrMsg + str(traceback.format_exc()) + "\n\n"
+		
+	if PageHtml :
+		try :
+			PageHtml = re.sub('\n', '', PageHtml)
+			PageHtmlJsonSearch = re.search(r'window.runParams\s+=\s+{\s+ data:(?P<JsonData>.*)};\s+</script>', str(PageHtml), re.DOTALL)
+			PageHtmlJsonData = PageHtmlJsonSearch.group('JsonData')
+			PageHtmlJson = json.loads(PageHtmlJsonData)
+		except :
+			PageHtmlJson = ''
+			ErrMsg = ErrMsg + str(traceback.format_exc()) + "\n\n"
+			
+	print(SiteUrl+"<br>"+str(ErrMsg)+"<br>")
+	
+	
+	
+	
+	
