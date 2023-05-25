@@ -43,3 +43,11 @@ for val in IslId_SiteUrl :
 	if SiteUrl == "" or SaveFileName == "" :
 		continue
 	print(SiteUrl+"<br>")
+	try :
+		PageHtml = requests.get(SiteUrl)
+		PageHtml = PageHtml.text
+		PageHtmlRecode = PageHtml.status_code
+	except :
+		PageHtml = ''
+		PageHtmlRecode = 'error'
+		ErrMsg = ErrMsg + str(traceback.format_exc()) + "\n\n"
