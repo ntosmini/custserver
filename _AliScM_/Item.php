@@ -31,6 +31,3 @@ if(empty($RunData['FileDir'])){
 	echo 'not FileDir';
 	exit;
 }
-$MConfigData = escapeshellarg(json_encode($RunData));
-
-
