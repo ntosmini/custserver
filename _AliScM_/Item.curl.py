@@ -30,10 +30,4 @@ UserAgent = MConfig['UserAgent']
 
 TotMsg = ''
 for val in IslId_SiteUrl :
-	
-	#저장html
-	SaveHtml = ''
-	#에러msg
-	ErrMsg = ''
-	(SiteUrl, SaveFileName) = val.split("|@|")
-	print(SiteUrl)
+	print(val)
