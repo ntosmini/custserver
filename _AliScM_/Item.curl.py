@@ -37,6 +37,8 @@ for val in IslId_SiteUrl :
 	ErrMsg = ''
 	#상세설명
 	DetailHtml = ''
+	#상품정보
+	PageHtmlJsonData = ''
 	(SiteUrl, SaveFileName) = val.split("|@|")
 	OriginUrl = "<ntosoriginurl>"+str(SiteUrl)+"</ntosoriginurl>\n\n"
 	#저장파일명
