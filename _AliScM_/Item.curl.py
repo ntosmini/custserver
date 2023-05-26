@@ -67,4 +67,23 @@ for val in IslId_SiteUrl :
 		except :
 			PageHtmlJson = ''
 			ErrMsg = ErrMsg + str(traceback.format_exc()) + "\n\n"
+			
+	if PageHtmlJson :
+		SaveHtml = SaveHtml + "<PageHtmlRecode>" + str(PageHtmlRecode) + "<PageHtmlRecode>\n\n"
+		SaveHtml = SaveHtml + "<PageHtmlJson>" + str(PageHtmlJson) + "<PageHtmlJson>\n\n"
+		try :
+			DetailUrl = PageHtmlJson['descInfo']['productDescUrl']
+		except :
+			DetailUrl = '';
+			ErrMsg = ErrMsg + str(traceback.format_exc()) + "\n\n"
+
+		if DetailUrl :
+			try :
+				DetailHtml = requests.get(str(DetailUrl))
+				DetailHtml = DetailHtml.text
+				DetailHtmlRecode = DetailHtml.status_code
+			except :
+				DetailHtml = ''
+				DetailHtmlRecode = 'error'
+				ErrMsg = ErrMsg + str(traceback.format_exc()) + "\n\n"			
 	print("a")
