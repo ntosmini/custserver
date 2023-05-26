@@ -10,6 +10,12 @@ if(empty($Type)){
 	$PageHtml = "<div>ntoswebsuccess</div>";
 	$PageHtml .= "<div>Type=(se or uc)</div>";
 	$PageHtml .= "<div>SiteUrl=</div>";
+} else if($Type == "curl"){
+	$RunData = array();
+	$RunData['SiteUrl'] = (empty($_GET['SiteUrl']))?"http://product.ntos.co.kr/_SeleniumChk.php":urldecode($_GET['SiteUrl']);
+	$MConfigData = escapeshellarg(json_encode($RunData));
+	exec("python3 /home/ntosmini/public_html/index.curl.py {$MConfigData}", $ResultArr);
+	$PageHtml = implode("\n", $ResultArr);
 } else if($Type == "se"){
 	$RunData = array();
 	$RunData['SiteUrl'] = (empty($_GET['SiteUrl']))?"http://product.ntos.co.kr/_SeleniumChk.php":urldecode($_GET['SiteUrl']);
