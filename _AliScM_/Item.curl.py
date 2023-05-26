@@ -27,11 +27,7 @@ FileSendSave = MConfig['FileSendSave']  #저장후 전송여부
 NtosServer = MConfig['NtosServer']  #전송서버 url
 
 FileDir = MConfig['FileDir']  #저장폴더
-UserAgent = MConfig['UserAgent']
 
-headers = {
-	"User-Agent":UserAgent
-}
 
 for val in IslId_SiteUrl :
 	#저장html
@@ -54,7 +50,7 @@ for val in IslId_SiteUrl :
 		continue
 
 	try :
-		PageHtml = requests.get(SiteUrl, headers=headers)
+		PageHtml = requests.get(SiteUrl)
 		PageHtmlRecode = PageHtml.status_code
 		PageHtml = PageHtml.text
 	except :
@@ -84,7 +80,7 @@ for val in IslId_SiteUrl :
 
 		if DetailUrl :
 			try :
-				DetailHtml = requests.get(str(DetailUrl), headers=headers)
+				DetailHtml = requests.get(str(DetailUrl))
 				DetailHtmlRecode = DetailHtml.status_code
 				DetailHtml = DetailHtml.text
 			except :
