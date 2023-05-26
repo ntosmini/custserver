@@ -18,7 +18,7 @@ if(empty($Type)){
 	$RunData = array();
 	$RunData['SiteUrl'] = (empty($_GET['SiteUrl']))?"http://product.ntos.co.kr/_SeleniumChk.php":urldecode($_GET['SiteUrl']);
 	$MConfigData = escapeshellarg(json_encode($RunData));
-	exec("python3 /home/ntosmini/public_html/index.uc.py {$MConfigData}", $ResultArr);
+	exec("PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin python3 /home/ntosmini/public_html/index.uc.py {$MConfigData}", $ResultArr);
 	$PageHtml = implode("\n", $ResultArr);
 } else {
 	$PageHtml = "error : Type";
