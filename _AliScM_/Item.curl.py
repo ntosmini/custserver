@@ -85,5 +85,20 @@ for val in IslId_SiteUrl :
 			except :
 				DetailHtml = ''
 				DetailHtmlRecode = 'error'
-				ErrMsg = ErrMsg + str(traceback.format_exc()) + "\n\n"			
+				ErrMsg = ErrMsg + str(traceback.format_exc()) + "\n\n"
+
+		if DetailHtml :
+			DetailHtml = re.sub('(<script[^<]+</script>)', '', DetailHtml)
+			DetailHtml = re.sub('(<a[^<]+</a>)', '', DetailHtml)
+			DetailHtml = re.sub('(<link[^>]+>)', '', DetailHtml)
+			SaveHtml = SaveHtml + "<DetailHtml>" + str(DetailHtml) + "<DetailHtml>\n\n"
+
+		WriteFile = "<time>"+time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))+"</time>\n\n"
+		WriteFile = WriteFile + OriginUrl + SaveHtml + ErrMsg
+
+		f = open(SaveFile, 'w', encoding="utf8")
+		f.write(WriteFile)
+		f.close()
+		os.system("gzip "+SaveFile)
+				
 	print("a")
