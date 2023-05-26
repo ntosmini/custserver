@@ -5,7 +5,8 @@ header("Content-Type: text/html; charset=UTF-8");
 셀레니움 실행 확인용
 */
 $Type = (empty($_GET['Type']))?"":$_GET['Type'];
-
+$UserAgent = (empty($_GET['UserAgent']))?"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36":$_GET['UserAgent'];
+echo $UserAgent."<br>";
 if(empty($Type)){
 	$PageHtml = "<div>ntoswebsuccess</div>";
 	$PageHtml .= "<div>Type=(se or uc)</div>";
