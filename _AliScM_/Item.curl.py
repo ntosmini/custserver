@@ -69,6 +69,7 @@ for val in IslId_SiteUrl :
 			ErrMsg = ErrMsg + str(traceback.format_exc()) + "\n\n"
 			
 	if PageHtmlJson :
+		print("----------")
 		SaveHtml = SaveHtml + "<PageHtmlRecode>" + str(PageHtmlRecode) + "<PageHtmlRecode>\n\n"
 		SaveHtml = SaveHtml + "<PageHtmlJson>" + str(PageHtmlJson) + "<PageHtmlJson>\n\n"
 		try :
