@@ -13,7 +13,11 @@ MConfigData = sys.argv[1]
 MConfig = json.loads(MConfigData)
 
 SiteUrl = MConfig['SiteUrl']
+UserAgent = MConfig['UserAgent']
+headers = {
+	"User-Agent":UserAgent
+}
 
-PageHtml = requests.get(SiteUrl)
+PageHtml = requests.get(SiteUrl, headers=headers)
 PageHtml = PageHtml.text
 print(PageHtml)
