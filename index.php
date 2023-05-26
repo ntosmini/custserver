@@ -7,7 +7,9 @@ header("Content-Type: text/html; charset=UTF-8");
 $Type = (empty($_GET['Type']))?"":$_GET['Type'];
 
 if(empty($Type)){
-	$PageHtml = "ntoswebsuccess";
+	$PageHtml = "<div>ntoswebsuccess</div>";
+	$PageHtml .= "<div>Type=(se or uc)</div>";
+	$PageHtml .= "<div>SiteUrl=</div>";
 } else if($Type == "se"){
 	$RunData = array();
 	$RunData['SiteUrl'] = (empty($_GET['SiteUrl']))?"http://product.ntos.co.kr/_SeleniumChk.php":urldecode($_GET['SiteUrl']);
