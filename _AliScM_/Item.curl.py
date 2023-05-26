@@ -102,4 +102,4 @@ for val in IslId_SiteUrl :
 		f.close()
 		os.system("gzip "+SaveFile)
 				
-	print("a")
+	print("a"+ str(ErrMsg))
