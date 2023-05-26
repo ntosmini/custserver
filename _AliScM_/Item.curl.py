@@ -9,7 +9,6 @@ import os
 import random
 import requests
 import traceback
-import re
 
 #한글깨짐
 sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
@@ -27,19 +26,17 @@ FileSendSave = MConfig['FileSendSave']  #저장후 전송여부
 NtosServer = MConfig['NtosServer']  #전송서버 url
 
 FileDir = MConfig['FileDir']  #저장폴더
+UserAgent = MConfig['UserAgent']
 
+headers = {
+	"User-Agent":UserAgent
+}
 
 for val in IslId_SiteUrl :
 	#저장html
 	SaveHtml = ''
 	#에러msg
 	ErrMsg = ''
-	#상세설명
-	DetailHtml = ''
-	#상품정보
-	PageHtmlJsonData = ''
-	#상품정보 Json
-	PageHtmlJson = ''
 	(SiteUrl, SaveFileName) = val.split("|@|")
 	OriginUrl = "<ntosoriginurl>"+str(SiteUrl)+"</ntosoriginurl>\n\n"
 	#저장파일명
@@ -50,9 +47,9 @@ for val in IslId_SiteUrl :
 		continue
   
 	try :
-		PageHtml = requests.get(SiteUrl)
-		PageHtml = PageHtml.text
+		PageHtml = requests.get(SiteUrl, headers=headers)
 		PageHtmlRecode = PageHtml.status_code
+		PageHtml = PageHtml.text
 	except :
 		PageHtml = ''
 		PageHtmlRecode = 'error'
@@ -67,9 +64,8 @@ for val in IslId_SiteUrl :
 		except :
 			PageHtmlJson = ''
 			ErrMsg = ErrMsg + str(traceback.format_exc()) + "\n\n"
-			
+
 	if PageHtmlJson :
-		print("----------")
 		SaveHtml = SaveHtml + "<PageHtmlRecode>" + str(PageHtmlRecode) + "<PageHtmlRecode>\n\n"
 		SaveHtml = SaveHtml + "<PageHtmlJson>" + str(PageHtmlJson) + "<PageHtmlJson>\n\n"
 		try :
@@ -80,9 +76,9 @@ for val in IslId_SiteUrl :
 
 		if DetailUrl :
 			try :
-				DetailHtml = requests.get(str(DetailUrl))
-				DetailHtml = DetailHtml.text
+				DetailHtml = requests.get(str(DetailUrl), headers=headers)
 				DetailHtmlRecode = DetailHtml.status_code
+				DetailHtml = DetailHtml.text
 			except :
 				DetailHtml = ''
 				DetailHtmlRecode = 'error'
@@ -101,5 +97,14 @@ for val in IslId_SiteUrl :
 		f.write(WriteFile)
 		f.close()
 		os.system("gzip "+SaveFile)
-				
-	print("a"+ str(ErrMsg))
+
+		if FileSendSave == "Y" and NtosServer != "" :
+			gzfile = SaveFile+".gz"
+			files = open(gzfile, 'rb')
+			upload = {'file': files}
+			data = {'CustId':CustId, 'ScrapType':'item' }
+			Result_ = requests.post(NtosServer, data=data, files=upload)
+			Result = Result_.text
+			if os.path.exists(gzfile) :
+				os.remove(gzfile)
+	time.sleep(random.randint(1, 3))
