@@ -9,6 +9,7 @@ import os
 import random
 import requests
 import traceback
+import re
 
 #한글깨짐
 sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
@@ -108,4 +109,3 @@ for val in IslId_SiteUrl :
 			if os.path.exists(gzfile) :
 				os.remove(gzfile)
 	time.sleep(random.randint(1, 3))
-	print(str(ErrMsg))
