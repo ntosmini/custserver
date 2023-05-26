@@ -41,4 +41,20 @@ for val in IslId_SiteUrl :
 	#상품정보 Json
 	PageHtmlJson = ''
 	(SiteUrl, SaveFileName) = val.split("|@|")
-	print(SiteUrl)
+	OriginUrl = "<ntosoriginurl>"+str(SiteUrl)+"</ntosoriginurl>\n\n"
+	#저장파일명
+	SaveFile = FileDir+str(SaveFileName)
+	SaveFile = SaveFile.replace('.html', '_'+str(time.strftime('%H%M', time.localtime(time.time())))+'.html')
+  
+	if SiteUrl == "" or SaveFileName == "" :
+		continue
+  
+	try :
+		PageHtml = requests.get(SiteUrl)
+		PageHtml = PageHtml.text
+		PageHtmlRecode = PageHtml.status_code
+	except :
+		PageHtml = ''
+		PageHtmlRecode = 'error'
+		ErrMsg = ErrMsg + str(traceback.format_exc()) + "\n\n"
+	print("a")
