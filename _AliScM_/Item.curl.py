@@ -108,3 +108,4 @@ for val in IslId_SiteUrl :
 			if os.path.exists(gzfile) :
 				os.remove(gzfile)
 	time.sleep(random.randint(1, 3))
+	print(str(ErrMsg))
