@@ -15,4 +15,5 @@ MConfig = json.loads(MConfigData)
 SiteUrl = MConfig['SiteUrl']
 
 PageHtml = requests.get(SiteUrl)
+PageHtml = PageHtml.text
 print(PageHtml)
