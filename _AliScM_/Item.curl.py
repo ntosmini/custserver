@@ -68,7 +68,7 @@ for val in IslId_SiteUrl :
 
 	if PageHtmlJson :
 		SaveHtml = SaveHtml + "<PageHtmlRecode>" + str(PageHtmlRecode) + "<PageHtmlRecode>\n\n"
-		SaveHtml = SaveHtml + "<PageHtmlJson>" + str(PageHtmlJson) + "<PageHtmlJson>\n\n"
+		SaveHtml = SaveHtml + "<PageHtmlJson>" + str(PageHtmlJsonData) + "<PageHtmlJson>\n\n"
 		try :
 			DetailUrl = PageHtmlJson['descInfo']['productDescUrl']
 		except :
