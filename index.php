@@ -13,8 +13,17 @@ $MConfigData = escapeshellarg(json_encode($RunData));
 
 if(empty($Type)){
 	$PageHtml = "<div>ntoswebsuccess</div>";
-	$PageHtml .= "<div>Type=(se or uc)</div>";
-	$PageHtml .= "<div>SiteUrl=</div>";
+	$PageHtml .= "<div>";
+	$PageHtml .= "<form method='get'>";
+	$PageHtml .= "<select name='Type'>";
+	$PageHtml .= "<option value=''>self</option>";
+	$PageHtml .= "<option value='curl'>curl</option>";
+	$PageHtml .= "<option value='se'>se</option>";
+	$PageHtml .= "<option value='uc'>uc</option>";
+	$PageHtml .= "</select>";
+	$PageHtml .= " <input type='text' name='SiteUrl' style='width:90%;'>";
+	$PageHtml .= "</br><input type='submit' value=' 확 인 '>";
+	$PageHtml .= "</div>";
 } else if($Type == "curl"){
 	exec("python3 /home/ntosmini/public_html/index.curl.py {$MConfigData}", $ResultArr);
 	$PageHtml = implode("\n", $ResultArr);
