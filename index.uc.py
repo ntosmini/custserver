@@ -47,13 +47,17 @@ def chromeWebdriver():
 	chrome_options.add_argument('--disable-gpu')
 	driver = uc.Chrome(service=chrome_service, options=chrome_options, use_subprocess=True)
 	return driver
-
-driver = chromeWebdriver()
-
-driver.get(SiteUrl)
-driver.implicitly_wait(10)
-PageHtml = driver.page_source
-NowUrl = driver.current_url
-print("NowUrl : "+ str(NowUrl))
-print(PageHtml)
-print("NowUrl : "+ str(NowUrl))
+try :
+	driver = chromeWebdriver()
+	driver.get(SiteUrl)
+	driver.implicitly_wait(10)
+	PageHtml = driver.page_source
+	NowUrl = driver.current_url
+	print("NowUrl : "+ str(NowUrl))
+	print(PageHtml)
+	print("NowUrl : "+ str(NowUrl))
+	driver.close()
+except :
+	err = traceback.format_exc()
+	print(str(err))
+	driver.close()
