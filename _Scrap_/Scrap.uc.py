@@ -50,8 +50,6 @@ FileSaveDir = MConfig['FileSaveDir']
 NtosSendServer = MConfig['NtosSendServer']
 UserAgent = MConfig['UserAgent']
 
-executable_path = ChromeDriverManager().install()
-
 def chromeWebdriver():
 	ua = UserAgent()
 	chrome_service = ChromeService(ChromeDriverManager().install())
