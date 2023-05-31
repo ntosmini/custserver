@@ -49,7 +49,7 @@ def chromeWebdriver():
 	chrome_options.add_argument('--user-agent=' + 'Mozilla/5.0 (Linux; Android 10; SM-G981B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.162 Mobile Safari/537.36')
 	
 	chrome_options.page_load_strategy = 'normal'
-	driver = uc.Chrome(service=chrome_service, options=chrome_options)
+	driver = uc.Chrome(service=chrome_service, options=chrome_options, version_main=113)
 
 	return driver
 

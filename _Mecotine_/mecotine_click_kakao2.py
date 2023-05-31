@@ -41,7 +41,7 @@ def chromeWebdriver():
     chrome_options.add_argument('--disable-infobars')
     chrome_options.add_argument('--user-agent=' + ua.random)
     chrome_options.page_load_strategy = 'normal'
-    driver = uc.Chrome(service=chrome_service, options=chrome_options)
+    driver = uc.Chrome(service=chrome_service, options=chrome_options, version_main=113)
 
     return driver
 
