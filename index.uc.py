@@ -32,8 +32,6 @@ MConfig = json.loads(MConfigData)
 
 SiteUrl = MConfig['SiteUrl']
 
-executable_path = ChromeDriverManager().install()
-
 def chromeWebdriver():
 	ua = UserAgent()
 	chrome_service = ChromeService(ChromeDriverManager().install())
