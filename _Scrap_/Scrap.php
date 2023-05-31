@@ -90,6 +90,7 @@ if($ScrapType == "self"){
 	exit;
 } else if($ScrapType == "pyget") {
 	$RunData['SiteUrlOne'] = (empty($_POST['SiteUrlOne']))?"N":$_POST['SiteUrlOne'];
+	$RunData['ScrapResultType'] = (empty($_POST['ScrapResultType']))?"view":$_POST['ScrapResultType'];	//수집파일 방식 - save or send or view
 	if($RunData['SiteUrlOne'] == "N"){
 		echo "not SiteUrlOne";
 		exit;
