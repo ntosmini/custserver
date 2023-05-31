@@ -50,6 +50,7 @@ def chromeWebdriver():
 	return driver
 try :
 	driver = chromeWebdriver()
+	driver.delete_all_cookies()
 	driver.get(SiteUrl)
 	driver.implicitly_wait(10)
 	PageHtml = driver.page_source
