@@ -7,6 +7,7 @@ import json
 import io
 import os
 import requests
+#pip3 install googletrans==4.0.0-rc1
 import googletrans
 import traceback
 
