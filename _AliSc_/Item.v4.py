@@ -9,6 +9,9 @@ import os
 import requests
 import traceback
 
+import undetected_chromedriver as uc
+from fake_useragent import UserAgent
+
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.chrome.options import Options
@@ -21,7 +24,6 @@ from selenium.webdriver.common.action_chains import ActionChains
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 
-import undetected_chromedriver as uc
 
 #한글깨짐
 sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
@@ -63,22 +65,23 @@ def osgzip(File) :
 executable_path = ChromeDriverManager().install()
 
 def chromeWebdriver():
-	chrome_service = ChromeService(executable_path)
-	chrome_options = uc.ChromeOptions()
+	ua = UserAgent()
+	chrome_service = ChromeService(ChromeDriverManager().install())
+	chrome_options = Options()
 	chrome_options.add_argument('--headless')
 	chrome_options.add_argument('--no-sandbox')
 	chrome_options.add_argument('--blink-settings=imagesEnabled=false')
-	chrome_options.add_argument('--start-maximized')
+	chrome_options.add_argument('--window-size=1920,1080')
 	chrome_options.add_argument('--disable-dev-shm-usage')
-	chrome_options.add_argument('--disable-blink-features=AutomationControlled')
+	chrome_options.add_argument('--disable-blink-features=AutomationControlled') # 이걸로도 되네?
 	chrome_options.add_argument('--disable-infobars')
-	chrome_options.add_argument('--ignore-certificate-errors')
-	chrome_options.add_argument('--ignore-ssl-errors=yes')
-	chrome_options.add_argument('--disable-gpu')
-	driver = uc.Chrome(service=chrome_service, options=chrome_options, use_subprocess=True)
+	chrome_options.add_argument('--user-agent=' + ua.random)
+	chrome_options.page_load_strategy = 'normal'
+	driver = uc.Chrome(service=chrome_service, options=chrome_options, version_main=113)
 	return driver
 
 driver = chromeWebdriver()
+driver.delete_all_cookies()
 
 driver.get("https://aliexpress.com")
 driver.implicitly_wait(3)
