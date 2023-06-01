@@ -27,7 +27,7 @@ from selenium.webdriver.common.by import By
 #한글깨짐
 sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
 sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
-
+print("1")
 SiteUrl_SaveFileName = []
 
 MConfigData = sys.argv[1]
@@ -42,7 +42,7 @@ ScrapResultType = MConfig['ScrapResultType']
 FileSaveDir = MConfig['FileSaveDir']
 NtosSendServer = MConfig['NtosSendServer']
 UserAgentSelected = MConfig['UserAgent']
-
+print("2")
 def chromeWebdriver():
 	ua = UserAgent()
 	chrome_service = ChromeService(ChromeDriverManager().install())
@@ -58,7 +58,7 @@ def chromeWebdriver():
 	chrome_options.page_load_strategy = 'normal'
 	driver = uc.Chrome(service=chrome_service, options=chrome_options, version_main=113)
 	return driver
-
+print("3")
 driver = chromeWebdriver()
 driver.delete_all_cookies()
 if StartSiteUrl :
