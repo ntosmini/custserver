@@ -89,6 +89,34 @@ if($ScrapType == "self"){
 	echo $PageHtml;
 	exit;
 } else if($ScrapType == "pyget") {
+	
+	$RunData['CustId'] = (empty($_POST['CustId']))?"":$_POST['CustId'];
+	if(empty($RunData['CustId'])){
+		echo 'not CustId';
+		exit;
+	}
+	$RunData['StartSiteUrl'] = (empty($_POST['StartSiteUrl']))?"":$_POST['StartSiteUrl'];	//시작 url
+	$RunData['SiteUrlOne'] = (empty($_POST['SiteUrlOne']))?"N":$_POST['SiteUrlOne'];
+	$RunData['SiteUrl_SaveFileName'] = (empty($_POST['SiteUrl_SaveFileName']))?"":$_POST['SiteUrl_SaveFileName'];	//수집url|@|저장파일명 or N -- 
+	$RunData['Refresh'] = ($_POST['Refresh'] == "Y")?$_POST['Refresh']:"N";;	//새로고침 - Y or N
+	$RunData['Scroll'] = ($_POST['Scroll'] == "Y")?$_POST['Scroll']:"N";	//스크롤 내리기 - Y or N
+	$RunData['ScrapResultType'] = (empty($_POST['ScrapResultType']))?"view":$_POST['ScrapResultType'];	//수집파일 방식 - save or send or view
+
+	if($RunData['SiteUrlOne'] == "N" && $RunData['ScrapResultType'] == "view"){
+		echo "not SiteUrlOne : ".$RunData['SiteUrlOne'].", ScrapResultType : ".$RunData['ScrapResultType'];
+		exit;
+	}
+	/*
+	저장 폴더
+	/home/ntosmini/ali_item_en/
+	/home/ntosmini/ali_item_kr/
+	/home/ntosmini/ali_category/
+
+	/home/ntosmini/scrapdata/
+	*/
+	$RunData['FileSaveDir'] = (($RunData['ScrapResultType'] == "save" || $RunData['ScrapResultType'] == "send") && $_POST['FileSaveDir'])?$_POST['FileSaveDir']:"";
+	
+	
 	$RunData['SiteUrlOne'] = (empty($_POST['SiteUrlOne']))?"N":$_POST['SiteUrlOne'];
 	$RunData['ScrapResultType'] = (empty($_POST['ScrapResultType']))?"view":$_POST['ScrapResultType'];	//수집파일 방식 - save or send or view
 	if($RunData['SiteUrlOne'] == "N"){
