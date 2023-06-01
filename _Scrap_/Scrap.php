@@ -97,7 +97,6 @@ if($ScrapType == "self"){
 	}
 	$MConfigData = escapeshellarg(json_encode($RunData));
 	if($ChromeType == "uc"){
-		echo "uc";
 		exec("PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin python3 /home/ntosmini/public_html/_Scrap_/Scrap.uc.py {$MConfigData}", $ResultArr);		
 	} else {
 		exec("python3 /home/ntosmini/public_html/_Scrap_/Scrap.py {$MConfigData}", $ResultArr);
