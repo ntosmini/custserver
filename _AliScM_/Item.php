@@ -13,7 +13,7 @@ $RunData['FileSendSave'] = (empty($_POST['FileSendSave']))?"N":$_POST['FileSendS
 $RunData['NtosServer'] = (empty($_POST['NtosServer']))?"":$_POST['NtosServer'];	//받을 url
 $RunData['FileDir']  =(empty($_POST['FileDir']))?"":$_POST['FileDir'];  //저장폴더
 $RunData['UserAgent'] = (empty($_GET['UserAgent']))?"Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Mobile Safari/537.36":$_GET['UserAgent'];
-
+$RunData['LangType']  =(empty($_POST['LangType']))?"":$_POST['LangType'];  //언어 및 통화 (ko | en)
 
 
 
