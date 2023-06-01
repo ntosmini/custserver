@@ -41,8 +41,9 @@ Scroll = MConfig['Scroll']
 ScrapResultType = MConfig['ScrapResultType']
 FileSaveDir = MConfig['FileSaveDir']
 NtosSendServer = MConfig['NtosSendServer']
-UserAgentSelected = MConfig['UserAgent']
 print("2")
+UserAgentSelected = MConfig['UserAgent']
+
 def chromeWebdriver():
 	ua = UserAgent()
 	chrome_service = ChromeService(ChromeDriverManager().install())
