@@ -30,18 +30,30 @@ print("1")
 SiteUrl_SaveFileName = []
 
 MConfigData = sys.argv[1]
-MConfig = json.loads(MConfigData)
-CustId = MConfig['CustId']
-SiteUrlOne = MConfig['SiteUrlOne']
-StartSiteUrl = MConfig['StartSiteUrl']
-SiteUrl_SaveFileName = MConfig['SiteUrl_SaveFileName']
-Refresh = MConfig['Refresh']
-Scroll = MConfig['Scroll']
-ScrapResultType = MConfig['ScrapResultType']
-FileSaveDir = MConfig['FileSaveDir']
-NtosSendServer = MConfig['NtosSendServer']
 print("2")
-UserAgentSelected = MConfig['UserAgent']
+MConfig = json.loads(MConfigData)
+print("3")
+CustId = MConfig['CustId']
+print("4")
+SiteUrlOne = MConfig['SiteUrlOne']
+print("5")
+StartSiteUrl = MConfig['StartSiteUrl']
+print("6")
+SiteUrl_SaveFileName = MConfig['SiteUrl_SaveFileName']
+print("7")
+Refresh = MConfig['Refresh']
+print("8")
+Scroll = MConfig['Scroll']
+print("9")
+ScrapResultType = MConfig['ScrapResultType']
+print("10")
+FileSaveDir = MConfig['FileSaveDir']
+print("11")
+NtosSendServer = MConfig['NtosSendServer']
+print("12")
+
+UserAgent = MConfig['UserAgent']
+print("13")
 
 def chromeWebdriver():
 	chrome_service = ChromeService(ChromeDriverManager().install())
