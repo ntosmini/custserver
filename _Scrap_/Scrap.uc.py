@@ -69,7 +69,7 @@ def chromeWebdriver():
 	chrome_options.page_load_strategy = 'normal'
 	driver = uc.Chrome(service=chrome_service, options=chrome_options, version_main=113)
 	return driver
-print("3")
+
 driver = chromeWebdriver()
 driver.delete_all_cookies()
 if StartSiteUrl :
@@ -146,6 +146,7 @@ if SiteUrlOne == "N" :
 			pass
 
 else :
+	print("view")
 	PageHtml = ""
 	NowUrl = ""
 	SiteUrl = str(SiteUrlOne)
