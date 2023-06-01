@@ -12,7 +12,6 @@ import random
 
 
 import undetected_chromedriver as uc
-from fake_useragent import UserAgent
 
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
@@ -45,7 +44,6 @@ print("2")
 UserAgentSelected = MConfig['UserAgent']
 
 def chromeWebdriver():
-	ua = UserAgent()
 	chrome_service = ChromeService(ChromeDriverManager().install())
 	chrome_options = Options()
 	chrome_options.add_argument('--headless')
@@ -55,7 +53,7 @@ def chromeWebdriver():
 	chrome_options.add_argument('--disable-dev-shm-usage')
 	chrome_options.add_argument('--disable-blink-features=AutomationControlled') # 이걸로도 되네?
 	chrome_options.add_argument('--disable-infobars')
-	chrome_options.add_argument('--user-agent=' + ua.random)
+	#chrome_options.add_argument('--user-agent=' + ua.random)
 	chrome_options.page_load_strategy = 'normal'
 	driver = uc.Chrome(service=chrome_service, options=chrome_options, version_main=113)
 	return driver
