@@ -146,10 +146,11 @@ if SiteUrlOne == "N" :
 			pass
 
 else :
-	print("view")
+	print(ScrapResultType)
 	PageHtml = ""
 	NowUrl = ""
 	SiteUrl = str(SiteUrlOne)
+	print(SiteUrlOne)
 	SaveFileName = ""
 
 	try :
