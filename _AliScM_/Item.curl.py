@@ -29,6 +29,18 @@ NtosServer = MConfig['NtosServer']  #전송서버 url
 FileDir = MConfig['FileDir']  #저장폴더
 UserAgent = MConfig['UserAgent']
 
+LangType = MConfig['LangType']	#언어 및 통화 (ko | en)
+cookies_en = {
+'xman_us_f': 'x_l=0&x_locale=en_US&x_c_chg=1&acs_rt=',
+'aep_usuc_f': 'site=usa&c_tp=USD&region=US&b_locale=en_US',
+'intl_locale': 'en_US',
+}
+cookies_ko = {
+'xman_us_f': 'x_l=0&x_locale=ko_KR&x_c_chg=1&acs_rt=',
+'aep_usuc_f': 'site=kor&c_tp=KRW&region=KR&b_locale=ko_KR',
+'intl_locale': 'ko_KR',
+}
+
 headers = {
 	"User-Agent":UserAgent
 }
@@ -54,7 +66,12 @@ for val in IslId_SiteUrl :
 		continue
   
 	try :
-		PageHtml = requests.get(SiteUrl, headers=headers)
+		if LangType == "ko" :
+			PageHtml = requests.get(SiteUrl, headers=headers, cookies=cookies_ko)
+		elif LangType == "en" :
+			PageHtml = requests.get(SiteUrl, headers=headers, cookies=cookies_en)
+		else :
+			PageHtml = requests.get(SiteUrl, headers=headers)
 		PageHtmlRecode = PageHtml.status_code
 		PageHtml = PageHtml.text
 	except :
@@ -83,7 +100,12 @@ for val in IslId_SiteUrl :
 
 		if DetailUrl :
 			try :
-				DetailHtml = requests.get(str(DetailUrl), headers=headers)
+				if LangType == "ko" :
+					DetailHtml = requests.get(str(DetailUrl), headers=headers, cookies=cookies_ko)
+				elif LangType == "en" :
+					DetailHtml = requests.get(str(DetailUrl), headers=headers, cookies=cookies_en)
+				else :
+					DetailHtml = requests.get(str(DetailUrl), headers=headers)
 				DetailHtmlRecode = DetailHtml.status_code
 				DetailHtml = DetailHtml.text
 			except :
