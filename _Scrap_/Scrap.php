@@ -106,6 +106,7 @@ if($ScrapType == "self"){
 		echo "not SiteUrlOne : ".$RunData['SiteUrlOne'].", ScrapResultType : ".$RunData['ScrapResultType'];
 		exit;
 	}
+	$RunData['NtosSendServer'] = ($RunData['ScrapResultType'] == "send" && $_POST['NtosSendServer'])?$_POST['NtosSendServer']:"";	//전송서버 폴더까지
 	/*
 	저장 폴더
 	/home/ntosmini/ali_item_en/
