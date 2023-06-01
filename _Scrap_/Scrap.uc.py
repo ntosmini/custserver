@@ -10,11 +10,7 @@ import requests
 import traceback
 import random
 
-try :
-	os.system("killall -o 3m chrome")
-	os.system("killall -o 3m chromedriver")
-except :
-	pass
+print("1")
 
 import undetected_chromedriver as uc
 from fake_useragent import UserAgent
@@ -29,7 +25,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 
-
+print("2")
 #한글깨짐
 sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
 sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
@@ -38,7 +34,7 @@ SiteUrl_SaveFileName = []
 
 MConfigData = sys.argv[1]
 MConfig = json.loads(MConfigData)
-
+print("3")
 CustId = MConfig['CustId']
 SiteUrlOne = MConfig['SiteUrlOne']
 StartSiteUrl = MConfig['StartSiteUrl']
@@ -49,7 +45,7 @@ ScrapResultType = MConfig['ScrapResultType']
 FileSaveDir = MConfig['FileSaveDir']
 NtosSendServer = MConfig['NtosSendServer']
 UserAgent = MConfig['UserAgent']
-
+print("4")
 def chromeWebdriver():
 	ua = UserAgent()
 	chrome_service = ChromeService(ChromeDriverManager().install())
@@ -71,7 +67,7 @@ driver.delete_all_cookies()
 if StartSiteUrl :
 	driver.get(StartSiteUrl)
 	driver.implicitly_wait(10)
-
+print("5")
 if SiteUrlOne == "N" :
 	for val in SiteUrl_SaveFileName :
 		PageHtml = ""
