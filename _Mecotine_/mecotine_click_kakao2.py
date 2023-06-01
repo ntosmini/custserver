@@ -37,9 +37,9 @@ def chromeWebdriver():
     chrome_options.add_argument('--blink-settings=imagesEnabled=false')
     chrome_options.add_argument('--window-size=1920,1080')
     chrome_options.add_argument('--disable-dev-shm-usage')
-    chrome_options.add_argument('--disable-blink-features=AutomationControlled') # 이걸로도 되네?
+    chrome_options.add_argument('--disable-blink-features=AutomationControlled')
     chrome_options.add_argument('--disable-infobars')
-    chrome_options.add_argument('--user-agent=' + ua.random)
+    #chrome_options.add_argument('--user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36')
     chrome_options.page_load_strategy = 'normal'
     driver = uc.Chrome(service=chrome_service, options=chrome_options, version_main=113)
 
