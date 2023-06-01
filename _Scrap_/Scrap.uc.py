@@ -156,7 +156,7 @@ else :
 	try :
 		driver.get(SiteUrl)
 		driver.implicitly_wait(10)
-
+		print("site get")
 		if Refresh == "Y" :
 			driver.refresh()
 			driver.implicitly_wait(10)
