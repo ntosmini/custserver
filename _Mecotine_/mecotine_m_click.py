@@ -34,24 +34,26 @@ sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
 
 def chromeWebdriver():
 	
-	ua = UserAgent()
-	chrome_service = ChromeService(ChromeDriverManager().install())
-	chrome_options = Options()
-	
-	chrome_options.add_argument('--headless')
-	chrome_options.add_argument('--no-sandbox')
-	chrome_options.add_argument('--blink-settings=imagesEnabled=false')
-	chrome_options.add_argument('--window-size=1920,1080')
-	chrome_options.add_argument('--disable-dev-shm-usage')
-	chrome_options.add_argument('--disable-blink-features=AutomationControlled') # 이걸로도 되네?
-	chrome_options.add_argument('--disable-infobars')
-	#chrome_options.add_argument('--user-agent=' + ua.random)
-	chrome_options.add_argument('--user-agent=' + 'Mozilla/5.0 (Linux; Android 10; SM-G981B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.162 Mobile Safari/537.36')
-	
-	chrome_options.page_load_strategy = 'normal'
-	driver = uc.Chrome(service=chrome_service, options=chrome_options, version_main=113)
+    ua = UserAgent()
+    chrome_service = ChromeService(ChromeDriverManager().install())
+    chrome_options = uc.ChromeOptions()
 
-	return driver
+    chrome_options.add_argument('--headless=new')
+    chrome_options.add_argument('--no-sandbox')
+    chrome_options.add_argument('--blink-settings=imagesEnabled=false')
+    chrome_options.add_argument('--window-size=1920,1080')
+    chrome_options.add_argument('--disable-dev-shm-usage')
+    chrome_options.add_argument('--disable-blink-features=AutomationControlled')
+    chrome_options.add_argument('--disable-infobars')
+    chrome_options.add_argument('--disable-setuid-sandbox')
+    chrome_options.add_argument('--disable-gpu')
+    #chrome_options.add_argument('--user-agent=' + ua.random)
+    chrome_options.add_argument('--user-agent=' + 'Mozilla/5.0 (Linux; Android 10; SM-G981B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.162 Mobile Safari/537.36')
+
+    chrome_options.page_load_strategy = 'normal'
+    driver = uc.Chrome(service=chrome_service, options=chrome_options, version_main=113)
+
+    return driver
 
 
 driver = chromeWebdriver()
