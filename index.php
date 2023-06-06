@@ -9,6 +9,7 @@ $Type = (empty($_GET['Type']))?"":$_GET['Type'];
 $RunData = array();
 $RunData['SiteUrl'] = (empty($_GET['SiteUrl']))?"http://product.ntos.co.kr/_SeleniumChk.php":urldecode($_GET['SiteUrl']);
 $RunData['UserAgent'] = (empty($_GET['UserAgent']))?"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36":$_GET['UserAgent'];
+$RunData['CookiesLang'] = (empty($_GET['CookiesLang']))?"":$_GET['CookiesLang'];	//쿠키 언어
 $MConfigData = escapeshellarg(json_encode($RunData));
 
 if(empty($Type)){
@@ -31,8 +32,13 @@ if(empty($Type)){
 	exec("python3 /home/ntosmini/public_html/index.se.py {$MConfigData}", $ResultArr);
 	$PageHtml = implode("\n", $ResultArr);
 } else if($Type == "uc"){
-	exec("PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin python3 /home/ntosmini/public_html/index.uc.py {$MConfigData}", $ResultArr);
+	if(empty($RunData['CookiesLang'])){
+		exec("PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin python3 /home/ntosmini/public_html/index.uc.py {$MConfigData}", $ResultArr);
+	} else {
+		exec("PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin python3 /home/ntosmini/public_html/index.uc.Cookies.py {$MConfigData}", $ResultArr);
+	}
 	$PageHtml = implode("\n", $ResultArr);
+		
 } else {
 	$PageHtml = "error : Type";
 }
