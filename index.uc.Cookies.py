@@ -35,8 +35,6 @@ import undetected_chromedriver as uc
 
 from urllib.parse import urlparse, parse_qsl, urlencode, urlunparse, unquote
 print("1")
-CslId_SiteUrl = []
-
 
 MConfigData = sys.argv[1]
 MConfig = json.loads(MConfigData)
