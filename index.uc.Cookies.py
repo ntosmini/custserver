@@ -77,12 +77,12 @@ try :
 				if cookie['name'] == "JSESSIONID" :
 					cookie['domain'] = 'www.aliexpress.us'
 				else :
-					cookie['domain'] = '.aliexpress.us'
+					cookie['domain'] = 'aliexpress.us'
 			elif CookiesLang == "ko" :
 				if cookie['name'] == "JSESSIONID" :
 					cookie['domain'] = 'ko.aliexpress.com'
 				else :
-					cookie['domain'] = '.aliexpress.com'
+					cookie['domain'] = 'aliexpress.com'
 			parts = ''
 			new_url = ''
 			qs = {}
