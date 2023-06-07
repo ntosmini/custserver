@@ -64,7 +64,10 @@ print("3")
 
 try :
 	if re.search(r'aliexpress', str(SiteUrl)) and CookiesLang :
-		driver.get('https://www.aliexpress.com')
+		if CookiesLang == "en" :
+			driver.get('https://aliexpress.us')
+		elif CookiesLang == "ko" :
+			driver.get('https://ko.aliexpress.com')
 		getcookies = driver.get_cookies()
 		driver.delete_all_cookies()
 		arr = {}
