@@ -7,6 +7,7 @@ header("Content-Type: text/html; charset=UTF-8");
 $Type = (empty($_GET['Type']))?"":$_GET['Type'];
 
 $RunData = array();
+$RunData['StartUrl'] = (empty($_GET['StartUrl']))?"":urldecode($_GET['StartUrl']);
 $RunData['SiteUrl'] = (empty($_GET['SiteUrl']))?"http://product.ntos.co.kr/_SeleniumChk.php":urldecode($_GET['SiteUrl']);
 $RunData['UserAgent'] = (empty($_GET['UserAgent']))?"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36":$_GET['UserAgent'];
 $RunData['CookiesLang'] = (empty($_GET['CookiesLang']))?"":$_GET['CookiesLang'];	//쿠키 언어
