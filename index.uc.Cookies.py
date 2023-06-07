@@ -34,7 +34,7 @@ from selenium.webdriver.common.by import By
 import undetected_chromedriver as uc
 
 from urllib.parse import urlparse, parse_qsl, urlencode, urlunparse, unquote
-
+print("1")
 CslId_SiteUrl = []
 
 
@@ -43,7 +43,7 @@ MConfig = json.loads(MConfigData)
 
 SiteUrl = MConfig['SiteUrl']
 CookiesLang = MConfig['CookiesLang']
-
+print("2")
 def chromeWebdriver():
 	chrome_service = ChromeService(ChromeDriverManager().install())
 	chrome_options = uc.ChromeOptions()
@@ -61,7 +61,7 @@ def chromeWebdriver():
 	return driver
 
 driver = chromeWebdriver()
-
+print("3")
 try :
 
 	if re.search(r'aliexpress', str(SiteUrl)) and CookiesLang :
