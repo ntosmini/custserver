@@ -64,10 +64,7 @@ print("3")
 
 try :
 	if re.search(r'aliexpress', str(SiteUrl)) and CookiesLang :
-		if CookiesLang == "en" :
-			driver.get('https://aliexpress.us')
-		elif CookiesLang == "ko" :
-			driver.get('https://ko.aliexpress.com')
+		driver.get('https://aliexpress.com')
 		getcookies = driver.get_cookies()
 		driver.delete_all_cookies()
 		arr = {}
@@ -76,6 +73,16 @@ try :
 			if cookie['name'] == "JSESSIONID" :
 				cookie['domain'] = 'www.aliexpress.com'
 			"""
+			if CookiesLang == "en" :
+				if cookie['name'] == "JSESSIONID" :
+					cookie['domain'] = 'www.aliexpress.us'
+				else :
+					cookie['domain'] = '.aliexpress.us'
+			elif CookiesLang == "ko" :
+				if cookie['name'] == "JSESSIONID" :
+					cookie['domain'] = 'ko.aliexpress.com'
+				else :
+					cookie['domain'] = '.aliexpress.com'
 			parts = ''
 			new_url = ''
 			qs = {}
