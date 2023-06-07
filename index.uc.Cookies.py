@@ -65,6 +65,9 @@ driver = chromeWebdriver()
 try :
 
 	if re.search(r'aliexpress', str(SiteUrl)) and CookiesLang :
+		driver.get('https://www.aliexpress.com')
+		getcookies = driver.get_cookies()
+		driver.delete_all_cookies()
 		arr = {}
 		for cookie in getcookies :
 			"""
