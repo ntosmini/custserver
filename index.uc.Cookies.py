@@ -124,7 +124,7 @@ try :
 except :
 	ErrHtml = traceback.format_exc()
 	print(str(ErrHtml))
-
+driver.maximize_window()
 driver.get(SiteUrl)
 PageHtml = driver.page_source
 NowUrl = driver.current_url
