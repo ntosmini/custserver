@@ -61,3 +61,12 @@ def chromeWebdriver():
 
 driver = chromeWebdriver()
 print("3")
+
+try :
+	if re.search(r'aliexpress', str(SiteUrl)) and CookiesLang :
+		driver.get('https://www.aliexpress.com')
+		getcookies = driver.get_cookies()
+		driver.delete_all_cookies()
+except :
+	ErrHtml = traceback.format_exc()
+	print(str(ErrHtml))
