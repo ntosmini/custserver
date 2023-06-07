@@ -129,8 +129,10 @@ try :
 except :
 	ErrHtml = traceback.format_exc()
 	print(str(ErrHtml))
+"""	
 driver.get(SiteUrl)
 PageHtml = driver.page_source
 NowUrl = driver.current_url
 print(NowUrl+"<br>")
 print(PageHtml+"<br>")
+"""
