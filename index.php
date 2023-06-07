@@ -40,7 +40,7 @@ if(empty($Type)){
 	if(empty($RunData['CookiesLang'])){
 		exec("PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin python3 /home/ntosmini/public_html/index.uc.py {$MConfigData}", $ResultArr);
 	} else {
-		echo 'uc-CookiesLang<br>'
+		echo 'uc-CookiesLang<br>';
 		exec("PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin python3 /home/ntosmini/public_html/index.uc.Cookies.py {$MConfigData}", $ResultArr);
 	}
 	$PageHtml = implode("\n", $ResultArr);
