@@ -116,6 +116,7 @@ try :
 		for val in cookie.keys() :
 			arr[val] = cookie[val]
 		driver.add_cookie(arr)
+		print(str(arr)+"<br><Br>")
 
 	"""
 	파일명
