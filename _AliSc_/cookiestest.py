@@ -73,12 +73,12 @@ try :
 			qs = dict(parse_qsl(parts.query))
 			#qs['c_tp'] = unquote(qs['c_tp'])
 			if CookiesLang == "en" :
-				qs['site'] = 'usa'
+				#qs['site'] = 'usa'
 				qs['c_tp'] = 'USD'
 				qs['region'] = 'US'
 				qs['b_locale'] = 'en_US'
 			elif CookiesLang == "ko" :
-				qs['site'] = 'kor'
+				#qs['site'] = 'kor'
 				qs['c_tp'] = 'KRW'
 				qs['region'] = 'KR'
 				#qs['c_tp'] = 'KRW®ion=KR'
