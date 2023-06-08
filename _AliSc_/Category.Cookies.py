@@ -85,20 +85,19 @@ driver.get("https://aliexpress.com")
 getcookies = driver.get_cookies()
 driver.delete_all_cookies()
 
-arr = {}
 for cookie in getcookies :
-	"""
-	if cookie['name'] == "JSESSIONID" :
-		cookie['domain'] = 'www.aliexpress.com'
-	"""
+	arr = {}
 	parts = ''
 	new_url = ''
 	qs = {}
 	if cookie['name'] == "aep_usuc_f" :
-		# site=kor&c_tp=KRW®ion=KR&b_locale=ko_KR
 		# site=kor&c_tp=KRW&region=KR&b_locale=ko_KR
-		parts = urlparse('https://aliexpress.com?'+cookie['value'])
+		print(cookie['value']+" --- <br>")
+		#cookie['value'] = cookie['value'].replace("\®", '')
+		#cookie['value'] = 'site=kor&c_tp=KRW®ion=KR&b_locale=ko_KR'
+		parts = urlparse('https://aliexpress.us?'+cookie['value'])
 		qs = dict(parse_qsl(parts.query))
+		#qs['c_tp'] = unquote(qs['c_tp'])
 		if CookiesLang == "en" :
 			qs['site'] = 'usa'
 			qs['c_tp'] = 'USD'
@@ -108,11 +107,12 @@ for cookie in getcookies :
 			qs['site'] = 'kor'
 			qs['c_tp'] = 'KRW'
 			qs['region'] = 'KR'
+			#qs['c_tp'] = 'KRW®ion=KR'
 			qs['b_locale'] = 'ko_KR'
 
 		parts = parts._replace(query=urlencode(qs))
 		new_url = urlunparse(parts)
-		new_url = unquote(new_url.replace('https://aliexpress.com?', ''))
+		new_url = unquote(new_url.replace('https://aliexpress.us?', ''))
 		cookie['value'] = new_url
 
 	if cookie['name'] == "intl_locale" :
@@ -127,7 +127,7 @@ for cookie in getcookies :
 	qs = {}
 	if cookie['name'] == "xman_us_f" :
 		#cookie['value'] = 'x_l=0&x_locale=ko_KR&x_c_chg=1&acs_rt='
-		parts = urlparse('https://aliexpress.com?'+cookie['value'])
+		parts = urlparse('https://aliexpress.us?'+cookie['value'])
 		qs = dict(parse_qsl(parts.query))
 		if CookiesLang == "en" :
 			qs['x_locale'] = 'en_US'
@@ -136,7 +136,7 @@ for cookie in getcookies :
 
 		parts = parts._replace(query=urlencode(qs))
 		new_url = urlunparse(parts)
-		new_url = unquote(new_url.replace('https://aliexpress.com?', ''))
+		new_url = unquote(new_url.replace('https://aliexpress.us?', ''))
 		cookie['value'] = new_url
 
 	for val in cookie.keys() :
