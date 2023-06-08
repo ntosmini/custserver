@@ -162,7 +162,7 @@ for val in CslId_SiteUrl :
 	SaveFile = FileDir+str(SaveFileName)
 	ErrHtml = ''
 	if SiteUrl == "" or SaveFileName == "" :
-		continue
+		pass
 	else :
 		try :
 			driver.get(SiteUrl)
