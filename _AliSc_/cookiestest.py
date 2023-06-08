@@ -26,9 +26,11 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 
 import undetected_chromedriver as uc
-
-from urllib.parse import urlparse, parse_qsl, urlencode, urlunparse, unquote
-
+try :
+	from urllib.parse import urlparse, parse_qsl, urlencode, urlunparse, unquote
+except :
+	ErrHtml = traceback.format_exc()
+	print("Error "+str(ErrHtml))
 
 
 CookiesLang = "ko"	#MConfig['CookiesLang']	#en / ko
