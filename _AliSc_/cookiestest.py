@@ -68,7 +68,7 @@ for cookie in getcookies :
 	qs = {}
 	if cookie['name'] == "aep_usuc_f" :
 		# site=kor&c_tp=KRW&region=KR&b_locale=ko_KR
-		print(cookie['value']+" --- <br>")
+		#print(cookie['value']+" --- <br>")
 		#cookie['value'] = cookie['value'].replace("\®", '')
 		#cookie['value'] = 'site=kor&c_tp=KRW®ion=KR&b_locale=ko_KR'
 		parts = urlparse('https://aliexpress.us?'+cookie['value'])
