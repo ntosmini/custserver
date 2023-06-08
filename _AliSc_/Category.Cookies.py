@@ -48,12 +48,16 @@ FileSendSave = MConfig['FileSendSave']
 NtosServer = MConfig['NtosServer']
 UserAgent = MConfig['UserAgent']
 CookiesLang = MConfig['CookiesLang']	#en / ko
+FileSaveDir = MConfig['FileSaveDir']
 
 FileDir = ""
 if CustId == "aliexpress" :
 	FileDir = "/home/ntosmini/ali_category/"
 else :
-	exit()
+	if FileSaveDir == "" :
+		exit()
+	else :
+		FileDir = FileSaveDir
 
 
 def osgzip(File) :
