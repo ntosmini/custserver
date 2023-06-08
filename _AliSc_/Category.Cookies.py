@@ -85,127 +85,147 @@ driver.get("https://aliexpress.com")
 getcookies = driver.get_cookies()
 driver.delete_all_cookies()
 
-for cookie in getcookies :
-	arr = {}
-	parts = ''
-	new_url = ''
-	qs = {}
-	if cookie['name'] == "aep_usuc_f" :
-		# site=kor&c_tp=KRW&region=KR&b_locale=ko_KR
-		print(cookie['value']+" --- <br>")
-		#cookie['value'] = cookie['value'].replace("\®", '')
-		#cookie['value'] = 'site=kor&c_tp=KRW®ion=KR&b_locale=ko_KR'
-		parts = urlparse('https://aliexpress.us?'+cookie['value'])
-		qs = dict(parse_qsl(parts.query))
-		#qs['c_tp'] = unquote(qs['c_tp'])
-		if CookiesLang == "en" :
-			qs['site'] = 'usa'
-			qs['c_tp'] = 'USD'
-			qs['region'] = 'US'
-			qs['b_locale'] = 'en_US'
-		elif CookiesLang == "ko" :
-			qs['site'] = 'kor'
-			qs['c_tp'] = 'KRW'
-			qs['region'] = 'KR'
-			#qs['c_tp'] = 'KRW®ion=KR'
-			qs['b_locale'] = 'ko_KR'
 
-		parts = parts._replace(query=urlencode(qs))
-		new_url = urlunparse(parts)
-		new_url = unquote(new_url.replace('https://aliexpress.us?', ''))
-		cookie['value'] = new_url
+try :
+	for cookie in getcookies :
+		arr = {}
+		parts = ''
+		new_url = ''
+		qs = {}
+		if cookie['name'] == "aep_usuc_f" :
+			# site=kor&c_tp=KRW&region=KR&b_locale=ko_KR
+			print(cookie['value']+" --- <br>")
+			#cookie['value'] = cookie['value'].replace("\®", '')
+			#cookie['value'] = 'site=kor&c_tp=KRW®ion=KR&b_locale=ko_KR'
+			parts = urlparse('https://aliexpress.us?'+cookie['value'])
+			qs = dict(parse_qsl(parts.query))
+			#qs['c_tp'] = unquote(qs['c_tp'])
+			if CookiesLang == "en" :
+				qs['site'] = 'usa'
+				qs['c_tp'] = 'USD'
+				qs['region'] = 'US'
+				qs['b_locale'] = 'en_US'
+			elif CookiesLang == "ko" :
+				qs['site'] = 'kor'
+				qs['c_tp'] = 'KRW'
+				qs['region'] = 'KR'
+				#qs['c_tp'] = 'KRW®ion=KR'
+				qs['b_locale'] = 'ko_KR'
 
-	if cookie['name'] == "intl_locale" :
-		#cookie['value'] = 'ko_KR'
-		if CookiesLang == "en" :
-			cookie['value'] = "en_US"
-		elif CookiesLang == "ko" :
-			cookie['value'] = "ko_KR"
+			parts = parts._replace(query=urlencode(qs))
+			new_url = urlunparse(parts)
+			new_url = unquote(new_url.replace('https://aliexpress.us?', ''))
+			cookie['value'] = new_url
 
-	parts = ''
-	new_url = ''
-	qs = {}
-	if cookie['name'] == "xman_us_f" :
-		#cookie['value'] = 'x_l=0&x_locale=ko_KR&x_c_chg=1&acs_rt='
-		parts = urlparse('https://aliexpress.us?'+cookie['value'])
-		qs = dict(parse_qsl(parts.query))
-		if CookiesLang == "en" :
-			qs['x_locale'] = 'en_US'
-		elif CookiesLang == "ko" :
-			qs['x_locale'] = 'ko_KR'
+		if cookie['name'] == "intl_locale" :
+			#cookie['value'] = 'ko_KR'
+			if CookiesLang == "en" :
+				cookie['value'] = "en_US"
+			elif CookiesLang == "ko" :
+				cookie['value'] = "ko_KR"
 
-		parts = parts._replace(query=urlencode(qs))
-		new_url = urlunparse(parts)
-		new_url = unquote(new_url.replace('https://aliexpress.us?', ''))
-		cookie['value'] = new_url
+		parts = ''
+		new_url = ''
+		qs = {}
+		if cookie['name'] == "xman_us_f" :
+			#cookie['value'] = 'x_l=0&x_locale=ko_KR&x_c_chg=1&acs_rt='
+			parts = urlparse('https://aliexpress.us?'+cookie['value'])
+			qs = dict(parse_qsl(parts.query))
+			if CookiesLang == "en" :
+				qs['x_locale'] = 'en_US'
+			elif CookiesLang == "ko" :
+				qs['x_locale'] = 'ko_KR'
 
-	for val in cookie.keys() :
-		arr[val] = cookie[val]
-	driver.add_cookie(arr)
+			parts = parts._replace(query=urlencode(qs))
+			new_url = urlunparse(parts)
+			new_url = unquote(new_url.replace('https://aliexpress.us?', ''))
+			cookie['value'] = new_url
 
-"""
-파일명
-cate_{CustId}_{CslId}_{CaId}_{server_id}_{LogId}.html
+		for val in cookie.keys() :
+			arr[val] = cookie[val]
+		driver.add_cookie(arr)
 
-상단 내용++
-<ntosoriginurl></ntosoriginurl>
-<ntosnowurl></ntosnowurl>
-"""
+	"""
+	파일명
+	cate_{CustId}_{CslId}_{CaId}_{server_id}_{LogId}.html
 
-driver.maximize_window()
+	상단 내용++
+	<ntosoriginurl></ntosoriginurl>
+	<ntosnowurl></ntosnowurl>
+	"""
+
+	driver.maximize_window()
 
 
-for val in CslId_SiteUrl :
-	(SiteUrl, SaveFileName) = val.split("|@|")
-	OriginUrl = "<ntosoriginurl>"+str(SiteUrl)+"</ntosoriginurl>"
-	#저장파일명
-	SaveFile = FileDir+str(SaveFileName)
-	ErrHtml = ''
-	if SiteUrl == "" or SaveFileName == "" :
-		continue
-	else :
-		try :
-			driver.get(SiteUrl)
-			#driver.execute_script("window.stop();")
-			if Scroll == "Y" :
-				SCROLL_PAUSE_SEC = 0.5
-				# 스크롤 높이 가져옴
-				last_height = driver.execute_script("return document.body.scrollHeight")
-				while True:
-					# 끝까지 스크롤 다운
-					driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-					# SCROLL_PAUSE_SEC 초 대기
-					time.sleep(SCROLL_PAUSE_SEC)
-					# 스크롤 다운 후 스크롤 높이 다시 가져옴
-					new_height = driver.execute_script("return document.body.scrollHeight")
-					if new_height == last_height:
-						break
-					last_height = new_height
-			PageHtml = driver.page_source
-			NowUrl = driver.current_url
-		except :
-			PageHtml = ""
-			NowUrl = ""
-			ErrHtml = traceback.format_exc()
-			
-		WriteFile = ""
-		WriteFile = WriteFile + OriginUrl+"\n"
-		if NowUrl :
-			WriteFile = WriteFile + "<ntosnowurl>"+NowUrl+"</ntosnowurl>\n"
-		WriteFile = WriteFile + PageHtml
-		if ErrHtml :
-			WriteFile = WriteFile + "\n\n" + str(ErrHtml)
-		f = open(SaveFile, 'w', encoding="utf8")
-		f.write(WriteFile)
-		f.close()
-		osgzip(SaveFile)
-		if FileSendSave == "Y" and NtosServer != "" :
-			gzfile = SaveFile+".gz"
-			files = open(gzfile, 'rb')
-			upload = {'file': files}
-			data = {'CustId':CustId, 'ScrapType':'cate' }
-			Result_ = requests.post(NtosServer, data=data, files=upload)
-			Result = Result_.text
-			if os.path.exists(gzfile) :
-				os.remove(gzfile)
+	for val in CslId_SiteUrl :
+		(SiteUrl, SaveFileName) = val.split("|@|")
+		OriginUrl = "<ntosoriginurl>"+str(SiteUrl)+"</ntosoriginurl>"
+		#저장파일명
+		SaveFile = FileDir+str(SaveFileName)
+		ErrHtml = ''
+		if SiteUrl == "" or SaveFileName == "" :
+			continue
+		else :
+			try :
+				driver.get(SiteUrl)
+				#driver.execute_script("window.stop();")
+				if Scroll == "Y" :
+					SCROLL_PAUSE_SEC = 0.5
+					# 스크롤 높이 가져옴
+					last_height = driver.execute_script("return document.body.scrollHeight")
+					while True:
+						# 끝까지 스크롤 다운
+						driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+						# SCROLL_PAUSE_SEC 초 대기
+						time.sleep(SCROLL_PAUSE_SEC)
+						# 스크롤 다운 후 스크롤 높이 다시 가져옴
+						new_height = driver.execute_script("return document.body.scrollHeight")
+						if new_height == last_height:
+							break
+						last_height = new_height
+				PageHtml = driver.page_source
+				NowUrl = driver.current_url
+			except :
+				PageHtml = ""
+				NowUrl = ""
+				ErrHtml = traceback.format_exc()
+				
+			WriteFile = ""
+			WriteFile = WriteFile + OriginUrl+"\n"
+			if NowUrl :
+				WriteFile = WriteFile + "<ntosnowurl>"+NowUrl+"</ntosnowurl>\n"
+			WriteFile = WriteFile + PageHtml
+			if ErrHtml :
+				WriteFile = WriteFile + "\n\n" + str(ErrHtml)
+			f = open(SaveFile, 'w', encoding="utf8")
+			f.write(WriteFile)
+			f.close()
+			osgzip(SaveFile)
+			if FileSendSave == "Y" and NtosServer != "" :
+				gzfile = SaveFile+".gz"
+				files = open(gzfile, 'rb')
+				upload = {'file': files}
+				data = {'CustId':CustId, 'ScrapType':'cate' }
+				Result_ = requests.post(NtosServer, data=data, files=upload)
+				Result = Result_.text
+				if os.path.exists(gzfile) :
+					os.remove(gzfile)
+except :
+	ErrHtml = traceback.format_exc()
+	SaveFile = FileDir+"error.html"
+	if ErrHtml :
+		WriteFile = WriteFile + "\n\n" + str(ErrHtml)
+	f = open(SaveFile, 'w', encoding="utf8")
+	f.write(WriteFile)
+	f.close()
+	osgzip(SaveFile)
+	if FileSendSave == "Y" and NtosServer != "" :
+		gzfile = SaveFile+".gz"
+		files = open(gzfile, 'rb')
+		upload = {'file': files}
+		data = {'CustId':CustId, 'ScrapType':'cate' }
+		Result_ = requests.post(NtosServer, data=data, files=upload)
+		Result = Result_.text
+		if os.path.exists(gzfile) :
+			os.remove(gzfile)
 driver.quit()
