@@ -129,7 +129,7 @@ try :
 	driver.maximize_window()
 	try :
 		OriginUrl = ""
-		SiteUrl = "https://www.aliexpress.com/category/200218542/electric-window-cleaners.html?shipFromCountry=CN&CatId=200218542&trafficChannel=main&isCategoryBrowse=true&minPrice=10&maxPrice=11&g=y&isrefine=y&page=1"
+		SiteUrl = "https://ko.aliexpress.com/category/200218542/electric-window-cleaners.html?shipFromCountry=CN&CatId=200218542&trafficChannel=main&isCategoryBrowse=true&minPrice=10000&maxPrice=11000&g=y&isrefine=y&page=1"
 		SaveFileName = "a"
 
 		OriginUrl = "<ntosoriginurl>"+str(SiteUrl)+"</ntosoriginurl>"
