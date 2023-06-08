@@ -152,7 +152,7 @@ cate_{CustId}_{CslId}_{CaId}_{server_id}_{LogId}.html
 <ntosnowurl></ntosnowurl>
 """
 
-
+driver.maximize_window()
 
 
 for val in CslId_SiteUrl :
