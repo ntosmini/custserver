@@ -55,23 +55,27 @@ NowUrl = driver.current_url
 
 
 print(NowUrl+"<br><br>")
-for cookie in getcookies :
-	arr = {}
-	if cookie['name'] == "b2b_ship_country" :
-		cookie['value'] = "KR"
-	if cookie['name'] == "b2b_ip_country" :
-		cookie['value'] = "US"
+try :
+	for cookie in getcookies :
+		arr = {}
+		if cookie['name'] == "b2b_ship_country" :
+			cookie['value'] = "KR"
+		if cookie['name'] == "b2b_ip_country" :
+			cookie['value'] = "US"
 
-	for val in cookie.keys() :
-		arr[val] = cookie[val]
-	driver.add_cookie(arr)
+		for val in cookie.keys() :
+			arr[val] = cookie[val]
+		driver.add_cookie(arr)
 
-	print(cookie)
-	print("<br><br>")
+		print(cookie)
+		print("<br><br>")
 
 
 
-driver.get("https://kr.dhgate.com/product/fashion-classic-4-four-leaf-clover-necklaces/741060105.html?dspm=pckr.hp.ymljfy.jfy-2.HwwaCqwyg964Smn0w28w&resource_id=741060105&scm_id=rec.yml..._pc_recm-1to2_pc_nebula_related_pc_recm_fm-jfy-filter_2512_null_greenScreenFlag_6.782263339506557.")
-time.sleep(10)
-PageHtml = driver.page_source
-print("<br><br>"+PageHtml)
+	driver.get("https://kr.dhgate.com/product/fashion-classic-4-four-leaf-clover-necklaces/741060105.html?dspm=pckr.hp.ymljfy.jfy-2.HwwaCqwyg964Smn0w28w&resource_id=741060105&scm_id=rec.yml..._pc_recm-1to2_pc_nebula_related_pc_recm_fm-jfy-filter_2512_null_greenScreenFlag_6.782263339506557.")
+	time.sleep(10)
+	PageHtml = driver.page_source
+	print("<br><br>"+PageHtml)
+except :
+	ErrHtml = traceback.format_exc()
+	print("Error "+str(ErrHtml))
