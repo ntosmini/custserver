@@ -47,7 +47,7 @@ try :
 		if ChromeVer == "" :
 			driver = uc.Chrome(service=chrome_service, options=chrome_options, use_subprocess=True)
 		   else :
-				driver = uc.Chrome(service=chrome_service, options=chrome_options, version_main=ChromeVer)
+			driver = uc.Chrome(service=chrome_service, options=chrome_options, version_main=ChromeVer)
 		return driver
 
 	driver = chromeWebdriver()
