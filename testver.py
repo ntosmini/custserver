@@ -26,10 +26,10 @@ from selenium.webdriver.common.by import By
 import undetected_chromedriver as uc
 
 from urllib.parse import urlparse, parse_qsl, urlencode, urlunparse, unquote
-
+MConfigData = sys.argv[1]
+MConfig = json.loads(MConfigData)
+ChromeVer  = MConfig['ChromeVer']
 try :
-	ChromeVer = sys.argv[1]
-
 	def chromeWebdriver():
 		chrome_service = ChromeService(ChromeDriverManager().install())
 		chrome_options = uc.ChromeOptions()
@@ -46,7 +46,7 @@ try :
 		chrome_options.page_load_strategy = 'normal'
 		if ChromeVer == "" :
 			driver = uc.Chrome(service=chrome_service, options=chrome_options, use_subprocess=True)
-		   else :
+		else :
 			driver = uc.Chrome(service=chrome_service, options=chrome_options, version_main=ChromeVer)
 		return driver
 
