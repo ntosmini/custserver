@@ -43,7 +43,7 @@ try :
 		chrome_options.add_argument('--ignore-certificate-errors')
 		chrome_options.add_argument('--ignore-ssl-errors=yes')
 		chrome_options.add_argument('--disable-gpu')
-		chrome_options.page_load_strategy = 'normal'
+		#chrome_options.page_load_strategy = 'normal'
 		if ChromeVer == "" :
 			driver = uc.Chrome(service=chrome_service, options=chrome_options, use_subprocess=True)
 		else :
