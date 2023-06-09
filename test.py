@@ -31,7 +31,7 @@ from urllib.parse import urlparse, parse_qsl, urlencode, urlunparse, unquote
 def chromeWebdriver():
 	chrome_service = ChromeService(ChromeDriverManager().install())
 	chrome_options = uc.ChromeOptions()
-	#chrome_options.add_argument('--headless')
+	chrome_options.add_argument('--headless')
 	chrome_options.add_argument('--no-sandbox')
 	chrome_options.add_argument('--blink-settings=imagesEnabled=false')
 	chrome_options.add_argument('--start-maximized')
@@ -73,7 +73,6 @@ try :
 
 
 	driver.get("https://kr.dhgate.com/product/fashion-classic-4-four-leaf-clover-necklaces/741060105.html?dspm=pckr.hp.ymljfy.jfy-2.HwwaCqwyg964Smn0w28w&resource_id=741060105&scm_id=rec.yml..._pc_recm-1to2_pc_nebula_related_pc_recm_fm-jfy-filter_2512_null_greenScreenFlag_6.782263339506557.")
-	time.sleep(10)
 	PageHtml = driver.page_source
 	print("<br><br>"+PageHtml)
 except :
