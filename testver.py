@@ -54,9 +54,6 @@ try :
 
 
 	driver.get("http://ntos.co.kr")
-	getcookies = driver.get_cookies()
-	driver.delete_all_cookies()
-
 	NowUrl = driver.current_url
 	PageHtml = driver.page_source
 
@@ -64,4 +61,4 @@ try :
 	print(PageHtml+"<br><br>")
 except :
 	err = traceback.format_exc()
-	return str(err)
+	print(str(err))
