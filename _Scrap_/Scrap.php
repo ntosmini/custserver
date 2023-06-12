@@ -6,6 +6,7 @@ $RunData = array();
 $ScrapType = (empty($_POST['ScrapType']))?"selenium":$_POST['ScrapType'];	//수집방식 - curl or self or selenium or pyget
 $RunData['UserAgent'] = (empty($_POST['UserAgent']))?"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36":$_POST['UserAgent'];
 $ChromeType = (empty($_POST['ChromeType']))?"":$_POST['ChromeType'];
+$RunData['ChromeVer'] = (empty($_POST['ChromeVer']))?"":$_POST['ChromeVer'];	//Chrome version
 if($ScrapType == "self"){
 
 	echo "ntoswebsuccess";
