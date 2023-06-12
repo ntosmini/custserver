@@ -9,6 +9,7 @@ import os
 import requests
 import traceback
 import random
+import re
 
 try :
 	os.system("killall -o 3m chrome")
@@ -92,6 +93,7 @@ driver.maximize_window()
 if SiteUrlOne == "N" :
 	for val in SiteUrl_SaveFileName :
 		PageHtml = ""
+		OptHtml = ""
 		NowUrl = ""
 		SiteUrl = ""
 		SaveFileName = ""
@@ -126,11 +128,20 @@ if SiteUrlOne == "N" :
 			time.sleep(random.randint(1, 3))
 			PageHtml = driver.page_source
 			NowUrl = driver.current_url
+			try :
+				ItemSkuSearch = re.search(r'"sku":"(?P<ItemSkuCode>[^"]+)",', str(PageHtml), re.DOTALL)
+				ItemSku = ItemSkuSearch.group('ItemSkuCode')
+				ItemOptUrl = "https://kr.dhgate.com/prod/ajax/pcsku.do?client=pc&language=kr&version=0.1&itemCode="+str(ItemSku)
+				driver.get(ItemOptUrl)
+				OptHtml = driver.page_source
+			except :
+				OptHtml = ""
+			
 		except :
 			err = traceback.format_exc()
 			PageHtml = PageHtml+str(err)+"\n"
 
-		PageHtml = "<ntosoriginurl>"+str(SiteUrl)+"</ntosoriginurl>\n"+ "<ntosnowurl>"+str(NowUrl)+"</ntosnowurl>\n" + PageHtml
+		PageHtml = "<ntosoriginurl>" + str(SiteUrl) + "</ntosoriginurl>\n" + "<ntosnowurl>" + str(NowUrl) + "</ntosnowurl>\n" + "<OptHtml>" + OptHtml + "</OptHtml>\n" + PageHtml
 
 		if ScrapResultType == "save" :
 			SaveFile = str(FileSaveDir)+str(SaveFileName)
@@ -160,6 +171,7 @@ if SiteUrlOne == "N" :
 
 else :
 	PageHtml = ""
+	OptHtml = ""
 	NowUrl = ""
 	SiteUrl = str(SiteUrlOne)
 	SaveFileName = ""
@@ -190,11 +202,20 @@ else :
 		time.sleep(random.randint(1, 3))
 		PageHtml = driver.page_source
 		NowUrl = driver.current_url
+
+		try :
+			ItemSkuSearch = re.search(r'"sku":"(?P<ItemSkuCode>[^"]+)",', str(PageHtml), re.DOTALL)
+			ItemSku = ItemSkuSearch.group('ItemSkuCode')
+			ItemOptUrl = "https://kr.dhgate.com/prod/ajax/pcsku.do?client=pc&language=kr&version=0.1&itemCode="+str(ItemSku)
+			driver.get(ItemOptUrl)
+			OptHtml = driver.page_source
+		except :
+			OptHtml = ""
 	except :
 		err = traceback.format_exc()
 		PageHtml = PageHtml+str(err)+"\n"
 
-	PageHtml = "<ntosoriginurl>"+str(SiteUrl)+"</ntosoriginurl>\n"+ "<ntosnowurl>"+str(NowUrl)+"</ntosnowurl>\n" + PageHtml
+	PageHtml = "<ntosoriginurl>" + str(SiteUrl) + "</ntosoriginurl>\n" + "<ntosnowurl>" + str(NowUrl) + "</ntosnowurl>\n" + "<OptHtml>" + OptHtml + "</OptHtml>\n" + PageHtml
 
 	if ScrapResultType == "save" :
 		SaveFile = str(FileSaveDir)+str(SaveFileName)
