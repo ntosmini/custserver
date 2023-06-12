@@ -27,6 +27,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 
 import undetected_chromedriver as uc
+from urllib.parse import urlparse, parse_qsl, urlencode, urlunparse, unquote
 
 #한글깨짐
 sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
@@ -39,7 +40,6 @@ MConfig = json.loads(MConfigData)
 
 CustId = MConfig['CustId']
 SiteUrlOne = MConfig['SiteUrlOne']
-StartSiteUrl = MConfig['StartSiteUrl']
 SiteUrl_SaveFileName = MConfig['SiteUrl_SaveFileName']
 Refresh = MConfig['Refresh']
 Scroll = MConfig['Scroll']
@@ -72,9 +72,20 @@ def chromeWebdriver():
 
 driver = chromeWebdriver()
 
-if StartSiteUrl :
-	driver.get(StartSiteUrl)
-	driver.implicitly_wait(10)
+driver.get("https://www.dhgate.com")
+
+for cookie in getcookies :
+	arr = {}
+	if cookie['name'] == "b2b_ship_country" :
+		cookie['value'] = "KR"
+	if cookie['name'] == "b2b_ip_country" :
+		cookie['value'] = "US"
+
+	for val in cookie.keys() :
+		arr[val] = cookie[val]
+	driver.add_cookie(arr)
+  
+driver.maximize_window()
 
 if SiteUrlOne == "N" :
 	for val in SiteUrl_SaveFileName :
