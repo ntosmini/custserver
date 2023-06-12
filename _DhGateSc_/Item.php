@@ -6,7 +6,6 @@ header("Content-Type: text/html; charset=UTF-8");
 */
 
 $RunData = array();
-$Ver = (empty($_POST['Ver']))?"v4":$_POST['Ver'];	//v3 or v4
 $RunData['IslId_SiteUrl'] = (empty($_POST['IslId_SiteUrl']))?"":$_POST['IslId_SiteUrl'];
 $RunData['CustId'] = (empty($_POST['CustId']))?"":$_POST['CustId'];
 
@@ -15,10 +14,6 @@ $RunData['NtosServer'] = (empty($_POST['NtosServer']))?"":$_POST['NtosServer'];	
 $RunData['UserAgent'] = (empty($_POST['UserAgent']))?"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36":$_POST['UserAgent'];
 $RunData['ChromeVer'] = (empty($_POST['ChromeVer']))?"":$_POST['ChromeVer'];	//Chrome version
 
-if(empty($Ver) || ($Ver != 'v3' && $Ver != 'v4') ){
-	echo 'not Ver';
-	exit;
-}	//end if(empty($Ver))
 
 if(empty($RunData['IslId_SiteUrl'])){
 	echo 'not IslId_SiteUrl';
