@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*- 
-# 카테고리 파일-v4
+# 스크렙
 
 import time
 import sys
@@ -8,11 +8,7 @@ import io
 import os
 import requests
 import traceback
-
-#한글깨짐
-sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
-sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
-
+import random
 
 try :
 	os.system("killall -o 3m chrome")
@@ -32,27 +28,31 @@ from selenium.webdriver.common.by import By
 
 import undetected_chromedriver as uc
 
-from urllib.parse import urlparse, parse_qsl, urlencode, urlunparse, unquote
+#한글깨짐
+sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
+sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
 
-CslId_SiteUrl = []
-
+SiteUrl_SaveFileName = []
 
 MConfigData = sys.argv[1]
 MConfig = json.loads(MConfigData)
 
-IslId_SiteUrl = MConfig['IslId_SiteUrl']
 CustId = MConfig['CustId']
-
-FileSendSave = MConfig['FileSendSave']
-NtosServer = MConfig['NtosServer']
+SiteUrlOne = MConfig['SiteUrlOne']
+StartSiteUrl = MConfig['StartSiteUrl']
+SiteUrl_SaveFileName = MConfig['SiteUrl_SaveFileName']
+Refresh = MConfig['Refresh']
+Scroll = MConfig['Scroll']
+ScrapResultType = MConfig['ScrapResultType']
+FileSaveDir = MConfig['FileSaveDir']
+NtosSendServer = MConfig['NtosSendServer']
 UserAgent = MConfig['UserAgent']
 ChromeVer = MConfig['ChromeVer']
 
-def osgzip(File) :
-	os.system("gzip "+File)
+executable_path = ChromeDriverManager().install()
 
 def chromeWebdriver():
-	chrome_service = ChromeService(ChromeDriverManager().install())
+	chrome_service = ChromeService(executable_path)
 	chrome_options = uc.ChromeOptions()
 	chrome_options.add_argument('--headless')
 	chrome_options.add_argument('--no-sandbox')
@@ -72,76 +72,143 @@ def chromeWebdriver():
 
 driver = chromeWebdriver()
 
-driver.get("https://www.dhgate.com")
-getcookies = driver.get_cookies()
-driver.delete_all_cookies()
+if StartSiteUrl :
+	driver.get(StartSiteUrl)
+	driver.implicitly_wait(10)
 
-for cookie in getcookies :
-	arr = {}
-	if cookie['name'] == "b2b_ship_country" :
-		cookie['value'] = "KR"
-	if cookie['name'] == "b2b_ip_country" :
-		cookie['value'] = "US"
+if SiteUrlOne == "N" :
+	for val in SiteUrl_SaveFileName :
+		PageHtml = ""
+		NowUrl = ""
+		SiteUrl = ""
+		SaveFileName = ""
 
-	for val in cookie.keys() :
-		arr[val] = cookie[val]
-	driver.add_cookie(arr)
-  
-driver.maximize_window()
-
-for val in IslId_SiteUrl :
-	(SiteUrl, SaveFileName) = val.split("|@|")
-	OriginUrl = "<ntosoriginurl>"+str(SiteUrl)+"</ntosoriginurl>"
-	#저장파일명
-	SaveFile = FileSaveDir+str(SaveFileName)
-	SaveFile = SaveFile.replace('.html', '_'+str(time.strftime('%H%M', time.localtime(time.time())))+'.html')
-	#에러msg
-	ErrMsg = ''
-	if SiteUrl == "" or SaveFileName == "" :
-		continue
-	else :
+		try :
+			(SiteUrl, SaveFileName) = val.split("|@|")
+		except :
+			err = traceback.format_exc()
+			PageHtml = str(err)+"\n"
 		try :
 			driver.get(SiteUrl)
-			driver.implicitly_wait(3)
-			#driver.execute_script("window.stop();")
+			driver.implicitly_wait(10)
+			if Refresh == "Y" :
+				driver.refresh()
+				driver.implicitly_wait(10)
+
+			if Scroll == "Y" :
+				SCROLL_PAUSE_SEC = 0.5
+				# 스크롤 높이 가져옴
+				last_height = driver.execute_script("return document.body.scrollHeight")
+				while True:
+					# 끝까지 스크롤 다운
+					driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+					# SCROLL_PAUSE_SEC 초 대기
+					time.sleep(SCROLL_PAUSE_SEC)
+					# 스크롤 다운 후 스크롤 높이 다시 가져옴
+					new_height = driver.execute_script("return document.body.scrollHeight")
+					if new_height == last_height:
+						break
+					last_height = new_height
+
+			time.sleep(random.randint(1, 3))
 			PageHtml = driver.page_source
 			NowUrl = driver.current_url
 		except :
-			PageHtml = ""
-			NowUrl = ""
-			ErrMsg = traceback.format_exc()
-		WriteFile = "<time>"+time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))+"</time>\n"
-		WriteFile = WriteFile + OriginUrl+"\n"
-		if NowUrl :
-			WriteFile = WriteFile + "<ntosnowurl>"+NowUrl+"</ntosnowurl>\n"
+			err = traceback.format_exc()
+			PageHtml = PageHtml+str(err)+"\n"
 
-		if ErrMsg :
-			WriteFile = WriteFile + "<ErrMsg>"+str(ErrMsg)+"</ErrMsg>\n"
-			
-		#lock 체크
-		if PageHtml != "" :
-			lock_chk = ""
-			lock_chk = LockChk(PageHtml)
-			if lock_chk != "" :
-				WriteFile = WriteFile + "<lock_chk>"+lock_chk+"</lock_chk>\n"
+		PageHtml = "<ntosoriginurl>"+str(SiteUrl)+"</ntosoriginurl>\n"+ "<ntosnowurl>"+str(NowUrl)+"</ntosnowurl>\n" + PageHtml
 
-			driver.implicitly_wait(10)
-			PageHtml = driver.page_source
-			NowUrl = driver.current_url
-			
-		WriteFile = WriteFile + PageHtml
+		if ScrapResultType == "save" :
+			SaveFile = str(FileSaveDir)+str(SaveFileName)
+			WriteContent = PageHtml
+			f = open(SaveFile, 'w', encoding="utf8")
+			f.write(WriteContent)
+			f.close()
+			os.system("gzip "+SaveFile)
+		elif ScrapResultType == "send" :
+			SaveFile = str(FileSaveDir)+str(SaveFileName)
+			WriteContent = PageHtml
+			f = open(SaveFile, 'w', encoding="utf8")
+			f.write(WriteContent)
+			f.close()
+			os.system("gzip "+SaveFile)
 
-		f = open(SaveFile, 'w', encoding="utf8")
-		f.write(WriteFile)
-		f.close()
-		osgzip(SaveFile)
-		if FileSendSave == "Y" and NtosServer != "" :
 			gzfile = SaveFile+".gz"
 			files = open(gzfile, 'rb')
 			upload = {'file': files}
-			data = {'CustId':CustId, 'ScrapType':'item' }
-			Result_ = requests.post(NtosServer, data=data, files=upload)
-			Result = Result_.text
-			if os.path.exists(gzfile) :
-				os.remove(gzfile)
+			data = {'CustId':CustId }
+			Result_ = requests.post(NtosSendServer, data=data, files=upload)
+			res = Result_.text
+			time.sleep(3)
+			os.remove(gzfile)
+		else :
+			pass
+
+else :
+	PageHtml = ""
+	NowUrl = ""
+	SiteUrl = str(SiteUrlOne)
+	SaveFileName = ""
+
+	try :
+		driver.get(SiteUrl)
+		driver.implicitly_wait(10)
+
+		if Refresh == "Y" :
+			driver.refresh()
+			driver.implicitly_wait(10)
+
+		if Scroll == "Y" :
+			SCROLL_PAUSE_SEC = 0.5
+			# 스크롤 높이 가져옴
+			last_height = driver.execute_script("return document.body.scrollHeight")
+			while True:
+				# 끝까지 스크롤 다운
+				driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+				# SCROLL_PAUSE_SEC 초 대기
+				time.sleep(SCROLL_PAUSE_SEC)
+				# 스크롤 다운 후 스크롤 높이 다시 가져옴
+				new_height = driver.execute_script("return document.body.scrollHeight")
+				if new_height == last_height:
+					break
+				last_height = new_height
+
+		time.sleep(random.randint(1, 3))
+		PageHtml = driver.page_source
+		NowUrl = driver.current_url
+	except :
+		err = traceback.format_exc()
+		PageHtml = PageHtml+str(err)+"\n"
+
+	PageHtml = "<ntosoriginurl>"+str(SiteUrl)+"</ntosoriginurl>\n"+ "<ntosnowurl>"+str(NowUrl)+"</ntosnowurl>\n" + PageHtml
+
+	if ScrapResultType == "save" :
+		SaveFile = str(FileSaveDir)+str(SaveFileName)
+		WriteContent = PageHtml
+		f = open(SaveFile, 'w', encoding="utf8")
+		f.write(WriteContent)
+		f.close()
+		os.system("gzip "+SaveFile)
+	elif ScrapResultType == "send" :
+		SaveFile = str(FileSaveDir)+str(SaveFileName)
+		WriteContent = PageHtml
+		f = open(SaveFile, 'w', encoding="utf8")
+		f.write(WriteContent)
+		f.close()
+		os.system("gzip "+SaveFile)
+
+		gzfile = SaveFile+".gz"
+		files = open(gzfile, 'rb')
+		upload = {'file': files}
+		data = {'CustId':CustId }
+		Result_ = requests.post(NtosSendServer, data=data, files=upload)
+		res = Result_.text
+		time.sleep(3)
+		os.remove(gzfile)
+	elif ScrapResultType == "view" :
+		print(PageHtml)
+	else :
+		pass
+
 driver.quit()
