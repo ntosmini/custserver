@@ -40,15 +40,12 @@ CslId_SiteUrl = []
 MConfigData = sys.argv[1]
 MConfig = json.loads(MConfigData)
 
-CslId_SiteUrl = MConfig['CslId_SiteUrl']
+IslId_SiteUrl = MConfig['IslId_SiteUrl']
 CustId = MConfig['CustId']
-Scroll = MConfig['Scroll']
 
 FileSendSave = MConfig['FileSendSave']
 NtosServer = MConfig['NtosServer']
 UserAgent = MConfig['UserAgent']
-CookiesLang = MConfig['CookiesLang']	#en / ko
-FileSaveDir = MConfig['FileSaveDir']
 ChromeVer = MConfig['ChromeVer']
 
 def osgzip(File) :
