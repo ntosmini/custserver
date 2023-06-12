@@ -42,4 +42,9 @@ if(empty($RunData['NtosSendServer']) && $RunData['ScrapResultType'] == "send"){
 $RunData['SiteUrl_SaveFileName'] = explode("|^|", $RunData['SiteUrl_SaveFileName']);
 $MConfigData = escapeshellarg(json_encode($RunData));
 
-exec("PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin python3 /home/ntosmini/public_html/_DhGateSc_/Item.py {$MConfigData}");
+exec("PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin python3 /home/ntosmini/public_html/_DhGateSc_/Item.py {$MConfigData}", $ResultArr);
+
+if(isset($ResultArr) && count($ResultArr) > 0){
+	$PageHtml = implode("\n", $ResultArr);
+	echo $PageHtml;
+}
