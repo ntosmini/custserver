@@ -49,7 +49,7 @@ NtosServer = MConfig['NtosServer']
 UserAgent = MConfig['UserAgent']
 CookiesLang = MConfig['CookiesLang']	#en / ko
 FileSaveDir = MConfig['FileSaveDir']
-
+ChromeVer = MConfig['ChromeVer']
 FileDir = ""
 if CustId == "aliexpress" :
 	FileDir = "/home/ntosmini/ali_category/"
@@ -76,7 +76,10 @@ def chromeWebdriver():
 	chrome_options.add_argument('--ignore-certificate-errors')
 	chrome_options.add_argument('--ignore-ssl-errors=yes')
 	chrome_options.add_argument('--disable-gpu')
-	driver = uc.Chrome(service=chrome_service, options=chrome_options, use_subprocess=True)
+	if ChromeVer :
+		driver = uc.Chrome(service=chrome_service, options=chrome_options, version_main=ChromeVer)
+	else :
+		driver = uc.Chrome(service=chrome_service, options=chrome_options, use_subprocess=True)
 	return driver
 
 driver = chromeWebdriver()
