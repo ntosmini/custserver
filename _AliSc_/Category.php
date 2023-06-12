@@ -15,6 +15,8 @@ $RunData['UserAgent'] = (empty($_POST['UserAgent']))?"Mozilla/5.0 (Windows NT 10
 $RunData['FileSaveDir'] = (empty($_POST['FileSaveDir']))?"":$_POST['FileSaveDir'];	//xs 서버 저장 폴더
 
 $RunData['CookiesLang'] = (empty($_POST['CookiesLang']))?"":$_POST['CookiesLang'];	//쿠키 언어
+$RunData['ChromeVer'] = (empty($_POST['ChromeVer']))?"":$_POST['ChromeVer'];	//Chrome version
+
 
 if(empty($RunData['CslId_SiteUrl'])){
 	echo 'not CslId_SiteUrl';
