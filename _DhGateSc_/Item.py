@@ -73,6 +73,8 @@ def chromeWebdriver():
 driver = chromeWebdriver()
 
 driver.get("https://www.dhgate.com")
+getcookies = driver.get_cookies()
+driver.delete_all_cookies()
 
 for cookie in getcookies :
 	arr = {}
