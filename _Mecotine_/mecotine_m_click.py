@@ -2,13 +2,9 @@
 
 import time
 import sys
-#import json
 import io
-#import os
-#import re
 import random
-#import traceback
-
+import mobile_agent
 
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
@@ -31,12 +27,11 @@ from fake_useragent import UserAgent
 sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
 sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
 
-
 def chromeWebdriver():
-	
-    ua = UserAgent()
+	    
     chrome_service = ChromeService(ChromeDriverManager().install())
     chrome_options = uc.ChromeOptions()
+    agent = mobile_agent.get_agent()
 
     chrome_options.add_argument('--headless=new')
     chrome_options.add_argument('--no-sandbox')
@@ -46,9 +41,8 @@ def chromeWebdriver():
     chrome_options.add_argument('--disable-blink-features=AutomationControlled')
     chrome_options.add_argument('--disable-infobars')
     chrome_options.add_argument('--disable-setuid-sandbox')
-    chrome_options.add_argument('--disable-gpu')
-    #chrome_options.add_argument('--user-agent=' + ua.random)
-    chrome_options.add_argument('--user-agent=' + 'Mozilla/5.0 (Linux; Android 10; SM-G981B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.162 Mobile Safari/537.36')
+    chrome_options.add_argument('--disable-gpu')    
+    chrome_options.add_argument('--user-agent=' + agent)
 
     chrome_options.page_load_strategy = 'normal'
     driver = uc.Chrome(service=chrome_service, options=chrome_options, version_main=113)
@@ -95,13 +89,17 @@ try:
     e = driver.find_elements(By.CSS_SELECTOR, "a[href='http://mecotine.com/']")
     e[0].click()
         
-    time.sleep(random.randint(18, 22))
+    time.sleep(random.randint(30, 46))
 
     a_elements = driver.find_elements(By.CSS_SELECTOR, ".main_disp a[href*='shopdetail']")
 
     a_elements[random.randint(0, len(a_elements)-1)].click()
 
-    time.sleep(random.randint(9, 12))
+    time.sleep(random.randint(30, 55))
+
+    driver.execute_script("window.history.go(-1)")
+
+    time.sleep(random.randint(5, 12))
 
     print("SUCCESS")
 
