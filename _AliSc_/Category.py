@@ -81,6 +81,53 @@ def chromeWebdriver():
 
 driver = chromeWebdriver()
 
+def LockChk(PageHtml) :
+	action = ActionChains(driver)
+	try :
+		if re.search('we have detected unusual traffic from your network', str(PageHtml)) :
+			try :
+				slider = driver.find_element(By.ID, "nc_1_n1z")
+				slider.click()
+				action.move_to_element(slider)
+				action.click_and_hold(slider)
+				xoffset = 0
+				while xoffset < 500:
+					xmove = random.randint(10, 50)
+					ymove = random.randint(-1, 1)
+					action.move_by_offset(xmove, ymove)
+					xoffset += xmove
+				action.release()
+				action.perform()
+				return "good"
+			except :
+				err = traceback.format_exc()
+				return str(err)
+		else :
+			pass
+	except :
+		pass
+	try :
+		try :
+			driver.switch_to.frame("baxia-dialog-content")
+			slider = driver.find_element(By.ID, "nc_1_n1z")
+			slider.click()
+			action.move_to_element(slider)
+			action.click_and_hold(slider)
+			xoffset = 0
+			while xoffset < 500:
+				xmove = random.randint(10, 50)
+				ymove = random.randint(-1, 1)
+				action.move_by_offset(xmove, ymove)
+				xoffset += xmove
+			action.release()
+			action.perform()
+			return "iframe"
+		except :
+			err = traceback.format_exc()
+	except :
+		pass	
+	return "pass"
+	
 driver.get("https://aliexpress.com")
 
 
@@ -124,15 +171,14 @@ for val in CslId_SiteUrl :
 		except :
 			PageHtml = ""
 			NowUrl = ""
-			ErrHtml = traceback.format_exc()
-			
+		ErrHtml = LockChk(PageHtml)
 		WriteFile = ""
 		WriteFile = WriteFile + OriginUrl+"\n"
 		if NowUrl :
 			WriteFile = WriteFile + "<ntosnowurl>"+NowUrl+"</ntosnowurl>\n"
 		WriteFile = WriteFile + PageHtml
 		if ErrHtml :
-			WriteFile = WriteFile + "\n\n" + str(ErrHtml)
+			WriteFile = WriteFile + "\n\nLockChk : " + str(ErrHtml)
 		f = open(SaveFile, 'w', encoding="utf8")
 		f.write(WriteFile)
 		f.close()
