@@ -8,6 +8,8 @@ import io
 import os
 import requests
 import traceback
+import re
+import random
 
 #한글깨짐
 sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
