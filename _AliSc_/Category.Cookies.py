@@ -51,10 +51,13 @@ CookiesLang = MConfig['CookiesLang']	#en / ko
 FileSaveDir = MConfig['FileSaveDir']
 ChromeVer = MConfig['ChromeVer']
 FileDir = ""
-if FileSaveDir == "" :
-	exit()
+if CustId == "aliexpress" :
+	FileDir = "/home/ntosmini/ali_category/"
 else :
-	FileDir = FileSaveDir
+	if FileSaveDir == "" :
+		exit()
+	else :
+		FileDir = FileSaveDir
 
 
 def osgzip(File) :
