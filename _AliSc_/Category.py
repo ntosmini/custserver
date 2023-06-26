@@ -83,10 +83,17 @@ def chromeWebdriver():
 
 driver = chromeWebdriver()
 
+#lock 체크
+LockChkCnt = int(0)
 def LockChk(PageHtml) :
+	global LockChkCnt
 	action = ActionChains(driver)
+	PageChk = "N"
+	ResultChk = ""
 	try :
 		if re.search('we have detected unusual traffic from your network', str(PageHtml)) :
+			PageChk = "Y"
+			LockChkCnt = LockChkCnt + 1
 			try :
 				slider = driver.find_element(By.ID, "nc_1_n1z")
 				slider.click()
@@ -100,36 +107,48 @@ def LockChk(PageHtml) :
 					xoffset += xmove
 				action.release()
 				action.perform()
-				return "good"
+				ResultChk = "page"
 			except :
-				err = traceback.format_exc()
-				return str(err)
+				ResultChk = traceback.format_exc()
 		else :
-			pass
+			ResultChk = "pass"
 	except :
-		pass
-	try :
+		ResultChk = traceback.format_exc()
+
+	if ResultChk != "page" :
 		try :
-			driver.switch_to.frame("baxia-dialog-content")
-			slider = driver.find_element(By.ID, "nc_1_n1z")
-			slider.click()
-			action.move_to_element(slider)
-			action.click_and_hold(slider)
-			xoffset = 0
-			while xoffset < 500:
-				xmove = random.randint(10, 50)
-				ymove = random.randint(-1, 1)
-				action.move_by_offset(xmove, ymove)
-				xoffset += xmove
-			action.release()
-			action.perform()
-			return "iframe"
+			if re.search('.com:443/display', str(PageHtml)) :
+				PageChk = "Y"
+				LockChkCnt = LockChkCnt + 1
+				try :
+					driver.switch_to.frame("baxia-dialog-content")
+					slider = driver.find_element(By.ID, "nc_1_n1z")
+					slider.click()
+					action.move_to_element(slider)
+					action.click_and_hold(slider)
+					xoffset = 0
+					while xoffset < 500:
+						xmove = random.randint(10, 50)
+						ymove = random.randint(-1, 1)
+						action.move_by_offset(xmove, ymove)
+						xoffset += xmove
+					action.release()
+					action.perform()
+					ResultChk = "iframe"
+				except :
+					ResultChk = traceback.format_exc()
+			else :
+				ResultChk = "pass"
 		except :
-			err = traceback.format_exc()
-	except :
-		pass	
-	return "pass"
-	
+			ResultChk = traceback.format_exc()
+
+	PageHtml2 = driver.page_source
+
+	if ResultChk != "pass" and LockChkCnt < 5 :
+		LockChk(PageHtml2)
+
+	return str(ResultChk)+" - "+str(PageChk)+" - "+str(LockChkCnt)
+
 driver.get("https://aliexpress.com")
 
 
