@@ -147,10 +147,10 @@ def LockChk(PageHtml) :
 		except :
 			ResultChk = traceback.format_exc()
 
-	PageHtml = driver.page_source
+	PageHtml2 = driver.page_source
 
-	if LockChkCnt < 5 and ResultChk != "pass" :
-		LockChk(PageHtml)
+	if ResultChk != "pass" :
+		LockChk(PageHtml2)
 
 	return str(ResultChk)+" - "+str(PageChk)+" - "+str(LockChkCnt)
 	
