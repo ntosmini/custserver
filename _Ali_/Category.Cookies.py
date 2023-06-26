@@ -8,6 +8,8 @@ import io
 import os
 import requests
 import traceback
+import re
+import random
 
 #한글깨짐
 sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
@@ -25,6 +27,8 @@ from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+
+from selenium.webdriver.common.action_chains import ActionChains
 
 #pip3 install webdriver_manager
 from webdriver_manager.chrome import ChromeDriverManager
@@ -84,6 +88,72 @@ def chromeWebdriver():
 
 driver = chromeWebdriver()
 
+#lock 체크
+LockChkCnt = int(0)
+def LockChk(PageHtml) :
+	global LockChkCnt
+	action = ActionChains(driver)
+	PageChk = "N"
+	ResultChk = ""
+	try :
+		if re.search('we have detected unusual traffic from your network', str(PageHtml)) :
+			PageChk = "Y"
+			LockChkCnt = LockChkCnt + 1
+			try :
+				slider = driver.find_element(By.ID, "nc_1_n1z")
+				slider.click()
+				action.move_to_element(slider)
+				action.click_and_hold(slider)
+				xoffset = 0
+				while xoffset < 500:
+					xmove = random.randint(10, 50)
+					ymove = random.randint(-1, 1)
+					action.move_by_offset(xmove, ymove)
+					xoffset += xmove
+				action.release()
+				action.perform()
+				ResultChk = "page"
+			except :
+				ResultChk = traceback.format_exc()
+		else :
+			ResultChk = "pass"
+	except :
+		ResultChk = traceback.format_exc()
+
+	if ResultChk != "page" :
+		try :
+			if re.search('.com:443/display', str(PageHtml)) :
+				PageChk = "Y"
+				LockChkCnt = LockChkCnt + 1
+				try :
+					driver.switch_to.frame("baxia-dialog-content")
+					slider = driver.find_element(By.ID, "nc_1_n1z")
+					slider.click()
+					action.move_to_element(slider)
+					action.click_and_hold(slider)
+					xoffset = 0
+					while xoffset < 500:
+						xmove = random.randint(10, 50)
+						ymove = random.randint(-1, 1)
+						action.move_by_offset(xmove, ymove)
+						xoffset += xmove
+					action.release()
+					action.perform()
+					ResultChk = "iframe"
+				except :
+					ResultChk = traceback.format_exc()
+			else :
+				ResultChk = "pass"
+		except :
+			ResultChk = traceback.format_exc()
+
+	PageHtml2 = driver.page_source
+
+	if ResultChk != "pass" and LockChkCnt < 5 :
+		LockChk(PageHtml2)
+
+	return str(ResultChk)+" - "+str(PageChk)+" - "+str(LockChkCnt)
+	
 driver.get("https://aliexpress.com")
 getcookies = driver.get_cookies()
 driver.delete_all_cookies()
@@ -163,7 +233,7 @@ for val in CslId_SiteUrl :
 	OriginUrl = "<ntosoriginurl>"+str(SiteUrl)+"</ntosoriginurl>"
 	#저장파일명
 	SaveFile = FileDir+str(SaveFileName)
-	ErrHtml = ''
+	ErrMsg = ''
 	if SiteUrl == "" or SaveFileName == "" :
 		pass
 	else :
@@ -195,9 +265,21 @@ for val in CslId_SiteUrl :
 		WriteFile = WriteFile + OriginUrl+"\n"
 		if NowUrl :
 			WriteFile = WriteFile + "<ntosnowurl>"+NowUrl+"</ntosnowurl>\n"
+		if ErrMsg :
+			WriteFile = WriteFile + "<ErrMsg>"+str(ErrMsg)+"</ErrMsg>\n"
+
+		#lock 체크
+		if PageHtml != "" :
+			lock_chk = ""
+			lock_chk = LockChk(PageHtml)
+			if lock_chk != "" :
+				WriteFile = WriteFile + "<lock_chk>"+lock_chk+"</lock_chk>\n"
+
+			driver.implicitly_wait(10)
+			PageHtml = driver.page_source
+			NowUrl = driver.current_url
+		
 		WriteFile = WriteFile + PageHtml
-		if ErrHtml :
-			WriteFile = WriteFile + "\n\n" + str(ErrHtml)
 		f = open(SaveFile, 'w', encoding="utf8")
 		f.write(WriteFile)
 		f.close()
