@@ -52,13 +52,10 @@ UserAgent = MConfig['UserAgent']
 FileSaveDir = MConfig['FileSaveDir']
 ChromeVer = MConfig['ChromeVer']
 FileDir = ""
-if CustId == "aliexpress" :
-	FileDir = "/home/ntosmini/ali_category/"
+if FileSaveDir == "" :
+	exit()
 else :
-	if FileSaveDir == "" :
-		exit()
-	else :
-		FileDir = FileSaveDir
+	FileDir = FileSaveDir
 
 
 def osgzip(File) :
