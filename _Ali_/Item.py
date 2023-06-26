@@ -8,6 +8,8 @@ import io
 import os
 import requests
 import traceback
+import re
+import random
 
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
@@ -87,55 +89,58 @@ driver = chromeWebdriver()
 #lock 체크
 def LockChk(PageHtml) :
 	action = ActionChains(driver)
+	ResultChk = ""
 	try :
-		if re.search('Sorry, we have detected unusual traffic from your network', str(PageHtml)) :
+		if re.search('we have detected unusual traffic from your network', str(PageHtml)) :
 			try :
-				slider2 = driver.find_element(By.ID, "nc_1_n1z")
-				slider2.click()
-				action.move_to_element(slider2)
-				action.click_and_hold(slider2)
-				xoffset = 0
-				while xoffset < 400 :
-					xmove = random.randint(10, 50)
-					ymove = random.randint(-1, 1)
-					action.move_by_offset(xmove, ymove)
-					xoffset += xmove
-				action.release()
-				action.perform()
-				return "page"
-			except :
-				err = traceback.format_exc()
-				return str(err)
-		else :
-			pass
-	except :
-		pass
-
-	try :
-		if re.search('.com:443/display', str(PageHtml)) :
-			try :
-				driver.switch_to.frame("baxia-dialog-content")
 				slider = driver.find_element(By.ID, "nc_1_n1z")
 				slider.click()
 				action.move_to_element(slider)
 				action.click_and_hold(slider)
 				xoffset = 0
-				while xoffset < 400 :
+				while xoffset < 500:
 					xmove = random.randint(10, 50)
 					ymove = random.randint(-1, 1)
 					action.move_by_offset(xmove, ymove)
 					xoffset += xmove
 				action.release()
 				action.perform()
-				return "iframe"
+				ResultChk = "page"
 			except :
-				err = traceback.format_exc()
-				return str(err)
+				ResultChk = traceback.format_exc()
 		else :
+			ResultChk = "pass"
 			pass
 	except :
-		pass
-	return "pass"
+		ResultChk = traceback.format_exc()
+
+	if ResultChk != "page" :
+		try :
+			if re.search('.com:443/display', str(PageHtml)) :
+				try :
+					driver.switch_to.frame("baxia-dialog-content")
+					slider = driver.find_element(By.ID, "nc_1_n1z")
+					slider.click()
+					action.move_to_element(slider)
+					action.click_and_hold(slider)
+					xoffset = 0
+					while xoffset < 500:
+						xmove = random.randint(10, 50)
+						ymove = random.randint(-1, 1)
+						action.move_by_offset(xmove, ymove)
+						xoffset += xmove
+					action.release()
+					action.perform()
+					ResultChk = "iframe"
+				except :
+					ResultChk = traceback.format_exc()
+			else :
+				ResultChk = "pass"
+				pass
+		except :
+			ResultChk = traceback.format_exc()
+
+	return str(ResultChk)
 
 driver.get("https://aliexpress.com")
 driver.implicitly_wait(3)
