@@ -147,7 +147,7 @@ def LockChk(PageHtml) :
 
 	PageHtml2 = driver.page_source
 
-	if ResultChk != "pass" and LockChkCnt < 5 :
+	if ResultChk != "pass" or LockChkCnt < 5 :
 		LockChk(PageHtml2)
 
 	return str(ResultChk)+" - "+str(PageChk)+" - "+str(LockChkCnt)
