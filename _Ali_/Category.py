@@ -115,7 +115,6 @@ def LockChk(PageHtml) :
 				ResultChk = traceback.format_exc()
 		else :
 			ResultChk = "pass"
-			pass
 	except :
 		ResultChk = traceback.format_exc()
 
@@ -143,7 +142,6 @@ def LockChk(PageHtml) :
 					ResultChk = traceback.format_exc()
 			else :
 				ResultChk = "pass"
-				pass
 		except :
 			ResultChk = traceback.format_exc()
 
