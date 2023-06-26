@@ -87,12 +87,16 @@ driver = chromeWebdriver()
 
 
 #lock 체크
-#lock 체크
+LockChkCnt = int(0)
 def LockChk(PageHtml) :
+	global LockChkCnt
 	action = ActionChains(driver)
+	PageChk = "N"
 	ResultChk = ""
 	try :
 		if re.search('we have detected unusual traffic from your network', str(PageHtml)) :
+			PageChk = "Y"
+			LockChkCnt = LockChkCnt + 1
 			try :
 				slider = driver.find_element(By.ID, "nc_1_n1z")
 				slider.click()
@@ -118,6 +122,8 @@ def LockChk(PageHtml) :
 	if ResultChk != "page" :
 		try :
 			if re.search('.com:443/display', str(PageHtml)) :
+				PageChk = "Y"
+				LockChkCnt = LockChkCnt + 1
 				try :
 					driver.switch_to.frame("baxia-dialog-content")
 					slider = driver.find_element(By.ID, "nc_1_n1z")
@@ -141,7 +147,12 @@ def LockChk(PageHtml) :
 		except :
 			ResultChk = traceback.format_exc()
 
-	return str(ResultChk)
+	PageHtml = driver.page_source
+
+	if LockChkCnt < 5 and ResultChk != "pass" :
+		LockChk(PageHtml)
+
+	return str(ResultChk)+" - "+str(PageChk)+" - "+str(LockChkCnt)
 	
 driver.get("https://aliexpress.com")
 
