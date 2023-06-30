@@ -30,7 +30,10 @@ from fake_useragent import UserAgent
 sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
 sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
 
+# 운영체제
 os_info = platform.system()
+# 화면 출력
+debug = False
 
 search_keyword = ['원피스'
 ,'써스데이아일랜드원피스'
@@ -143,8 +146,7 @@ def chromeWebdriver():
 
 	if os_info != 'Darwin' :
 		chrome_options.add_argument('--headless=new')
-
-	chrome_options.add_argument('--headless=new')
+	
 	chrome_options.add_argument('--no-sandbox')
 	chrome_options.add_argument('--blink-settings=imagesEnabled=false')
 	chrome_options.add_argument('--window-size=1920,1080')
@@ -191,6 +193,9 @@ class EnhancedActionChains(ActionChains):
 # 네이버 쇼핑 클릭
 def clickShoppingLink(driver) :
 
+	if debug :
+		print("In clickShoppingLink")
+
 	retVal = "success"
 	
 	try:
@@ -206,9 +211,13 @@ def clickShoppingLink(driver) :
 		MouseScroll2(driver)
 
 	except Exception as e:
+		
 		retVal = "error"
-		print("clickShoppingLink error")
-		print(e)
+
+		if debug :
+			print("clickShoppingLink error")
+			print(e)
+
 		return retVal
 
 	try:
@@ -234,8 +243,12 @@ def clickShoppingLink(driver) :
 		driver.close()
 
 	except Exception as e:
-		print("clickShoppingLink error2")
-		print(e)
+		retVal = "error"
+
+		if debug :
+			print("clickShoppingLink error2")
+			print(e)
+
 		driver.close()
 		pass
 
@@ -243,6 +256,9 @@ def clickShoppingLink(driver) :
 
 #네이버 블로그 클릭
 def clickBlogLink(driver) :
+
+	if debug :
+		print("In clickBlogLink")
 
 	retVal = "success"
 
@@ -264,13 +280,56 @@ def clickBlogLink(driver) :
 		driver.close()
 		
 	except Exception as e:
-		print("clickBlogLink error")
-		print(e)
+		
+		retVal = "error"
+		
+		if debug :
+			print("clickBlogLink error")
+			print(e)
+		
 		pass
 
 	
 	return retVal
+
+#네이버 인플루언서 클릭
+def clickInfluencerLink(driver) :
+
+	if debug :
+		print("In clickInfluencerLink")
+
+	retVal = "success"
+
+	try:
+		# 네이버 검색 페이지에서 클릭
+		elements = driver.find_elements(By.CSS_SELECTOR, "div[class='dsc_area']>a[href*='https://in.naver.com']")	
+		element = elements[random.randint(0, len(elements)-1)]
+		ActionChains(driver).move_to_element(element).click().perform()
+
+		time.sleep(random.uniform(0.5, 5))
+
+		driver.switch_to.window(driver.window_handles[1])
+
+		MouseScroll2(driver)
+		MouseScroll2(driver)
+		MouseScroll2(driver)
+
+		driver.close()
+		
+	except Exception as e:
+		
+		retVal = "error"
+
+		if debug :
+			print("clickInfluencerLink error")
+			print(e)
+		
+		pass
+
 	
+	return retVal
+
+
 	
 driver = chromeWebdriver()
 
@@ -300,20 +359,40 @@ MouseScroll2(driver)
 
 time.sleep(random.randint(1, 3))
 
-for i in range(0, random.randint(2, 6)) :
+loop_cnt = list(range(0, random.randint(3, 6)))
 
-	if random.randint(0, 1) == 0 :
-		print(str(i) + "_clickShoppingLink")
-		clickShoppingLink(driver)		
+is_blog = "success"
+is_influencer = "success"
+
+for i in loop_cnt :
+	
+	work_num = random.randint(0, 2)
+
+	if work_num == 1 and is_blog == "sccuess":
+		is_blog = clickBlogLink(driver)
+
+		if is_blog == "error" :
+			loop_cnt.append( loop_cnt[-1] + 1)
+
+	elif work_num == 2 and is_influencer == "success" :
+		is_influencer = clickInfluencerLink(driver)
+
+		if is_influencer == "error" :
+			loop_cnt.append( loop_cnt[-1] + 1)
 	else :
-		print(str(i) + "_clickBlogLink")
-		clickBlogLink(driver)
+		clickShoppingLink(driver)
+
+	# 최대 6번만 움직이게
+	if len(loop_cnt) > 6 :
+		del loop_cnt[-1]
 
 	try:
 		driver.switch_to.window(driver.window_handles[0])
 	except Exception as e:
-		print("link click error")
-		print(e)
+
+		if debug :
+			print("link click error")
+			print(e)
 		pass
 
 	time.sleep(random.randint(5, 10))
@@ -339,7 +418,8 @@ time.sleep(random.randint(1, 3))
 
 elem.send_keys(Keys.ENTER)
 
-print("naver search")
+if debug :
+	print("naver search")
 
 try:
 
@@ -347,14 +427,18 @@ try:
 
 	elements = driver.find_elements(By.XPATH, '//*[@id="main_pack"]/section/div/ul/li')
 
-	print("Before Mecotine Click")
+	if debug :
+		print("Before Mecotine Click")
+
 	for elem in elements:
 		e = elem.find_element(By.CLASS_NAME, 'total_tit')
 		if e.text == "[메코틴] 국내 유일 고품질의 RS-니코틴 메코틴본사":        
 			e.click()
 			time.sleep(random.randint(1, 2))
 			break
-	print("After Mecotine Click")
+
+	if debug :
+		print("After Mecotine Click")
 
 	time.sleep(random.randint(1, 3))
 
@@ -367,41 +451,51 @@ try:
 	for i in range(0, num) :
 		
 		try : 
-			print( str(i) + "_before_goods_click")
-			a_elements = driver.find_elements(By.CSS_SELECTOR, "li[class='name']>a[href*='shopdetail']")
-			a_elements[random.randint(0, len(a_elements)-1)].click()
 
-			del a_elements
+			if debug :
+				print( str(i) + "_before_goods_click")
 
-			print( str(i) + "_after_goods_click")
+			
+			#a_elements = driver.find_elements(By.CSS_SELECTOR, "li[class='name']>a[href*='shopdetail']")
+			a_elements = driver.find_elements(By.CSS_SELECTOR, "div[class='thumnail']")			
+			a_element = a_elements[random.randint(0, len(a_elements)-1)]	
+			ActionChains(driver).move_to_element(a_element).click().perform()
+
+			del a_elements, a_element
+
+			if debug :
+				print( str(i) + "_after_goods_click")
 
 			MouseScroll2(driver)
 			
-			print( str(i) + "_after_goods_click2")
+			if debug :
+				print( str(i) + "_after_goods_click2")
 
 			time.sleep(random.randint(12, 20))
 			
 			#driver.back()
 			driver.execute_script("window.history.go(-1)")
 
-			print( str(i) + "_after_goods_click3")
+			if debug :
+				print( str(i) + "_after_goods_click3")
 
 			time.sleep(random.randint(12, 18))
 
-			print( str(i) + "_end_goods_click")
+			if debug :
+				print( str(i) + "_end_goods_click")
 
 			
 		except Exception as e:
-			print( str(i) + "_error_goods_click")
-			print(driver.current_url)
-			print(e)
+			if debug :
+				print( str(i) + "_error_goods_click")
+				print(driver.current_url)
+				print(e)
 			pass
 
-	print("SUCESS")
+	print("SUCCESS")
 	driver.quit()
 
 except Exception as e:
 	print("예외발생")
 	print(e)
 	driver.quit()
-
