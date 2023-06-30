@@ -457,7 +457,8 @@ try:
 
 			
 			#a_elements = driver.find_elements(By.CSS_SELECTOR, "li[class='name']>a[href*='shopdetail']")
-			a_elements = driver.find_elements(By.CSS_SELECTOR, "div[class='thumnail']")			
+			#a_elements = driver.find_elements(By.CSS_SELECTOR, "div[class='thumnail']")
+			a_elements = driver.find_elements(By.CSS_SELECTOR, "li[class='name']")
 			a_element = a_elements[random.randint(0, len(a_elements)-1)]	
 			ActionChains(driver).move_to_element(a_element).click().perform()
 
