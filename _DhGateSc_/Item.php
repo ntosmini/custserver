@@ -22,6 +22,9 @@ $RunData['Scroll'] = ($_POST['Scroll'] == "Y")?$_POST['Scroll']:"N";	//스크롤
 $RunData['ScrapResultType'] = (empty($_POST['ScrapResultType']))?"view":$_POST['ScrapResultType'];	//수집파일 방식 - save or send or view
 $RunData['ChromeVer'] = (empty($_POST['ChromeVer']))?"":$_POST['ChromeVer'];	//Chrome version
 
+$RunData['ship_country'] = (empty($_POST['ship_country']))?"KR":$_POST['ship_country'];	//언어 KR or US
+$RunData['ip_country'] = (empty($_POST['ip_country']))?"US":$_POST['ip_country'];	//통화 KR or US
+
 if($RunData['SiteUrlOne'] == "N" && $RunData['ScrapResultType'] == "view"){
 	echo "not SiteUrlOne : ".$RunData['SiteUrlOne'].", ScrapResultType : ".$RunData['ScrapResultType'];
 	exit;
