@@ -50,6 +50,9 @@ NtosSendServer = MConfig['NtosSendServer']
 UserAgent = MConfig['UserAgent']
 ChromeVer = MConfig['ChromeVer']
 
+ship_country = MConfig['ship_country']
+ip_country = MConfig['ip_country']
+
 executable_path = ChromeDriverManager().install()
 
 def chromeWebdriver():
@@ -80,9 +83,9 @@ driver.delete_all_cookies()
 for cookie in getcookies :
 	arr = {}
 	if cookie['name'] == "b2b_ship_country" :
-		cookie['value'] = "KR"
+		cookie['value'] = ship_country
 	if cookie['name'] == "b2b_ip_country" :
-		cookie['value'] = "US"
+		cookie['value'] = ip_country
 
 	for val in cookie.keys() :
 		arr[val] = cookie[val]
