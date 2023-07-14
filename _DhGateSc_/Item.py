@@ -83,9 +83,15 @@ driver.delete_all_cookies()
 for cookie in getcookies :
 	arr = {}
 	if cookie['name'] == "b2b_ship_country" :
-		cookie['value'] = ShipCountry
+		if ShipCountry == "KR" :
+			cookie['value'] = "KR"
+		else :
+			cookie['value'] = "US"
 	if cookie['name'] == "b2b_ip_country" :
-		cookie['value'] = IpCountry
+		if IpCountry == "KR" :
+			cookie['value'] = "KR"
+		else :
+			cookie['value'] = "US"
 
 	for val in cookie.keys() :
 		arr[val] = cookie[val]
