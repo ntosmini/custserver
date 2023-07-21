@@ -43,7 +43,7 @@ if($Type == "web"){
 	$MiniServerGet['PageHtml'] = "ntoswebsuccess";
 
 	$ch = curl_init();
-	curl_setopt($ch, CURLOPT_URL, $SendServerUrl );
+	curl_setopt($ch, CURLOPT_URL, $NtosServer );
 	curl_setopt($ch, CURLOPT_HEADER, false);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
