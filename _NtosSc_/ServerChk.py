@@ -2,10 +2,15 @@
 # 서버체크 v4
 import sys
 import json
+import requests
 import traceback
 
 MConfigData = sys.argv[1]
 MConfig = json.loads(MConfigData)
+
+CustId = MConfig['SiteUrl']
+SId = MConfig['SiteUrl']
+NtosServer = MConfig['SiteUrl']
 SiteUrl = MConfig['SiteUrl']
 ChromeVer = MConfig['ChromeVer']
 
@@ -42,15 +47,20 @@ def chromeWebdriver():
 
 
 driver = chromeWebdriver()
+PageHtml = ''
 try :
 	driver.get(SiteUrl)
 	driver.implicitly_wait(10)
 	PageHtml = driver.page_source
 	driver.close()
 	driver.quit()
-	print(PageHtml)
 except :
-	err = traceback.format_exc()
-	print(str(err))
-	driver.close()
-	driver.quit()
+	PageHtml = 'ntosseleniumfalse'
+CustId = MConfig['SiteUrl']
+SId = MConfig['SiteUrl']
+NtosServer = MConfig['SiteUrl']
+SiteUrl = MConfig['SiteUrl']
+
+data = {'CustId':str(CustId), 'SId':str(SId), 'PageHtml':str(PageHtml) }
+headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
+requests.post(NtosServer, data=json.dumps(data), headers=headers)
