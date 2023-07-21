@@ -12,7 +12,7 @@ if($Type == "web"){
 } else if($Type == "selenium"){
 	$RunData['SiteUrl'] = $SiteUrl;
 	$MConfigData = escapeshellarg(json_encode($RunData));
-	exec("python3 /home/ntosmini/public_html/_NtosSc_/ServerChk.{$Ver}.py {$MConfigData}", $ResultArr);
+	exec("PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin python3 /home/ntosmini/public_html/_NtosSc_/ServerChk.py {$MConfigData}", $ResultArr);
 	$PageHtml = implode("\n", $ResultArr);
 } else {
 	$PageHtml = 'not Type';
