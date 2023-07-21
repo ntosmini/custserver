@@ -9,6 +9,7 @@ MConfig = json.loads(MConfigData)
 SiteUrl = MConfig['SiteUrl']
 ChromeVer = MConfig['ChromeVer']
 """
+ChromeVer = ""
 SiteUrl = "http://product.ntos.co.kr/_SeleniumChk.php"
 
 from selenium import webdriver
