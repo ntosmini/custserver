@@ -9,6 +9,8 @@ $CustId = (empty($_POST['CustId']))?"":$_POST['CustId']; //id
 $SId = (empty($_POST['SId']))?"":$_POST['SId']; //server id
 $NtosServer = (empty($_POST['NtosServer']))?"":$_POST['NtosServer']; //받을 url
 $SiteUrl = (empty($_POST['SiteUrl']))?"":$_POST['SiteUrl'];
+$ChromeVer = (empty($_POST['ChromeVer']))?"":$_POST['ChromeVer'];
+
 
 if(empty($CustId)){
 	echo 'not CustId';
@@ -62,6 +64,7 @@ if($Type == "web"){
 	$RunData['SId'] = $SId;
 	$RunData['NtosServer'] = $NtosServer;
 	$RunData['SiteUrl'] = $SiteUrl;
+	$RunData['ChromeVer'] = $ChromeVer;
 
 	$MConfigData = escapeshellarg(json_encode($RunData));
 	exec("PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin python3 /home/ntosmini/public_html/_NtosSc_/ServerChk.py {$MConfigData}", $ResultArr);
