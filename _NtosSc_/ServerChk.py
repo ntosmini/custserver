@@ -62,5 +62,4 @@ NtosServer = MConfig['SiteUrl']
 SiteUrl = MConfig['SiteUrl']
 
 data = {'CustId':str(CustId), 'SId':str(SId), 'PageHtml':str(PageHtml) }
-headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
-requests.post(NtosServer, data=json.dumps(data), headers=headers)
+requests.post(NtosServer, data=json.dumps(data))
