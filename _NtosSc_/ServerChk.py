@@ -3,11 +3,13 @@
 import sys
 import json
 import traceback
-
+"""
 MConfigData = sys.argv[1]
 MConfig = json.loads(MConfigData)
 SiteUrl = MConfig['SiteUrl']
 ChromeVer = MConfig['ChromeVer']
+"""
+SiteUrl = "http://product.ntos.co.kr/_SeleniumChk.php"
 
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
