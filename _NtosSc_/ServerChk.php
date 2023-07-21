@@ -1,7 +1,9 @@
 <?php
 set_time_limit(0);
 header("Content-Type: text/html; charset=UTF-8");
-
+/*
+체크용 지우면 안됨
+*/
 $Type = (empty($_GET['Type']))?"web":$_GET['Type']; //web, selenium
 $Ver = (empty($_GET['Ver']))?"":$_GET['Ver'];	//v3 or v4
 $SiteUrl = (empty($_GET['SiteUrl']))?"":urldecode($_GET['SiteUrl']);
