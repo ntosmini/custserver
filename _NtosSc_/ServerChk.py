@@ -8,6 +8,7 @@ import traceback
 MConfigData = sys.argv[1]
 MConfig = json.loads(MConfigData)
 
+Type = MConfig['Type']
 CustId = MConfig['SiteUrl']
 SId = MConfig['SiteUrl']
 NtosServer = MConfig['SiteUrl']
@@ -61,5 +62,5 @@ SId = MConfig['SiteUrl']
 NtosServer = MConfig['SiteUrl']
 SiteUrl = MConfig['SiteUrl']
 
-data = {'CustId':str(CustId), 'SId':str(SId), 'PageHtml':str(PageHtml) }
+data = {'CustId':str(CustId), 'SId':str(SId), 'Type':str(Type), 'PageHtml':str(PageHtml) }
 requests.post(NtosServer, data=json.dumps(data))
