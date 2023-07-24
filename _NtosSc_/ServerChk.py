@@ -9,9 +9,9 @@ MConfigData = sys.argv[1]
 MConfig = json.loads(MConfigData)
 
 Type = MConfig['Type']
-CustId = MConfig['SiteUrl']
-SId = MConfig['SiteUrl']
-NtosServer = MConfig['SiteUrl']
+CustId = MConfig['CustId']
+SId = MConfig['SId']
+NtosServer = MConfig['NtosServer']
 SiteUrl = MConfig['SiteUrl']
 ChromeVer = MConfig['ChromeVer']
 
