@@ -59,8 +59,8 @@ if($Type == "web"){
 	exit;
 
 } else if($Type == "selenium"){
+	$RunData['Type'] = $Type;
 	$RunData['SiteUrl'] = $SiteUrl;
-
 	$RunData['CustId'] = $CustId;
 	$RunData['SId'] = $SId;
 	$RunData['NtosServer'] = $NtosServer;
