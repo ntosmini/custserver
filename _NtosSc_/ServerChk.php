@@ -71,6 +71,7 @@ if($Type == "web"){
 	$MConfigData = escapeshellarg(json_encode($RunData));
 	exec("PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin python3 /home/ntosmini/public_html/_NtosSc_/ServerChk.py {$MConfigData}", $ResultArr);
 	$PageHtml = implode("\n", $ResultArr);
+	$PageHtml = strip_tags($PageHtml);
 	echo $PageHtml;
 	exit;
 } else {
