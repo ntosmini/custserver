@@ -38,6 +38,7 @@ if(empty($SId)){
 }
 
 if($Type == "web"){
+	$MiniServerGet['Type'] = $Type;
 	$MiniServerGet['CustId'] = $CustId;
 	$MiniServerGet['SId'] = $SId;
 	$MiniServerGet['PageHtml'] = "ntoswebsuccess";
