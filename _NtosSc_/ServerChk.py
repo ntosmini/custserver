@@ -57,10 +57,6 @@ try :
 	driver.quit()
 except :
 	PageHtml = 'ntosseleniumfalse'
-CustId = MConfig['SiteUrl']
-SId = MConfig['SiteUrl']
-NtosServer = MConfig['SiteUrl']
-SiteUrl = MConfig['SiteUrl']
 
 data = {'CustId':str(CustId), 'SId':str(SId), 'Type':str(Type), 'PageHtml':str(PageHtml) }
-requests.post(NtosServer, data=json.dumps(data))
+requests.post(NtosServer, data=data)
