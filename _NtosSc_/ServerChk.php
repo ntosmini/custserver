@@ -56,6 +56,7 @@ if($Type == "web"){
 	$PageHtml=curl_exec($ch);
 	$http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 	curl_close($ch);
+	echo $PageHtml;
 	exit;
 
 } else if($Type == "selenium"){
@@ -69,6 +70,8 @@ if($Type == "web"){
 
 	$MConfigData = escapeshellarg(json_encode($RunData));
 	exec("PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin python3 /home/ntosmini/public_html/_NtosSc_/ServerChk.py {$MConfigData}", $ResultArr);
+	$PageHtml = implode("\n", $ResultArr);
+	echo $PageHtml;
 	exit;
 } else {
 	$PageHtml = 'not Type';
