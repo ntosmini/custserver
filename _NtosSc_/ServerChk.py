@@ -60,3 +60,4 @@ except :
 
 data = {'CustId':str(CustId), 'SId':str(SId), 'Type':str(Type), 'PageHtml':str(PageHtml) }
 requests.post(NtosServer, data=data)
+print(str(PageHtml))
