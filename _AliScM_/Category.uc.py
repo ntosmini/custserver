@@ -95,7 +95,8 @@ for val in SiteUrlList :
 
 		if ErrMsg :
 			ErrMsg = "<error>"+ErrMsg+"</error>\n\n"
-
+		print(PageHtml)
+		print(ErrMsg)
 		WriteFile = "<time>"+time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))+"</time>\n\n"
 		WriteFile = WriteFile + OriginUrl + NowUrl + PageHtml + ErrMsg
 
