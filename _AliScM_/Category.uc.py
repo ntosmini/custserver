@@ -70,6 +70,7 @@ for val in SiteUrlList :
 	else :
 		try :
 			driver.get(SiteUrl)
+			driver.implicitly_wait(10)
 			PageHtml = driver.page_source
 			NowUrl = driver.current_url
 		except :
