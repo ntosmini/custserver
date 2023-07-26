@@ -61,7 +61,7 @@ def chromeWebdriver():
 	chrome_options.add_argument('--ignore-ssl-errors=yes')
 	chrome_options.add_argument('--disable-gpu')
 	if UserAgent :
-		chrome_options.add_argument('user-agent=' + UserAgent)
+		chrome_options.add_argument('--user-agent=' + UserAgent)
 	if ChromeVer :
 		driver = uc.Chrome(service=chrome_service, options=chrome_options, version_main=ChromeVer)
 	else :
