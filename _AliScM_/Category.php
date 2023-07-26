@@ -2,7 +2,7 @@
 set_time_limit(0);
 header("Content-Type: text/html; charset=UTF-8");
 /*
-상품 - 모바일
+알리 카테고리 - 모바일
 */
 
 $RunData = array();
