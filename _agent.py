@@ -7,8 +7,8 @@ sys.path.append(os.path.dirname("/home/ntosmini/public_html/_agent.py"))
 
 import _agent
 
-mobileagent = _agent.get_mobile_agent()
-pcagent = _agent.get_pc_agent()
+mobile_agent = _agent.get_mobile_agent()
+pc_agent = _agent.get_pc_agent()
 """
 def get_mobile_agent():
 	list = ["Mozilla/5.0 (Linux; Android 13; SM-S901U) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.5304.63 Mobile Safari/537.36"
