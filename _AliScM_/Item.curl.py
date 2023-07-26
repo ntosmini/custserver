@@ -27,7 +27,7 @@ FileSendSave = MConfig['FileSendSave']  #저장후 전송여부
 NtosServer = MConfig['NtosServer']  #전송서버 url
 
 FileDir = MConfig['FileDir']  #저장폴더
-UserAgent = MConfig['UserAgent']
+
 
 LangType = MConfig['LangType']	#언어 및 통화 (ko | en)
 cookies_en = {
@@ -40,6 +40,10 @@ cookies_ko = {
 'aep_usuc_f': 'site=kor&c_tp=KRW&region=KR&b_locale=ko_KR',
 'intl_locale': 'ko_KR',
 }
+
+sys.path.append(os.path.dirname("/home/ntosmini/public_html/_agent.py"))
+import _agent
+UserAgent = _agent.get_mobile_agent()
 
 headers = {
 	"User-Agent":UserAgent
