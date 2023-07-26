@@ -39,15 +39,12 @@ $MConfigData = escapeshellarg(json_encode($RunData));
 
 switch($ScrapType){
 	case 'curl' :
-		echo "1";
 		exec("python3 /home/ntosmini/public_html/_AliScM_/Category.curl.py {$MConfigData}", $ResultArr);
 	break;
 	case 'uc' :
-		echo "2";
 		exec("PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin python3 /home/ntosmini/public_html/_AliScM_/Category.uc.py {$MConfigData}", $ResultArr);
 	break;
 	default :
-		echo "3";
 		exec("python3 /home/ntosmini/public_html/_AliScM_/Category.selenium.py {$MConfigData}", $ResultArr);
 	break;
 }
