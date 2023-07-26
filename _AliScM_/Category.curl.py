@@ -83,7 +83,7 @@ for val in SiteUrlList :
       gzfile = SaveFile+".gz"
       files = open(gzfile, 'rb')
       upload = {'file': files}
-      data = {'CustId':CustId, 'ScrapType':'item' }
+      data = {'CustId':CustId, 'ScrapType':'cate' }
       Result_ = requests.post(NtosServer, data=data, files=upload)
       Result = Result_.text
       if os.path.exists(gzfile) :
