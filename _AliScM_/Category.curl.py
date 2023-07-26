@@ -47,46 +47,45 @@ headers = {
 }
 
 for val in SiteUrlList :
-  #에러msg
-  ErrMsg = ''
-  PageHtml = ''
-  (SiteUrl, SaveFileName) = val.split("|@|")
-  OriginUrl = "<ntosoriginurl>"+str(SiteUrl)+"</ntosoriginurl>\n\n"
-  #저장파일명
-  SaveFile = FileDir+str(SaveFileName)
-  SaveFile = SaveFile.replace('.html', '_'+str(time.strftime('%H%M', time.localtime(time.time())))+'.html')
-  if SiteUrl == "" or SaveFileName == "" :
-    pass
-  else :
-    try :
-      if LangType == "ko" :
-        PageHtml = requests.get(SiteUrl, headers=headers, cookies=cookies_ko)
-      elif LangType == "en" :
-        PageHtml = requests.get(SiteUrl, headers=headers, cookies=cookies_en)
-      else :
-        PageHtml = requests.get(SiteUrl, headers=headers)
-      PageHtmlRecode = PageHtml.status_code
-      PageHtml = PageHtml.text
-    except :
-      PageHtml = ''
-      PageHtmlRecode = 'error'
-      ErrMsg = ErrMsg + str(traceback.format_exc()) + "\n\n"
-    WriteFile = "<time>"+time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))+"</time>\n\n"
-    WriteFile = WriteFile + OriginUrl + PageHtml + ErrMsg
+	#에러msg
+	ErrMsg = ''
+	PageHtml = ''
+	(SiteUrl, SaveFileName) = val.split("|@|")
+	OriginUrl = "<ntosoriginurl>"+str(SiteUrl)+"</ntosoriginurl>\n\n"
+	#저장파일명
+	SaveFile = FileDir+str(SaveFileName)
+	SaveFile = SaveFile.replace('.html', '_'+str(time.strftime('%H%M', time.localtime(time.time())))+'.html')
+	if SiteUrl == "" or SaveFileName == "" :
+		pass
+	else :
+		try :
+			if LangType == "ko" :
+				PageHtml = requests.get(SiteUrl, headers=headers, cookies=cookies_ko)
+			elif LangType == "en" :
+				PageHtml = requests.get(SiteUrl, headers=headers, cookies=cookies_en)
+			else :
+				PageHtml = requests.get(SiteUrl, headers=headers)
+			PageHtmlRecode = PageHtml.status_code
+			PageHtml = PageHtml.text
+		except :
+			PageHtml = ''
+			PageHtmlRecode = 'error'
+		ErrMsg = ErrMsg + str(traceback.format_exc()) + "\n\n"
+		WriteFile = "<time>"+time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))+"</time>\n\n"
+		WriteFile = WriteFile + OriginUrl + PageHtml + ErrMsg
 
-    f = open(SaveFile, 'w', encoding="utf8")
-    f.write(WriteFile)
-    f.close()
-    os.system("gzip "+SaveFile)
-    
-    if FileSendSave == "Y" and NtosServer != "" :
-      gzfile = SaveFile+".gz"
-      files = open(gzfile, 'rb')
-      upload = {'file': files}
-      data = {'CustId':CustId, 'ScrapType':'cate' }
-      Result_ = requests.post(NtosServer, data=data, files=upload)
-      Result = Result_.text
-      if os.path.exists(gzfile) :
-        os.remove(gzfile)
-  time.sleep(random.randint(3, 6))
-      
+		f = open(SaveFile, 'w', encoding="utf8")
+		f.write(WriteFile)
+		f.close()
+		os.system("gzip "+SaveFile)
+
+		if FileSendSave == "Y" and NtosServer != "" :
+			gzfile = SaveFile+".gz"
+			files = open(gzfile, 'rb')
+			upload = {'file': files}
+			data = {'CustId':CustId, 'ScrapType':'cate' }
+			Result_ = requests.post(NtosServer, data=data, files=upload)
+			Result = Result_.text
+			if os.path.exists(gzfile) :
+				os.remove(gzfile)
+	time.sleep(random.randint(3, 6))     
