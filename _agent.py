@@ -1,6 +1,6 @@
 import random
 
-def get_agent():
+def get_mobile_agent():
 	list = ["Mozilla/5.0 (Linux; Android 13; SM-S901U) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.5304.63 Mobile Safari/537.36"
 	,"Mozilla/5.0 (Linux; Android 13; Pixel 4 XL) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.5304.115 Mobile Safari/537.36"
 	,"Mozilla/5.0 (Linux; Android 13; SM-S908B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.5238.167 Mobile Safari/537.36"
