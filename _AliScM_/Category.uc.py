@@ -26,6 +26,11 @@ import undetected_chromedriver as uc
 sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
 sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
 
+
+sys.path.append(os.path.dirname("/home/ntosmini/public_html/_agent.py"))
+import _agent
+UserAgent = _agent.get_mobile_agent()
+
 SiteUrlList = []
 
 MConfigData = sys.argv[1]
@@ -55,6 +60,8 @@ def chromeWebdriver():
 	chrome_options.add_argument('--ignore-certificate-errors')
 	chrome_options.add_argument('--ignore-ssl-errors=yes')
 	chrome_options.add_argument('--disable-gpu')
+	if UserAgent :
+		chrome_options.add_argument('user-agent=' + UserAgent)
 	if ChromeVer :
 		driver = uc.Chrome(service=chrome_service, options=chrome_options, version_main=ChromeVer)
 	else :
