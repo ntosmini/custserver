@@ -77,7 +77,8 @@ for val in SiteUrlList :
 			PageHtml = ''
 			PageHtmlRecode = 'error'
 			ErrMsg = str(traceback.format_exc())
-
+		print(PageHtml)
+		print(ErrMsg)
 		if NowUrl :
 			NowUrl = "<ntosnowurl>"+NowUrl+"</ntosnowurl>\n\n"
 
