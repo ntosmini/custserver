@@ -14,6 +14,8 @@ $RunData['NtosServer'] = (empty($_POST['NtosServer']))?"":$_POST['NtosServer'];	
 $RunData['FileDir']  =(empty($_POST['FileDir']))?"":$_POST['FileDir'];  //저장폴더
 $RunData['LangType']  =(empty($_POST['LangType']))?"":$_POST['LangType'];  //언어 및 통화 (ko | en)
 
+//셀레니움
+$RunData['Scroll']  =(empty($_POST['Scroll']))?"N":$_POST['Scroll'];  //스크롤
 $RunData['StartUrl']  =(empty($_POST['StartUrl']))?"":$_POST['StartUrl'];  //시작URL
 $RunData['ChromeVer']  =(empty($_POST['ChromeVer']))?"":$_POST['ChromeVer'];  //크롬버전
 
