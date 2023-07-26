@@ -14,17 +14,15 @@ import re
 sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
 sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
 
-IslId_SiteUrl = []
+SiteUrlList = []
 
 MConfigData = sys.argv[1]
 MConfig = json.loads(MConfigData)
 
-IslId_SiteUrl = MConfig['IslId_SiteUrl']
+SiteUrlList = MConfig['SiteUrlList']
 CustId = MConfig['CustId']
-
 FileSendSave = MConfig['FileSendSave']  #저장후 전송여부
 NtosServer = MConfig['NtosServer']  #전송서버 url
-
 FileDir = MConfig['FileDir']  #저장폴더
 LangType = MConfig['LangType']	#언어 및 통화 (ko | en)
 
