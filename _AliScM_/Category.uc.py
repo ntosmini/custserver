@@ -21,6 +21,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 
 import undetected_chromedriver as uc
+from urllib.parse import urlparse, parse_qsl, urlencode, urlunparse, unquote
 
 #한글깨짐
 sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
