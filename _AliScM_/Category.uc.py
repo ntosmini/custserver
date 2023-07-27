@@ -148,10 +148,6 @@ for val in SiteUrlList :
 		pass
 	else :
 		try :
-			if Start_netloc :
-				SiteUrl_parts = urlparse(SiteUrl)
-				SiteUrl_netloc = SiteUrl_parts.netloc
-				SiteUrl = SiteUrl.replace(str(SiteUrl_netloc), str(Start_netloc))
 			driver.get(SiteUrl)
 			driver.implicitly_wait(10)
 			PageHtml = driver.page_source
