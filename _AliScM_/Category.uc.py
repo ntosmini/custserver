@@ -75,6 +75,7 @@ if StartUrl :
 	driver.get(StartUrl)
 	driver.implicitly_wait(10)	
 coo = ''
+cooo = ''
 if CookiesLang :
 	if StartUrl == "" :
 		driver.get(StartUrl)
@@ -129,6 +130,7 @@ if CookiesLang :
 
 		for val in cookie.keys() :
 			arr[val] = cookie[val]
+			cooo = cooo + "\n\n" + str(cookie[val])
 		driver.add_cookie(arr)
 		driver.maximize_window()
 
@@ -161,7 +163,7 @@ for val in SiteUrlList :
 		if ErrMsg :
 			ErrMsg = "<error>"+ErrMsg+"</error>\n\n"
 		WriteFile = "<time>"+time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))+"</time>\n\n"
-		WriteFile = WriteFile + OriginUrl + NowUrl + PageHtml + ErrMsg + "\n\n\n" + str(coo)
+		WriteFile = WriteFile + OriginUrl + NowUrl + PageHtml + ErrMsg + "\n\n\n" + str(coo) + "\n\n\n" + str(cooo) 
 
 		f = open(SaveFile, 'w', encoding="utf8")
 		f.write(WriteFile)
