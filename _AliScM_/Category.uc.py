@@ -87,7 +87,7 @@ if CookiesLang :
 		parts = ''
 		new_url = ''
 		qs = {}
-		coo = coo + cookie['value']
+		coo = coo + "\n\n" +cookie['value']
 		if cookie['name'] == "aep_usuc_f" :
 			parts = urlparse('https://aliexpress.com?'+cookie['value'])
 			qs = dict(parse_qsl(parts.query))
