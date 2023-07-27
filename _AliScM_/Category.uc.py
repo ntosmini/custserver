@@ -82,7 +82,7 @@ if StartUrl or (CookiesLang and StartUrl) :
 
 if CookiesLang and Start_netloc :
 	getcookies = driver.get_cookies()
-	#driver.delete_all_cookies()
+	driver.delete_all_cookies()
 
 	for cookie in getcookies :
 		arr = {}
