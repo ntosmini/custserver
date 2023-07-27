@@ -91,7 +91,7 @@ if CookiesLang and Start_netloc :
 		qs = {}
 
 		if cookie['name'] == "aep_usuc_f" :
-			parts = urlparse('https://'+str(Start_netloc)+'?'+cookie['value'])
+			parts = urlparse('https://aliexpress.com?'+cookie['value'])
 			qs = dict(parse_qsl(parts.query))
 			if CookiesLang == "en" :
 				qs['site'] = 'usa'
@@ -105,14 +105,14 @@ if CookiesLang and Start_netloc :
 				qs['b_locale'] = 'ko_KR'
 			parts = parts._replace(query=urlencode(qs))
 			new_url = urlunparse(parts)
-			new_url = unquote(new_url.replace('https://'+str(Start_netloc)+'?', ''))
+			new_url = unquote(new_url.replace('https://aliexpress.com?', ''))
 			cookie['value'] = new_url
 
 		parts = ''
 		new_url = ''
 		qs = {}
 		if cookie['name'] == "xman_us_f" :
-			parts = urlparse('https://'+str(Start_netloc)+'?'+cookie['value'])
+			parts = urlparse('https://aliexpress.com?'+cookie['value'])
 			qs = dict(parse_qsl(parts.query))
 			if CookiesLang == "en" :
 				qs['x_locale'] = 'en_US'
@@ -120,7 +120,7 @@ if CookiesLang and Start_netloc :
 				qs['x_locale'] = 'ko_KR'
 			parts = parts._replace(query=urlencode(qs))
 			new_url = urlunparse(parts)
-			new_url = unquote(new_url.replace('https://'+str(Start_netloc)+'?', ''))
+			new_url = unquote(new_url.replace('https://aliexpress.com?', ''))
 			cookie['value'] = new_url
 
 		if cookie['name'] == "intl_locale" :
