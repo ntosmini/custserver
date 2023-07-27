@@ -25,7 +25,7 @@ CustId = MConfig['CustId']
 FileSendSave = MConfig['FileSendSave']  #저장후 전송여부
 NtosServer = MConfig['NtosServer']  #전송서버 url
 FileDir = MConfig['FileDir']  #저장폴더
-LangType = MConfig['LangType']	#언어 및 통화 (ko | en)
+CookiesLang = MConfig['CookiesLang']	#언어 및 통화 (ko | en)
 
 cookies_en = {
 'xman_us_f': 'x_l=0&x_locale=en_US&x_c_chg=1&acs_rt=',
@@ -59,9 +59,9 @@ for val in SiteUrlList :
 		pass
 	else :
 		try :
-			if LangType == "ko" :
+			if CookiesLang == "ko" :
 				PageHtml = requests.get(SiteUrl, headers=headers, cookies=cookies_ko)
-			elif LangType == "en" :
+			elif CookiesLang == "en" :
 				PageHtml = requests.get(SiteUrl, headers=headers, cookies=cookies_en)
 			else :
 				PageHtml = requests.get(SiteUrl, headers=headers)
