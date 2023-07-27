@@ -132,6 +132,7 @@ if CookiesLang and Start_netloc :
 		for val in cookie.keys() :
 			arr[val] = cookie[val]
 		driver.add_cookie(arr)
+		driver.maximize_window()
 
 for val in SiteUrlList :
 	#에러msg
