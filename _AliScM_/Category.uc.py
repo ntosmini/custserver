@@ -74,7 +74,7 @@ driver = chromeWebdriver()
 if StartUrl :
 	driver.get(StartUrl)
 	driver.implicitly_wait(10)	
-
+coo = ''
 if CookiesLang :
 	if StartUrl == "" :
 		driver.get(StartUrl)
@@ -87,7 +87,7 @@ if CookiesLang :
 		parts = ''
 		new_url = ''
 		qs = {}
-
+		coo = coo + cookie['value']
 		if cookie['name'] == "aep_usuc_f" :
 			parts = urlparse('https://aliexpress.com?'+cookie['value'])
 			qs = dict(parse_qsl(parts.query))
@@ -161,7 +161,7 @@ for val in SiteUrlList :
 		if ErrMsg :
 			ErrMsg = "<error>"+ErrMsg+"</error>\n\n"
 		WriteFile = "<time>"+time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))+"</time>\n\n"
-		WriteFile = WriteFile + OriginUrl + NowUrl + PageHtml + ErrMsg
+		WriteFile = WriteFile + OriginUrl + NowUrl + PageHtml + ErrMsg + "\n\n\n" + str(coo)
 
 		f = open(SaveFile, 'w', encoding="utf8")
 		f.write(WriteFile)
