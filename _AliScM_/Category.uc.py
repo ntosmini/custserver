@@ -72,15 +72,11 @@ def chromeWebdriver():
 driver = chromeWebdriver()
 
 Start_netloc = ''
-if StartUrl or (CookiesLang and StartUrl) :
+if StartUrl :
 	driver.get(StartUrl)
-	driver.implicitly_wait(10)
-	Start_NowUrl = driver.current_url
-	Start_parts = urlparse(Start_NowUrl)
-	Start_netloc = Start_parts.netloc
-	
+	driver.implicitly_wait(10)	
 
-if CookiesLang and Start_netloc :
+if CookiesLang :
 	getcookies = driver.get_cookies()
 	driver.delete_all_cookies()
 
