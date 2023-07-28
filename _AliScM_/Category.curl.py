@@ -68,6 +68,7 @@ for val in SiteUrlList :
 					PageHtml = requests.get(SiteUrl, headers=headers)
 				PageHtmlRecode = PageHtml.status_code
 				PageHtml = PageHtml.text
+				print(PageHtml)
 			except :
 				PageHtml = ''
 				PageHtmlRecode = 'error'
