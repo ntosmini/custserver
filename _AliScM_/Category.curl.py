@@ -70,7 +70,7 @@ for val in SiteUrlList :
 		except :
 			PageHtml = ''
 			PageHtmlRecode = 'error'
-		ErrMsg = ErrMsg + str(traceback.format_exc()) + "\n\n"
+			ErrMsg = str(traceback.format_exc())+"\n\n"
 		WriteFile = "<time>"+time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))+"</time>\n\n"
 		WriteFile = WriteFile + OriginUrl + PageHtml + ErrMsg
 
