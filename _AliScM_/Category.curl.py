@@ -71,7 +71,6 @@ for val in SiteUrlList :
 			PageHtml = ''
 			PageHtmlRecode = 'error'
 			ErrMsg = str(traceback.format_exc())+"\n\n"
-		print(ErrMsg)
 		WriteFile = "<time>"+time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))+"</time>\n\n"
 		WriteFile = WriteFile + OriginUrl + PageHtml + ErrMsg
 
@@ -87,8 +86,6 @@ for val in SiteUrlList :
 			data = {'CustId':CustId, 'ScrapType':'cate' }
 			Result_ = requests.post(NtosServer, data=data, files=upload)
 			Result = Result_.text
-			print(Result)
 			if os.path.exists(gzfile) :
 				os.remove(gzfile)
 	time.sleep(random.randint(3, 6))     
-print("end")
