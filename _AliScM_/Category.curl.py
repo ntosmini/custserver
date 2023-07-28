@@ -90,3 +90,4 @@ for val in SiteUrlList :
 			if os.path.exists(gzfile) :
 				os.remove(gzfile)
 	time.sleep(random.randint(3, 6))     
+print("end")
