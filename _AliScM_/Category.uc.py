@@ -131,6 +131,8 @@ if CookiesLang :
 		driver.add_cookie(arr)
 		driver.maximize_window()
 
+time.sleep(3)
+
 for val in SiteUrlList :
 	#에러msg
 	ErrMsg = ''
