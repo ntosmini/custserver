@@ -194,4 +194,4 @@ for val in SiteUrlList :
 			Result = Result_.text
 			if os.path.exists(gzfile) :
 				os.remove(gzfile)
-	time.sleep(random.randint(1, 3))
+driver.quit()
