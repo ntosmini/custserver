@@ -74,8 +74,7 @@ driver = chromeWebdriver()
 if StartUrl :
 	driver.get(StartUrl)
 	driver.implicitly_wait(10)	
-coo = ''
-cooo = ''
+
 if CookiesLang :
 	if StartUrl == "" :
 		driver.get(StartUrl)
@@ -88,7 +87,6 @@ if CookiesLang :
 		parts = ''
 		new_url = ''
 		qs = {}
-		coo = coo + "\n\n" +cookie['value']
 		if cookie['name'] == "aep_usuc_f" :
 			parts = urlparse('https://aliexpress.com?'+cookie['value'])
 			qs = dict(parse_qsl(parts.query))
@@ -130,7 +128,6 @@ if CookiesLang :
 
 		for val in cookie.keys() :
 			arr[val] = cookie[val]
-			cooo = cooo + "\n\n" + str(cookie[val])
 		driver.add_cookie(arr)
 		driver.maximize_window()
 
@@ -163,7 +160,7 @@ for val in SiteUrlList :
 		if ErrMsg :
 			ErrMsg = "<error>"+ErrMsg+"</error>\n\n"
 		WriteFile = "<time>"+time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))+"</time>\n\n"
-		WriteFile = WriteFile + OriginUrl + NowUrl + PageHtml + ErrMsg + "\n\n\n" + str(coo) + "\n\n\n" + str(cooo) 
+		WriteFile = WriteFile + OriginUrl + NowUrl + PageHtml + ErrMsg
 
 		f = open(SaveFile, 'w', encoding="utf8")
 		f.write(WriteFile)
@@ -179,4 +176,4 @@ for val in SiteUrlList :
 			Result = Result_.text
 			if os.path.exists(gzfile) :
 				os.remove(gzfile)
-	time.sleep(random.randint(3, 6))
+	time.sleep(random.randint(1, 3))
