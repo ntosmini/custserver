@@ -31,20 +31,20 @@ g_src = MConfig['g_src']
 ResultType = MConfig['ResultType']
 
 try :
-  translator = googletrans.Translator()
-  try :
-    ResultStr = translator.translate(TransStr, dest = str(g_dest), src = str(g_src))
-    ResultStr_ = ResultStr.text
-  except :
-    ResultStr_ = "error"
+	translator = googletrans.Translator()
+	try :
+		ResultStr = translator.translate(TransStr, dest = str(g_dest), src = str(g_src))
+		ResultStr_ = ResultStr.text
+	except :
+		ResultStr_ = "error"
     
-  if ResultType == "View" :
-    print(ResultStr_)
-  else :
-    data = {'CustId':str(CustId), 'it_id':str(it_id), 'OrgField':str(OrgField), 'TargetField':str(TargetField), 'TransStr':str(TransStr), 'ResultStr':str(ResultStr_) }
-    headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
-    result = requests.post(NtosServer, data=json.dumps(data), headers=headers)
-    print(ResultStr_)
+	if ResultType == "View" :
+		print(ResultStr_)
+	else :
+		data = {'CustId':str(CustId), 'it_id':str(it_id), 'OrgField':str(OrgField), 'TargetField':str(TargetField), 'TransStr':str(TransStr), 'ResultStr':str(ResultStr_) }
+		headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
+		result = requests.post(NtosServer, data=json.dumps(data), headers=headers)
+		print(ResultStr_)
 except :
-  err = traceback.format_exc()
-  print("trans_error : "+str(err))
+	err = traceback.format_exc()
+	print("trans_error : "+str(err))
