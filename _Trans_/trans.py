@@ -32,14 +32,19 @@ ResultType = MConfig['ResultType']
 
 try :
   translator = googletrans.Translator()
-  ResultStr = translator.translate(TransStr, dest = str(g_dest), src = str(g_src))
+  try :
+    ResultStr = translator.translate(TransStr, dest = str(g_dest), src = str(g_src))
+    ResultStr_ = ResultStr.text
+  except :
+    ResultStr_ = "error"
+    
   if ResultType == "View" :
-    print(ResultStr.text)
+    print(ResultStr_)
   else :
-    data = {'CustId':str(CustId), 'it_id':str(it_id), 'OrgField':str(OrgField), 'TargetField':str(TargetField), 'TransStr':str(TransStr), 'ResultStr':str(ResultStr.text) }
+    data = {'CustId':str(CustId), 'it_id':str(it_id), 'OrgField':str(OrgField), 'TargetField':str(TargetField), 'TransStr':str(TransStr), 'ResultStr':str(ResultStr_) }
     headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
     result = requests.post(NtosServer, data=json.dumps(data), headers=headers)
-    print(result.text)
+    print(ResultStr_)
 except :
   err = traceback.format_exc()
   print("trans_error : "+str(err))
