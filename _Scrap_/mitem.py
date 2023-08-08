@@ -1017,7 +1017,7 @@ def chromeWebdriver():
 		chrome_options = Options()
 		chrome_options.add_experimental_option('detach', True)
 		chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
-		chrome_options.add_argument('--headless')
+		#chrome_options.add_argument('--headless')
 		chrome_options.add_argument('--no-sandbox')
 
 		#chrome_options.add_argument("window-size=1920,1080")
@@ -1028,17 +1028,53 @@ def chromeWebdriver():
 	return driver
 
 
+#메코틴, 제로메코틴, 의료용 니코틴, 전자담배 액상, 국내 유일 고품질의 RS-니코틴
+#메코틴, RS-니코틴, 전자담배 액상, 전자담배, 액상, 메디컬 니코틴, 발암물질 ZERO, 베이핑, 안전한 니코틴
+
+def get_search1():
+	list = [
+	"전자담배 액상"
+	,"전자담배 액상 추천"
+	,"전자담배"
+	,"전자담배 추천"
+	,"RS-니코틴"
+	,"의료용 니코틴"
+	,"발암물질 ZERO 니코틴"
+	,"발암물질 제로 니코틴"
+	,"안전한 니코틴"
+	,"메디컬 니코틴"
+	]
+	return list[random.randint(0,len(list)-1)]
+
+
+
+def get_search2():
+	list = [
+	"제로메코틴"
+	,"메코틴"
+	]
+	return list[random.randint(0,len(list)-1)]
+
+
+def get_search3():
+	list = [
+	"제로메코틴"
+	]
+	return list[random.randint(0,len(list)-1)]
+
+
+search1 = get_search1()
+search2 = get_search2()
+search3 = get_search3()
+
+
 driver = chromeWebdriver()
-
 driver.delete_all_cookies()
-
 SiteUrl = "https://m.naver.com"
-
 driver.get(SiteUrl)
 driver.implicitly_wait(10) # 처음에만 셋팅
 time.sleep(random.randint(2, 5))
 
-#driver.maximize_window()
 
 # 검색창 클릭
 
@@ -1046,45 +1082,92 @@ time.sleep(random.randint(2, 5))
 driver.find_element(By.XPATH, '//*[@id="MM_SEARCH_FAKE"]').click()
 
 elem = driver.find_element(By.XPATH, '//*[@id="query"]')
-elem.click()
+time.sleep(random.randint(2, 7))
 
-elem.send_keys("제")
-time.sleep(random.uniform(0.1, 2))
-elem.send_keys("로")
-time.sleep(random.uniform(0.1, 2))
-elem.send_keys("메")
-time.sleep(random.uniform(0.1, 2))
-elem.send_keys("코")
-time.sleep(random.uniform(0.1, 2))
-elem.send_keys("틴")
-time.sleep(random.uniform(0.1, 2))
+for val in list(search1) :
+	elem.send_keys(str(val))
+	time.sleep(random.uniform(0.1, 2))
 
 elem.send_keys(Keys.ENTER)
+time.sleep(random.randint(2, 7))
 
-try:
+mecotine_chk = 'n'
 
-    time.sleep(random.randint(2, 7))
-
-    e = driver.find_elements(By.CSS_SELECTOR, "a[href='https://item.mecotine.com/']")
-    e[0].click()
-        
-    time.sleep(random.randint(20, 46))
-
-    a_elements = driver.find_elements(By.CSS_SELECTOR, ".main_disp a[href*='shopdetail']")
-
-    a_elements[random.randint(0, len(a_elements)-1)].click()
-
-    time.sleep(random.randint(20, 55))
-
-    driver.execute_script("window.history.go(-1)")
-
-    time.sleep(random.randint(5, 12))
-
-    print("SUCCESS")
-
-except:
+try :
+	e = driver.find_elements(By.CSS_SELECTOR, "a[href='https://item.mecotine.com/']")
+	if e :
+		mecotine_chk = 'y'
+except :
 	print("EXCEPT")
+
+if mecotine_chk == "n" :
+	time.sleep(random.randint(2, 4))
+	driver.find_element(By.XPATH, '//*[@id="nx_query"]').click()
+	elem = driver.find_element(By.XPATH, '//*[@id="nx_query"]')
 	
+	elem.send_keys(" ")
+	for val2 in list(search2) :
+		elem.send_keys(str(val2))
+		time.sleep(random.uniform(0.1, 2))
+
+	elem.send_keys(Keys.ENTER)
+	time.sleep(random.randint(2, 7))
+
+	try :
+		e = driver.find_elements(By.CSS_SELECTOR, "a[href='https://item.mecotine.com/']")
+		if e :
+			mecotine_chk = 'y'
+	except :
+		print("EXCEPT")
+
+
+if mecotine_chk == "n" :
+	time.sleep(random.randint(2, 4))
+	driver.find_element(By.XPATH, '//*[@id="nx_query"]').click()
+	elem = driver.find_element(By.XPATH, '//*[@id="nx_query"]')
+	
+	elem.clear()
+	time.sleep(random.randint(1, 2))
+	for val3 in list(search3) :
+		elem.send_keys(str(val3))
+		time.sleep(random.uniform(0.1, 2))
+	elem.send_keys(Keys.ENTER)
+	time.sleep(random.randint(2, 7))
+
+	try :
+		e = driver.find_elements(By.CSS_SELECTOR, "a[href='https://item.mecotine.com/']")
+		if e :
+			mecotine_chk = 'y'
+	except :
+		print("EXCEPT")
+
+
+if mecotine_chk == "y" :
+	try:
+
+		time.sleep(random.randint(2, 7))
+
+		e[0].click()
+			
+		time.sleep(random.randint(20, 46))
+
+		a_elements = driver.find_elements(By.CSS_SELECTOR, ".main_disp a[href*='shopdetail']")
+
+		a_elements[random.randint(0, len(a_elements)-1)].click()
+
+		time.sleep(random.randint(20, 55))
+
+		driver.execute_script("window.history.go(-1)")
+
+		time.sleep(random.randint(5, 12))
+
+		print("SUCCESS")
+
+	except:
+		print("EXCEPT")
+
+
+
 driver.quit()
 
 
