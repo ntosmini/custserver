@@ -20,6 +20,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 
+from selenium.webdriver.common.action_chains import ActionChains
+
 import undetected_chromedriver as uc
 from urllib.parse import urlparse, parse_qsl, urlencode, urlunparse, unquote
 
@@ -133,11 +135,46 @@ if CookiesLang :
 
 time.sleep(3)
 
+#lock 체크
+LockChkCnt = int(0)
+def LockChk(PageHtml) :
+	ResultLockChk = "no"
+	action = ActionChains(driver)
+	try :
+		if re.search('.com:443', str(PageHtml)) :
+			iframe = driver.find_elements(By.TAG_NAME, "iframe")
+			for iframeVal in iframe :
+				driver.switch_to.frame(iframeVal)
+				try :
+					slider = driver.find_element(By.ID, "nc_1_n1z")
+					if slider :
+						slider.click()
+						action.move_to_element(slider)
+						action.click_and_hold(slider)
+						xoffset = 0
+						while xoffset < 500:
+							xmove = random.randint(10, 50)
+							ymove = random.randint(-1, 1)
+							action.move_by_offset(xmove, ymove)
+							xoffset += xmove
+						action.release()
+						action.perform()
+						ResultLockChk = "ok"
+						break
+				except :
+					ResultLockChk = traceback.format_exc()
+					pass
+	except :
+		ResultLockChk = traceback.format_exc()
+		pass
+	return str(ResultLockChk)
+					
 for val in SiteUrlList :
 	#에러msg
 	ErrMsg = ''
 	PageHtml = ''
 	NowUrl = ''
+	LockChkMsg = ''
 	(SiteUrl, SaveFileName) = val.split("|@|")
 	OriginUrl = "<ntosoriginurl>"+str(SiteUrl)+"</ntosoriginurl>\n\n"
 	#저장파일명
@@ -167,18 +204,23 @@ for val in SiteUrlList :
 			
 			PageHtml = driver.page_source
 			NowUrl = driver.current_url
+			LockChkMsg = LockChk(PageHtml)
 		except :
 			PageHtml = ''
 			PageHtmlRecode = 'error'
 			ErrMsg = str(traceback.format_exc())
 
+
+		if LockChkMsg :
+			LockChkMsg = "<lockchk>"+LockChkMsg+"</lockchk>\n\n"
+			
 		if NowUrl :
 			NowUrl = "<ntosnowurl>"+NowUrl+"</ntosnowurl>\n\n"
 
 		if ErrMsg :
 			ErrMsg = "<error>"+ErrMsg+"</error>\n\n"
 		WriteFile = "<time>"+time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))+"</time>\n\n"
-		WriteFile = WriteFile + OriginUrl + NowUrl + PageHtml + ErrMsg
+		WriteFile = WriteFile + OriginUrl + NowUrl + PageHtml + ErrMsg + LockChkMsg
 
 		f = open(SaveFile, 'w', encoding="utf8")
 		f.write(WriteFile)
