@@ -18,6 +18,7 @@ $RunData['CookiesLang']  =(empty($_POST['CookiesLang']))?"":$_POST['CookiesLang'
 $RunData['Scroll']  =(empty($_POST['Scroll']))?"N":$_POST['Scroll'];  //스크롤
 $RunData['StartUrl']  =(empty($_POST['StartUrl']))?"":$_POST['StartUrl'];  //시작URL
 $RunData['ChromeVer']  =(empty($_POST['ChromeVer']))?"":$_POST['ChromeVer'];  //크롬버전
+$RunData['LockSlider']  =(empty($_POST['LockSlider']))?"":$_POST['LockSlider'];  //LockSlider 사용여부(Y/null)
 
 
 
