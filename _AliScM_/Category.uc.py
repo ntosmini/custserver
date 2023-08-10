@@ -49,6 +49,7 @@ CookiesLang = MConfig['CookiesLang']	#언어 및 통화 (ko | en)
 Scroll = MConfig['Scroll']  #스크롤
 StartUrl = MConfig['StartUrl']  #시작URL
 ChromeVer = MConfig['ChromeVer']  #크롬버전
+LockSlider = MConfig['LockSlider']	#LockSlider 사용여부(Y/null)
 
 def chromeWebdriver():
 	chrome_service = ChromeService(ChromeDriverManager().install())
@@ -138,6 +139,8 @@ time.sleep(3)
 #lock 체크
 LockChkCnt = int(0)
 def LockChk(PageHtml) :
+	if LockSlider == "n" :
+		return "pass"
 	ResultLockChk = "no"
 	action = ActionChains(driver)
 	try :
@@ -230,7 +233,7 @@ for val in SiteUrlList :
 		f.close()
 		os.system("gzip "+SaveFile)
 
-		if FileSendSave == "Y" and NtosServer != "" :
+		if FileSendSave == "y" and NtosServer != "" :
 			gzfile = SaveFile+".gz"
 			files = open(gzfile, 'rb')
 			upload = {'file': files}
