@@ -221,7 +221,7 @@ for val in SiteUrlList :
 		if ErrMsg :
 			ErrMsg = "<error>"+ErrMsg+"</error>\n\n"
 		WriteFile = "<time>"+time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))+"</time>\n\n"
-		WriteFile = WriteFile + OriginUrl + NowUrl + PageHtml + ErrMsg + LockChkMsg
+		WriteFile = WriteFile + OriginUrl + NowUrl + ErrMsg + LockChkMsg + PageHtml
 
 		f = open(SaveFile, 'w', encoding="utf8")
 		f.write(WriteFile)
