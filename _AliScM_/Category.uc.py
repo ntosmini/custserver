@@ -49,7 +49,7 @@ CookiesLang = MConfig['CookiesLang']	#언어 및 통화 (ko | en)
 Scroll = MConfig['Scroll']  #스크롤
 StartUrl = MConfig['StartUrl']  #시작URL
 ChromeVer = MConfig['ChromeVer']  #크롬버전
-LockSlider = MConfig['LockSlider']	#LockSlider 사용여부(Y/null)
+LockSlider = MConfig['LockSlider']	#LockSlider 사용여부(y/n)
 
 def chromeWebdriver():
 	chrome_service = ChromeService(ChromeDriverManager().install())
@@ -192,7 +192,7 @@ for val in SiteUrlList :
 			driver.get(SiteUrl)
 			driver.implicitly_wait(10)
 
-			if Scroll == "Y" :
+			if Scroll == "y" :
 				SCROLL_PAUSE_SEC = 0.5
 				# 스크롤 높이 가져옴
 				last_height = driver.execute_script("return document.body.scrollHeight")
