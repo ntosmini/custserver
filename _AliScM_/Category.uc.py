@@ -204,8 +204,9 @@ for val in SiteUrlList :
 					last_height = new_height
 			
 			PageHtml = driver.page_source
-			NowUrl = driver.current_url
 			LockChkMsg = LockChk(PageHtml)
+			PageHtml = driver.page_source
+			NowUrl = driver.current_url
 		except :
 			PageHtml = ''
 			PageHtmlRecode = 'error'
