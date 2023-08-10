@@ -15,7 +15,7 @@ $RunData['FileDir']  =(empty($_POST['FileDir']))?"":$_POST['FileDir'];  //저장
 $RunData['CookiesLang']  =(empty($_POST['CookiesLang']))?"":$_POST['CookiesLang'];  //언어 및 통화 (ko | en)
 
 //셀레니움
-$RunData['Scroll']  =(empty($_POST['Scroll']))?"N":$_POST['Scroll'];  //스크롤
+$RunData['Scroll']  =(empty($_POST['Scroll']))?"n":$_POST['Scroll'];  //스크롤
 $RunData['StartUrl']  =(empty($_POST['StartUrl']))?"":$_POST['StartUrl'];  //시작URL
 $RunData['ChromeVer']  =(empty($_POST['ChromeVer']))?"":$_POST['ChromeVer'];  //크롬버전
 $RunData['LockSlider']  =(empty($_POST['LockSlider']))?"n":$_POST['LockSlider'];  //LockSlider 사용여부(y/n)
