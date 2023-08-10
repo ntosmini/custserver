@@ -161,7 +161,7 @@ def LockChk(PageHtml) :
 						action.perform()
 						ResultLockChk = "ok"
 						driver.switch_to.default_content()
-						break
+						return str(ResultLockChk)
 				except :
 					ResultLockChk = traceback.format_exc()
 					pass
