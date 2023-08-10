@@ -160,6 +160,7 @@ def LockChk(PageHtml) :
 						action.release()
 						action.perform()
 						ResultLockChk = "ok"
+						driver.switch_to.default_content()
 						break
 				except :
 					ResultLockChk = traceback.format_exc()
