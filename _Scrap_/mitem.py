@@ -29,9 +29,12 @@ import undetected_chromedriver as uc
 sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
 sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
 
-MConfigData = sys.argv[1]
-MConfig = json.loads(MConfigData)
-
+try :
+  MConfigData = sys.argv[1]
+  MConfig = json.loads(MConfigData)
+except :
+	err = traceback.format_exc()
+	print(str(err))
 Type = MConfig['Type']
 Search1 = MConfig['Search1']
 Search2 = MConfig['Search2']
