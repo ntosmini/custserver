@@ -62,7 +62,7 @@ try :
 		
 		(SiteUrl, SaveFileName) = val.split("|@|")
 		OriginUrl = "<ntosoriginurl>"+str(SiteUrl)+"</ntosoriginurl>\n\n"
-		OriginUrl = OriginUrl + len(IslId_SiteUrl)+"\n\n"
+		OriginUrl = OriginUrl + str(len(IslId_SiteUrl))+"\n\n"
 		#저장파일명
 		SaveFile = FileDir+str(SaveFileName)
 		SaveFile = SaveFile.replace('.html', '_'+str(time.strftime('%H%M', time.localtime(time.time())))+'.html')
