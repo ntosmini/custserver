@@ -302,7 +302,6 @@ try :
 			f = open(SaveFile, 'w', encoding="utf8")
 			f.write(WriteFile)
 			f.close()
-			print(SaveFile)
 			os.system("gzip "+SaveFile)
 
 			if FileSendSave == "Y" and NtosServer != "" :
