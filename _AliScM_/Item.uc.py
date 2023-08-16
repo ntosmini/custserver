@@ -237,6 +237,20 @@ try :
 
 			if PageHtml :
 				try :
+					if Scroll == "Y" :
+						SCROLL_PAUSE_SEC = 0.5
+						# 스크롤 높이 가져옴
+						last_height = driver.execute_script("return document.body.scrollHeight")
+						while True:
+							# 끝까지 스크롤 다운
+							driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+							# SCROLL_PAUSE_SEC 초 대기
+							time.sleep(SCROLL_PAUSE_SEC)
+							# 스크롤 다운 후 스크롤 높이 다시 가져옴
+							new_height = driver.execute_script("return document.body.scrollHeight")
+							if new_height == last_height:
+								break
+							last_height = new_height
 					PageHtml = re.sub('\n', '', PageHtml)
 					PageHtmlJsonSearch = re.search(r'window.runParams\s+=\s+{\s+ data:(?P<JsonData>.*)};\s+</script>', str(PageHtml), re.DOTALL)
 					PageHtmlJsonData = PageHtmlJsonSearch.group('JsonData')
