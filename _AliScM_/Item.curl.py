@@ -15,12 +15,12 @@ import re
 sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
 sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
 
-IslId_SiteUrl = []
+SiteUrlList = []
 
 MConfigData = sys.argv[1]
 MConfig = json.loads(MConfigData)
 
-IslId_SiteUrl = MConfig['IslId_SiteUrl']
+SiteUrlList = MConfig['SiteUrlList']
 CustId = MConfig['CustId']
 
 FileSendSave = MConfig['FileSendSave']  #저장후 전송여부
@@ -50,7 +50,7 @@ headers = {
 }
 try : 
 	cnt_ = int(1)
-	for val in IslId_SiteUrl :
+	for val in SiteUrlList :
 		#저장html
 		SaveHtml = ''
 		#에러msg
@@ -63,7 +63,7 @@ try :
 		
 		(SiteUrl, SaveFileName) = val.split("|@|")
 		OriginUrl = "<ntosoriginurl>"+str(SiteUrl)+"</ntosoriginurl>\n\n"
-		OriginUrl = OriginUrl + str(len(IslId_SiteUrl))+" - "+str(cnt_)+"\n\n"
+		OriginUrl = OriginUrl + str(len(SiteUrlList))+" - "+str(cnt_)+"\n\n"
 		
 		#저장파일명
 		SaveFile = FileDir+str(SaveFileName)
