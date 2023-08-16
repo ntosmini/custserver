@@ -79,6 +79,10 @@ def LockChk(PageHtml) :
 	if LockSlider == "n" :
 		return "pass"
 	ResultLockChk = "no"
+	if re.search('Please refresh and try again', str(PageHtml)) or re.search('새로고침', str(PageHtml)) or re.search('새로 고침', str(PageHtml)) :
+		driver.refresh()
+		driver.implicitly_wait(10)
+		PageHtml = driver.page_source
 	action = ActionChains(driver)
 	try :
 		if re.search('Sorry, we have detected unusual traffic from your network', str(PageHtml)) :
