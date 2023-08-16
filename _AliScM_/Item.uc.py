@@ -212,6 +212,7 @@ try :
 		NowUrl = ''
 		LogMsg = ''
 		LockChkMsg = ''
+		NowUrl = ''
 
 		(SiteUrl, SaveFileName) = val.split("|@|")
 		OriginUrl = "<ntosoriginurl>"+str(SiteUrl)+"</ntosoriginurl>\n\n"
@@ -287,9 +288,11 @@ try :
 
 			if LockChkMsg :
 				LockChkMsg = "<LockChkMsg>"+str(LockChkMsg)+"</LockChkMsg>\n\n"
-
+			if NowUrl :
+				NowUrl = "<ntosnowurl>"+NowUrl+"</ntosnowurl>\n\n"
+				
 			WriteFile = "<agent>"+str(UserAgent)+"</agent>\n\n"+"<time>"+time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))+"</time>\n\n"
-			WriteFile = LockChkMsg + WriteFile + OriginUrl + SaveHtml + ErrMsg + "\n\n<PageHtml>"+str(PageHtml)+"</PageHtml>\n\n"
+			WriteFile = LockChkMsg + WriteFile + OriginUrl + NowUrl + SaveHtml + ErrMsg + "\n\n<PageHtml>"+str(PageHtml)+"</PageHtml>\n\n"
 
 			f = open(SaveFile, 'w', encoding="utf8")
 			f.write(WriteFile)
