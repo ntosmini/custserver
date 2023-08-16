@@ -128,24 +128,24 @@ try :
 				DetailHtml = re.sub('(<link[^>]+>)', '', DetailHtml)
 				SaveHtml = SaveHtml + "<DetailHtml>" + str(DetailHtml) + "</DetailHtml>\n\n"
 
-			WriteFile = "<time>"+time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))+"</time>\n\n"
-			WriteFile = WriteFile + OriginUrl + SaveHtml + ErrMsg
+		WriteFile = "<time>"+time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))+"</time>\n\n"
+		WriteFile = WriteFile + OriginUrl + SaveHtml + ErrMsg + "\n\n<PageHtml>"+str(PageHtml)+"</PageHtml>\n\n"
 
-			f = open(SaveFile, 'w', encoding="utf8")
-			f.write(WriteFile)
-			f.close()
-			os.system("gzip "+SaveFile)
-			print(str(SaveFile))
+		f = open(SaveFile, 'w', encoding="utf8")
+		f.write(WriteFile)
+		f.close()
+		os.system("gzip "+SaveFile)
+		print(str(SaveFile))
 
-			if FileSendSave == "Y" and NtosServer != "" :
-				gzfile = SaveFile+".gz"
-				files = open(gzfile, 'rb')
-				upload = {'file': files}
-				data = {'CustId':CustId, 'ScrapType':'item' }
-				Result_ = requests.post(NtosServer, data=data, files=upload)
-				Result = Result_.text
-				if os.path.exists(gzfile) :
-					os.remove(gzfile)
+		if FileSendSave == "Y" and NtosServer != "" :
+			gzfile = SaveFile+".gz"
+			files = open(gzfile, 'rb')
+			upload = {'file': files}
+			data = {'CustId':CustId, 'ScrapType':'item' }
+			Result_ = requests.post(NtosServer, data=data, files=upload)
+			Result = Result_.text
+			if os.path.exists(gzfile) :
+				os.remove(gzfile)
 		time.sleep(random.randint(1, 3))
 except :
 	ErrMsg = ErrMsg + str(traceback.format_exc()) + "\n\n"
