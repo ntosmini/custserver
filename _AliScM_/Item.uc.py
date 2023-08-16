@@ -302,20 +302,13 @@ try :
 			f = open(SaveFile, 'w', encoding="utf8")
 			f.write(WriteFile)
 			f.close()
-			os.system("gzip "+SaveFile)
-
-			if FileSendSave == "Y" and NtosServer != "" :
-				gzfile = SaveFile+".gz"
-				files = open(gzfile, 'rb')
-				upload = {'file': files}
-				data = {'CustId':CustId, 'ScrapType':'item' }
-				Result_ = requests.post(NtosServer, data=data, files=upload)
-				Result = Result_.text
-				if os.path.exists(gzfile) :
-					os.remove(gzfile)
-
+			print(SaveFile)
+			#os.system("gzip "+SaveFile)
+		time.sleep(random.randint(2, 3))
+		driver.execute_script("window.history.go(-1)")
 		time.sleep(random.randint(1, 3))
 except :
 	print(str(traceback.format_exc()))
+	
 # 종료
 driver.quit()
