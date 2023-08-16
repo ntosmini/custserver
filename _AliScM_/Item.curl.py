@@ -135,7 +135,7 @@ try :
 			f.write(WriteFile)
 			f.close()
 			os.system("gzip "+SaveFile)
-			print(str(WriteFile))
+			print(str(SaveFile))
 
 			if FileSendSave == "Y" and NtosServer != "" :
 				gzfile = SaveFile+".gz"
