@@ -130,7 +130,7 @@ try :
 				DetailHtml = re.sub('(<link[^>]+>)', '', DetailHtml)
 				SaveHtml = SaveHtml + "<DetailHtml>" + str(DetailHtml) + "</DetailHtml>\n\n"
 
-		WriteFile = "<time>"+time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))+"</time>\n\n"
+		WriteFile = "<agent>"+str(UserAgent)+"</agent>"+"<time>"+time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))+"</time>\n\n"
 		WriteFile = WriteFile + OriginUrl + SaveHtml + ErrMsg + "\n\n<PageHtml>"+str(PageHtml)+"</PageHtml>\n\n"
 
 		f = open(SaveFile, 'w', encoding="utf8")
