@@ -9,10 +9,16 @@ $RunData = array();
 $ScrapType =(empty($_POST['ScrapType']))?"":$_POST['ScrapType'];  // curl / selenium / uc
 $RunData['CustId'] = (empty($_POST['CustId']))?"":$_POST['CustId'];
 $RunData['SiteUrlList'] = (empty($_POST['SiteUrlList']))?"":$_POST['SiteUrlList'];
-$RunData['FileSendSave'] = (empty($_POST['FileSendSave']))?"N":$_POST['FileSendSave'];	//파일 저장 전송 사용여부 Y/N
+$RunData['FileSendSave'] = (empty($_POST['FileSendSave']))?"n":$_POST['FileSendSave'];	//파일 저장 전송 사용여부 y/n
 $RunData['NtosServer'] = (empty($_POST['NtosServer']))?"":$_POST['NtosServer'];	//받을 url
 $RunData['FileDir']  =(empty($_POST['FileDir']))?"":$_POST['FileDir'];  //저장폴더
-$RunData['LangType']  =(empty($_POST['LangType']))?"":$_POST['LangType'];  //언어 및 통화 (ko | en)
+$RunData['CookiesLang']  =(empty($_POST['CookiesLang']))?"":$_POST['CookiesLang'];  //언어 및 통화 (ko | en)
+
+//셀레니움
+$RunData['Scroll']  =(empty($_POST['Scroll']))?"n":$_POST['Scroll'];  //스크롤
+$RunData['StartUrl']  =(empty($_POST['StartUrl']))?"":$_POST['StartUrl'];  //시작URL
+$RunData['ChromeVer']  =(empty($_POST['ChromeVer']))?"":$_POST['ChromeVer'];  //크롬버전
+$RunData['LockSlider']  =(empty($_POST['LockSlider']))?"n":$_POST['LockSlider'];  //LockSlider 사용여부(y/n)
 
 
 
