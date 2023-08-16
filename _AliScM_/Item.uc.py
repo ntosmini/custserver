@@ -140,7 +140,7 @@ def LockChk(PageHtml) :
 
 if StartUrl :
 	driver.get(StartUrl)
-	driver.implicitly_wait(10)	
+	driver.implicitly_wait(10)
 else :
 	driver.get("https://aliexpress.com")
 	driver.implicitly_wait(10)
@@ -293,12 +293,9 @@ for val in SiteUrlList :
 			Result_ = requests.post(NtosServer, data=data, files=upload)
 			Result = Result_.text
 			if os.path.exists(gzfile) :
-				os.remove(gzfile)	
+				os.remove(gzfile)
 
 	time.sleep(random.randint(1, 3))
-except :
-	ErrMsg = ErrMsg + str(traceback.format_exc()) + "\n\n"
-	print(ErrMsg)
 
 # 종료
 driver.quit()
