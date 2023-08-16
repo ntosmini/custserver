@@ -64,14 +64,16 @@ try :
 		(SiteUrl, SaveFileName) = val.split("|@|")
 		OriginUrl = "<ntosoriginurl>"+str(SiteUrl)+"</ntosoriginurl>\n\n"
 		OriginUrl = OriginUrl + str(len(IslId_SiteUrl))+" - "+str(cnt_)+"\n\n"
-		cnt_ = cnt_ + 1
+		
 		#저장파일명
 		SaveFile = FileDir+str(SaveFileName)
 		SaveFile = SaveFile.replace('.html', '_'+str(time.strftime('%H%M', time.localtime(time.time())))+'.html')
 	  
 		if SiteUrl == "" or SaveFileName == "" :
+			print("continue - "+str(cnt_ ))
 			continue
-	  
+	  	print("ok - "+str(cnt_ ))
+		cnt_ = cnt_ + 1
 		try :
 			if LangType == "ko" :
 				PageHtml = requests.get(SiteUrl, headers=headers, cookies=cookies_ko)
