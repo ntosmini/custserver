@@ -87,7 +87,7 @@ try :
 			PageHtml = ''
 			PageHtmlRecode = 'error'
 			ErrMsg = ErrMsg + str(traceback.format_exc()) + "\n\n"
-
+		print(str(PageHtmlRecode))
 		if PageHtml :
 			try :
 				PageHtml = re.sub('\n', '', PageHtml)
