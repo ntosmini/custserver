@@ -282,7 +282,6 @@ try :
 						driver.implicitly_wait(10)
 						DetailHtmlRecode = 'ok'
 						DetailHtml = driver.page_source
-						driver.back()
 					except :
 						DetailHtml = ''
 						DetailHtmlRecode = 'error'
