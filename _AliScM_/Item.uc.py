@@ -203,6 +203,7 @@ time.sleep(3)
 
 try :
 	for val in SiteUrlList :
+		LockChkCnt = 0
 		#저장html
 		SaveHtml = ''
 		#에러msg
