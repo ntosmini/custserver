@@ -200,102 +200,103 @@ if CookiesLang :
 
 time.sleep(3)
 
+try :
+	for val in SiteUrlList :
+		#저장html
+		SaveHtml = ''
+		#에러msg
+		ErrMsg = ''
+		
+		PageHtml = ''
+		PageHtmlJson = ''
+		DetailUrl = ''
+		DetailHtml = ''
 
-for val in SiteUrlList :
-	#저장html
-	SaveHtml = ''
-	#에러msg
-	ErrMsg = ''
-	
-	PageHtml = ''
-	PageHtmlJson = ''
-	DetailUrl = ''
-	DetailHtml = ''
+		NowUrl = ''
+		LogMsg = ''
+		LockChkMsg = ''
 
-	NowUrl = ''
-	LogMsg = ''
-	LockChkMsg = ''
+		(SiteUrl, SaveFileName) = val.split("|@|")
+		OriginUrl = "<ntosoriginurl>"+str(SiteUrl)+"</ntosoriginurl>\n\n"
 
-	(SiteUrl, SaveFileName) = val.split("|@|")
-	OriginUrl = "<ntosoriginurl>"+str(SiteUrl)+"</ntosoriginurl>\n\n"
+		#저장파일명
+		SaveFile = FileDir+str(SaveFileName)
+		SaveFile = SaveFile.replace('.html', '_'+str(time.strftime('%H%M', time.localtime(time.time())))+'.html')
 
-	#저장파일명
-	SaveFile = FileDir+str(SaveFileName)
-	SaveFile = SaveFile.replace('.html', '_'+str(time.strftime('%H%M', time.localtime(time.time())))+'.html')
-
-	if SiteUrl == "" or SaveFileName == "" :
-		LogMsg = LogMsg + "\ncontinue"
-	else :
-		try :
-			driver.get(SiteUrl)
-			driver.implicitly_wait(10)
-			PageHtml = driver.page_source
-			LockChkMsg = LockChk(PageHtml)
-			PageHtml = driver.page_source
-			NowUrl = driver.current_url
-		except :
-			PageHtml = ''
-			NowUrl = ''
-			ErrMsg = ErrMsg + str(traceback.format_exc()) + "\n\n"
-
-		if PageHtml :
+		if SiteUrl == "" or SaveFileName == "" :
+			LogMsg = LogMsg + "\ncontinue"
+		else :
 			try :
-				PageHtml = re.sub('\n', '', PageHtml)
-				PageHtmlJsonSearch = re.search(r'window.runParams\s+=\s+{\s+ data:(?P<JsonData>.*)};\s+</script>', str(PageHtml), re.DOTALL)
-				PageHtmlJsonData = PageHtmlJsonSearch.group('JsonData')
-				PageHtmlJson = json.loads(PageHtmlJsonData)
+				driver.get(SiteUrl)
+				driver.implicitly_wait(10)
+				PageHtml = driver.page_source
+				LockChkMsg = LockChk(PageHtml)
+				PageHtml = driver.page_source
+				NowUrl = driver.current_url
 			except :
-				PageHtmlJson = ''
+				PageHtml = ''
+				NowUrl = ''
 				ErrMsg = ErrMsg + str(traceback.format_exc()) + "\n\n"
 
-		if PageHtmlJson :
-			SaveHtml = SaveHtml + "<PageHtmlJson>" + str(PageHtmlJsonData) + "</PageHtmlJson>\n\n"
-			try :
-				DetailUrl = PageHtmlJson['descInfo']['productDescUrl']
-			except :
-				DetailUrl = '';
-				ErrMsg = ErrMsg + str(traceback.format_exc()) + "\n\n"
-
-			if DetailUrl :
+			if PageHtml :
 				try :
-					time.sleep(random.randint(1, 3))
-					DetailHtml = driver.get(str(DetailUrl))
-					driver.implicitly_wait(10)
-					DetailHtmlRecode = 'ok'
-					DetailHtml = driver.page_source
+					PageHtml = re.sub('\n', '', PageHtml)
+					PageHtmlJsonSearch = re.search(r'window.runParams\s+=\s+{\s+ data:(?P<JsonData>.*)};\s+</script>', str(PageHtml), re.DOTALL)
+					PageHtmlJsonData = PageHtmlJsonSearch.group('JsonData')
+					PageHtmlJson = json.loads(PageHtmlJsonData)
 				except :
-					DetailHtml = ''
-					DetailHtmlRecode = 'error'
+					PageHtmlJson = ''
 					ErrMsg = ErrMsg + str(traceback.format_exc()) + "\n\n"
 
-			if DetailHtml :
-				DetailHtml = re.sub('(<script[^<]+</script>)', '', DetailHtml)
-				DetailHtml = re.sub('(<a[^<]+</a>)', '', DetailHtml)
-				DetailHtml = re.sub('(<link[^>]+>)', '', DetailHtml)
-				SaveHtml = SaveHtml + "<DetailHtml>" + str(DetailHtml) + "</DetailHtml>\n\n"
+			if PageHtmlJson :
+				SaveHtml = SaveHtml + "<PageHtmlJson>" + str(PageHtmlJsonData) + "</PageHtmlJson>\n\n"
+				try :
+					DetailUrl = PageHtmlJson['descInfo']['productDescUrl']
+				except :
+					DetailUrl = '';
+					ErrMsg = ErrMsg + str(traceback.format_exc()) + "\n\n"
 
-		if LockChkMsg :
-			LockChkMsg = "<LockChkMsg>"+str(LockChkMsg)+"</LockChkMsg>\n\n"
+				if DetailUrl :
+					try :
+						time.sleep(random.randint(1, 3))
+						DetailHtml = driver.get(str(DetailUrl))
+						driver.implicitly_wait(10)
+						DetailHtmlRecode = 'ok'
+						DetailHtml = driver.page_source
+					except :
+						DetailHtml = ''
+						DetailHtmlRecode = 'error'
+						ErrMsg = ErrMsg + str(traceback.format_exc()) + "\n\n"
 
-		WriteFile = "<agent>"+str(UserAgent)+"</agent>\n\n"+"<time>"+time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))+"</time>\n\n"
-		WriteFile = LockChkMsg + WriteFile + OriginUrl + SaveHtml + ErrMsg + "\n\n<PageHtml>"+str(PageHtml)+"</PageHtml>\n\n"
+				if DetailHtml :
+					DetailHtml = re.sub('(<script[^<]+</script>)', '', DetailHtml)
+					DetailHtml = re.sub('(<a[^<]+</a>)', '', DetailHtml)
+					DetailHtml = re.sub('(<link[^>]+>)', '', DetailHtml)
+					SaveHtml = SaveHtml + "<DetailHtml>" + str(DetailHtml) + "</DetailHtml>\n\n"
 
-		f = open(SaveFile, 'w', encoding="utf8")
-		f.write(WriteFile)
-		f.close()
-		os.system("gzip "+SaveFile)
+			if LockChkMsg :
+				LockChkMsg = "<LockChkMsg>"+str(LockChkMsg)+"</LockChkMsg>\n\n"
 
-		if FileSendSave == "Y" and NtosServer != "" :
-			gzfile = SaveFile+".gz"
-			files = open(gzfile, 'rb')
-			upload = {'file': files}
-			data = {'CustId':CustId, 'ScrapType':'item' }
-			Result_ = requests.post(NtosServer, data=data, files=upload)
-			Result = Result_.text
-			if os.path.exists(gzfile) :
-				os.remove(gzfile)
+			WriteFile = "<agent>"+str(UserAgent)+"</agent>\n\n"+"<time>"+time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))+"</time>\n\n"
+			WriteFile = LockChkMsg + WriteFile + OriginUrl + SaveHtml + ErrMsg + "\n\n<PageHtml>"+str(PageHtml)+"</PageHtml>\n\n"
 
-	time.sleep(random.randint(1, 3))
+			f = open(SaveFile, 'w', encoding="utf8")
+			f.write(WriteFile)
+			f.close()
+			os.system("gzip "+SaveFile)
 
+			if FileSendSave == "Y" and NtosServer != "" :
+				gzfile = SaveFile+".gz"
+				files = open(gzfile, 'rb')
+				upload = {'file': files}
+				data = {'CustId':CustId, 'ScrapType':'item' }
+				Result_ = requests.post(NtosServer, data=data, files=upload)
+				Result = Result_.text
+				if os.path.exists(gzfile) :
+					os.remove(gzfile)
+
+		time.sleep(random.randint(1, 3))
+except :
+	print(str(traceback.format_exc()))
 # 종료
 driver.quit()
