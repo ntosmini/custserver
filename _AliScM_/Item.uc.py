@@ -314,8 +314,6 @@ try :
 				Result = Result_.text
 				if os.path.exists(gzfile) :
 					os.remove(gzfile)
-			time.sleep(random.randint(2, 3))
-			driver.back()
 		time.sleep(random.randint(1, 3))
 except :
 	print(str(traceback.format_exc()))
