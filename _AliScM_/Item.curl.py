@@ -49,6 +49,7 @@ headers = {
 	"User-Agent":UserAgent
 }
 try : 
+	cnt_ = int(1)
 	for val in IslId_SiteUrl :
 		#저장html
 		SaveHtml = ''
@@ -62,7 +63,8 @@ try :
 		
 		(SiteUrl, SaveFileName) = val.split("|@|")
 		OriginUrl = "<ntosoriginurl>"+str(SiteUrl)+"</ntosoriginurl>\n\n"
-		OriginUrl = OriginUrl + str(len(IslId_SiteUrl))+"\n\n"
+		OriginUrl = OriginUrl + str(len(IslId_SiteUrl))+" - "+str(cnt_)+"\n\n"
+		cnt_ = cnt_ + 1
 		#저장파일명
 		SaveFile = FileDir+str(SaveFileName)
 		SaveFile = SaveFile.replace('.html', '_'+str(time.strftime('%H%M', time.localtime(time.time())))+'.html')
