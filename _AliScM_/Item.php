@@ -8,7 +8,7 @@ header("Content-Type: text/html; charset=UTF-8");
 $RunData = array();
 $ScrapType =(empty($_POST['ScrapType']))?"":$_POST['ScrapType'];  // curl / selenium / uc
 $RunData['CustId'] = (empty($_POST['CustId']))?"":$_POST['CustId'];
-$RunData['IslId_SiteUrl'] = (empty($_POST['IslId_SiteUrl']))?"":$_POST['IslId_SiteUrl'];
+$RunData['SiteUrlList'] = (empty($_POST['SiteUrlList']))?"":$_POST['SiteUrlList'];
 $RunData['FileSendSave'] = (empty($_POST['FileSendSave']))?"N":$_POST['FileSendSave'];	//파일 저장 전송 사용여부 Y/N
 $RunData['NtosServer'] = (empty($_POST['NtosServer']))?"":$_POST['NtosServer'];	//받을 url
 $RunData['FileDir']  =(empty($_POST['FileDir']))?"":$_POST['FileDir'];  //저장폴더
@@ -16,11 +16,11 @@ $RunData['LangType']  =(empty($_POST['LangType']))?"":$_POST['LangType'];  //언
 
 
 
-if(empty($RunData['IslId_SiteUrl'])){
-	echo 'not IslId_SiteUrl';
+if(empty($RunData['SiteUrlList'])){
+	echo 'not SiteUrlList';
 	exit;
 }
-$RunData['IslId_SiteUrl'] = explode("|^|", $RunData['IslId_SiteUrl']);
+$RunData['SiteUrlList'] = explode("|^|", $RunData['SiteUrlList']);
 
 if(empty($RunData['CustId'])){
 	echo 'not CustId';
