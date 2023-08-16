@@ -34,25 +34,20 @@ sys.path.append(os.path.dirname("/home/ntosmini/public_html/_agent.py"))
 import _agent
 UserAgent = _agent.get_mobile_agent()
 
-try :
-	SiteUrlList = []
-	
-	MConfigData = sys.argv[1]
-	MConfig = json.loads(MConfigData)
-	
-	SiteUrlList = MConfig['SiteUrlList']
-	CustId = MConfig['CustId']
-	FileSendSave = MConfig['FileSendSave']  #저장후 전송여부
-	NtosServer = MConfig['NtosServer']  #전송서버 url
-	FileDir = MConfig['FileDir']  #저장폴더
-	CookiesLang = MConfig['CookiesLang']	#언어 및 통화 (ko | en)
-	
-	Scroll = MConfig['Scroll']  #스크롤
-	StartUrl = MConfig['StartUrl']  #시작URL
-	ChromeVer = MConfig['ChromeVer']  #크롬버전
-	LockSlider = MConfig['LockSlider']	#LockSlider 사용여부(y/n)
-except :
-	print(str(traceback.format_exc()))
+SiteUrlList = []
+MConfigData = sys.argv[1]
+MConfig = json.loads(MConfigData)
+SiteUrlList = MConfig['SiteUrlList']
+CustId = MConfig['CustId']
+FileSendSave = MConfig['FileSendSave']  #저장후 전송여부
+NtosServer = MConfig['NtosServer']  #전송서버 url
+FileDir = MConfig['FileDir']  #저장폴더
+CookiesLang = MConfig['CookiesLang']	#언어 및 통화 (ko | en)
+Scroll = MConfig['Scroll']  #스크롤
+StartUrl = MConfig['StartUrl']  #시작URL
+ChromeVer = MConfig['ChromeVer']  #크롬버전
+LockSlider = MConfig['LockSlider']	#LockSlider 사용여부(y/n)
+
 def chromeWebdriver():
 	chrome_service = ChromeService(ChromeDriverManager().install())
 	chrome_options = uc.ChromeOptions()
