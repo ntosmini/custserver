@@ -305,7 +305,7 @@ try :
 			print(SaveFile)
 			#os.system("gzip "+SaveFile)
 		time.sleep(random.randint(2, 3))
-		driver.execute_script("window.history.go(-1)")
+		driver.back()
 		time.sleep(random.randint(1, 3))
 except :
 	print(str(traceback.format_exc()))
