@@ -72,7 +72,7 @@ try :
 		if SiteUrl == "" or SaveFileName == "" :
 			print("continue - "+str(cnt_ ))
 			continue
-	  	print("ok - "+str(cnt_ ))
+		print("ok - "+str(cnt_ ))
 		cnt_ = cnt_ + 1
 		try :
 			if LangType == "ko" :
