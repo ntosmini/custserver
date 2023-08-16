@@ -44,15 +44,13 @@ cookies_ko = {
 sys.path.append(os.path.dirname("/home/ntosmini/public_html/_agent.py"))
 import _agent
 
-
-
+UserAgent = "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Mobile Safari/537.36"	#_agent.get_mobile_agent()
+headers = {
+	"User-Agent":UserAgent
+}
 try : 
 	cnt_ = int(1)
 	for val in IslId_SiteUrl :
-		UserAgent = _agent.get_mobile_agent()
-		headers = {
-			"User-Agent":UserAgent
-		}
 		#저장html
 		SaveHtml = ''
 		#에러msg
