@@ -277,11 +277,12 @@ try :
 
 				if DetailUrl :
 					try :
-						time.sleep(random.randint(1, 3))
+						time.sleep(random.randint(2, 3))
 						DetailHtml = driver.get(str(DetailUrl))
 						driver.implicitly_wait(10)
 						DetailHtmlRecode = 'ok'
 						DetailHtml = driver.page_source
+						driver.back()
 					except :
 						DetailHtml = ''
 						DetailHtmlRecode = 'error'
