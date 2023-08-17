@@ -291,12 +291,12 @@ try :
 							break
 						last_height = new_height
 				try :
-					PageHtml = re.sub('\n', '', PageHtml)
-					PageHtmlJsonSearch = re.search(r'window.runParams\s+=\s+{\s+ data:(?P<JsonData>.*)};\s+</script>', str(PageHtml), re.DOTALL)
-					PageHtmlJsonData = PageHtmlJsonSearch.group('JsonData')
+					PageHtml = re.sub("\n", "", PageHtml)
+					PageHtmlJsonSearch = re.search(r"window.runParams\s+=\s+{\s+ data:(?P<JsonData>.*)};\s+</script>", str(PageHtml), re.DOTALL)
+					PageHtmlJsonData = PageHtmlJsonSearch.group("JsonData")
 					PageHtmlJson = json.loads(PageHtmlJsonData)
 				except :
-					PageHtmlJson = ''
+					PageHtmlJson = ""
 					ErrMsg = ErrMsg + str(traceback.format_exc()) + "\n\n"
 			
 			if PageHtmlJson :
@@ -304,7 +304,7 @@ try :
 				try :
 					DetailUrl = PageHtmlJson['descInfo']['productDescUrl']
 				except :
-					DetailUrl = '';
+					DetailUrl = "";
 					ErrMsg = ErrMsg + str(traceback.format_exc()) + "\n\n"
 				
 				if DetailUrl :
