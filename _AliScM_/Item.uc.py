@@ -333,8 +333,9 @@ try :
 		if ErrMsg :
 			ErrMsg = "<errmsg>"+ErrMsg+"</errmsg>\n\n"
 			
+		PageHtml_ = driver.page_source
 		WriteFile = "<agent>"+str(UserAgent)+"</agent>\n\n"+"<time>"+time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))+"</time>\n\n"
-		WriteFile = WriteFile + OriginUrl + NowUrl + SaveHtml + ErrMsg + "\n\n"	#<PageHtml>"+str(PageHtml)+"</PageHtml>\n\n
+		WriteFile = WriteFile + OriginUrl + NowUrl + SaveHtml + ErrMsg + "\n\n<PageHtml>"+str(PageHtml_)+"</PageHtml>\n\n"
 
 		f = open(SaveFile, 'w', encoding="utf8")
 		f.write(WriteFile)
