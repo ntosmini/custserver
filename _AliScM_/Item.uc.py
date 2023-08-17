@@ -97,14 +97,17 @@ def LockChkAction(PageHtml) :
 			driver.refresh()
 			LockChkCnt = LockChkCnt + 1
 			driver.implicitly_wait(10)
-			PageHtml1 = driver.page_source
+			PageHtml = driver.page_source
 			defreturn = "y"
 		else :
 			action = ActionChains(driver)
 			if re.search("Sorry, we have detected unusual traffic from your network", str(PageHtml)) :
 				print("Sorry")
 				try :
-					slider = driver.find_element(By.ID, "nc_1_n1z")
+					try :
+						slider = driver.find_element(By.ID, "nc_1_n1z")
+					except :
+						slider = ""
 					if slider :
 						time.sleep(random.uniform(0.5, 2))
 						#slider.click()
@@ -123,6 +126,13 @@ def LockChkAction(PageHtml) :
 						action.perform()
 						ResultLockChk = "page ok : "+str(LockChkCnt)
 						LockChkCnt = LockChkCnt + 1
+						driver.implicitly_wait(10)
+						PageHtml = driver.page_source
+						defreturn = "y"
+					else :
+						print("re")
+						time.sleep(1)
+						driver.refresh()
 						driver.implicitly_wait(10)
 						PageHtml = driver.page_source
 						defreturn = "y"
