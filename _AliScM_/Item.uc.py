@@ -75,7 +75,9 @@ driver = chromeWebdriver()
 LockChkCnt = int(0)
 def LockChkAction(PageHtml) :
 	global LockChkCnt
-
+	action = ''
+	slider = ''
+	slider2 = ''
 	if LockSlider == "n" :
 		return 'pass'
 
