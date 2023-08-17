@@ -71,6 +71,92 @@ def chromeWebdriver():
 
 driver = chromeWebdriver()
 
+
+LockChkCnt = int(0)
+def LockChkAction(PageHtml, SiteUrl='') :
+	global LockChkCnt
+
+	print("-"+str(LockChkCnt)+" == "+str(SiteUrl)+"\n")
+	if LockChkCnt > 5 :
+		return 'lockover'
+
+	if LockSlider == "n" :
+		return 'pass'
+
+	ResultLockChk = "no : "+str(LockChkCnt)
+	if re.search('Please refresh and try again', str(PageHtml)) or re.search('새로고침', str(PageHtml)) or re.search('새로 고침', str(PageHtml)) :
+		time.sleep(1)
+		driver.refresh()
+		driver.implicitly_wait(10)
+		PageHtml = driver.page_source
+		LockChkCnt = LockChkCnt + 1
+		LockChkAction(PageHtml)
+	
+	action = ActionChains(driver)
+	if re.search('Sorry, we have detected unusual traffic from your network', str(PageHtml)) :
+		try :
+			slider = driver.find_element(By.ID, "nc_1_n1z")
+			if slider :
+				time.sleep(random.uniform(0.5, 2))
+				slider.click()
+				action.move_to_element(slider)
+				action.click_and_hold(slider)
+				"""
+				xoffset = 0
+				while xoffset < 500:
+					xmove = 499	#random.randint(50, 70)
+					ymove = random.randint(-1, 1)
+					action.move_by_offset(xmove, ymove)
+					xoffset += xmove
+				"""
+				action.move_by_offset(random.uniform(400, 500), random.randint(-1, 1))
+				action.release()
+				action.perform()
+				ResultLockChk = "page ok : "+str(LockChkCnt)
+				PageHtml = driver.page_source
+				LockChkCnt = LockChkCnt + 1
+				LockChkAction(PageHtml)
+				#return str(ResultLockChk)
+		except :
+			ResultLockChk = traceback.format_exc()+" : "+str(LockChkCnt)
+			pass
+	elif re.search('.com:443', str(PageHtml)) :
+		iframe = driver.find_elements(By.TAG_NAME, "iframe")
+		for iframeVal in iframe :
+			driver.switch_to.frame(iframeVal)
+			try :
+				slider = driver.find_element(By.ID, "nc_1_n1z")
+				if slider :
+					time.sleep(random.uniform(0.5, 2))
+					slider.click()
+					action.move_to_element(slider)
+					action.click_and_hold(slider)
+					"""
+					xoffset = 0
+					while xoffset < 500:
+						xmove = random.randint(10, 50)
+						ymove = random.randint(-1, 1)
+						action.move_by_offset(xmove, ymove)
+						xoffset += xmove
+					"""
+					action.move_by_offset(random.uniform(400, 500), random.randint(-1, 1))
+					action.release()
+					action.perform()
+					ResultLockChk = "iframe ok : "+str(LockChkCnt)
+					driver.switch_to.default_content()
+					PageHtml = driver.page_source
+					LockChkCnt = LockChkCnt + 1
+					LockChkAction(PageHtml)
+					#return str(ResultLockChk)
+			except :
+				ResultLockChk = traceback.format_exc()+" : "+str(LockChkCnt)
+				pass
+		driver.switch_to.default_content()
+	else :
+		ResultLockChk = "non : "+str(LockChkCnt)
+	return ResultLockChk
+
+
 cookies_en = {
 'xman_us_f': 'x_l=0&x_locale=en_US&x_c_chg=1&acs_rt=',
 'aep_usuc_f': 'site=usa&c_tp=USD&region=US&b_locale=en_US',
@@ -90,6 +176,9 @@ if StartUrl == "" :
 
 driver.get(StartUrl)
 driver.implicitly_wait(10)
+PageHtml = driver.page_source
+LockChkAction(PageHtml)
+
 
 if CookiesLang :
 	getcookies = driver.get_cookies()
@@ -144,86 +233,7 @@ if CookiesLang :
 		driver.add_cookie(arr)
 	time.sleep(3)
 	#driver.maximize_window()
-LockChkCnt = int(0)
-def LockChkAction(PageHtml) :
-	global LockChkCnt
-	LockChkCnt = LockChkCnt + 1
-	print("-"+str(LockChkCnt)+"\n")
-	if LockChkCnt > 5 :
-		return 'lockover'
 
-	if LockSlider == "n" :
-		return 'pass'
-
-	ResultLockChk = "no : "+str(LockChkCnt)
-	if re.search('Please refresh and try again', str(PageHtml)) or re.search('새로고침', str(PageHtml)) or re.search('새로 고침', str(PageHtml)) :
-		time.sleep(1)
-		driver.refresh()
-		driver.implicitly_wait(10)
-		PageHtml = driver.page_source
-		LockChkAction(PageHtml)
-	
-	action = ActionChains(driver)
-	if re.search('Sorry, we have detected unusual traffic from your network', str(PageHtml)) :
-		try :
-			slider = driver.find_element(By.ID, "nc_1_n1z")
-			if slider :
-				time.sleep(random.uniform(0.5, 2))
-				slider.click()
-				action.move_to_element(slider)
-				action.click_and_hold(slider)
-				"""
-				xoffset = 0
-				while xoffset < 500:
-					xmove = 499	#random.randint(50, 70)
-					ymove = random.randint(-1, 1)
-					action.move_by_offset(xmove, ymove)
-					xoffset += xmove
-				"""
-				action.move_by_offset(random.uniform(400, 500), random.randint(-1, 1))
-				action.release()
-				action.perform()
-				ResultLockChk = "page ok : "+str(LockChkCnt)
-				PageHtml = driver.page_source
-				LockChkAction(PageHtml)
-				#return str(ResultLockChk)
-		except :
-			ResultLockChk = traceback.format_exc()+" : "+str(LockChkCnt)
-			pass
-	elif re.search('.com:443', str(PageHtml)) :
-		iframe = driver.find_elements(By.TAG_NAME, "iframe")
-		for iframeVal in iframe :
-			driver.switch_to.frame(iframeVal)
-			try :
-				slider = driver.find_element(By.ID, "nc_1_n1z")
-				if slider :
-					time.sleep(random.uniform(0.5, 2))
-					slider.click()
-					action.move_to_element(slider)
-					action.click_and_hold(slider)
-					"""
-					xoffset = 0
-					while xoffset < 500:
-						xmove = random.randint(10, 50)
-						ymove = random.randint(-1, 1)
-						action.move_by_offset(xmove, ymove)
-						xoffset += xmove
-					"""
-					action.move_by_offset(random.uniform(400, 500), random.randint(-1, 1))
-					action.release()
-					action.perform()
-					ResultLockChk = "iframe ok : "+str(LockChkCnt)
-					driver.switch_to.default_content()
-					PageHtml = driver.page_source
-					LockChkAction(PageHtml)
-					#return str(ResultLockChk)
-			except :
-				ResultLockChk = traceback.format_exc()+" : "+str(LockChkCnt)
-				pass
-		driver.switch_to.default_content()
-	else :
-		ResultLockChk = "non : "+str(LockChkCnt)
-	return ResultLockChk
 
 
 try :
@@ -256,7 +266,7 @@ try :
 				driver.get(SiteUrl)
 				driver.implicitly_wait(10)
 				PageHtml = driver.page_source
-				LockChk = LockChkAction(PageHtml)
+				LockChk = LockChkAction(PageHtml, SiteUrl)
 				if LockChk == "lockover" :
 					print("lockover continue")
 					continue
