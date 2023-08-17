@@ -75,7 +75,7 @@ driver = chromeWebdriver()
 LockChkCnt = int(0)
 def LockChkAction(PageHtml) :
 	global LockChkCnt
-	global driver
+
 	time.sleep(random.uniform(1, 3))
 	print("-"+str(LockChkCnt)+" == ")
 	if LockChkCnt > 100 :
