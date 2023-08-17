@@ -77,7 +77,7 @@ def LockChkAction(PageHtml) :
 	global LockChkCnt
 
 	print("-"+str(LockChkCnt)+" == ")
-	if LockChkCnt > 5 :
+	if LockChkCnt > 100 :
 		print(str(LockChkCnt)+" stop")
 		return 'lockover'
 
