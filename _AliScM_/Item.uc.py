@@ -329,7 +329,9 @@ try :
 
 			if NowUrl :
 				NowUrl = "<ntosnowurl>"+NowUrl+"</ntosnowurl>\n\n"
-
+			if ErrMsg :
+				ErrMsg = "<errmsg>"+ErrMsg+"</errmsg>\n\n"
+				
 			WriteFile = "<agent>"+str(UserAgent)+"</agent>\n\n"+"<time>"+time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))+"</time>\n\n"
 			WriteFile = WriteFile + OriginUrl + NowUrl + SaveHtml + ErrMsg + "\n\n"	#<PageHtml>"+str(PageHtml)+"</PageHtml>\n\n
 
