@@ -34,4 +34,5 @@ sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
 sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
 
 path_ = ChromeDriverManager().install()
-print(path_)
+PORT = "9222"
+sp = subprocess.Popen(str(path_)+' --remote-debugging-port='+str(PORT)+' --user-data-dir="/home/ntosmini/ch"')
