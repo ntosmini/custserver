@@ -144,9 +144,9 @@ if CookiesLang :
 		driver.add_cookie(arr)
 	time.sleep(3)
 	#driver.maximize_window()
-
+LockChkCnt = int(0)
 def LockChkAction(PageHtml) :
-	global LockChkCnt, driver
+	global LockChkCnt
 	LockChkCnt = LockChkCnt + 1
 	print("-"+str(LockChkCnt)+"\n")
 	if LockChkCnt > 5 :
@@ -228,7 +228,7 @@ def LockChkAction(PageHtml) :
 
 try :
 	for val in SiteUrlList :
-		LockChkCnt = int(0)
+		LockChkCnt = 0
 		
 		LogMsg = ''
 		NowUrl = ''
