@@ -191,7 +191,7 @@ if StartUrl == "" :
 driver.get(StartUrl)
 driver.implicitly_wait(10)
 PageHtml11 = driver.page_source
-aa = LockChkAction(PageHtml)
+aa = LockChkAction(PageHtml11)
 PageHtml1 = driver.page_source
 print(str(aa))
 #저장파일명
