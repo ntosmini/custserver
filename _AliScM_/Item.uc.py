@@ -91,7 +91,7 @@ def LockChkAction(PageHtml) :
 	else :
 
 		ResultLockChk = "no : "+str(LockChkCnt)
-		if re.search("Please refresh and try again", str(PageHtml)) :
+		if re.search("Please refresh and try again", str(PageHtml)) or re.search("Deny from x5", str(PageHtml)) :
 			print("re")
 			time.sleep(1)
 			driver.refresh()
