@@ -74,7 +74,8 @@ driver = chromeWebdriver()
 
 LockChkCnt = int(0)
 def LockChkAction() :
-	global LockChkCnt, driver
+	global LockChkCnt
+	global driver
 
 	PageHtml = driver.page_source
 	PageHtml = str(PageHtml)
@@ -290,7 +291,7 @@ try :
 							break
 						last_height = new_height
 				try :
-					#PageHtml = re.sub("\n", "", PageHtml)
+					PageHtml = re.sub("\n", "", PageHtml)
 					PageHtmlJsonSearch = re.search(r"window.runParams\s+=\s+{\s+ data:(?P<JsonData>.*)};\s+</script>", str(PageHtml), re.DOTALL)
 					PageHtmlJsonData = PageHtmlJsonSearch.group("JsonData")
 					PageHtmlJson = json.loads(PageHtmlJsonData)
