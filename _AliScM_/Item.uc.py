@@ -149,6 +149,8 @@ def LockChkAction(PageHtml) :
 	global LockChkCnt, driver
 	LockChkCnt = LockChkCnt + 1
 	print("-"+str(LockChkCnt)+"\n")
+	if LockChkCnt > 5 :
+		return 'lockover'
 
 	if LockSlider == "n" :
 		return 'pass'
@@ -254,6 +256,9 @@ try :
 				driver.implicitly_wait(10)
 				PageHtml = driver.page_source
 				LockChk = LockChkAction(PageHtml)
+				if LockChk == "lockover" :
+					print("lockover continue")
+					continue
 				PageHtml = driver.page_source
 				NowUrl = driver.current_url
 			except :
