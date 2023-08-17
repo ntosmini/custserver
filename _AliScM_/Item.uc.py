@@ -78,7 +78,7 @@ def LockChkAction(PageHtml) :
 
 	time.sleep(random.uniform(1, 3))
 	print("-"+str(LockChkCnt)+" == ")
-	if LockChkCnt > 100 :
+	if LockChkCnt > 5 :
 		print(str(LockChkCnt)+" stop")
 		return 'lockover'
 
