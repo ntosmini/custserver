@@ -73,6 +73,7 @@ driver = chromeWebdriver()
 
 
 LockChkCnt = int(0)
+action = ActionChains(driver)
 def LockChkAction(PageHtml) :
 	global LockChkCnt
 
@@ -94,7 +95,6 @@ def LockChkAction(PageHtml) :
 		PageHtml = driver.page_source
 		return LockChkAction(PageHtml)
 	
-	action = ActionChains(driver)
 	if re.search('Sorry, we have detected unusual traffic from your network', str(PageHtml)) :
 		print("Sorry")
 		try :
