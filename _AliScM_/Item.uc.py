@@ -74,12 +74,12 @@ driver = chromeWebdriver()
 cookies_en = {
 'xman_us_f': 'x_l=0&x_locale=en_US&x_c_chg=1&acs_rt=',
 'aep_usuc_f': 'site=usa&c_tp=USD&region=US&b_locale=en_US',
-'intl_locale': 'en_US',
+'intl_locale': 'en_US'
 }
 cookies_ko = {
 'xman_us_f': 'x_l=0&x_locale=ko_KR&x_c_chg=1&acs_rt=',
 'aep_usuc_f': 'site=kor&c_tp=KRW&region=KR&b_locale=ko_KR',
-'intl_locale': 'ko_KR',
+'intl_locale': 'ko_KR'
 }
 headers = {
 	"User-Agent":UserAgent
