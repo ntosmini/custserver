@@ -82,7 +82,7 @@ def LockChkAction(PageHtml) :
 		return 'pass'
 
 	defreturn = "n"
-
+	ResultLockChk = "non"
 	time.sleep(random.uniform(1, 3))
 	print("-"+str(LockChkCnt)+" == ")
 	if LockChkCnt > 5 :
