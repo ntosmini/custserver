@@ -78,14 +78,15 @@ def LockChkAction(PageHtml) :
 
 	print("-"+str(LockChkCnt)+" == ")
 	if LockChkCnt > 5 :
+		print(str(LockChkCnt)+" stop")
 		return 'lockover'
 
 	if LockSlider == "n" :
 		return 'pass'
 
 	ResultLockChk = "no : "+str(LockChkCnt)
-	if re.search('Please refresh and try again', str(PageHtml)) or re.search('새로고침', str(PageHtml)) or re.search('새로 고침', str(PageHtml)) :
-		print("1")
+	if re.search("Please refresh and try again", str(PageHtml)) or re.search("새로고침", str(PageHtml)) or re.search("새로 고침", str(PageHtml)) :
+		print("re")
 		time.sleep(1)
 		driver.refresh()
 		LockChkCnt = LockChkCnt + 1
@@ -95,7 +96,7 @@ def LockChkAction(PageHtml) :
 	
 	action = ActionChains(driver)
 	if re.search('Sorry, we have detected unusual traffic from your network', str(PageHtml)) :
-		print("2")
+		print("Sorry")
 		try :
 			slider = driver.find_element(By.ID, "nc_1_n1z")
 			if slider :
@@ -124,7 +125,7 @@ def LockChkAction(PageHtml) :
 			ResultLockChk = traceback.format_exc()+" : "+str(LockChkCnt)
 			pass
 	elif re.search('.com:443', str(PageHtml)) :
-		print("3")
+		print("com:443")
 		iframe = driver.find_elements(By.TAG_NAME, "iframe")
 		for iframeVal in iframe :
 			driver.switch_to.frame(iframeVal)
