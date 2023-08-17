@@ -73,12 +73,8 @@ driver = chromeWebdriver()
 
 
 LockChkCnt = int(0)
-def LockChkAction() :
+def LockChkAction(PageHtml) :
 	global LockChkCnt
-	global driver
-
-	PageHtml = driver.page_source
-	PageHtml = str(PageHtml)
 
 	print("-"+str(LockChkCnt)+" == ")
 	if LockChkCnt > 5 :
@@ -92,9 +88,10 @@ def LockChkAction() :
 		print("1")
 		time.sleep(1)
 		driver.refresh()
-		driver.implicitly_wait(10)
 		LockChkCnt = LockChkCnt + 1
-		LockChkAction()
+		driver.implicitly_wait(10)
+		PageHtml = driver.page_source
+		LockChkAction(PageHtml)
 	
 	action = ActionChains(driver)
 	if re.search('Sorry, we have detected unusual traffic from your network', PageHtml) :
@@ -119,7 +116,9 @@ def LockChkAction() :
 				action.perform()
 				ResultLockChk = "page ok : "+str(LockChkCnt)
 				LockChkCnt = LockChkCnt + 1
-				LockChkAction()
+				driver.implicitly_wait(10)
+				PageHtml = driver.page_source
+				LockChkAction(PageHtml)
 				#return str(ResultLockChk)
 		except :
 			ResultLockChk = traceback.format_exc()+" : "+str(LockChkCnt)
@@ -150,7 +149,9 @@ def LockChkAction() :
 					ResultLockChk = "iframe ok : "+str(LockChkCnt)
 					driver.switch_to.default_content()
 					LockChkCnt = LockChkCnt + 1
-					LockChkAction()
+					driver.implicitly_wait(10)
+					PageHtml = driver.page_source
+					LockChkAction(PageHtml)
 					#return str(ResultLockChk)
 			except :
 				ResultLockChk = traceback.format_exc()+" : "+str(LockChkCnt)
@@ -180,7 +181,8 @@ if StartUrl == "" :
 
 driver.get(StartUrl)
 driver.implicitly_wait(10)
-LockChkAction()
+PageHtml = driver.page_source
+LockChkAction(PageHtml)
 
 
 if CookiesLang :
@@ -268,7 +270,8 @@ try :
 			try :
 				driver.get(SiteUrl)
 				driver.implicitly_wait(10)
-				LockChk = LockChkAction()
+				PageHtml = driver.page_source
+				LockChk = LockChkAction(PageHtml)
 				PageHtml = driver.page_source
 				if LockChk == "lockover" :
 					print("lockover continue")
