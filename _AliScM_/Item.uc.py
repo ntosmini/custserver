@@ -328,28 +328,28 @@ try :
 					DetailHtml = re.sub('(<link[^>]+>)', '', DetailHtml)
 					SaveHtml = SaveHtml + "<DetailHtml>" + str(DetailHtml) + "</DetailHtml>\n\n"
 
-			if NowUrl :
-				NowUrl = "<ntosnowurl>"+NowUrl+"</ntosnowurl>\n\n"
-			if ErrMsg :
-				ErrMsg = "<errmsg>"+ErrMsg+"</errmsg>\n\n"
-				
-			WriteFile = "<agent>"+str(UserAgent)+"</agent>\n\n"+"<time>"+time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))+"</time>\n\n"
-			WriteFile = WriteFile + OriginUrl + NowUrl + SaveHtml + ErrMsg + "\n\n"	#<PageHtml>"+str(PageHtml)+"</PageHtml>\n\n
+		if NowUrl :
+			NowUrl = "<ntosnowurl>"+NowUrl+"</ntosnowurl>\n\n"
+		if ErrMsg :
+			ErrMsg = "<errmsg>"+ErrMsg+"</errmsg>\n\n"
+			
+		WriteFile = "<agent>"+str(UserAgent)+"</agent>\n\n"+"<time>"+time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))+"</time>\n\n"
+		WriteFile = WriteFile + OriginUrl + NowUrl + SaveHtml + ErrMsg + "\n\n"	#<PageHtml>"+str(PageHtml)+"</PageHtml>\n\n
 
-			f = open(SaveFile, 'w', encoding="utf8")
-			f.write(WriteFile)
-			f.close()
-			os.system("gzip "+SaveFile)
+		f = open(SaveFile, 'w', encoding="utf8")
+		f.write(WriteFile)
+		f.close()
+		os.system("gzip "+SaveFile)
 
-			if FileSendSave == "y" and NtosServer != "" :
-				gzfile = SaveFile+".gz"
-				files = open(gzfile, 'rb')
-				upload = {'file': files}
-				data = {'CustId':CustId, 'ScrapType':'item' }
-				Result_ = requests.post(NtosServer, data=data, files=upload)
-				Result = Result_.text
-				if os.path.exists(gzfile) :
-					os.remove(gzfile)
+		if FileSendSave == "y" and NtosServer != "" :
+			gzfile = SaveFile+".gz"
+			files = open(gzfile, 'rb')
+			upload = {'file': files}
+			data = {'CustId':CustId, 'ScrapType':'item' }
+			Result_ = requests.post(NtosServer, data=data, files=upload)
+			Result = Result_.text
+			if os.path.exists(gzfile) :
+				os.remove(gzfile)
 
 		time.sleep(random.uniform(1, 3))
 except :
