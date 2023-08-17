@@ -86,64 +86,32 @@ def LockChkAction(PageHtml) :
 	if LockChkCnt > 5 :
 		print(str(LockChkCnt)+" stop")
 		defreturn = "n"
-
-
-
-	ResultLockChk = "no : "+str(LockChkCnt)
-	if re.search("Please refresh and try again", str(PageHtml)) :
-		print("re")
-		time.sleep(1)
-		driver.refresh()
-		LockChkCnt = LockChkCnt + 1
-		driver.implicitly_wait(10)
-		PageHtml1 = driver.page_source
-		defreturn = "y"
 	else :
-		action = ActionChains(driver)
-		if re.search("Sorry, we have detected unusual traffic from your network", str(PageHtml)) :
-			print("Sorry")
-			try :
-				slider = driver.find_element(By.ID, "nc_1_n1z")
-				if slider :
-					time.sleep(random.uniform(0.5, 2))
-					#slider.click()
-					action.move_to_element(slider)
-					action.click_and_hold(slider)
-					"""
-					xoffset = 0
-					while xoffset < 500:
-						xmove = 499	#random.randint(50, 70)
-						ymove = random.randint(-1, 1)
-						action.move_by_offset(xmove, ymove)
-						xoffset += xmove
-					"""
-					action.move_by_offset(random.uniform(400, 500), random.randint(-1, 1))
-					action.release()
-					action.perform()
-					ResultLockChk = "page ok : "+str(LockChkCnt)
-					LockChkCnt = LockChkCnt + 1
-					driver.implicitly_wait(10)
-					PageHtml = driver.page_source
-					defreturn = "y"
-			except :
-				ResultLockChk = traceback.format_exc()+" : "+str(LockChkCnt)
 
-		elif re.search(".com:443", str(PageHtml)) :
-			print("com:443")
-			iframe = driver.find_elements(By.TAG_NAME, "iframe")
-			for iframeVal in iframe :
-				driver.switch_to.frame(iframeVal)
+		ResultLockChk = "no : "+str(LockChkCnt)
+		if re.search("Please refresh and try again", str(PageHtml)) :
+			print("re")
+			time.sleep(1)
+			driver.refresh()
+			LockChkCnt = LockChkCnt + 1
+			driver.implicitly_wait(10)
+			PageHtml1 = driver.page_source
+			defreturn = "y"
+		else :
+			action = ActionChains(driver)
+			if re.search("Sorry, we have detected unusual traffic from your network", str(PageHtml)) :
+				print("Sorry")
 				try :
-					slider2 = driver.find_element(By.ID, "nc_1_n1z")
-					if slider2 :
+					slider = driver.find_element(By.ID, "nc_1_n1z")
+					if slider :
 						time.sleep(random.uniform(0.5, 2))
-						#slider2.click()
-						action.move_to_element(slider2)
-						action.click_and_hold(slider2)
+						#slider.click()
+						action.move_to_element(slider)
+						action.click_and_hold(slider)
 						"""
 						xoffset = 0
 						while xoffset < 500:
-							xmove = random.randint(10, 50)
+							xmove = 499	#random.randint(50, 70)
 							ymove = random.randint(-1, 1)
 							action.move_by_offset(xmove, ymove)
 							xoffset += xmove
@@ -151,8 +119,7 @@ def LockChkAction(PageHtml) :
 						action.move_by_offset(random.uniform(400, 500), random.randint(-1, 1))
 						action.release()
 						action.perform()
-						ResultLockChk = "iframe ok : "+str(LockChkCnt)
-						driver.switch_to.default_content()
+						ResultLockChk = "page ok : "+str(LockChkCnt)
 						LockChkCnt = LockChkCnt + 1
 						driver.implicitly_wait(10)
 						PageHtml = driver.page_source
@@ -160,10 +127,42 @@ def LockChkAction(PageHtml) :
 				except :
 					ResultLockChk = traceback.format_exc()+" : "+str(LockChkCnt)
 
-				driver.switch_to.default_content()
-		else :
-			ResultLockChk = "non : "+str(LockChkCnt)
-			defreturn = "n"
+			elif re.search(".com:443", str(PageHtml)) :
+				print("com:443")
+				iframe = driver.find_elements(By.TAG_NAME, "iframe")
+				for iframeVal in iframe :
+					driver.switch_to.frame(iframeVal)
+					try :
+						slider2 = driver.find_element(By.ID, "nc_1_n1z")
+						if slider2 :
+							time.sleep(random.uniform(0.5, 2))
+							#slider2.click()
+							action.move_to_element(slider2)
+							action.click_and_hold(slider2)
+							"""
+							xoffset = 0
+							while xoffset < 500:
+								xmove = random.randint(10, 50)
+								ymove = random.randint(-1, 1)
+								action.move_by_offset(xmove, ymove)
+								xoffset += xmove
+							"""
+							action.move_by_offset(random.uniform(400, 500), random.randint(-1, 1))
+							action.release()
+							action.perform()
+							ResultLockChk = "iframe ok : "+str(LockChkCnt)
+							driver.switch_to.default_content()
+							LockChkCnt = LockChkCnt + 1
+							driver.implicitly_wait(10)
+							PageHtml = driver.page_source
+							defreturn = "y"
+					except :
+						ResultLockChk = traceback.format_exc()+" : "+str(LockChkCnt)
+
+					driver.switch_to.default_content()
+			else :
+				ResultLockChk = "non : "+str(LockChkCnt)
+				defreturn = "n"
 
 	print(str(defreturn))
 	if defreturn == "y" :
