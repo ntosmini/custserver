@@ -25,21 +25,24 @@ import undetected_chromedriver as uc
 #한글깨짐
 sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
 sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
-
-
-subprocess.Popen(f'google-chrome --remote-debugging-port=9222  --user-data-dir=data_dir'.split()) 
-
-option = Options()
-option.add_experimental_option("debuggerAddress", "127.0.0.1:9222")
-chrome_ver = chromedriver_autoinstaller.get_chrome_version().split('.')[0]
-
-try:
-  driver = webdriver.Chrome(f'./{chrome_ver}/chromedriver', options=option)
-except:
-  chromedriver_autoinstaller.install(True)
-  driver = webdriver.Chrome(f'./{chrome_ver}/chromedriver', options=option)
-
-driver.get("http://ntos.co.kr")
-driver.implicitly_wait(10)
-PageHtml = driver.page_source
+PageHtml = ''
+try :
+  subprocess.Popen(f'google-chrome --remote-debugging-port=9222  --user-data-dir=data_dir'.split()) 
+  
+  option = Options()
+  option.add_experimental_option("debuggerAddress", "127.0.0.1:9222")
+  chrome_ver = chromedriver_autoinstaller.get_chrome_version().split('.')[0]
+  
+  try:
+    driver = webdriver.Chrome(f'./{chrome_ver}/chromedriver', options=option)
+  except:
+    chromedriver_autoinstaller.install(True)
+    driver = webdriver.Chrome(f'./{chrome_ver}/chromedriver', options=option)
+    print(str(traceback.format_exc()))
+  
+  driver.get("http://ntos.co.kr")
+  driver.implicitly_wait(10)
+  PageHtml = driver.page_source
+except :
+  print(str(traceback.format_exc()))
 print(PageHtml)
