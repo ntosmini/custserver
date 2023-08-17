@@ -85,14 +85,14 @@ def LockChkAction(PageHtml) :
 		return 'pass'
 
 	ResultLockChk = "no : "+str(LockChkCnt)
-	if re.search("Please refresh and try again", str(PageHtml)) or re.search("새로고침", str(PageHtml)) or re.search("새로 고침", str(PageHtml)) :
+	if re.search("Please refresh and try again", str(PageHtml)) :
 		print("re")
 		time.sleep(1)
 		driver.refresh()
 		LockChkCnt = LockChkCnt + 1
 		driver.implicitly_wait(10)
 		PageHtml = driver.page_source
-		LockChkAction(PageHtml)
+		return LockChkAction(PageHtml)
 	
 	action = ActionChains(driver)
 	if re.search('Sorry, we have detected unusual traffic from your network', str(PageHtml)) :
@@ -119,8 +119,7 @@ def LockChkAction(PageHtml) :
 				LockChkCnt = LockChkCnt + 1
 				driver.implicitly_wait(10)
 				PageHtml = driver.page_source
-				LockChkAction(PageHtml)
-				#return str(ResultLockChk)
+				return LockChkAction(PageHtml)
 		except :
 			ResultLockChk = traceback.format_exc()+" : "+str(LockChkCnt)
 			pass
@@ -152,8 +151,7 @@ def LockChkAction(PageHtml) :
 					LockChkCnt = LockChkCnt + 1
 					driver.implicitly_wait(10)
 					PageHtml = driver.page_source
-					LockChkAction(PageHtml)
-					#return str(ResultLockChk)
+					return LockChkAction(PageHtml)
 			except :
 				ResultLockChk = traceback.format_exc()+" : "+str(LockChkCnt)
 				pass
