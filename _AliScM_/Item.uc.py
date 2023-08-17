@@ -197,6 +197,17 @@ f.write(WriteFile)
 f.close()
 os.system("gzip "+SaveFile)
 
+if FileSendSave == "y" and NtosServer != "" :
+	gzfile = SaveFile+".gz"
+	files = open(gzfile, 'rb')
+	upload = {'file': files}
+	data = {'CustId':CustId, 'ScrapType':'item' }
+	Result_ = requests.post(NtosServer, data=data, files=upload)
+	Result = Result_.text
+	if os.path.exists(gzfile) :
+		os.remove(gzfile)
+
+
 exit()
 
 
