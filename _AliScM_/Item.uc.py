@@ -250,6 +250,7 @@ try :
 
 		if SiteUrl == "" or SaveFileName == "" :
 			LogMsg = LogMsg + "\ncontinue"
+			continue
 		else :
 			try :
 				driver.get(SiteUrl)
