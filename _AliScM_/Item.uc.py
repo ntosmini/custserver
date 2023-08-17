@@ -71,82 +71,25 @@ def chromeWebdriver():
 
 driver = chromeWebdriver()
 
-#lock 체크
-LockChkCnt = int(0)
-def LockChk(PageHtml) :
-	global LockChkCnt
-	LockChkCnt = LockChkCnt + 1
-	if LockSlider == "n" :
-		return "pass"
-	ResultLockChk = "no"
-	if re.search('Please refresh and try again', str(PageHtml)) or re.search('새로고침', str(PageHtml)) or re.search('새로 고침', str(PageHtml)) :
-		driver.refresh()
-		driver.implicitly_wait(10)
-		PageHtml = driver.page_source
-		LockChk(PageHtml)
-		return "re"
-	action = ActionChains(driver)
-	try :
-		if re.search('Sorry, we have detected unusual traffic from your network', str(PageHtml)) :
-			try :
-				slider = driver.find_element(By.ID, "nc_1_n1z")
-				if slider :
-					slider.click()
-					action.move_to_element(slider)
-					action.click_and_hold(slider)
-					xoffset = 0
-					while xoffset < 500:
-						xmove = random.randint(10, 50)
-						ymove = random.randint(-1, 1)
-						action.move_by_offset(xmove, ymove)
-						xoffset += xmove
-					action.release()
-					action.perform()
-					ResultLockChk = "page ok : "+str(LockChkCnt)
-					PageHtml = driver.page_source
-					LockChk(PageHtml)
-					return str(ResultLockChk)
-			except :
-				ResultLockChk = traceback.format_exc()
-				pass
-		if re.search('.com:443', str(PageHtml)) :
-			iframe = driver.find_elements(By.TAG_NAME, "iframe")
-			for iframeVal in iframe :
-				driver.switch_to.frame(iframeVal)
-				try :
-					slider = driver.find_element(By.ID, "nc_1_n1z")
-					if slider :
-						slider.click()
-						action.move_to_element(slider)
-						action.click_and_hold(slider)
-						xoffset = 0
-						while xoffset < 500:
-							xmove = random.randint(10, 50)
-							ymove = random.randint(-1, 1)
-							action.move_by_offset(xmove, ymove)
-							xoffset += xmove
-						action.release()
-						action.perform()
-						ResultLockChk = "iframe ok : "+str(LockChkCnt)
-						driver.switch_to.default_content()
-						return str(ResultLockChk)
-				except :
-					ResultLockChk = traceback.format_exc()
-					pass
-				driver.switch_to.default_content()
-	except :
-		ResultLockChk = traceback.format_exc()
-		pass
-	return str(ResultLockChk)
+cookies_en = {
+'xman_us_f': 'x_l=0&x_locale=en_US&x_c_chg=1&acs_rt=',
+'aep_usuc_f': 'site=usa&c_tp=USD&region=US&b_locale=en_US',
+'intl_locale': 'en_US',
+}
+cookies_ko = {
+'xman_us_f': 'x_l=0&x_locale=ko_KR&x_c_chg=1&acs_rt=',
+'aep_usuc_f': 'site=kor&c_tp=KRW&region=KR&b_locale=ko_KR',
+'intl_locale': 'ko_KR',
+}
+headers = {
+	"User-Agent":UserAgent
+}
+if StartUrl == "" :
+	StartUrl = "https://m.aliexpress.com"
 
 
-
-if StartUrl :
-	driver.get(StartUrl)
-	driver.implicitly_wait(10)
-else :
-	driver.get("https://aliexpress.com")
-	driver.implicitly_wait(10)
+driver.get(StartUrl)
+driver.implicitly_wait(10)
 
 if CookiesLang :
 	getcookies = driver.get_cookies()
@@ -158,7 +101,7 @@ if CookiesLang :
 		new_url = ''
 		qs = {}
 		if cookie['name'] == "aep_usuc_f" :
-			parts = urlparse('https://aliexpress.com?'+cookie['value'])
+			parts = urlparse(StartUrl+'?'+cookie['value'])
 			qs = dict(parse_qsl(parts.query))
 			if CookiesLang == "en" :
 				qs['site'] = 'usa'
@@ -172,14 +115,14 @@ if CookiesLang :
 				qs['b_locale'] = 'ko_KR'
 			parts = parts._replace(query=urlencode(qs))
 			new_url = urlunparse(parts)
-			new_url = unquote(new_url.replace('https://aliexpress.com?', ''))
+			new_url = unquote(new_url.replace(StartUrl+'?', ''))
 			cookie['value'] = new_url
 
 		parts = ''
 		new_url = ''
 		qs = {}
 		if cookie['name'] == "xman_us_f" :
-			parts = urlparse('https://aliexpress.com?'+cookie['value'])
+			parts = urlparse(StartUrl+'?'+cookie['value'])
 			qs = dict(parse_qsl(parts.query))
 			if CookiesLang == "en" :
 				qs['x_locale'] = 'en_US'
@@ -187,7 +130,7 @@ if CookiesLang :
 				qs['x_locale'] = 'ko_KR'
 			parts = parts._replace(query=urlencode(qs))
 			new_url = urlunparse(parts)
-			new_url = unquote(new_url.replace('https://aliexpress.com?', ''))
+			new_url = unquote(new_url.replace(StartUrl+'?', ''))
 			cookie['value'] = new_url
 
 		if cookie['name'] == "intl_locale" :
@@ -199,31 +142,133 @@ if CookiesLang :
 		for val in cookie.keys() :
 			arr[val] = cookie[val]
 		driver.add_cookie(arr)
-		#driver.maximize_window()
+	time.sleep(3)
+	#driver.maximize_window()
 
-time.sleep(3)
+def ScrollAction(sec) :
+	if Scroll == "y" :
+		SCROLL_PAUSE_SEC = sec
+		# 스크롤 높이 가져옴
+		last_height = driver.execute_script("return document.body.scrollHeight")
+		while True:
+			# 끝까지 스크롤 다운
+			driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+			# SCROLL_PAUSE_SEC 초 대기
+			time.sleep(SCROLL_PAUSE_SEC)
+			# 스크롤 다운 후 스크롤 높이 다시 가져옴
+			new_height = driver.execute_script("return document.body.scrollHeight")
+			if new_height == last_height:
+				break
+			last_height = new_height
+		return 'ok'
+	else :
+		return 'pass'
+
+
+def SaveFile(SaveFile, WriteFile) :
+	f = open(SaveFile, 'w', encoding="utf8")
+	f.write(WriteFile)
+	f.close()
+
+
+
+def LockChkAction(PageHtml) :
+	global LockChkCnt, driver
+	LockChkCnt = LockChkCnt + 1
+	print("-"+str(LockChkCnt)+"\n")
+
+	if LockSlider == "n" :
+		return 'pass'
+
+	ResultLockChk = "no : "+str(LockChkCnt)
+	if re.search('Please refresh and try again', str(PageHtml)) or re.search('새로고침', str(PageHtml)) or re.search('새로 고침', str(PageHtml)) :
+		time.sleep(1)
+		driver.refresh()
+		driver.implicitly_wait(10)
+		PageHtml = driver.page_source
+		LockChkAction(PageHtml)
+	
+	action = ActionChains(driver)
+	if re.search('Sorry, we have detected unusual traffic from your network', str(PageHtml)) :
+		try :
+			slider = driver.find_element(By.ID, "nc_1_n1z")
+			if slider :
+				time.sleep(random.uniform(0.5, 2))
+				slider.click()
+				action.move_to_element(slider)
+				action.click_and_hold(slider)
+				"""
+				xoffset = 0
+				while xoffset < 500:
+					xmove = 499	#random.randint(50, 70)
+					ymove = random.randint(-1, 1)
+					action.move_by_offset(xmove, ymove)
+					xoffset += xmove
+				"""
+				action.move_by_offset(random.uniform(400, 500), random.randint(-1, 1))
+				action.release()
+				action.perform()
+				ResultLockChk = "page ok : "+str(LockChkCnt)
+				PageHtml = driver.page_source
+				LockChkAction(PageHtml)
+				#return str(ResultLockChk)
+		except :
+			ResultLockChk = traceback.format_exc()+" : "+str(LockChkCnt)
+			pass
+	elif re.search('.com:443', str(PageHtml)) :
+		iframe = driver.find_elements(By.TAG_NAME, "iframe")
+		for iframeVal in iframe :
+			driver.switch_to.frame(iframeVal)
+			try :
+				slider = driver.find_element(By.ID, "nc_1_n1z")
+				if slider :
+					time.sleep(random.uniform(0.5, 2))
+					slider.click()
+					action.move_to_element(slider)
+					action.click_and_hold(slider)
+					"""
+					xoffset = 0
+					while xoffset < 500:
+						xmove = random.randint(10, 50)
+						ymove = random.randint(-1, 1)
+						action.move_by_offset(xmove, ymove)
+						xoffset += xmove
+					"""
+					action.move_by_offset(random.uniform(400, 500), random.randint(-1, 1))
+					action.release()
+					action.perform()
+					ResultLockChk = "iframe ok : "+str(LockChkCnt)
+					driver.switch_to.default_content()
+					PageHtml = driver.page_source
+					LockChkAction(PageHtml)
+					#return str(ResultLockChk)
+			except :
+				ResultLockChk = traceback.format_exc()+" : "+str(LockChkCnt)
+				pass
+		driver.switch_to.default_content()
+	else :
+		ResultLockChk = "non : "+str(LockChkCnt)
+	return ResultLockChk
+
 
 try :
 	for val in SiteUrlList :
-		LockChkCnt = 0
-		#저장html
-		SaveHtml = ''
-		#에러msg
-		ErrMsg = ''
+		LockChkCnt = int(0)
 		
+		LogMsg = ''
+		NowUrl = ''
+		ErrMsg = ''
+		LockChk = ''
+
 		PageHtml = ''
+		SaveHtml = ''
 		PageHtmlJson = ''
 		DetailUrl = ''
 		DetailHtml = ''
 
-		NowUrl = ''
-		LogMsg = ''
-		LockChkMsg = ''
-		NowUrl = ''
-
 		(SiteUrl, SaveFileName) = val.split("|@|")
+		
 		OriginUrl = "<ntosoriginurl>"+str(SiteUrl)+"</ntosoriginurl>\n\n"
-
 		#저장파일명
 		SaveFile = FileDir+str(SaveFileName)
 		SaveFile = SaveFile.replace('.html', '_'+str(time.strftime('%H%M', time.localtime(time.time())))+'.html')
@@ -235,30 +280,15 @@ try :
 				driver.get(SiteUrl)
 				driver.implicitly_wait(10)
 				PageHtml = driver.page_source
-				LockChkMsg = LockChk(PageHtml)
+				LockChk = LockChkAction(PageHtml)
 				PageHtml = driver.page_source
 				NowUrl = driver.current_url
 			except :
-				PageHtml = ''
-				NowUrl = ''
 				ErrMsg = ErrMsg + str(traceback.format_exc()) + "\n\n"
 
 			if PageHtml :
+				ScrollAction(1)
 				try :
-					if Scroll == "Y" :
-						SCROLL_PAUSE_SEC = 0.5
-						# 스크롤 높이 가져옴
-						last_height = driver.execute_script("return document.body.scrollHeight")
-						while True:
-							# 끝까지 스크롤 다운
-							driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-							# SCROLL_PAUSE_SEC 초 대기
-							time.sleep(SCROLL_PAUSE_SEC)
-							# 스크롤 다운 후 스크롤 높이 다시 가져옴
-							new_height = driver.execute_script("return document.body.scrollHeight")
-							if new_height == last_height:
-								break
-							last_height = new_height
 					PageHtml = re.sub('\n', '', PageHtml)
 					PageHtmlJsonSearch = re.search(r'window.runParams\s+=\s+{\s+ data:(?P<JsonData>.*)};\s+</script>', str(PageHtml), re.DOTALL)
 					PageHtmlJsonData = PageHtmlJsonSearch.group('JsonData')
@@ -266,7 +296,7 @@ try :
 				except :
 					PageHtmlJson = ''
 					ErrMsg = ErrMsg + str(traceback.format_exc()) + "\n\n"
-
+			
 			if PageHtmlJson :
 				SaveHtml = SaveHtml + "<PageHtmlJson>" + str(PageHtmlJsonData) + "</PageHtmlJson>\n\n"
 				try :
@@ -274,18 +304,31 @@ try :
 				except :
 					DetailUrl = '';
 					ErrMsg = ErrMsg + str(traceback.format_exc()) + "\n\n"
-
+				
 				if DetailUrl :
+					time.sleep(random.uniform(1, 3))
 					try :
-						time.sleep(random.randint(2, 3))
-						DetailHtml = driver.get(str(DetailUrl))
-						driver.implicitly_wait(10)
-						DetailHtmlRecode = 'ok'
-						DetailHtml = driver.page_source
+						if CookiesLang == "ko" :
+							DetailHtml = requests.get(str(DetailUrl), headers=headers, cookies=cookies_ko)
+						elif CookiesLang == "en" :
+							DetailHtml = requests.get(str(DetailUrl), headers=headers, cookies=cookies_en)
+						else :
+							DetailHtml = requests.get(str(DetailUrl), headers=headers)
+						DetailHtml = DetailHtml.text
 					except :
 						DetailHtml = ''
-						DetailHtmlRecode = 'error'
 						ErrMsg = ErrMsg + str(traceback.format_exc()) + "\n\n"
+
+					if DetailHtml == "" :
+						try :
+							DetailHtml = driver.get(str(DetailUrl))
+							driver.implicitly_wait(10)
+							DetailHtml = driver.page_source
+							time.sleep(random.uniform(2, 3))
+							driver.back()
+						except :
+							DetailHtml = ''
+							ErrMsg = ErrMsg + str(traceback.format_exc()) + "\n\n"
 
 				if DetailHtml :
 					DetailHtml = re.sub('(<script[^<]+</script>)', '', DetailHtml)
@@ -293,20 +336,18 @@ try :
 					DetailHtml = re.sub('(<link[^>]+>)', '', DetailHtml)
 					SaveHtml = SaveHtml + "<DetailHtml>" + str(DetailHtml) + "</DetailHtml>\n\n"
 
-			if LockChkMsg :
-				LockChkMsg = "<LockChkMsg>"+str(LockChkMsg)+"</LockChkMsg>\n\n"
 			if NowUrl :
 				NowUrl = "<ntosnowurl>"+NowUrl+"</ntosnowurl>\n\n"
-				
+
 			WriteFile = "<agent>"+str(UserAgent)+"</agent>\n\n"+"<time>"+time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))+"</time>\n\n"
-			WriteFile = LockChkMsg + WriteFile + OriginUrl + NowUrl + SaveHtml + ErrMsg + "\n\n<PageHtml>"+str(PageHtml)+"</PageHtml>\n\n"
+			WriteFile = WriteFile + OriginUrl + NowUrl + SaveHtml + ErrMsg + "\n\n"	#<PageHtml>"+str(PageHtml)+"</PageHtml>\n\n
 
 			f = open(SaveFile, 'w', encoding="utf8")
 			f.write(WriteFile)
 			f.close()
 			os.system("gzip "+SaveFile)
 
-			if FileSendSave == "Y" and NtosServer != "" :
+			if FileSendSave == "y" and NtosServer != "" :
 				gzfile = SaveFile+".gz"
 				files = open(gzfile, 'rb')
 				upload = {'file': files}
@@ -315,9 +356,10 @@ try :
 				Result = Result_.text
 				if os.path.exists(gzfile) :
 					os.remove(gzfile)
-		time.sleep(random.randint(1, 3))
+
+		time.sleep(random.uniform(1, 3))
 except :
 	print(str(traceback.format_exc()))
-	
+
 # 종료
 driver.quit()
