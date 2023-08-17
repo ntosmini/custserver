@@ -190,7 +190,7 @@ if StartUrl == "" :
 
 driver.get(StartUrl)
 driver.implicitly_wait(10)
-PageHtml = driver.page_source
+PageHtml11 = driver.page_source
 aa = LockChkAction(PageHtml)
 PageHtml1 = driver.page_source
 print(str(aa))
@@ -199,7 +199,7 @@ SaveFileName = "seller.ntos.co.kr_alichiadmin_item_1215184_55632007026003000000_
 SaveFile = FileDir+str(SaveFileName)
 SaveFile = SaveFile.replace('.html', '_'+str(time.strftime('%H%M', time.localtime(time.time())))+'.html')
 
-WriteFile = "<PageHtml>"+str(PageHtml)+"</PageHtml>\n\n"+"<PageHtml1>"+str(PageHtml1)+"</PageHtml1>"
+WriteFile = "<PageHtml>"+str(PageHtml11)+"</PageHtml>\n\n"+"<PageHtml1>"+str(PageHtml1)+"</PageHtml1>"
 
 f = open(SaveFile, 'w', encoding="utf8")
 f.write(WriteFile)
