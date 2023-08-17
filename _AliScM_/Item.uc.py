@@ -75,7 +75,8 @@ driver = chromeWebdriver()
 LockChkCnt = int(0)
 def LockChkAction(PageHtml) :
 	global LockChkCnt
-
+	global driver
+	time.sleep(random.uniform(1, 3))
 	print("-"+str(LockChkCnt)+" == ")
 	if LockChkCnt > 100 :
 		print(str(LockChkCnt)+" stop")
@@ -94,7 +95,7 @@ def LockChkAction(PageHtml) :
 		PageHtml = driver.page_source
 		return LockChkAction(PageHtml)
 	action = ActionChains(driver)
-	if re.search('Sorry, we have detected unusual traffic from your network', str(PageHtml)) :
+	if re.search("Sorry, we have detected unusual traffic from your network", str(PageHtml)) :
 		print("Sorry")
 		try :
 			slider = driver.find_element(By.ID, "nc_1_n1z")
@@ -122,7 +123,7 @@ def LockChkAction(PageHtml) :
 		except :
 			ResultLockChk = traceback.format_exc()+" : "+str(LockChkCnt)
 			pass
-	elif re.search('.com:443', str(PageHtml)) :
+	elif re.search(".com:443", str(PageHtml)) :
 		print("com:443")
 		iframe = driver.find_elements(By.TAG_NAME, "iframe")
 		for iframeVal in iframe :
