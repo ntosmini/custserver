@@ -73,10 +73,13 @@ driver = chromeWebdriver()
 
 
 LockChkCnt = int(0)
-def LockChkAction(PageHtml, SiteUrl='') :
-	global LockChkCnt
+def LockChkAction() :
+	global LockChkCnt, driver
 
-	print("-"+str(LockChkCnt)+" == "+str(SiteUrl)+"\n")
+	PageHtml = driver.page_source
+	PageHtml = str(PageHtml)
+
+	print("-"+str(LockChkCnt)+" == ")
 	if LockChkCnt > 5 :
 		return 'lockover'
 
@@ -84,16 +87,15 @@ def LockChkAction(PageHtml, SiteUrl='') :
 		return 'pass'
 
 	ResultLockChk = "no : "+str(LockChkCnt)
-	if re.search('Please refresh and try again', str(PageHtml)) or re.search('새로고침', str(PageHtml)) or re.search('새로 고침', str(PageHtml)) :
+	if re.search('Please refresh and try again', PageHtml) or re.search('새로고침', PageHtml) or re.search('새로 고침', PageHtml) :
 		time.sleep(1)
 		driver.refresh()
 		driver.implicitly_wait(10)
-		PageHtml = driver.page_source
 		LockChkCnt = LockChkCnt + 1
-		LockChkAction(PageHtml)
+		LockChkAction()
 	
 	action = ActionChains(driver)
-	if re.search('Sorry, we have detected unusual traffic from your network', str(PageHtml)) :
+	if re.search('Sorry, we have detected unusual traffic from your network', PageHtml) :
 		try :
 			slider = driver.find_element(By.ID, "nc_1_n1z")
 			if slider :
@@ -113,14 +115,13 @@ def LockChkAction(PageHtml, SiteUrl='') :
 				action.release()
 				action.perform()
 				ResultLockChk = "page ok : "+str(LockChkCnt)
-				PageHtml = driver.page_source
 				LockChkCnt = LockChkCnt + 1
-				LockChkAction(PageHtml)
+				LockChkAction()
 				#return str(ResultLockChk)
 		except :
 			ResultLockChk = traceback.format_exc()+" : "+str(LockChkCnt)
 			pass
-	elif re.search('.com:443', str(PageHtml)) :
+	elif re.search('.com:443', PageHtml) :
 		iframe = driver.find_elements(By.TAG_NAME, "iframe")
 		for iframeVal in iframe :
 			driver.switch_to.frame(iframeVal)
@@ -144,9 +145,8 @@ def LockChkAction(PageHtml, SiteUrl='') :
 					action.perform()
 					ResultLockChk = "iframe ok : "+str(LockChkCnt)
 					driver.switch_to.default_content()
-					PageHtml = driver.page_source
 					LockChkCnt = LockChkCnt + 1
-					LockChkAction(PageHtml)
+					LockChkAction()
 					#return str(ResultLockChk)
 			except :
 				ResultLockChk = traceback.format_exc()+" : "+str(LockChkCnt)
@@ -176,8 +176,7 @@ if StartUrl == "" :
 
 driver.get(StartUrl)
 driver.implicitly_wait(10)
-PageHtml = driver.page_source
-LockChkAction(PageHtml)
+LockChkAction()
 
 
 if CookiesLang :
@@ -265,8 +264,8 @@ try :
 			try :
 				driver.get(SiteUrl)
 				driver.implicitly_wait(10)
+				LockChk = LockChkAction()
 				PageHtml = driver.page_source
-				LockChk = LockChkAction(PageHtml, SiteUrl)
 				if LockChk == "lockover" :
 					print("lockover continue")
 					continue
