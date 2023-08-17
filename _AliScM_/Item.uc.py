@@ -92,8 +92,8 @@ def LockChkAction(PageHtml) :
 		driver.refresh()
 		LockChkCnt = LockChkCnt + 1
 		driver.implicitly_wait(10)
-		PageHtml = driver.page_source
-		return LockChkAction(PageHtml)
+		PageHtml1 = driver.page_source
+		return LockChkAction(PageHtml1)
 	action = ActionChains(driver)
 	if re.search("Sorry, we have detected unusual traffic from your network", str(PageHtml)) :
 		print("Sorry")
@@ -118,8 +118,8 @@ def LockChkAction(PageHtml) :
 				ResultLockChk = "page ok : "+str(LockChkCnt)
 				LockChkCnt = LockChkCnt + 1
 				driver.implicitly_wait(10)
-				PageHtml = driver.page_source
-				return LockChkAction(PageHtml)
+				PageHtml2 = driver.page_source
+				return LockChkAction(PageHtml2)
 		except :
 			ResultLockChk = traceback.format_exc()+" : "+str(LockChkCnt)
 			pass
@@ -150,8 +150,8 @@ def LockChkAction(PageHtml) :
 					driver.switch_to.default_content()
 					LockChkCnt = LockChkCnt + 1
 					driver.implicitly_wait(10)
-					PageHtml = driver.page_source
-					return LockChkAction(PageHtml)
+					PageHtml3 = driver.page_source
+					return LockChkAction(PageHtml3)
 			except :
 				ResultLockChk = traceback.format_exc()+" : "+str(LockChkCnt)
 				pass
