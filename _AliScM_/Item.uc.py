@@ -183,6 +183,22 @@ driver.get(StartUrl)
 driver.implicitly_wait(10)
 PageHtml = driver.page_source
 LockChkAction(PageHtml)
+PageHtml1 = driver.page_source
+
+#저장파일명
+SaveFileName = "seller.ntos.co.kr_alichiadmin_item_1215184_55632007026003000000_841_not_xs438.html"
+SaveFile = FileDir+str(SaveFileName)
+SaveFile = SaveFile.replace('.html', '_'+str(time.strftime('%H%M', time.localtime(time.time())))+'.html')
+
+WriteFile = "<PageHtml>"+str(PageHtml)+"</PageHtml>\n\n"+"<PageHtml1>"+str(PageHtml1)+"</PageHtml1>"
+
+f = open(SaveFile, 'w', encoding="utf8")
+f.write(WriteFile)
+f.close()
+os.system("gzip "+SaveFile)
+
+exit()
+
 
 
 if CookiesLang :
