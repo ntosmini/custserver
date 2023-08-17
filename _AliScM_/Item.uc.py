@@ -129,12 +129,12 @@ def LockChkAction(PageHtml) :
 		for iframeVal in iframe :
 			driver.switch_to.frame(iframeVal)
 			try :
-				slider = driver.find_element(By.ID, "nc_1_n1z")
-				if slider :
+				slider2 = driver.find_element(By.ID, "nc_1_n1z")
+				if slider2 :
 					time.sleep(random.uniform(0.5, 2))
-					slider.click()
-					action.move_to_element(slider)
-					action.click_and_hold(slider)
+					slider2.click()
+					action.move_to_element(slider2)
+					action.click_and_hold(slider2)
 					"""
 					xoffset = 0
 					while xoffset < 500:
@@ -156,7 +156,7 @@ def LockChkAction(PageHtml) :
 			except :
 				ResultLockChk = traceback.format_exc()+" : "+str(LockChkCnt)
 				pass
-		driver.switch_to.default_content()
+			driver.switch_to.default_content()
 	else :
 		ResultLockChk = "non : "+str(LockChkCnt)
 	return ResultLockChk
