@@ -195,7 +195,7 @@ driver.implicitly_wait(10)
 PageHtml11 = driver.page_source
 aa = LockChkAction(PageHtml11)
 PageHtml1 = driver.page_source
-print(str(aa))
+print(" ============ "+str(aa))
 #저장파일명
 SaveFileName = "seller.ntos.co.kr_alichiadmin_item_1215184_55632007026003000000_841_not_xs438.html"
 SaveFile = FileDir+str(SaveFileName)
