@@ -145,33 +145,6 @@ if CookiesLang :
 	time.sleep(3)
 	#driver.maximize_window()
 
-def ScrollAction(sec) :
-	if Scroll == "y" :
-		SCROLL_PAUSE_SEC = sec
-		# 스크롤 높이 가져옴
-		last_height = driver.execute_script("return document.body.scrollHeight")
-		while True:
-			# 끝까지 스크롤 다운
-			driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-			# SCROLL_PAUSE_SEC 초 대기
-			time.sleep(SCROLL_PAUSE_SEC)
-			# 스크롤 다운 후 스크롤 높이 다시 가져옴
-			new_height = driver.execute_script("return document.body.scrollHeight")
-			if new_height == last_height:
-				break
-			last_height = new_height
-		return 'ok'
-	else :
-		return 'pass'
-
-
-def SaveFile(SaveFile, WriteFile) :
-	f = open(SaveFile, 'w', encoding="utf8")
-	f.write(WriteFile)
-	f.close()
-
-
-
 def LockChkAction(PageHtml) :
 	global LockChkCnt, driver
 	LockChkCnt = LockChkCnt + 1
@@ -287,7 +260,20 @@ try :
 				ErrMsg = ErrMsg + str(traceback.format_exc()) + "\n\n"
 
 			if PageHtml :
-				ScrollAction(1)
+				if Scroll == "y" :
+					SCROLL_PAUSE_SEC = 0.5
+					# 스크롤 높이 가져옴
+					last_height = driver.execute_script("return document.body.scrollHeight")
+					while True:
+						# 끝까지 스크롤 다운
+						driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+						# SCROLL_PAUSE_SEC 초 대기
+						time.sleep(SCROLL_PAUSE_SEC)
+						# 스크롤 다운 후 스크롤 높이 다시 가져옴
+						new_height = driver.execute_script("return document.body.scrollHeight")
+						if new_height == last_height:
+							break
+						last_height = new_height
 				try :
 					PageHtml = re.sub('\n', '', PageHtml)
 					PageHtmlJsonSearch = re.search(r'window.runParams\s+=\s+{\s+ data:(?P<JsonData>.*)};\s+</script>', str(PageHtml), re.DOTALL)
