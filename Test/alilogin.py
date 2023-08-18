@@ -37,7 +37,7 @@ import _agent
 pc_agent = _agent.get_mobile_agent()
 
 def chromeWebdriver():
-	chrome_service = ChromeService(ChromeDriverManager().install())
+	chrome_service = ChromeService(ChromeDriverManager(version="114.0.5735.90").install())
 	chrome_options = uc.ChromeOptions()
 	chrome_options.add_argument('--headless')
 	chrome_options.add_argument('--no-sandbox')
