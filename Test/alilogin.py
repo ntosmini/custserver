@@ -34,11 +34,11 @@ sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
 ChromeVer = "114"
 
 def chromeWebdriver():
-	chrome_service = ChromeService(ChromeDriverManager(version="114.0.5735.90").install())
+	chrome_service = ChromeService(ChromeDriverManager().install())
 	chrome_options = uc.ChromeOptions()
-	#chrome_options.add_argument('--headless')
+	chrome_options.add_argument('--headless')
 	chrome_options.add_argument('--no-sandbox')
-	#chrome_options.add_argument('--blink-settings=imagesEnabled=false')
+	chrome_options.add_argument('--blink-settings=imagesEnabled=false')
 	chrome_options.add_argument('--start-maximized')
 	chrome_options.add_argument('--disable-dev-shm-usage')
 	chrome_options.add_argument('--disable-blink-features=AutomationControlled')
