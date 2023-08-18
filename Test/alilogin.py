@@ -134,7 +134,9 @@ try :
 	driver.get("https://m.aliexpress.us/")
 	driver.implicitly_wait(10)
 	PageHtml11 = driver.page_source
-	
+
+	print(str(PageHtml11))
+	exit()
 	SiteUrlList = [
 	"https://m.aliexpress.us/item/1005001929718955.html|@|seller.ntos.co.kr_alichiadmin_item_1215184_55632007026003000000_841_not_xs438_1.html"
 	,"https://m.aliexpress.us/item/1005005340674498.html|@|seller.ntos.co.kr_alichiadmin_item_1215184_55632007026003000000_841_not_xs438_2.html"
