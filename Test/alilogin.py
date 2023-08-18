@@ -153,7 +153,7 @@ try :
 		SaveFile = FileDir+str(SaveFileName)
 		SaveFile = SaveFile.replace('.html', '_'+str(time.strftime('%H%M', time.localtime(time.time())))+'.html')
 
-		WriteFile = str(NowUrl)+"\n\n"+str(PageHtml)+"\n\n\n\n\n"+str(PageHtml11)
+		WriteFile = str(NowUrl)+"\n\n"+str(PageHtml)+"\n\n\n===========================\n\n"+str(PageHtml11)
 		f = open(SaveFile, 'w', encoding="utf8")
 		f.write(WriteFile)
 		f.close()
