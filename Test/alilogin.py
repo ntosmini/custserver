@@ -58,7 +58,7 @@ def chromeWebdriver():
 try :
 	driver = chromeWebdriver()
 
-	driver.get("https://login.aliexpress.com/?return_url=https%3A%2F%2Fm.aliexpress.us%2Faccount%2Findex.html")
+	driver.get("https://login.aliexpress.com/?return_url=https://m.aliexpress.us")
 
 	driver.implicitly_wait(10)
 
