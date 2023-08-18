@@ -148,6 +148,15 @@ try :
 
 		driver.get(StartUrl)
 		driver.implicitly_wait(10)
+
+		slider = driver.find_element(By.ID, "nc_1_n1z")
+		action.move_to_element(slider)
+		action.click_and_hold(slider)
+		action.move_by_offset(random.uniform(300, 350), random.randint(-1, 1))
+		action.release()
+		action.perform()
+		
+		driver.implicitly_wait(10)
 		PageHtml = driver.page_source
 		NowUrl = driver.current_url
 		print(str(NowUrl)+"<br><br>"+str(PageHtml))
