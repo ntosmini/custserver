@@ -32,6 +32,9 @@ sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
 sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
 
 ChromeVer = "114"
+sys.path.append(os.path.dirname("/home/ntosmini/public_html/_agent.py"))
+import _agent
+pc_agent = _agent.get_pc_agent()
 
 def chromeWebdriver():
 	chrome_service = ChromeService(ChromeDriverManager().install())
@@ -46,6 +49,7 @@ def chromeWebdriver():
 	chrome_options.add_argument('--ignore-certificate-errors')
 	chrome_options.add_argument('--ignore-ssl-errors=yes')
 	chrome_options.add_argument('--disable-gpu')
+	chrome_options.add_argument('--user-agent=' + pc_agent)
 	if ChromeVer :
 		driver = uc.Chrome(service=chrome_service, options=chrome_options, version_main=ChromeVer)
 	else :
