@@ -145,11 +145,12 @@ try :
 		driver.get(StartUrl)
 		driver.implicitly_wait(10)
 		PageHtml = driver.page_source
+		NowUrl = driver.current_url
 
 		SaveFile = FileDir+str(SaveFileName)
 		SaveFile = SaveFile.replace('.html', '_'+str(time.strftime('%H%M', time.localtime(time.time())))+'.html')
 
-		WriteFile = str(PageHtml)
+		WriteFile = str(NowUrl)+"\n\n"+str(PageHtml)
 		f = open(SaveFile, 'w', encoding="utf8")
 		f.write(WriteFile)
 		f.close()
