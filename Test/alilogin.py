@@ -75,12 +75,16 @@ try :
 
 	time.sleep(random.uniform(1, 3))
 	#driver.find_element(By.XPATH, '//*[@class="comet-icon comet-icon-account _3L9my"]').click()
+	try :
+		time.sleep(random.uniform(1, 3))
+		driver.find_element(By.XPATH, '//*[@class="scene-login-icon-more"]').click()
 
-	time.sleep(random.uniform(1, 3))
-	driver.find_element(By.XPATH, '//*[@class="scene-login-icon-more"]').click()
+		time.sleep(random.uniform(1, 3))
+		driver.find_element(By.XPATH, '//*[@class="cosmos-tabs-nav-item"]').click()
+	except :
+		pass
 
-	time.sleep(random.uniform(1, 3))
-	driver.find_element(By.XPATH, '//*[@class="cosmos-tabs-nav-item"]').click()
+
 
 
 
