@@ -58,7 +58,7 @@ def chromeWebdriver():
 try :
 	driver = chromeWebdriver()
 
-	driver.get("https://login.aliexpress.com/?return_url=https://m.aliexpress.us/")
+	driver.get("https://login.aliexpress.com/")
 
 	driver.implicitly_wait(10)
 
@@ -101,7 +101,7 @@ try :
 
 
 	time.sleep(random.uniform(4, 7))
-	driver.get("https://login.aliexpress.com/?return_url=https://m.aliexpress.us/")
+	#driver.get("https://login.aliexpress.com/?return_url=https://m.aliexpress.us/")
 	driver.implicitly_wait(10)
 	PageHtml11 = driver.page_source
 	NowUrl = driver.current_url
