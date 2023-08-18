@@ -34,7 +34,7 @@ sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
 ChromeVer = "114"
 sys.path.append(os.path.dirname("/home/ntosmini/public_html/_agent.py"))
 import _agent
-pc_agent = _agent.get_pc_agent()
+pc_agent = _agent.get_mobile_agent()
 
 def chromeWebdriver():
 	chrome_service = ChromeService(ChromeDriverManager().install())
@@ -57,24 +57,28 @@ def chromeWebdriver():
 	return driver
 
 driver = chromeWebdriver()
-
-driver.get("https://aliexpress.com")
+driver.set_window_size(512, 1080)
+driver.get("https://m.aliexpress.us")
 
 driver.implicitly_wait(10)
 
 try :
+	time.sleep(random.uniform(1, 3))
 	driver.find_element(By.XPATH, '//*[@class="pop-close-btn"]').click()
 except :
 	pass
 
+time.sleep(random.uniform(1, 3))
+driver.find_element(By.XPATH, '//*[@class="comet-icon comet-icon-account _3L9my"]').click()
 
-action = ActionChains(driver)
-loginform = driver.find_element(By.XPATH, '//*[@id="nav-user-account"]')
-loginbtn = driver.find_element(By.XPATH, '//*[@class="sign-btn"]')
-action.move_to_element(loginform)
-action.click(loginbtn)
-action.release()
-action.perform()
+time.sleep(random.uniform(1, 3))
+driver.find_element(By.XPATH, '//*[@class="scene-login-icon-more"]').click()
+
+time.sleep(random.uniform(1, 3))
+driver.find_element(By.XPATH, '//*[@class="cosmos-tabs-nav-item"]').click()
+
+
+
 
 time.sleep(random.uniform(1, 3))
 id_input = driver.find_element(By.XPATH, '//*[@id="fm-login-id"]')
@@ -99,12 +103,13 @@ driver.find_element(By.CLASS_NAME, 'login-submit').click()
 
 time.sleep(random.uniform(1, 3))
 try :
+	action = ActionChains(driver)
 	iframe = driver.find_element(By.XPATH, '//*[@id="baxia-dialog-content"]')
 	driver.switch_to.frame(iframe)
 	slider = driver.find_element(By.ID, "nc_1_n1z")
 	action.move_to_element(slider)
 	action.click_and_hold(slider)
-	action.move_by_offset(random.uniform(450, 500), random.randint(-1, 1))
+	action.move_by_offset(random.uniform(300, 350), random.randint(-1, 1))
 	action.release()
 	action.perform()
 	driver.switch_to.default_content()
@@ -116,16 +121,9 @@ except :
 
 time.sleep(random.uniform(1, 3))
 
-#driver.refresh()
-#driver.execute_script("window.stop();")
-
-#loginbtn = driver.find_element(By.XPATH, '//*[@class="pop-close-btn"]')
-#loginbtn.click()
-time.sleep(3)
-
 SiteUrlList = [
-"https://www.aliexpress.us/item/1005001929718955.html|@|seller.ntos.co.kr_alichiadmin_item_1215184_55632007026003000000_841_not_xs438_1.html"
-,"https://www.aliexpress.us/item/1005005340674498.html|@|seller.ntos.co.kr_alichiadmin_item_1215184_55632007026003000000_841_not_xs438_2.html"
+"https://m.aliexpress.us/item/1005001929718955.html|@|seller.ntos.co.kr_alichiadmin_item_1215184_55632007026003000000_841_not_xs438_1.html"
+,"https://m.aliexpress.us/item/1005005340674498.html|@|seller.ntos.co.kr_alichiadmin_item_1215184_55632007026003000000_841_not_xs438_2.html"
 ]
 
 FileDir = "/home/ntosmini/scrapdata/"
