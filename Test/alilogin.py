@@ -78,16 +78,11 @@ try :
 	try :
 		time.sleep(random.uniform(1, 3))
 		driver.find_element(By.XPATH, '//*[@class="scene-login-icon-more"]').click()
-
-		time.sleep(random.uniform(1, 3))
-		driver.find_element(By.XPATH, '//*[@class="cosmos-tabs-nav-item"]').click()
 	except :
 		pass
 
-
-
-
-
+	time.sleep(random.uniform(1, 3))
+	driver.find_element(By.XPATH, '//*[@class="cosmos-tabs-nav-item"]').click()
 
 	time.sleep(random.uniform(1, 3))
 	id_input = driver.find_element(By.XPATH, '//*[@id="fm-login-id"]')
