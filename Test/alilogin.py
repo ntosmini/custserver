@@ -58,7 +58,7 @@ def chromeWebdriver():
 try :
 	driver = chromeWebdriver()
 
-	driver.get("https://m.aliexpress.us/account/index.html")
+	driver.get("https://login.aliexpress.com/?return_url=https%3A%2F%2Fm.aliexpress.us%2Faccount%2Findex.html")
 
 	driver.implicitly_wait(10)
 
@@ -75,6 +75,7 @@ try :
 
 	time.sleep(random.uniform(1, 3))
 	#driver.find_element(By.XPATH, '//*[@class="comet-icon comet-icon-account _3L9my"]').click()
+	
 	try :
 		time.sleep(random.uniform(1, 3))
 		driver.find_element(By.XPATH, '//*[@class="scene-login-icon-more"]').click()
@@ -86,6 +87,9 @@ try :
 		driver.find_element(By.XPATH, '//*[@class="cosmos-tabs-nav-item"]').click()
 	except :
 		pass
+
+
+
 
 	time.sleep(random.uniform(1, 3))
 	id_input = driver.find_element(By.XPATH, '//*[@id="fm-login-id"]')
