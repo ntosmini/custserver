@@ -152,7 +152,10 @@ try :
 		driver.switch_to.default_content()
 	# id="nc_1_n1z"
 	# id="baxia-dialog-content"
-
+	PageHtml11 = driver.page_source
+	NowUrl = driver.current_url
+	print(str(NowUrl)+"<br><br>"+str(PageHtml11))
+	exit()
 	time.sleep(random.uniform(1, 3))
 	driver.get("https://m.aliexpress.us/account/index.html")
 	driver.implicitly_wait(10)
