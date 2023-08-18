@@ -131,27 +131,8 @@ try :
 
 
 	time.sleep(random.uniform(1, 3))
-	iframe = driver.find_elements(By.TAG_NAME, "iframe")
-	for iframeVal in iframe :
-		driver.switch_to.frame(iframeVal)
-		try :
-			slider2 = driver.find_element(By.ID, "nc_1_n1z")
-			if slider2 :
-				time.sleep(random.uniform(0.5, 2))
-				#slider2.click()
-				action.move_to_element(slider2)
-				action.click_and_hold(slider2)
-				action.move_by_offset(random.uniform(300, 350), random.randint(-1, 1))
-				action.release()
-				action.perform()
-				driver.switch_to.default_content()
-				driver.implicitly_wait(10)
-				PageHtml = driver.page_source
-		except :
-			pass
-		driver.switch_to.default_content()
-	# id="nc_1_n1z"
-	# id="baxia-dialog-content"
+	driver.get("https://login.aliexpress.com/?return_url=https:%3A%2F%2Fm.aliexpress.us")
+	driver.implicitly_wait(10)
 	PageHtml11 = driver.page_source
 	NowUrl = driver.current_url
 	print(str(NowUrl)+"<br><br>"+str(PageHtml11))
@@ -183,6 +164,7 @@ try :
 	PageHtml11 = driver.page_source
 	NowUrl = driver.current_url
 	print(str(NowUrl)+"<br><br>"+str(PageHtml11))
+	"""
 	exit()
 	SiteUrlList = [
 	"https://m.aliexpress.us/item/1005001929718955.html|@|seller.ntos.co.kr_alichiadmin_item_1215184_55632007026003000000_841_not_xs438_1.html"
@@ -252,6 +234,7 @@ try :
 		if os.path.exists(gzfile) :
 			os.remove(gzfile)
 		time.sleep(3)
+	"""
 except :
 	print(str(traceback.format_exc()))
 driver.quit()
