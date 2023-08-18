@@ -61,50 +61,6 @@ try :
 	driver.get("https://login.aliexpress.com/?return_url=https:%3A%2F%2Fm.aliexpress.us")
 
 	driver.implicitly_wait(10)
-	iframe = driver.find_elements(By.TAG_NAME, "iframe")
-	for iframeVal in iframe :
-		driver.switch_to.frame(iframeVal)
-		try :
-			slider2 = driver.find_element(By.ID, "nc_1_n1z")
-			if slider2 :
-				time.sleep(random.uniform(0.5, 2))
-				#slider2.click()
-				action.move_to_element(slider2)
-				action.click_and_hold(slider2)
-				action.move_by_offset(random.uniform(300, 350), random.randint(-1, 1))
-				action.release()
-				action.perform()
-				driver.switch_to.default_content()
-				driver.implicitly_wait(10)
-				PageHtml = driver.page_source
-		except :
-			pass
-		driver.switch_to.default_content()
-	time.sleep(random.uniform(1, 3))
-
-	try :
-		driver.find_element(By.XPATH, '//*[@class="pop-close-btn"]').click()
-		time.sleep(random.uniform(1, 3))
-	except :
-		print("pass")
-		pass
-
-	PageHtml = driver.page_source
-
-	time.sleep(random.uniform(1, 3))
-	#driver.find_element(By.XPATH, '//*[@class="comet-icon comet-icon-account _3L9my"]').click()
-	
-	try :
-		time.sleep(random.uniform(1, 3))
-		driver.find_element(By.XPATH, '//*[@class="scene-login-icon-more"]').click()
-	except :
-		pass
-
-	try :
-		time.sleep(random.uniform(1, 3))
-		driver.find_element(By.XPATH, '//*[@class="cosmos-tabs-nav-item"]').click()
-	except :
-		pass
 
 
 
@@ -114,7 +70,7 @@ try :
 	user_id = "ntosmini@gmail.com"
 	for val in list(user_id) :
 		id_input.send_keys(str(val))
-		time.sleep(random.uniform(0.01, 0.5))
+		time.sleep(random.uniform(0.1, 0.5))
 
 	time.sleep(2)
 
@@ -122,7 +78,7 @@ try :
 	user_pw = "wjdalsl!!22"
 	for val in list(user_pw) :
 		pw_input.send_keys(str(val))
-		time.sleep(random.uniform(0.01, 0.5))
+		time.sleep(random.uniform(0.1, 0.5))
 	time.sleep(2)
 
 	driver.find_element(By.CLASS_NAME, 'login-submit').click()
