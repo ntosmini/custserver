@@ -138,6 +138,27 @@ try :
 	time.sleep(random.uniform(1, 3))
 	driver.get("https://m.aliexpress.us/account/index.html")
 	driver.implicitly_wait(10)
+
+	iframe = driver.find_elements(By.TAG_NAME, "iframe")
+	for iframeVal in iframe :
+		driver.switch_to.frame(iframeVal)
+		try :
+			slider2 = driver.find_element(By.ID, "nc_1_n1z")
+			if slider2 :
+				time.sleep(random.uniform(0.5, 2))
+				#slider2.click()
+				action.move_to_element(slider2)
+				action.click_and_hold(slider2)
+				action.move_by_offset(random.uniform(300, 350), random.randint(-1, 1))
+				action.release()
+				action.perform()
+				driver.switch_to.default_content()
+				driver.implicitly_wait(10)
+				PageHtml = driver.page_source
+		except :
+			pass
+		driver.switch_to.default_content()
+	driver.implicitly_wait(10)
 	PageHtml11 = driver.page_source
 	NowUrl = driver.current_url
 	print(str(NowUrl)+"<br><br>"+str(PageHtml11))
