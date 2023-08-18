@@ -58,7 +58,7 @@ def chromeWebdriver():
 try :
 	driver = chromeWebdriver()
 
-	driver.get("https://login.aliexpress.com/?return_url=https:%3A%2F%2Fm.aliexpress.us")
+	driver.get("https://login.aliexpress.com/?return_url=https://m.aliexpress.us/")
 
 	driver.implicitly_wait(10)
 
@@ -83,10 +83,6 @@ try :
 
 	driver.find_element(By.CLASS_NAME, 'login-submit').click()
 
-	driver.implicitly_wait(10)
-	PageHtml11 = driver.page_source
-	NowUrl = driver.current_url
-	print(str(NowUrl)+"<br><br>"+str(PageHtml11))
 
 	try :
 		action = ActionChains(driver)
@@ -102,13 +98,15 @@ try :
 		driver.implicitly_wait(10)
 	except :
 		print(str(traceback.format_exc()))
-		
-	time.sleep(random.uniform(1, 3))
-	driver.get("https://login.aliexpress.com/?return_url=https:%3A%2F%2Fm.aliexpress.us")
+
+
+	time.sleep(random.uniform(4, 7))
+	driver.get("https://login.aliexpress.com/?return_url=https://m.aliexpress.us/")
 	driver.implicitly_wait(10)
 	PageHtml11 = driver.page_source
 	NowUrl = driver.current_url
 	print(str(NowUrl)+"<br><br>"+str(PageHtml11))
+	print("\n\n"+str(pc_agent)+"\n\n")
 
 except :
 	print(str(traceback.format_exc()))
