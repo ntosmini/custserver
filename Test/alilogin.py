@@ -88,7 +88,21 @@ try :
 	NowUrl = driver.current_url
 	print(str(NowUrl)+"<br><br>"+str(PageHtml11))
 
-
+	try :
+		action = ActionChains(driver)
+		iframe = driver.find_element(By.XPATH, '//*[@id="baxia-dialog-content"]')
+		driver.switch_to.frame(iframe)
+		slider = driver.find_element(By.ID, "nc_1_n1z")
+		action.move_to_element(slider)
+		action.click_and_hold(slider)
+		action.move_by_offset(random.uniform(300, 350), random.randint(-1, 1))
+		action.release()
+		action.perform()
+		driver.switch_to.default_content()
+		driver.implicitly_wait(10)
+	except :
+		print(str(traceback.format_exc()))
+		
 	time.sleep(random.uniform(1, 3))
 	driver.get("https://login.aliexpress.com/?return_url=https:%3A%2F%2Fm.aliexpress.us")
 	driver.implicitly_wait(10)
