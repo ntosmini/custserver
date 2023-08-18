@@ -57,19 +57,24 @@ def chromeWebdriver():
 	return driver
 try :
 	driver = chromeWebdriver()
-	driver.set_window_size(512, 1080)
-	driver.get("https://m.aliexpress.us")
+
+	driver.get("https://m.aliexpress.us/account/index.html")
 
 	driver.implicitly_wait(10)
 
+	time.sleep(random.uniform(1, 3))
+
 	try :
-		time.sleep(random.uniform(1, 3))
 		driver.find_element(By.XPATH, '//*[@class="pop-close-btn"]').click()
+		time.sleep(random.uniform(1, 3))
 	except :
+		print("pass")
 		pass
 
+	PageHtml = driver.page_source
+
 	time.sleep(random.uniform(1, 3))
-	driver.find_element(By.XPATH, '//*[@class="comet-icon comet-icon-account _3L9my"]').click()
+	#driver.find_element(By.XPATH, '//*[@class="comet-icon comet-icon-account _3L9my"]').click()
 
 	time.sleep(random.uniform(1, 3))
 	driver.find_element(By.XPATH, '//*[@class="scene-login-icon-more"]').click()
