@@ -150,12 +150,37 @@ try :
 		driver.get(StartUrl)
 		driver.implicitly_wait(10)
 
-		slider = driver.find_element(By.ID, "nc_1_n1z")
-		action.move_to_element(slider)
-		action.click_and_hold(slider)
-		action.move_by_offset(random.uniform(300, 350), random.randint(-1, 1))
-		action.release()
-		action.perform()
+		iframe = driver.find_elements(By.TAG_NAME, "iframe")
+		for iframeVal in iframe :
+			driver.switch_to.frame(iframeVal)
+			try :
+				slider2 = driver.find_element(By.ID, "nc_1_n1z")
+				if slider2 :
+					time.sleep(random.uniform(0.5, 2))
+					#slider2.click()
+					action.move_to_element(slider2)
+					action.click_and_hold(slider2)
+					"""
+					xoffset = 0
+					while xoffset < 500:
+						xmove = random.randint(10, 50)
+						ymove = random.randint(-1, 1)
+						action.move_by_offset(xmove, ymove)
+						xoffset += xmove
+					"""
+					action.move_by_offset(random.uniform(300, 350), random.randint(-1, 1))
+					action.release()
+					action.perform()
+					ResultLockChk = "iframe ok : "+str(LockChkCnt)
+					driver.switch_to.default_content()
+					LockChkCnt = LockChkCnt + 1
+					driver.implicitly_wait(10)
+					PageHtml = driver.page_source
+					defreturn = "y"
+			except :
+				ResultLockChk = traceback.format_exc()+" : "+str(LockChkCnt)
+
+			driver.switch_to.default_content()
 		
 		driver.implicitly_wait(10)
 		PageHtml = driver.page_source
