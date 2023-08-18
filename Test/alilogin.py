@@ -31,7 +31,7 @@ from selenium.webdriver.common.keys import Keys
 sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
 sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
 
-ChromeVer = "114"
+ChromeVer = ""
 sys.path.append(os.path.dirname("/home/ntosmini/public_html/_agent.py"))
 import _agent
 pc_agent = _agent.get_mobile_agent()
