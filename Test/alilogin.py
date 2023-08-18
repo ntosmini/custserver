@@ -83,7 +83,10 @@ try :
 
 	driver.find_element(By.CLASS_NAME, 'login-submit').click()
 
-
+	driver.implicitly_wait(10)
+	PageHtml11 = driver.page_source
+	NowUrl = driver.current_url
+	print(str(NowUrl)+"<br><br>"+str(PageHtml11))
 
 
 	time.sleep(random.uniform(1, 3))
