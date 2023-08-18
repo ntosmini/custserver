@@ -55,103 +55,104 @@ def chromeWebdriver():
 	else :
 		driver = uc.Chrome(service=chrome_service, options=chrome_options, use_subprocess=True)
 	return driver
-
-driver = chromeWebdriver()
-driver.set_window_size(512, 1080)
-driver.get("https://m.aliexpress.us")
-
-driver.implicitly_wait(10)
-
 try :
-	time.sleep(random.uniform(1, 3))
-	driver.find_element(By.XPATH, '//*[@class="pop-close-btn"]').click()
-except :
-	pass
+	driver = chromeWebdriver()
+	driver.set_window_size(512, 1080)
+	driver.get("https://m.aliexpress.us")
 
-time.sleep(random.uniform(1, 3))
-driver.find_element(By.XPATH, '//*[@class="comet-icon comet-icon-account _3L9my"]').click()
-
-time.sleep(random.uniform(1, 3))
-driver.find_element(By.XPATH, '//*[@class="scene-login-icon-more"]').click()
-
-time.sleep(random.uniform(1, 3))
-driver.find_element(By.XPATH, '//*[@class="cosmos-tabs-nav-item"]').click()
-
-
-
-
-time.sleep(random.uniform(1, 3))
-id_input = driver.find_element(By.XPATH, '//*[@id="fm-login-id"]')
-user_id = "ntosmini@gmail.com"
-for val in list(user_id) :
-	id_input.send_keys(str(val))
-	time.sleep(random.uniform(0.01, 0.5))
-
-time.sleep(2)
-
-pw_input = driver.find_element(By.XPATH, '//*[@id="fm-login-password"]')
-user_pw = "wjdalsl!!22"
-for val in list(user_pw) :
-	pw_input.send_keys(str(val))
-	time.sleep(random.uniform(0.01, 0.5))
-time.sleep(2)
-
-driver.find_element(By.CLASS_NAME, 'login-submit').click()
-
-
-
-
-time.sleep(random.uniform(1, 3))
-try :
-	action = ActionChains(driver)
-	iframe = driver.find_element(By.XPATH, '//*[@id="baxia-dialog-content"]')
-	driver.switch_to.frame(iframe)
-	slider = driver.find_element(By.ID, "nc_1_n1z")
-	action.move_to_element(slider)
-	action.click_and_hold(slider)
-	action.move_by_offset(random.uniform(300, 350), random.randint(-1, 1))
-	action.release()
-	action.perform()
-	driver.switch_to.default_content()
 	driver.implicitly_wait(10)
+
+	try :
+		time.sleep(random.uniform(1, 3))
+		driver.find_element(By.XPATH, '//*[@class="pop-close-btn"]').click()
+	except :
+		pass
+
+	time.sleep(random.uniform(1, 3))
+	driver.find_element(By.XPATH, '//*[@class="comet-icon comet-icon-account _3L9my"]').click()
+
+	time.sleep(random.uniform(1, 3))
+	driver.find_element(By.XPATH, '//*[@class="scene-login-icon-more"]').click()
+
+	time.sleep(random.uniform(1, 3))
+	driver.find_element(By.XPATH, '//*[@class="cosmos-tabs-nav-item"]').click()
+
+
+
+
+	time.sleep(random.uniform(1, 3))
+	id_input = driver.find_element(By.XPATH, '//*[@id="fm-login-id"]')
+	user_id = "ntosmini@gmail.com"
+	for val in list(user_id) :
+		id_input.send_keys(str(val))
+		time.sleep(random.uniform(0.01, 0.5))
+
+	time.sleep(2)
+
+	pw_input = driver.find_element(By.XPATH, '//*[@id="fm-login-password"]')
+	user_pw = "wjdalsl!!22"
+	for val in list(user_pw) :
+		pw_input.send_keys(str(val))
+		time.sleep(random.uniform(0.01, 0.5))
+	time.sleep(2)
+
+	driver.find_element(By.CLASS_NAME, 'login-submit').click()
+
+
+
+
+	time.sleep(random.uniform(1, 3))
+	try :
+		action = ActionChains(driver)
+		iframe = driver.find_element(By.XPATH, '//*[@id="baxia-dialog-content"]')
+		driver.switch_to.frame(iframe)
+		slider = driver.find_element(By.ID, "nc_1_n1z")
+		action.move_to_element(slider)
+		action.click_and_hold(slider)
+		action.move_by_offset(random.uniform(300, 350), random.randint(-1, 1))
+		action.release()
+		action.perform()
+		driver.switch_to.default_content()
+		driver.implicitly_wait(10)
+	except :
+		print(str(traceback.format_exc()))
+	# id="nc_1_n1z"
+	# id="baxia-dialog-content"
+
+	time.sleep(random.uniform(1, 3))
+
+	SiteUrlList = [
+	"https://m.aliexpress.us/item/1005001929718955.html|@|seller.ntos.co.kr_alichiadmin_item_1215184_55632007026003000000_841_not_xs438_1.html"
+	,"https://m.aliexpress.us/item/1005005340674498.html|@|seller.ntos.co.kr_alichiadmin_item_1215184_55632007026003000000_841_not_xs438_2.html"
+	]
+
+	FileDir = "/home/ntosmini/scrapdata/"
+	NtosServer = "http://seller.ntos.co.kr/_AliWb_/ScrapSaveFile.php"
+	for Val in SiteUrlList :
+		(StartUrl, SaveFileName) = Val.split("|@|")
+
+		driver.get(StartUrl)
+		driver.implicitly_wait(10)
+		PageHtml = driver.page_source
+
+		SaveFile = FileDir+str(SaveFileName)
+		SaveFile = SaveFile.replace('.html', '_'+str(time.strftime('%H%M', time.localtime(time.time())))+'.html')
+
+		WriteFile = str(PageHtml)
+		f = open(SaveFile, 'w', encoding="utf8")
+		f.write(WriteFile)
+		f.close()
+		os.system("gzip "+SaveFile)
+
+		gzfile = SaveFile+".gz"
+		files = open(gzfile, 'rb')
+		upload = {'file': files}
+		data = {'CustId':CustId, 'ScrapType':'item' }
+		Result_ = requests.post(NtosServer, data=data, files=upload)
+		Result = Result_.text
+		if os.path.exists(gzfile) :
+			os.remove(gzfile)
+		time.sleep(3)
 except :
 	print(str(traceback.format_exc()))
-# id="nc_1_n1z"
-# id="baxia-dialog-content"
-
-time.sleep(random.uniform(1, 3))
-
-SiteUrlList = [
-"https://m.aliexpress.us/item/1005001929718955.html|@|seller.ntos.co.kr_alichiadmin_item_1215184_55632007026003000000_841_not_xs438_1.html"
-,"https://m.aliexpress.us/item/1005005340674498.html|@|seller.ntos.co.kr_alichiadmin_item_1215184_55632007026003000000_841_not_xs438_2.html"
-]
-
-FileDir = "/home/ntosmini/scrapdata/"
-NtosServer = "http://seller.ntos.co.kr/_AliWb_/ScrapSaveFile.php"
-for Val in SiteUrlList :
-	(StartUrl, SaveFileName) = Val.split("|@|")
-
-	driver.get(StartUrl)
-	driver.implicitly_wait(10)
-	PageHtml = driver.page_source
-
-	SaveFile = FileDir+str(SaveFileName)
-	SaveFile = SaveFile.replace('.html', '_'+str(time.strftime('%H%M', time.localtime(time.time())))+'.html')
-
-	WriteFile = str(PageHtml)
-	f = open(SaveFile, 'w', encoding="utf8")
-	f.write(WriteFile)
-	f.close()
-	os.system("gzip "+SaveFile)
-
-	gzfile = SaveFile+".gz"
-	files = open(gzfile, 'rb')
-	upload = {'file': files}
-	data = {'CustId':CustId, 'ScrapType':'item' }
-	Result_ = requests.post(NtosServer, data=data, files=upload)
-	Result = Result_.text
-	if os.path.exists(gzfile) :
-		os.remove(gzfile)
-	time.sleep(3)
-
 driver.quit()
