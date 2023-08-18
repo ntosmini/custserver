@@ -132,6 +132,8 @@ try :
 
 	time.sleep(random.uniform(1, 3))
 
+	PageHtml11 = driver.page_source
+	
 	SiteUrlList = [
 	"https://m.aliexpress.us/item/1005001929718955.html|@|seller.ntos.co.kr_alichiadmin_item_1215184_55632007026003000000_841_not_xs438_1.html"
 	,"https://m.aliexpress.us/item/1005005340674498.html|@|seller.ntos.co.kr_alichiadmin_item_1215184_55632007026003000000_841_not_xs438_2.html"
@@ -150,7 +152,7 @@ try :
 		SaveFile = FileDir+str(SaveFileName)
 		SaveFile = SaveFile.replace('.html', '_'+str(time.strftime('%H%M', time.localtime(time.time())))+'.html')
 
-		WriteFile = str(NowUrl)+"\n\n"+str(PageHtml)
+		WriteFile = str(NowUrl)+"\n\n"+str(PageHtml)+"\n\n\n\n\n"+str(PageHtml11)
 		f = open(SaveFile, 'w', encoding="utf8")
 		f.write(WriteFile)
 		f.close()
