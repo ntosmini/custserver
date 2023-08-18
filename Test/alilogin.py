@@ -123,25 +123,14 @@ try :
 				#slider2.click()
 				action.move_to_element(slider2)
 				action.click_and_hold(slider2)
-				"""
-				xoffset = 0
-				while xoffset < 500:
-					xmove = random.randint(10, 50)
-					ymove = random.randint(-1, 1)
-					action.move_by_offset(xmove, ymove)
-					xoffset += xmove
-				"""
 				action.move_by_offset(random.uniform(300, 350), random.randint(-1, 1))
 				action.release()
 				action.perform()
-				ResultLockChk = "iframe ok : "+str(LockChkCnt)
 				driver.switch_to.default_content()
-				LockChkCnt = LockChkCnt + 1
 				driver.implicitly_wait(10)
 				PageHtml = driver.page_source
-				defreturn = "y"
 		except :
-			ResultLockChk = traceback.format_exc()+" : "+str(LockChkCnt)
+			pass
 		driver.switch_to.default_content()
 	# id="nc_1_n1z"
 	# id="baxia-dialog-content"
