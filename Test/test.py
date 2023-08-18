@@ -46,10 +46,11 @@ if sock.connect_ex((HOST, PORT)) == 0 :
 	print("Port " + str(PORT) + " is open") # Connected successfully
 else :
   print("Port " + str(PORT) + " is closed") # Failed to connect because port is in use (or bad host)
-  path_ = ChromeDriverManager().install()
+  path_ = "/opt/google/chrome/chrome.exe"
   sp = subprocess.Popen(str(path_)+' --remote-debugging-port='+str(PORT)+' --user-data-dir="/home/ntosmini/scrapdata/ch"')
 
 sock.close()
+exit()
 def chromeWebdriver():
 	chrome_service = ChromeService(ChromeDriverManager().install())
 	chrome_options = Options()
