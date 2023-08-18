@@ -58,7 +58,7 @@ def chromeWebdriver():
 try :
 	driver = chromeWebdriver()
 
-	driver.get("https://login.aliexpress.com/?return_url=https:%3A%2F%2Fm.aliexpress.us")
+	driver.get("https://login.aliexpress.com/index.html?return_url=https:%3A%2F%2Fm.aliexpress.us")
 
 	driver.implicitly_wait(10)
 	iframe = driver.find_elements(By.TAG_NAME, "iframe")
