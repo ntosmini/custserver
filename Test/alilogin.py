@@ -131,7 +131,8 @@ try :
 	# id="baxia-dialog-content"
 
 	time.sleep(random.uniform(1, 3))
-
+	driver.get("https://m.aliexpress.us/")
+	driver.implicitly_wait(10)
 	PageHtml11 = driver.page_source
 	
 	SiteUrlList = [
