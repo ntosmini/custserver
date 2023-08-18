@@ -131,11 +131,12 @@ try :
 	# id="baxia-dialog-content"
 
 	time.sleep(random.uniform(1, 3))
-	driver.get("https://m.aliexpress.us/")
+	driver.get("https://m.aliexpress.us/account/index.html")
 	driver.implicitly_wait(10)
 	PageHtml11 = driver.page_source
-
-
+	NowUrl = driver.current_url
+	print(str(NowUrl)+"<br><br>"+str(PageHtml11))
+	exit()
 	SiteUrlList = [
 	"https://m.aliexpress.us/item/1005001929718955.html|@|seller.ntos.co.kr_alichiadmin_item_1215184_55632007026003000000_841_not_xs438_1.html"
 	,"https://m.aliexpress.us/item/1005005340674498.html|@|seller.ntos.co.kr_alichiadmin_item_1215184_55632007026003000000_841_not_xs438_2.html"
