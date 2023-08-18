@@ -58,10 +58,16 @@ def chromeWebdriver():
 
 driver = chromeWebdriver()
 
-driver.get("https://aliexpress.com/")
+driver.get("https://aliexpress.com")
+
 driver.implicitly_wait(10)
 
-driver.find_element(By.XPATH, '//*[@class="pop-close-btn"]').click()
+try :
+	driver.find_element(By.XPATH, '//*[@class="pop-close-btn"]').click()
+except :
+	pass
+
+
 action = ActionChains(driver)
 loginform = driver.find_element(By.XPATH, '//*[@id="nav-user-account"]')
 loginbtn = driver.find_element(By.XPATH, '//*[@class="sign-btn"]')
@@ -70,12 +76,12 @@ action.click(loginbtn)
 action.release()
 action.perform()
 
-
+time.sleep(random.uniform(1, 3))
 id_input = driver.find_element(By.XPATH, '//*[@id="fm-login-id"]')
 user_id = "ntosmini@gmail.com"
 for val in list(user_id) :
 	id_input.send_keys(str(val))
-	time.sleep(random.uniform(0.1, 0.5))
+	time.sleep(random.uniform(0.01, 0.5))
 
 time.sleep(2)
 
@@ -83,29 +89,35 @@ pw_input = driver.find_element(By.XPATH, '//*[@id="fm-login-password"]')
 user_pw = "wjdalsl!!22"
 for val in list(user_pw) :
 	pw_input.send_keys(str(val))
-	time.sleep(random.uniform(0.1, 0.5))
+	time.sleep(random.uniform(0.01, 0.5))
 time.sleep(2)
-pw_input.send_keys(Keys.ENTER)
 
-driver.implicitly_wait(10)
-
+driver.find_element(By.CLASS_NAME, 'login-submit').click()
 
 
+
+
+time.sleep(random.uniform(1, 3))
 try :
 	iframe = driver.find_element(By.XPATH, '//*[@id="baxia-dialog-content"]')
 	driver.switch_to.frame(iframe)
 	slider = driver.find_element(By.ID, "nc_1_n1z")
 	action.move_to_element(slider)
 	action.click_and_hold(slider)
-	action.move_by_offset(random.uniform(400, 500), random.randint(-1, 1))
+	action.move_by_offset(random.uniform(450, 500), random.randint(-1, 1))
 	action.release()
 	action.perform()
+	driver.switch_to.default_content()
+	driver.implicitly_wait(10)
 except :
 	print(str(traceback.format_exc()))
 # id="nc_1_n1z"
 # id="baxia-dialog-content"
 
+time.sleep(random.uniform(1, 3))
 
+#driver.refresh()
+#driver.execute_script("window.stop();")
 
 #loginbtn = driver.find_element(By.XPATH, '//*[@class="pop-close-btn"]')
 #loginbtn.click()
