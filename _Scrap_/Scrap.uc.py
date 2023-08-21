@@ -40,7 +40,7 @@ SiteUrl = MConfig['SiteUrl']
 ChromeVer = "114"
 sys.path.append(os.path.dirname("/home/ntosmini/public_html/_agent.py"))
 import _agent
-Agent = _agent.get_mobile_agent()
+Agent = _agent.get_pc_agent()
 
 def chromeWebdriver():
 	chrome_service = ChromeService(ChromeDriverManager().install())
