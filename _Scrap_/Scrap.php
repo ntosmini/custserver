@@ -6,6 +6,11 @@ $RunData = array();
 $ScrapType = (empty($_POST['ScrapType']))?"uc":$_POST['ScrapType'];	//수집방식 - curl or self or selenium or pyget
 $RunData['SiteUrl'] = (empty($_POST['SiteUrl']))?"":$_POST['SiteUrl'];
 
+$RunData['CustId'] = (empty($_POST['CustId']))?"":$_POST['CustId'];
+$RunData['FileSendSave'] = (empty($_POST['FileSendSave']))?"n":$_POST['FileSendSave'];	//파일 저장 전송 사용여부 y/n
+$RunData['NtosServer'] = (empty($_POST['NtosServer']))?"":$_POST['NtosServer'];	//받을 url
+$RunData['FileDir'] = (empty($_POST['FileDir']))?"":$_POST['FileDir'];	//xs 서버 저장 폴더
+
 
 if(empty($RunData['SiteUrl'])){
 	echo 'not SiteUrl';
