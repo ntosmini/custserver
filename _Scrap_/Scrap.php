@@ -11,7 +11,7 @@ $RunData['FileSendSave'] = (empty($_POST['FileSendSave']))?"n":$_POST['FileSendS
 $RunData['NtosServer'] = (empty($_POST['NtosServer']))?"":$_POST['NtosServer'];	//받을 url
 $RunData['FileDir'] = (empty($_POST['FileDir']))?"":$_POST['FileDir'];	//xs 서버 저장 폴더
 
-
+echo "aa";
 if(empty($RunData['SiteUrl'])){
 	echo 'not SiteUrl';
 	exit;
