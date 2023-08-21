@@ -68,7 +68,7 @@ try :
 	driver.get("https://www.temu.com")
 
 	time.sleep(random.uniform(1, 3))
-	driver.find_element(By.XPATH, '//*[@class="t3Pp2_fq"]').click()
+	driver.find_element(By.CLASS_NAME, 't3Pp2_fq').click()
 	
 
 	time.sleep(random.uniform(1, 3))
