@@ -65,7 +65,7 @@ def chromeWebdriver():
 try :
 	driver = chromeWebdriver()
 
-	driver.get("https://www.temu.com/kr/login.html")
+	driver.get("https://www.temu.com/login.html")
 
 	time.sleep(random.uniform(1, 3))
 	id_input = driver.find_element(By.XPATH, '//*[@id="user-account"]')
@@ -89,7 +89,7 @@ try :
 	driver.find_element(By.XPATH, '//*[@id="submit-button"]').click()
 
 	time.sleep(2)
-	driver.get(SiteUrl)
+	driver.get("https://www.temu.com/womens-clothing-o3-28.html?rps=10005&r_pid=0")
 	driver.implicitly_wait(10)
 	NowUrl = driver.current_url
 	PageHtml = driver.page_source
