@@ -32,7 +32,6 @@ import undetected_chromedriver as uc
 sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
 sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
 
-SiteUrl_SaveFileName = []
 
 MConfigData = sys.argv[1]
 MConfig = json.loads(MConfigData)
