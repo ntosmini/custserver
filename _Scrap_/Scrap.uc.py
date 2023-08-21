@@ -57,15 +57,17 @@ def chromeWebdriver():
 	else :
 		driver = uc.Chrome(service=chrome_service, options=chrome_options, use_subprocess=True)
 	return driver
+try :
+	driver = chromeWebdriver()
 
-driver = chromeWebdriver()
+	driver.get(SiteUrl)
+	driver.implicitly_wait(10)
+	NowUrl = driver.current_url
+	PageHtml = driver.page_source
 
-driver.get(SiteUrl)
-driver.implicitly_wait(10)
-NowUrl = driver.current_url
-PageHtml = driver.page_source
-
-print(NowUrl)
-print(PageHtml)
+	print(NowUrl)
+	print(PageHtml)
+except :
+	print(str(traceback.format_exc()))
 
 driver.quit()
