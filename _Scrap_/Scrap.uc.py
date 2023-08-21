@@ -21,8 +21,7 @@ from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-print("aaaaaaaaa")
-exit()
+
 #pip3 install webdriver_manager
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
@@ -58,6 +57,7 @@ def chromeWebdriver():
 	else :
 		driver = uc.Chrome(service=chrome_service, options=chrome_options, use_subprocess=True)
 	return driver
+	
 try :
 	driver = chromeWebdriver()
 
