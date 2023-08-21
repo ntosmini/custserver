@@ -15,7 +15,7 @@ if(empty($RunData['SiteUrl'])){
 	echo 'not SiteUrl';
 	exit;
 }
-
+$MConfigData = escapeshellarg(json_encode($RunData));
 switch($ScrapType){
 	case 'uc' :
 		exec("PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin python3 /home/ntosmini/public_html/_Scrap_/Scrap.uc.py {$MConfigData}", $ResultArr);
