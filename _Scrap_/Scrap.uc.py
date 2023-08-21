@@ -65,6 +65,30 @@ def chromeWebdriver():
 try :
 	driver = chromeWebdriver()
 
+	driver.get("https://www.temu.com/kr/login.html")
+
+	time.sleep(random.uniform(1, 3))
+	id_input = driver.find_element(By.XPATH, '//*[@id="user-account"]')
+	user_id = "ntosmini@gmail.com"
+	for val in list(user_id) :
+		id_input.send_keys(str(val))
+		time.sleep(random.uniform(0.1, 0.5))
+
+	time.sleep(2)
+	driver.find_element(By.XPATH, '//*[@id="submit-button"]').click()
+	time.sleep(2)
+
+
+	id_input = driver.find_element(By.XPATH, '//*[@id="pwdInputInLoginDialog"]')
+	user_id = "dpsxhtm12#$"
+	for val in list(user_id) :
+		id_input.send_keys(str(val))
+		time.sleep(random.uniform(0.1, 0.5))
+
+	time.sleep(2)
+	driver.find_element(By.XPATH, '//*[@id="submit-button"]').click()
+
+	
 	driver.get(SiteUrl)
 	driver.implicitly_wait(10)
 	NowUrl = driver.current_url
