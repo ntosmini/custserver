@@ -88,7 +88,7 @@ try :
 	time.sleep(2)
 	driver.find_element(By.XPATH, '//*[@id="submit-button"]').click()
 
-	
+	time.sleep(2)
 	driver.get(SiteUrl)
 	driver.implicitly_wait(10)
 	NowUrl = driver.current_url
