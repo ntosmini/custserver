@@ -12,7 +12,7 @@ $RunData['FileSendSave'] = (empty($_POST['FileSendSave']))?"n":$_POST['FileSendS
 $RunData['NtosServer'] = (empty($_POST['NtosServer']))?"":$_POST['NtosServer'];	//받을 url
 
 $RunData['UserAgent'] = (empty($_POST['UserAgent']))?"":$_POST['UserAgent'];
-$RunData['ChromeVer'] = (empty($_POST['ChromeVer']))?"114":$_POST['ChromeVer'];	//Chrome version	2023-07-19 = 114
+$RunData['ChromeVer'] = (empty($_POST['ChromeVer']))?"":$_POST['ChromeVer'];	//Chrome version	2023-07-19 = 114
 
 if(empty($RunData['SiteUrlArr'])){
 	echo 'not SiteUrlArr';
