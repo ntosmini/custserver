@@ -47,7 +47,7 @@ for val in SiteUrlArr :
 		pass
 	else :
 		try :
-			PageHtml = requests.get(SiteUrl, headers=headers)
+			PageHtml = requests.get(SiteUrl)
 			PageHtml = PageHtml.text
 		except :
 			PageHtml = str(traceback.format_exc())
