@@ -110,7 +110,7 @@ try :
 					if os.path.exists(gzfile) :
 						os.remove(gzfile)
 			else :
-				print(WriteFile)
+				print(str(WriteFile))
 		time.sleep(random.uniform(2, 4))
 	driver.quit()
 except :
