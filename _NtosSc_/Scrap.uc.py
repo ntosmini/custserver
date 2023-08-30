@@ -110,6 +110,9 @@ for val in SiteUrlArr :
 				if os.path.exists(gzfile) :
 					os.remove(gzfile)
 		else :
-			print(str(WriteFile))
+			if len(SiteUrlArr) == 1 :
+				print(str(WriteFile))
+			else :
+				pass
 	time.sleep(random.uniform(2, 4))
 driver.quit()
