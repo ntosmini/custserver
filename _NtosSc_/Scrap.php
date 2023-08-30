@@ -24,13 +24,16 @@ $MConfigData = escapeshellarg(json_encode($RunData));
 switch($ScrapType){
 	case 'uc' :
 		exec("PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin python3 /home/ntosmini/public_html/_NtosSc_/Scrap.uc.py {$MConfigData}", $ResultArr);
+	echo 'uc';
 	break;
 
 	case 'curl' :
 		exec("PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin python3 /home/ntosmini/public_html/_NtosSc_/Scrap.curl.py {$MConfigData}", $ResultArr);
+	echo 'curl';
 	break;
 
 	default :
+	echo 'not';
 		exit;
 	break;
 }
