@@ -28,15 +28,19 @@ $RunData['SiteUrlArr'] = explode("|^|", $RunData['SiteUrlArr']);
 $MConfigData = escapeshellarg(json_encode($RunData));
 
 switch($ScrapType){
-  case 'uc' :
-    exec("PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin python3 /home/ntosmini/public_html/_NtosSc_/Scrap.uc.py {$MConfigData}");
-  break;
+	case 'uc' :
+		exec("PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin python3 /home/ntosmini/public_html/_NtosSc_/Scrap.uc.py {$MConfigData}", $ResultArr);
+	break;
 
-  case 'curl' :
-    exec("PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin python3 /home/ntosmini/public_html/_NtosSc_/Scrap.curl.py {$MConfigData}");
-  break;
+	case 'curl' :
+		exec("PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin python3 /home/ntosmini/public_html/_NtosSc_/Scrap.curl.py {$MConfigData}", $ResultArr);
+	break;
 
-  default :
-    exit;
-  break;
+	default :
+		exit;
+	break;
+}
+if(isset($ResultArr)){
+	$PageHtml = implode("\n", $ResultArr);
+	echo $PageHtml;
 }
