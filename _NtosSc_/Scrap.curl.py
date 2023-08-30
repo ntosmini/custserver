@@ -34,9 +34,11 @@ NtosServer = MConfig['NtosServer']	#받을 url
 
 UserAgent = MConfig['UserAgent']
 ChromeVer = MConfig['ChromeVer']
-
-
-
+headers = ""
+if UserAgent :
+	headers = {
+		"User-Agent":UserAgent
+	}
 for val in SiteUrlArr :
 	(CustId, SiteUrl, SaveFileName) = val.split("|@|")
 	OriginUrl = "<ntosoriginurl>"+str(SiteUrl)+"</ntosoriginurl>\n"
@@ -47,7 +49,10 @@ for val in SiteUrlArr :
 		pass
 	else :
 		try :
-			PageHtml = requests.get(SiteUrl)
+			if headers :
+				PageHtml = requests.get(SiteUrl, headers=headers)
+			else :
+				PageHtml = requests.get(SiteUrl)
 			PageHtml = PageHtml.text
 		except :
 			PageHtml = str(traceback.format_exc())
