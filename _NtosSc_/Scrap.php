@@ -18,11 +18,6 @@ if(empty($RunData['SiteUrlArr'])){
 	exit;
 }
 
-if(empty($RunData['CustId'])){
-	echo 'not CustId';
-	exit;
-}
-
 $RunData['SiteUrlArr'] = explode("|^|", $RunData['SiteUrlArr']);
 $MConfigData = escapeshellarg(json_encode($RunData));
 
