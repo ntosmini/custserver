@@ -87,4 +87,3 @@ try :
 		time.sleep(random.uniform(2, 4))
 except :
 	print(str(traceback.format_exc()))
-driver.quit()
