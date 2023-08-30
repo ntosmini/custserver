@@ -38,7 +38,6 @@ MConfigData = sys.argv[1]
 MConfig = json.loads(MConfigData)
 
 SiteUrlArr = MConfig['SiteUrlArr']
-CustId = MConfig['CustId']
 FileSaveDir = MConfig['FileSaveDir']
 FileSendSave = MConfig['FileSendSave']	#파일 저장 전송 사용여부 y/n
 NtosServer = MConfig['NtosServer']	#받을 url
@@ -70,7 +69,7 @@ def chromeWebdriver():
 driver = chromeWebdriver()
 
 for val in SiteUrlArr :
-	(SiteUrl, SaveFileName) = val.split("|@|")
+	(CustId, SiteUrl, SaveFileName) = val.split("|@|")
 	OriginUrl = "<ntosoriginurl>"+str(SiteUrl)+"</ntosoriginurl>\n"
 
 	PageHtml = ""
