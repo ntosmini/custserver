@@ -56,6 +56,7 @@ Search = sys.argv[3]
 SearchChk = sys.argv[4]
 
 StartUrl = parse.unquote(StartUrl)
+Search = parse.unquote(Search)
 SearchChk = SearchChk.replace(" ", "")
 sys.path.append(os.path.dirname("/home/ntosmini/public_html/_agent.py"))
 
@@ -81,11 +82,6 @@ def chromeWebdriver():
 	driver = uc.Chrome(service=chrome_service, options=chrome_options, version_main=113)
 
 	return driver
-
-
-
-
-clickcnt = random.randint(0, 1)
 
 
 driver = chromeWebdriver()
@@ -130,8 +126,6 @@ if mecotine_chk == "n" :
 	try :
 		driver.find_element(By.XPATH, '//*[@class="api_more"]').click()
 		time.sleep(random.randint(2, 7))
-		ScrollDown(1)
-		time.sleep(random.randint(2, 7))
 	except :
 		err = traceback.format_exc()
 		print(str(err))
@@ -139,6 +133,7 @@ if mecotine_chk == "n" :
 
 	try :
 		e2_elements = driver.find_elements(By.CSS_SELECTOR, "a[href*='https://"+str(SearchChk)+"']")
+		print(str(len(e2_elements))+"--------------------")
 		if len(e2_elements) == 0:
 			pass
 		else :
@@ -164,8 +159,7 @@ if mecotine_chk == "y" :
 
 		a_elements[random.randint(0, len(a_elements)-1)].click()
 
-		time.sleep(random.randint(5, 10))
-		ScrollDown(3)
+
 		time.sleep(random.randint(20, 55))
 
 
@@ -178,17 +172,3 @@ if mecotine_chk == "y" :
 		print("EXCEPT3")
 
 driver.quit()
-
-
-if Type == "pc" :
-	_Dir_ = "C:/_Ntos_"
-
-	Rand_hours = random.randint(3,6)
-	Rand_minutes = random.randint(1,59)
-	sName = "_mitem"
-	sSchedule = datetime.datetime.now() + datetime.timedelta(hours=Rand_hours, minutes=Rand_minutes)
-
-	os.system('schtasks /delete /tn '+ sName +' /f')
-	time.sleep(1)
-
-	os.system('schtasks /create /tn '+ sName +' /tr '+ _Dir_ +'/mitem.bat /sc once /st '+ sSchedule.strftime('%H:%M') +' /sd '+ sSchedule.strftime('%Y/%m/%d'))
