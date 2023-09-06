@@ -1022,7 +1022,7 @@ mobile_agent = get_mobile_agent()
 
 def chromeWebdriver():
 	if Type == "server" :
-		chrome_service = ChromeService(ChromeDriverManager(version="114.0.5735.90").install())
+		chrome_service = ChromeService(ChromeDriverManager().install())
 		chrome_options = uc.ChromeOptions()
 
 
