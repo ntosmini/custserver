@@ -188,7 +188,10 @@ if mecotine_chk == "y" :
 		print(str(err))
 		print("EXCEPT3")
 
-
+NowUrl = driver.current_url
+PageHtml = driver.page_source
+print(PageHtml)
+print(NowUrl)
 
 driver.quit()
 
