@@ -56,7 +56,7 @@ Search = sys.argv[3]
 SearchChk = sys.argv[4]
 
 StartUrl = parse.unquote(StartUrl)
-
+SearchChk = SearchChk.replace(" ", "")
 sys.path.append(os.path.dirname("/home/ntosmini/public_html/_agent.py"))
 
 import _agent
@@ -187,11 +187,6 @@ if mecotine_chk == "y" :
 		err = traceback.format_exc()
 		print(str(err))
 		print("EXCEPT3")
-
-NowUrl = driver.current_url
-PageHtml = driver.page_source
-print(PageHtml)
-print(NowUrl)
 
 driver.quit()
 
