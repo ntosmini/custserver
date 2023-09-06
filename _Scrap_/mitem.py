@@ -61,41 +61,24 @@ sys.path.append(os.path.dirname("/home/ntosmini/public_html/_agent.py"))
 
 import _agent
 
-mobile_agent = _agent.get_mobile_agent()
+agent = _agent.get_mobile_agent()
 
 
 def chromeWebdriver():
-	if Type == "server" :
-		chrome_service = ChromeService(ChromeDriverManager().install())
-		chrome_options = uc.ChromeOptions()
-
-
-		chrome_options.add_argument('--headless=new')
-		chrome_options.add_argument('--no-sandbox')
-		chrome_options.add_argument('--blink-settings=imagesEnabled=false')
-		chrome_options.add_argument('--window-size=1920,1080')
-		chrome_options.add_argument('--disable-dev-shm-usage')
-		chrome_options.add_argument('--disable-blink-features=AutomationControlled')
-		chrome_options.add_argument('--disable-infobars')
-		chrome_options.add_argument('--disable-setuid-sandbox')
-		chrome_options.add_argument('--disable-gpu')    
-		chrome_options.add_argument('--user-agent=' + mobile_agent)
-
-		chrome_options.page_load_strategy = 'normal'
-		driver = uc.Chrome(service=chrome_service, options=chrome_options, version_main=114)
-	else :
-		chrome_service = ChromeService(executable_path=ChromeDriverManager(version="114.0.5735.90").install())
-		chrome_options = Options()
-		chrome_options.add_experimental_option('detach', True)
-		chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
-		if Type == "pc" :
-			chrome_options.add_argument('--headless')
-		chrome_options.add_argument('--no-sandbox')
-
-		#chrome_options.add_argument("window-size=1920,1080")
-		chrome_options.add_argument('user-agent='+ mobile_agent)
-
-		driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
+	chrome_service = ChromeService(ChromeDriverManager().install())
+	chrome_options = uc.ChromeOptions()
+	chrome_options.add_argument('--headless=new')
+	chrome_options.add_argument('--no-sandbox')
+	chrome_options.add_argument('--blink-settings=imagesEnabled=false')
+	chrome_options.add_argument('--window-size=1920,1080')
+	chrome_options.add_argument('--disable-dev-shm-usage')
+	chrome_options.add_argument('--disable-blink-features=AutomationControlled')
+	chrome_options.add_argument('--disable-infobars')
+	chrome_options.add_argument('--disable-setuid-sandbox')
+	chrome_options.add_argument('--disable-gpu')    
+	chrome_options.add_argument('--user-agent=' + agent)
+	chrome_options.page_load_strategy = 'normal'
+	driver = uc.Chrome(service=chrome_service, options=chrome_options, version_main=113)
 
 	return driver
 
@@ -131,8 +114,11 @@ mecotine_chk = 'n'
 
 try :
 	e1_elements = driver.find_elements(By.CSS_SELECTOR, "a[href*='https://"+str(SearchChk)+"']")
-	e1_elements[random.randint(0, len(e1_elements)-1)].click()
-	mecotine_chk = "y"
+	if len(e1_elements) == 0:
+		pass
+	else :
+		e1_elements[random.randint(0, len(e1_elements)-1)].click()
+		mecotine_chk = "y"
 except :
 	err = traceback.format_exc()
 	print(str(err))
@@ -153,8 +139,11 @@ if mecotine_chk == "n" :
 
 	try :
 		e2_elements = driver.find_elements(By.CSS_SELECTOR, "a[href*='https://"+str(SearchChk)+"']")
-		e2_elements[random.randint(0, len(e2_elements)-1)].click()
-		mecotine_chk = "y"
+		if len(e2_elements) == 0:
+			pass
+		else :
+			e2_elements[random.randint(0, len(e2_elements)-1)].click()
+			mecotine_chk = "y"
 	except :
 		err = traceback.format_exc()
 		print(str(err))
