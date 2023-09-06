@@ -4,10 +4,8 @@ header("Content-Type: text/html; charset=UTF-8");
 
 $RunData = array();
 $RunData['Type'] = (empty($_POST['Type']))?"server":$_POST['Type'];
-$RunData['SelectHref'] = (empty($_POST['SelectHref']))?"n":$_POST['SelectHref'];
-$RunData['Search1'] = (empty($_POST['Search1']))?"n":$_POST['Search1'];
-$RunData['Search2'] = (empty($_POST['Search2']))?"n":$_POST['Search2'];
-$RunData['Search3'] = (empty($_POST['Search3']))?"n":$_POST['Search3'];
+$RunData['Search'] = (empty($_POST['Search']))?"":$_POST['Search'];
+$RunData['SearchChk'] = (empty($_POST['SearchChk']))?"n":$_POST['SearchChk'];
 
 $MConfigData = escapeshellarg(json_encode($RunData));
 
