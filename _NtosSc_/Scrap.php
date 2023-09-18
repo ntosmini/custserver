@@ -12,6 +12,7 @@ $RunData['NtosServer'] = (empty($_POST['NtosServer']))?"":$_POST['NtosServer'];	
 
 $RunData['UserAgent'] = (empty($_POST['UserAgent']))?"":$_POST['UserAgent'];
 $RunData['ChromeVer'] = (empty($_POST['ChromeVer']))?"":$_POST['ChromeVer'];	//Chrome version	2023-07-19 = 114
+$RunData['PageWait'] = (empty($_POST['PageWait']))?"3":$_POST['PageWait'];	//상품당 대기 시간
 
 if(empty($RunData['SiteUrlArr'])){
 	echo 'not SiteUrlArr';
