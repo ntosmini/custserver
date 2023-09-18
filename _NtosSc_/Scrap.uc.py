@@ -44,6 +44,7 @@ NtosServer = MConfig['NtosServer']	#받을 url
 
 UserAgent = MConfig['UserAgent']
 ChromeVer = MConfig['ChromeVer']
+PageWait = int(MConfig['PageWait'])	#상품당 대기시간
 
 def chromeWebdriver():
 	chrome_service = ChromeService(ChromeDriverManager().install())
@@ -80,6 +81,8 @@ for val in SiteUrlArr :
 		try :
 			driver.get(SiteUrl)
 			driver.implicitly_wait(10)
+			if PageWait > 0 :
+				time.sleep(PageWait)
 			PageHtml = driver.page_source
 			NowUrl = driver.current_url
 		except :
