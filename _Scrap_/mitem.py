@@ -124,7 +124,8 @@ except :
 
 if mecotine_chk == "n" :
 	try :
-		driver.find_element(By.XPATH, '//*[@class="api_more"]').click()
+		more = driver.find_elements(By.XPATH, '//*[@class="group_more"]')
+		more[0].click()
 		time.sleep(random.randint(2, 7))
 	except :
 		err = traceback.format_exc()
