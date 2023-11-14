@@ -64,6 +64,21 @@ import _agent
 
 agent = _agent.get_mobile_agent()
 
+def Scroll(sec) :
+	SCROLL_PAUSE_SEC = sec
+	# 스크롤 높이 가져옴
+	last_height = driver.execute_script("return document.body.scrollHeight")
+	while True:
+		# 끝까지 스크롤 다운
+		driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+		# SCROLL_PAUSE_SEC 초 대기
+		time.sleep(SCROLL_PAUSE_SEC)
+		# 스크롤 다운 후 스크롤 높이 다시 가져옴
+		new_height = driver.execute_script("return document.body.scrollHeight")
+		if new_height == last_height:
+			break
+		last_height = new_height
+
 
 def chromeWebdriver():
 	chrome_service = ChromeService(ChromeDriverManager().install())
@@ -148,6 +163,8 @@ if mecotine_chk == "n" :
 
 if mecotine_chk == "y" :
 	try:
+		time.sleep(random.randint(2, 6))
+		Scroll(2)
 
 		time.sleep(random.randint(20, 46))
 
@@ -160,6 +177,8 @@ if mecotine_chk == "y" :
 
 		a_elements[random.randint(0, len(a_elements)-1)].click()
 
+		time.sleep(random.randint(2, 6))
+		Scroll(2)
 
 		time.sleep(random.randint(20, 55))
 
