@@ -15,27 +15,27 @@ try :
 	os.system("killall -o 3m chromedriver")
 except :
 	pass
-
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service as ChromeService
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-
-from selenium.webdriver.common.action_chains import ActionChains
-
-#pip3 install webdriver_manager
-from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.common.by import By
-
-import undetected_chromedriver as uc
-
-#한글깨짐
-sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
-sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
-
-
 try :
+	from selenium import webdriver
+	from selenium.webdriver.chrome.service import Service as ChromeService
+	from selenium.webdriver.chrome.options import Options
+	from selenium.webdriver.support.ui import WebDriverWait
+	from selenium.webdriver.support import expected_conditions as EC
+	
+	from selenium.webdriver.common.action_chains import ActionChains
+	
+	#pip3 install webdriver_manager
+	from webdriver_manager.chrome import ChromeDriverManager
+	from selenium.webdriver.common.by import By
+	
+	import undetected_chromedriver as uc
+	
+	#한글깨짐
+	sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
+	sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
+
+
+
 	MConfigData = sys.argv[1]
 	MConfig = json.loads(MConfigData)
 
