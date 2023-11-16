@@ -37,7 +37,8 @@ MConfig = json.loads(MConfigData)
 
 SiteUrl = MConfig['SiteUrl']
 SetAgent = MConfig['SetAgent']
-
+print(SiteUrl)
+exit()
 ChromeVer = "114"
 if SetAgent != "" :
 	sys.path.append(os.path.dirname("/home/ntosmini/public_html/_agent.py"))
