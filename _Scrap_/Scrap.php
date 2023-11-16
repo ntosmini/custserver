@@ -3,8 +3,8 @@ set_time_limit(0);
 header("Content-Type: text/html; charset=UTF-8");
 
 $RunData = array();
-$RunData['SiteUrl'] = (empty($_POST['SiteUrl']))?"":$_POST['SiteUrl'];
-$RunData['SetAgent'] = (empty($_POST['SetAgent']))?"":$_POST['SetAgent'];
+$RunData['SiteUrl'] = (empty($_GET['SiteUrl']))?"":$_GET['SiteUrl'];
+$RunData['SetAgent'] = (empty($_GET['SetAgent']))?"":$_GET['SetAgent'];
 
 if(empty($RunData['SiteUrl'])){
 	echo 'not SiteUrl';
