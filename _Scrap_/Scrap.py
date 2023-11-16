@@ -36,8 +36,8 @@ try :
 
 
 
-	#MConfigData = sys.argv[1]
-	#MConfig = json.loads(MConfigData)
+	MConfigData = sys.argv[1]
+	MConfig = json.loads(MConfigData)
 
 	SiteUrl = MConfig['SiteUrl']
 	SetAgent = MConfig['SetAgent']
