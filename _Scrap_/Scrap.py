@@ -36,11 +36,11 @@ try :
 
 
 
-	MConfigData = sys.argv[1]
-	MConfig = json.loads(MConfigData)
+	#MConfigData = sys.argv[1]
+	#MConfig = json.loads(MConfigData)
 
-	SiteUrl = MConfig['SiteUrl']
-	SetAgent = MConfig['SetAgent']
+	SiteUrl = "http://ntos.co.kr" #MConfig['SiteUrl']
+	SetAgent = ""	#MConfig['SetAgent']
 
 	ChromeVer = "114"
 	if SetAgent != "" :
