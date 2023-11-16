@@ -12,7 +12,7 @@ if(empty($RunData['SiteUrl'])){
 }
 
 $MConfigData = escapeshellarg(json_encode($RunData));
-
+echo "ok";
 exec("PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin python3 /home/ntosmini/public_html/_Scrap_/Scrap.py {$MConfigData}", $ResultArr);
 
 $PageHtml = implode("\n", $ResultArr);
