@@ -31,13 +31,13 @@ sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
 sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
 
 
-
-MConfigData = sys.argv[1]
-MConfig = json.loads(MConfigData)
-
-SiteUrl = MConfig['SiteUrl']
-SetAgent = MConfig['SetAgent']
 try :
+	MConfigData = sys.argv[1]
+	MConfig = json.loads(MConfigData)
+
+	SiteUrl = MConfig['SiteUrl']
+	SetAgent = MConfig['SetAgent']
+
 	ChromeVer = "114"
 	if SetAgent != "" :
 		sys.path.append(os.path.dirname("/home/ntosmini/public_html/_agent.py"))
