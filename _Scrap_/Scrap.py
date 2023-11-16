@@ -39,17 +39,17 @@ try :
 	#MConfigData = sys.argv[1]
 	#MConfig = json.loads(MConfigData)
 
-	SiteUrl = "http://ntos.co.kr" #MConfig['SiteUrl']
-	SetAgent = ""	#MConfig['SetAgent']
+	SiteUrl = MConfig['SiteUrl']
+	SetAgent = MConfig['SetAgent']
 
 	ChromeVer = "114"
 	if SetAgent != "" :
 		sys.path.append(os.path.dirname("/home/ntosmini/public_html/_agent.py"))
 		import _agent
 	
-		if SetAgent = "mobile" :
+		if SetAgent == "mobile" :
 			Agent = _agent.get_mobile_agent()
-		elif SetAgent = "pc" :
+		elif SetAgent == "pc" :
 			Agent = _agent.get_pc_agent()
 		else :
 			Agent = ""
