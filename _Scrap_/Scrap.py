@@ -43,6 +43,7 @@ try :
 	SetAgent = MConfig['SetAgent']
 
 	ChromeVer = "114"
+	Agent = ""
 	if SetAgent != "" :
 		sys.path.append(os.path.dirname("/home/ntosmini/public_html/_agent.py"))
 		import _agent
