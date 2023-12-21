@@ -122,7 +122,7 @@ try :
 	Search1_tags = driver.find_elements(By.TAG_NAME, "a")
 
 	for Val in Search1_tags :
-		if re.search(SearchChk, Val.text) :
+		if Val.text == SearchChk :
 			Val.click()
 			MatchChk = "y"
 			break
@@ -142,7 +142,7 @@ try :
 
 		Search2_tags = driver.find_elements(By.TAG_NAME, "a")
 		for Val in Search2_tags :
-			if re.search(SearchChk, Val.text) :
+			if Val.text == SearchChk :
 				Val.click()
 				MatchChk = "y"
 				break
