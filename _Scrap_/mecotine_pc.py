@@ -146,34 +146,27 @@ try :
 
 
 	if MatchChk == "y" :
-		time.sleep(random.randint(2, 5))
-
-		driver.switch_to.window(driver.window_handles[-1])
-
-		time.sleep(random.randint(15, 22))
-		ScrollDown(3)
-		time.sleep(random.randint(15, 22))
-
-		a_elements = driver.find_elements(By.CSS_SELECTOR, "a[href*='shopdetail']")
-
-		a_elements[random.randint(0, len(a_elements)-1)].click()
-
-		time.sleep(random.randint(3, 7))
-		ScrollDown(3)
-
-		time.sleep(random.randint(33, 55))
-
-		driver.execute_script("window.history.go(-1)")
-
-		time.sleep(random.randint(3, 7))
-		ScrollDown(3)
-		time.sleep(random.randint(6, 17))
-
-		print("SUCCESS")
-
+		try :
+			time.sleep(random.randint(2, 5))
+			driver.switch_to.window(driver.window_handles[-1])
+			time.sleep(random.randint(15, 22))
+			ScrollDown(3)
+			time.sleep(random.randint(15, 22))
+			a_elements = driver.find_elements(By.CSS_SELECTOR, "a[href*='shopdetail']")
+			a_elements[random.randint(0, len(a_elements)-1)].click()
+			time.sleep(random.randint(3, 7))
+			ScrollDown(3)
+			time.sleep(random.randint(33, 55))
+			driver.execute_script("window.history.go(-1)")
+			time.sleep(random.randint(3, 7))
+			ScrollDown(3)
+			time.sleep(random.randint(6, 17))
+			print("SUCCESS")
+		except :
+			print(str(traceback.format_exc()))
 except :
 	print("FALSE")
-	#print(str(traceback.format_exc()))
+	print(str(traceback.format_exc()))
 
 # 종료
 driver.quit()
