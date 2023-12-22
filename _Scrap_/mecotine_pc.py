@@ -45,26 +45,22 @@ SearchChk = MConfig['SearchChk']
 sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
 sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
 
-def ScrollDown(sec) :
-	SCROLL_PAUSE_SEC = sec
-	# 스크롤 높이 가져옴
-	last_height = driver.execute_script("return document.body.scrollHeight")
-
+def ScrollDown(mins=int(100), maxs=int(300), maxcnt=int(50)) :
+	scroll_location = driver.execute_script("return window.pageYOffset")
+	cnt = int(0)
+	nowscroll = int(0)
 	while True:
-		# 끝까지 스크롤 다운
-		driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-
-		# 1초 대기
-		time.sleep(SCROLL_PAUSE_SEC)
-
-		# 스크롤 다운 후 스크롤 높이 다시 가져옴
-		new_height = driver.execute_script("return document.body.scrollHeight")
-		if new_height == last_height:
+		scroll_height = driver.execute_script("return document.body.scrollHeight")
+		if nowscroll >= scroll_height or cnt >= maxcnt:
+			time.sleep(random.randint(2, 5))
 			break
-		last_height = new_height
-from urllib import parse
-
-
+		else:
+			lol = int(random.uniform(mins, maxs))
+			driver.execute_script("window.scrollTo(0,{})".format(scroll_location + lol))
+			time.sleep(random.uniform(0.1, 1))
+			scroll_location = driver.execute_script("return window.pageYOffset")
+			nowscroll = nowscroll + lol
+		cnt = cnt + 1
 
 def chromeWebdriver():
 	agent = _agent.get_pc_agent()
@@ -154,6 +150,7 @@ try :
 		driver.switch_to.window(driver.window_handles[-1])
 
 		time.sleep(random.randint(15, 22))
+		ScrollDown(100, 300, random.randint(1, 5))
 		time.sleep(random.randint(15, 22))
 
 		a_elements = driver.find_elements(By.CSS_SELECTOR, "a[href*='shopdetail']")
@@ -161,14 +158,14 @@ try :
 		a_elements[random.randint(0, len(a_elements)-1)].click()
 
 		time.sleep(random.randint(3, 7))
-		ScrollDown(random.randint(3, 6))
+		ScrollDown(100, 300, random.randint(45, 60))
 
 		time.sleep(random.randint(33, 55))
 
 		driver.execute_script("window.history.go(-1)")
 
 		time.sleep(random.randint(3, 7))
-		#ScrollDown(random.randint(3, 6))
+		ScrollDown(100, 300, random.randint(2, 6))
 		time.sleep(random.randint(6, 17))
 
 		print("SUCCESS")
