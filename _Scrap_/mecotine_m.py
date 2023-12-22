@@ -53,8 +53,7 @@ Search2 = MConfig['Search2']
 SearchChk = MConfig['SearchChk']
 
 
-if Type == "server" :
-	sys.path.append(os.path.dirname("/home/ntosmini/public_html/_agent.py"))
+sys.path.append(os.path.dirname("/home/ntosmini/public_html/_agent.py"))
 import _agent
 
 
