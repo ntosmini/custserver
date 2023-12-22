@@ -81,9 +81,6 @@ def ScrollDown(sec) :
 		if new_height == last_height:
 			break
 		last_height = new_height
-from urllib import parse
-
-
 
 def chromeWebdriver():
 	agent = _agent.get_mobile_agent()
