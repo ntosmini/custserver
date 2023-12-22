@@ -151,7 +151,7 @@ try :
 			driver.switch_to.window(driver.window_handles[-1])
 			time.sleep(random.randint(15, 22))
 			time.sleep(random.randint(15, 22))
-			a_elements = driver.find_elements(By.CSS_SELECTOR, "a[href*='shopdetail']")
+			a_elements = driver.find_elements(By.CSS_SELECTOR, ".main_disp a[href*='shopdetail']")
 			a_elements[random.randint(0, len(a_elements)-1)].click()
 			time.sleep(random.randint(3, 7))
 			ScrollDown(3)
