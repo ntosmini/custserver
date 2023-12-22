@@ -78,7 +78,7 @@ def chromeWebdriver():
 		chrome_options.add_argument('--disable-infobars')
 		chrome_options.add_argument('--disable-setuid-sandbox')
 		chrome_options.add_argument('--disable-gpu')
-		chrome_options.add_argument('--user-agent' + agent)
+		chrome_options.add_argument('--user-agent=' + agent)
 		chrome_options.page_load_strategy = 'normal'
 
 		driver = uc.Chrome(service=chrome_service, options=chrome_options, version_main=113)
