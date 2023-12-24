@@ -39,7 +39,8 @@ Type = MConfig['Type']
 SiteUrl = MConfig['SiteUrl']
 Search1 = MConfig['Search1']
 Search2 = MConfig['Search2']
-SearchChk = MConfig['SearchChk']
+SearchChk1 = MConfig['SearchChk1']
+SearchChk2 = MConfig['SearchChk2']
 
 #한글깨짐
 sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
@@ -119,7 +120,7 @@ try :
 	Search1_tags = driver.find_elements(By.TAG_NAME, "a")
 
 	for Val in Search1_tags :
-		if Val.text == SearchChk :
+		if Val.text == SearchChk1 and SearchChk1 :
 			Val.click()
 			MatchChk = "y"
 			break
@@ -139,7 +140,7 @@ try :
 
 		Search2_tags = driver.find_elements(By.TAG_NAME, "a")
 		for Val in Search2_tags :
-			if Val.text == SearchChk :
+			if Val.text == SearchChk2 and SearchChk2 :
 				Val.click()
 				MatchChk = "y"
 				break
