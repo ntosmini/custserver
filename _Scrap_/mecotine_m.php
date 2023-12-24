@@ -7,8 +7,8 @@ $RunData['Type'] = (empty($_POST['Type']))?"server":$_POST['Type'];
 $RunData['SiteUrl'] = (empty($_POST['SiteUrl']))?"":$_POST['SiteUrl'];
 $RunData['Search1'] = (empty($_POST['Search1']))?"":$_POST['Search1'];
 $RunData['Search2'] = (empty($_POST['Search2']))?"":$_POST['Search2'];
-$RunData['SearchChk'] = (empty($_POST['SearchChk']))?"":$_POST['SearchChk'];
-
+$RunData['SearchChk1'] = (empty($_POST['SearchChk1']))?"":$_POST['SearchChk1'];
+$RunData['SearchChk2'] = (empty($_POST['SearchChk2']))?"":$_POST['SearchChk2'];
 
 
 if(empty($RunData['SiteUrl'])){
@@ -18,10 +18,6 @@ if(empty($RunData['SiteUrl'])){
 
 if(empty($RunData['Search2'])){
 	echo 'not Search2';
-	exit;
-}
-if(empty($RunData['SearchChk'])){
-	echo 'not SearchChk';
 	exit;
 }
 
