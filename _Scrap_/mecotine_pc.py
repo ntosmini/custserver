@@ -160,7 +160,7 @@ try :
 			driver.execute_script("window.history.go(-1)")
 			time.sleep(random.randint(3, 7))
 			ScrollDown(3)
-			time.sleep(random.randint(6, 17))
+			time.sleep(random.randint(10, 30))
 			print("SUCCESS")
 		except :
 			print(str(traceback.format_exc()))
