@@ -42,6 +42,11 @@ Search2 = MConfig['Search2']
 SearchChk1 = MConfig['SearchChk1']
 SearchChk2 = MConfig['SearchChk2']
 
+StartSleep = MConfig['StartSleep']
+
+if StartSleep :
+	time.sleep(int(StartSleep))
+	
 #한글깨짐
 sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
 sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
