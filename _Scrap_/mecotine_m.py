@@ -52,8 +52,11 @@ Search1 = MConfig['Search1']
 Search2 = MConfig['Search2']
 SearchChk1 = MConfig['SearchChk1']
 SearchChk2 = MConfig['SearchChk2']
+StartSleep = MConfig['StartSleep']
 
-
+if StartSleep :
+	time.sleep(int(StartSleep))
+	
 sys.path.append(os.path.dirname("/home/ntosmini/public_html/_agent.py"))
 import _agent
 
