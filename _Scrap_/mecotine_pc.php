@@ -10,6 +10,7 @@ $RunData['Search2'] = (empty($_POST['Search2']))?"":$_POST['Search2'];
 $RunData['SearchChk1'] = (empty($_POST['SearchChk1']))?"":$_POST['SearchChk1'];
 $RunData['SearchChk2'] = (empty($_POST['SearchChk2']))?"":$_POST['SearchChk2'];
 
+$RunData['StartSleep'] = (empty($_POST['StartSleep']))?"":$_POST['StartSleep'];
 
 
 if(empty($RunData['SiteUrl'])){
