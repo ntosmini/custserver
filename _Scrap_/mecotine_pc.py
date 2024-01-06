@@ -157,7 +157,7 @@ try :
 			driver.switch_to.window(driver.window_handles[-1])
 			time.sleep(random.randint(15, 22))
 			time.sleep(random.randint(15, 22))
-			ClickArr = ["1", "2", "3", "4", "5"]
+			ClickArr = ["2", "3", "4", "5"]
 			Click = ClickArr[random.randint(0,len(ClickArr)-1)]
 			if Click == "1" :
 				a_elements = driver.find_elements(By.CSS_SELECTOR, ".cate_menu a[href*='category_code=100004000000000']")
