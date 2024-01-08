@@ -178,7 +178,7 @@ try :
 
 except :
 	print("FALSE")
-	#print(str(traceback.format_exc()))
+	print(str(traceback.format_exc()))
 
 # 종료
 driver.quit()
