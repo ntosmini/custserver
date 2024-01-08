@@ -149,18 +149,17 @@ try :
 
 
 	if MatchChk == "y" :
-		time.sleep(random.randint(2, 5))
-
-		driver.switch_to.window(driver.window_handles[-1])
-
-		time.sleep(random.randint(15, 22))
+		driver.set_window_size(768, 1366)
+		time.sleep(random.randint(5, 9))
+		time.sleep(random.randint(5, 10))
 		ScrollDown(3)
 		time.sleep(random.randint(15, 22))
 
-		a_elements = driver.find_elements(By.TAG_NAME, "a")
-		cho = random.randint(2, 3)
-		a_elements[cho].click()
 
+		driver.find_element(By.CLASS_NAME, "xi-bars").click()
+		time.sleep(random.randint(3, 7))
+		a_elements = driver.find_elements(By.CLASS_NAME, 'css-1q0anj3')
+		a_elements[random.randint(0, len(a_elements)-1)].click()
 		time.sleep(random.randint(3, 7))
 		ScrollDown(3)
 
