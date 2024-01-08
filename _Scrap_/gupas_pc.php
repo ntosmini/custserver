@@ -26,5 +26,5 @@ $MConfigData = escapeshellarg(json_encode($RunData));
 exec("PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin python3 /home/ntosmini/public_html/_Scrap_/gupas_pc.py {$MConfigData}", $ResultArr);
 
 $PageHtml = implode("\n", $ResultArr);
-echo $PageHtml;
+echo $PageHtml."--";
 exit;
