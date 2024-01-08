@@ -30,8 +30,6 @@ import undetected_chromedriver as uc
 
 
 
-import _agent
-
 MConfigData = sys.argv[1]
 MConfig = json.loads(MConfigData)
 
@@ -47,7 +45,7 @@ if Type == "server" :
 else :
 	sys.path.append(os.path.dirname("C:/_Scrap_/_agent.py"))
 
-
+import _agent
 
 #한글깨짐
 sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
