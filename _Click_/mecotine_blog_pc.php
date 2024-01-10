@@ -5,7 +5,7 @@ header("Content-Type: text/html; charset=UTF-8");
 $RunData = array();
 $RunData['Type'] = (empty($_POST['Type']))?"server":$_POST['Type'];
 $RunData['SiteUrl'] = (empty($_POST['SiteUrl']))?"":$_POST['SiteUrl'];
-$RunData['Search'] = (empty($_POST['Search1']))?"":$_POST['Search1'];
+$RunData['Search'] = (empty($_POST['Search']))?"":$_POST['Search'];
 $RunData['SearchChk'] = (empty($_POST['SearchChk']))?"":$_POST['SearchChk'];
 
 
