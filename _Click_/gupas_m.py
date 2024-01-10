@@ -165,9 +165,8 @@ try :
 				MatchChk = "y"
 				break
 
-		time.sleep(random.randint(10, 15))
-
 	if MatchChk == "y" :
+		time.sleep(random.randint(10, 15))
 		driver.set_window_size(768, 1366)
 		time.sleep(random.randint(5, 9))
 		time.sleep(random.randint(5, 10))
