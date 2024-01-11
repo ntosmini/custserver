@@ -186,7 +186,7 @@ try :
 		ScrollDown(random.randint(1, 2), 'num')
 		time.sleep(random.randint(21, 32))
 
-		m_elements = driver.find_elements(By.CSS_SELECTOR, ".se-module-oglink a[href*='item.mecotine.com']")
+		m_elements = driver.find_elements(By.CSS_SELECTOR, ".se-module se-module-text a[href*='item.mecotine.com']")
 		m_elements[0].click()
 
 		try :
