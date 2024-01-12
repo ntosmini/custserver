@@ -184,31 +184,7 @@ try :
 	if MatchChk == "y" :
 		time.sleep(random.randint(2, 5))
 		ScrollDown(random.randint(1, 2), 'num')
-		time.sleep(random.randint(21, 32))
-
-		m_elements = driver.find_elements(By.CSS_SELECTOR, ".se-module-text a[href*='item.mecotine.com']")
-		m_elements[0].click()
-
-		try :
-			driver.switch_to.window(driver.window_handles[-1])
-			time.sleep(random.randint(2, 5))
-			ScrollDown(random.uniform(0.5, 1), 'num')
-			time.sleep(random.randint(15, 22))
-
-			num = random.randint(1, 3)
-			for i in range(num) :
-				a_elements = driver.find_elements(By.CSS_SELECTOR, ".main_disp a[href*='shopdetail']")
-				a_elements[random.randint(0, len(a_elements)-1)].click()
-				time.sleep(random.randint(3, 7))
-				ScrollDown(random.uniform(0.5, 1), 'num')
-				time.sleep(random.randint(21, 38))
-				driver.execute_script("window.history.go(-1)")
-				time.sleep(random.randint(3, 7))
-				ScrollDown(random.uniform(0.5, 1), 'num')
-				time.sleep(random.randint(6, 13))
-			print("SUCCESS")
-		except :
-			print(str(traceback.format_exc()))
+		time.sleep(random.randint(40, 65))
 
 	print("SUCCESS")
 except :
