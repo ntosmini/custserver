@@ -141,7 +141,7 @@ try :
 	Search1_tags = driver.find_elements(By.TAG_NAME, "a")
 
 	for Val in Search1_tags :
-		if Val.text == SearchChk2 and SearchChk2 :
+		if Val.text == SearchChk1 and SearchChk1 :
 			Val.click()
 			MatchChk = "y"
 			requests.get(NtosUrl)
@@ -156,7 +156,7 @@ try :
 		Search1_tags_ = driver.find_elements(By.TAG_NAME, "a")
 
 		for Val_ in Search1_tags_ :
-			if Val_.text == SearchChk2 and SearchChk2 :
+			if Val_.text == SearchChk1 and SearchChk1 :
 				Val_.click()
 				MatchChk = "y"
 				requests.get(NtosUrl)
