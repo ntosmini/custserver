@@ -136,12 +136,11 @@ def chromeWebdriver():
 
 driver = chromeWebdriver()
 driver.delete_all_cookies()
-
+driver.maximize_window()
+time.sleep(random.randint(1, 2))
 
 driver.get(SiteUrl)
 driver.implicitly_wait(10)
-time.sleep(random.randint(2, 5))
-#driver.maximize_window()
 
 time.sleep(random.randint(2, 5))
 
