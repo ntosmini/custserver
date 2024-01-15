@@ -107,6 +107,7 @@ def TargetClick(Target) :
 	global ActionChains
 	actions = ActionChains(driver).move_to_element(Target)
 	actions.perform()
+	time.sleep(random.randint(1, 2))
 	Target.click()
 
 def chromeWebdriver():
@@ -169,7 +170,7 @@ time.sleep(random.randint(2, 7))
 MatchChk = "n"
 NtosUrl = "http://product.ntos.co.kr/_Ntos_/click/mecotine_chk.php?mode=up"
 try :
-
+	ScrollDown(random.uniform(0.5, 1), 'num')
 	Search1_tags = driver.find_elements(By.TAG_NAME, "a")
 
 	for Val in Search1_tags :
@@ -183,7 +184,7 @@ try :
 		time.sleep(random.randint(2, 7))
 		mod_more_wrap = driver.find_elements(By.CLASS_NAME, "mod_more_wrap")
 		TargetClick(mod_more_wrap[0])
-
+		ScrollDown(random.uniform(0.5, 1), 'num')
 		Search1_tags_ = driver.find_elements(By.TAG_NAME, "a")
 
 		for Val_ in Search1_tags_ :
@@ -204,7 +205,7 @@ try :
 
 		SearchForm.send_keys(Keys.ENTER)
 		time.sleep(random.randint(2, 7))
-
+		ScrollDown(random.uniform(0.5, 1), 'num')
 		Search2_tags = driver.find_elements(By.TAG_NAME, "a")
 		for Val in Search2_tags :
 			if Val.text == SearchChk2 and SearchChk2 :
@@ -216,7 +217,7 @@ try :
 	if MatchChk == "y" :
 		time.sleep(random.randint(3, 6))
 		ScrollDown(random.uniform(0.5, 1), 'num')
-		time.sleep(random.randint(5, 22))
+		time.sleep(random.randint(3, 12))
 
 		conloop = random.randint(1, 3)
 		for l in range(conloop) :
