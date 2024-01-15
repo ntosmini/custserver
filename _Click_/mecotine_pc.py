@@ -61,10 +61,11 @@ def ScrollDown(sec, sc_type='') :
 	time.sleep(random.randint(1, 2))
 
 	if sc_type == "num" :
-
 		num = random.randint(5, 10)
-		n_sc = last_height / num
-		for i in range(num) :
+		nm_ = num - random.randint(1, 3)
+		n_sc = (last_height / num)
+
+		for i in range(nm_) :
 			driver.execute_script("window.scrollTo(0, "+str(n_sc)+");")
 			time.sleep(sec)
 			new_height = driver.execute_script("return document.body.scrollHeight")
@@ -187,7 +188,8 @@ try :
 	if MatchChk == "y" :
 		time.sleep(random.randint(2, 5))
 		driver.switch_to.window(driver.window_handles[-1])
-		time.sleep(random.randint(5, 22))
+		time.sleep(random.randint(1, 5))
+		ScrollDown(random.uniform(0.5, 1), 'num')
 		time.sleep(random.randint(10, 22))
 		a_elements = driver.find_elements(By.CSS_SELECTOR, ".main_disp a[href*='shopdetail']")
 		a_elements[random.randint(0, len(a_elements)-1)].click()
