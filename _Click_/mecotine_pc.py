@@ -135,19 +135,35 @@ time.sleep(random.randint(2, 7))
 
 
 MatchChk = "n"
-
+NtosUrl = "http://product.ntos.co.kr/_Ntos_/click/mecotine_chk.php"
 try :
-
 	Search1_tags = driver.find_elements(By.TAG_NAME, "a")
 
 	for Val in Search1_tags :
-		if Val.text == SearchChk1 and SearchChk1 :
+		if Val.text == SearchChk2 and SearchChk2 :
 			Val.click()
 			MatchChk = "y"
+			requests.get(NtosUrl)
 			break
+
+	if MatchChk == "n" :
+		#더보기
+		time.sleep(random.randint(2, 7))
+		mod_more_wrap = driver.find_elements(By.CLASS_NAME, "mod_more_wrap")
+		mod_more_wrap[0].click()
+
+		Search1_tags_ = driver.find_elements(By.TAG_NAME, "a")
+
+		for Val_ in Search1_tags_ :
+			if Val_.text == SearchChk2 and SearchChk2 :
+				Val_.click()
+				MatchChk = "y"
+				requests.get(NtosUrl)
+				break
 
 
 	if MatchChk == "n" :
+		time.sleep(random.randint(2, 5))
 		SearchForm = driver.find_element(By.XPATH, '//*[@id="nx_query"]')
 		SearchForm.click()
 		SearchForm.clear()
@@ -172,6 +188,7 @@ try :
 			time.sleep(random.randint(2, 5))
 			driver.switch_to.window(driver.window_handles[-1])
 			time.sleep(random.randint(15, 22))
+			ScrollDown(random.uniform(0.5, 1), 'num')
 			time.sleep(random.randint(15, 22))
 			num = random.randint(1, 3)
 			for i in range(num) :
