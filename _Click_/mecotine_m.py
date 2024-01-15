@@ -24,6 +24,7 @@ import datetime
 import re
 import traceback
 import json
+import requests
 
 from bs4 import BeautifulSoup
 
@@ -160,7 +161,7 @@ time.sleep(random.randint(2, 7))
 
 
 MatchChk = "n"
-
+NtosUrl = "http://product.ntos.co.kr/_Ntos_/click/mecotine_chk.php"
 try :
 
 	Search1_tags = driver.find_elements(By.TAG_NAME, "a")
@@ -171,6 +172,20 @@ try :
 			MatchChk = "y"
 			break
 
+	if MatchChk == "n" :
+		#더보기
+		time.sleep(random.randint(2, 7))
+		mod_more_wrap = driver.find_elements(By.CLASS_NAME, "mod_more_wrap")
+		mod_more_wrap[0].click()
+
+		Search1_tags_ = driver.find_elements(By.TAG_NAME, "a")
+
+		for Val_ in Search1_tags_ :
+			if Val_.text == SearchChk1 and SearchChk1 :
+				Val_.click()
+				MatchChk = "y"
+				requests.get(NtosUrl)
+				break
 
 	if MatchChk == "n" :
 		SearchForm = driver.find_element(By.XPATH, '//*[@id="nx_query"]')
