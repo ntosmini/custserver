@@ -189,8 +189,14 @@ try :
 		time.sleep(random.randint(1, 2))
 		ScrollDown(random.uniform(0.5, 1), 'num')
 		time.sleep(random.randint(10, 22))
+
 		a_elements = driver.find_elements(By.CSS_SELECTOR, ".main_disp a[href*='shopdetail']")
-		a_elements[random.randint(0, len(a_elements)-1)].click()
+		a_emerand = random.randint(0, len(a_elements)-1)
+		a_emerand_ = a_elements[a_emerand]
+		actions = ActionChains(driver).move_to_element(a_emerand_)
+		actions.perform()
+		a_emerand_.click()
+		
 		time.sleep(random.randint(3, 7))
 		ScrollDown(random.uniform(0.5, 1), 'num')
 		time.sleep(random.randint(33, 55))
