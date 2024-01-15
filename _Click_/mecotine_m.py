@@ -161,7 +161,7 @@ time.sleep(random.randint(2, 7))
 
 
 MatchChk = "n"
-NtosUrl = "http://product.ntos.co.kr/_Ntos_/click/mecotine_chk.php"
+NtosUrl = "http://product.ntos.co.kr/_Ntos_/click/mecotine_chk.php?mode=up"
 try :
 
 	Search1_tags = driver.find_elements(By.TAG_NAME, "a")
