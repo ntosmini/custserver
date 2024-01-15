@@ -185,26 +185,22 @@ try :
 
 
 	if MatchChk == "y" :
-		try :
-			time.sleep(random.randint(2, 5))
-			driver.switch_to.window(driver.window_handles[-1])
-			time.sleep(random.randint(15, 22))
-			ScrollDown(random.uniform(0.5, 1), 'num')
-			time.sleep(random.randint(15, 22))
-			num = random.randint(1, 3)
-			for i in range(num) :
-				a_elements = driver.find_elements(By.CSS_SELECTOR, ".main_disp a[href*='shopdetail']")
-				a_elements[random.randint(0, len(a_elements)-1)].click()
-				time.sleep(random.randint(3, 7))
-				ScrollDown(random.uniform(0.5, 1), 'num')
-				time.sleep(random.randint(33, 55))
-				driver.execute_script("window.history.go(-1)")
-				time.sleep(random.randint(3, 7))
-				ScrollDown(random.uniform(0.5, 1), 'num')
-				time.sleep(random.randint(40, 65))
-			print("SUCCESS")
-		except :
-			print(str(traceback.format_exc()))
+		time.sleep(random.randint(2, 5))
+		driver.switch_to.window(driver.window_handles[-1])
+		time.sleep(random.randint(15, 22))
+		ScrollDown(random.uniform(0.5, 1), 'num')
+		time.sleep(random.randint(15, 22))
+		a_elements = driver.find_elements(By.CSS_SELECTOR, "a[href*='shopdetail']")
+		a_elements[random.randint(0, len(a_elements)-1)].click()
+		time.sleep(random.randint(3, 7))
+		ScrollDown(random.uniform(0.5, 1), 'num')
+		time.sleep(random.randint(33, 55))
+		driver.execute_script("window.history.go(-1)")
+		time.sleep(random.randint(3, 7))
+		ScrollDown(random.uniform(0.5, 1), 'num')
+		time.sleep(random.randint(40, 65))
+	print("SUCCESS")
+
 except :
 	print("FALSE")
 	print(str(traceback.format_exc()))
