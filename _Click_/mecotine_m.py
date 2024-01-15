@@ -228,7 +228,7 @@ try :
 			
 			time.sleep(random.randint(3, 7))
 			ScrollDown(random.uniform(0.5, 1), 'num')
-			time.sleep(random.randint(20, 32))
+			time.sleep(random.randint(10, 22))
 			driver.execute_script("window.history.go(-1)")
 			time.sleep(random.randint(3, 7))
 			ScrollDown(random.uniform(0.5, 1), 'num')
