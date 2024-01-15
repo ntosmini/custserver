@@ -188,7 +188,6 @@ try :
 		time.sleep(random.randint(2, 5))
 		driver.switch_to.window(driver.window_handles[-1])
 		time.sleep(random.randint(5, 22))
-		ScrollDown(random.uniform(0.5, 1), 'num')
 		time.sleep(random.randint(10, 22))
 		a_elements = driver.find_elements(By.CSS_SELECTOR, ".main_disp a[href*='shopdetail']")
 		a_elements[random.randint(0, len(a_elements)-1)].click()
