@@ -103,6 +103,12 @@ def ScrollDown(sec, sc_type='') :
 				break
 			last_height = new_height
 
+def TargetClick(Target) :
+	global ActionChains
+	actions = ActionChains(driver).move_to_element(Target)
+	actions.perform()
+	Target.click()
+
 def chromeWebdriver():
 	agent = _agent.get_mobile_agent()
 	if Type == "server" :
@@ -168,7 +174,7 @@ try :
 
 	for Val in Search1_tags :
 		if Val.text == SearchChk1 and SearchChk1 :
-			Val.click()
+			TargetClick(Val)
 			MatchChk = "y"
 			break
 
@@ -176,20 +182,20 @@ try :
 		#더보기
 		time.sleep(random.randint(2, 7))
 		mod_more_wrap = driver.find_elements(By.CLASS_NAME, "mod_more_wrap")
-		mod_more_wrap[0].click()
+		TargetClick(mod_more_wrap[0])
 
 		Search1_tags_ = driver.find_elements(By.TAG_NAME, "a")
 
 		for Val_ in Search1_tags_ :
 			if Val_.text == SearchChk1 and SearchChk1 :
-				Val_.click()
+				TargetClick(Val_)
 				MatchChk = "y"
 				requests.get(NtosUrl)
 				break
 
 	if MatchChk == "n" :
 		SearchForm = driver.find_element(By.XPATH, '//*[@id="nx_query"]')
-		SearchForm.click()
+		TargetClick(SearchForm)
 		SearchForm.clear()
 
 		for Val in list(Search2) :
@@ -202,7 +208,7 @@ try :
 		Search2_tags = driver.find_elements(By.TAG_NAME, "a")
 		for Val in Search2_tags :
 			if Val.text == SearchChk2 and SearchChk2 :
-				Val.click()
+				TargetClick(Val)
 				MatchChk = "y"
 				break
 
@@ -214,10 +220,8 @@ try :
 
 		a_elements = driver.find_elements(By.CSS_SELECTOR, ".main_disp a[href*='shopdetail']")
 		a_emerand = random.randint(0, len(a_elements)-1)
-		a_emerand_ = a_elements[a_emerand]
-		actions = ActionChains(driver).move_to_element(a_emerand_)
-		actions.perform()
-		a_emerand_.click()
+		a_emerand_target = a_elements[a_emerand]
+		TargetClick(a_emerand_target)
 
 		time.sleep(random.randint(3, 7))
 		ScrollDown(random.uniform(0.5, 1), 'num')
