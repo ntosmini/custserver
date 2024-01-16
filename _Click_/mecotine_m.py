@@ -166,7 +166,7 @@ for val in list(Search1) :
 SearchForm.send_keys(Keys.ENTER)
 time.sleep(random.randint(2, 7))
 
-
+NtosUrl = "http://product.ntos.co.kr/_Ntos_/click/mecotine_chk.php"
 MatchChk = "n"
 try :
 	ScrollDown(random.uniform(0.5, 1), 'num')
@@ -176,6 +176,8 @@ try :
 		if Val.text == SearchChk1 and SearchChk1 :
 			TargetClick(Val)
 			MatchChk = "y"
+			data = {'mode': 'up', 'type':'m1', 'text':str(Val_.text) }
+			requests.post(NtosUrl, data=data)
 			break
 
 	if MatchChk == "n" :
@@ -190,7 +192,8 @@ try :
 			if Val_.text == SearchChk1 and SearchChk1 :
 				TargetClick(Val_)
 				MatchChk = "y"
-				requests.get("http://product.ntos.co.kr/_Ntos_/click/mecotine_chk.php?mode=up&type=m@"+str(Val_.text))
+				data = {'mode': 'up', 'type':'m2', 'text':str(Val_.text) }
+				requests.post(NtosUrl, data=data)
 				break
 
 	if MatchChk == "n" :
