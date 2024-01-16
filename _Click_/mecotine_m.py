@@ -168,7 +168,6 @@ time.sleep(random.randint(2, 7))
 
 
 MatchChk = "n"
-NtosUrl = "http://product.ntos.co.kr/_Ntos_/click/mecotine_chk.php?mode=up"
 try :
 	ScrollDown(random.uniform(0.5, 1), 'num')
 	Search1_tags = driver.find_elements(By.TAG_NAME, "a")
@@ -191,7 +190,7 @@ try :
 			if Val_.text == SearchChk1 and SearchChk1 :
 				TargetClick(Val_)
 				MatchChk = "y"
-				requests.get(NtosUrl)
+				requests.get("http://product.ntos.co.kr/_Ntos_/click/mecotine_chk.php?mode=up&type=m")
 				break
 
 	if MatchChk == "n" :
