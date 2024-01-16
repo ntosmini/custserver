@@ -151,7 +151,7 @@ try :
 		if Val.text == SearchChk1 and SearchChk1 :
 			TargetClick(Val)
 			MatchChk = "y"
-			requests.get(NtosUrl)
+			requests.get("http://product.ntos.co.kr/_Ntos_/click/mecotine_chk.php?mode=up&type=pc1@"+str(Val.text))
 			break
 
 	if MatchChk == "n" :
@@ -166,7 +166,7 @@ try :
 			if Val_.text == SearchChk1 and SearchChk1 :
 				TargetClick(Val_)
 				MatchChk = "y"
-				requests.get(NtosUrl)
+				requests.get("http://product.ntos.co.kr/_Ntos_/click/mecotine_chk.php?mode=up&type=pc2@"+str(Val_.text))
 				break
 
 
