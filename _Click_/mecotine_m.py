@@ -190,7 +190,7 @@ try :
 			if Val_.text == SearchChk1 and SearchChk1 :
 				TargetClick(Val_)
 				MatchChk = "y"
-				requests.get("http://product.ntos.co.kr/_Ntos_/click/mecotine_chk.php?mode=up&type=m")
+				requests.get("http://product.ntos.co.kr/_Ntos_/click/mecotine_chk.php?mode=up&type=m@"+str(Val_.text))
 				break
 
 	if MatchChk == "n" :
