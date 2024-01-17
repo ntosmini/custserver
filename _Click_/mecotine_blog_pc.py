@@ -73,10 +73,11 @@ def ScrollDown(sec, sc_type='') :
 	time.sleep(random.randint(1, 2))
 
 	if sc_type == "num" :
-
 		num = random.randint(5, 10)
-		n_sc = last_height / num
-		for i in range(num) :
+		nm_ = num - random.randint(1, 3)
+		n_sc = (last_height / num)
+
+		for i in range(nm_) :
 			driver.execute_script("window.scrollTo(0, "+str(n_sc)+");")
 			time.sleep(sec)
 			new_height = driver.execute_script("return document.body.scrollHeight")
@@ -85,8 +86,6 @@ def ScrollDown(sec, sc_type='') :
 			last_height = new_height
 			n_sc = n_sc + n_sc
 	else :
-		sccnt = int(0)
-		scmax = int(3)
 		while True:
 			# 끝까지 스크롤 다운
 			driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
@@ -96,11 +95,17 @@ def ScrollDown(sec, sc_type='') :
 
 			# 스크롤 다운 후 스크롤 높이 다시 가져옴
 			new_height = driver.execute_script("return document.body.scrollHeight")
-			if new_height == last_height or sccnt >= scmax :
+			if new_height == last_height:
 				break
 			last_height = new_height
-			sccnt = sccnt + 1
 
+def TargetClick(Target) :
+	global ActionChains
+	actions = ActionChains(driver).move_to_element(Target)
+	actions.perform()
+	time.sleep(random.randint(1, 2))
+	Target.click()
+	
 def chromeWebdriver():
 	if Type == "server" :
 		chrome_service = ChromeService(ChromeDriverManager().install())
@@ -129,11 +134,11 @@ driver = chromeWebdriver()
 driver.delete_all_cookies()
 
 
-
+driver.maximize_window()
 driver.get(SiteUrl)
 driver.implicitly_wait(10)
 time.sleep(random.randint(2, 5))
-driver.maximize_window()
+
 
 time.sleep(random.randint(2, 5))
 
@@ -152,10 +157,12 @@ time.sleep(random.randint(2, 7))
 MatchChk = "n"
 try :
 
-	#ScrollDown(1, 'num')
+	ScrollDown(random.uniform(0.5, 1), 'num')
+	time.sleep(random.randint(1, 2))
+	driver.execute_script("window.scrollTo(0, 0);")
 	time.sleep(random.randint(1, 2))
 	viewmore = driver.find_element(By.CSS_SELECTOR, "a[href*='?where=view']")
-	viewmore.click()
+	TargetClick(viewmore)
 
 
 	time.sleep(random.randint(1, 3))
@@ -165,7 +172,7 @@ try :
 	Search_tags = driver.find_elements(By.TAG_NAME, "a")
 	for Val in Search_tags :
 		if Val.text == SearchChk and SearchChk :
-			Val.click()
+			TargetClick(Val)
 			MatchChk = "y"
 			break
 
@@ -175,7 +182,31 @@ try :
 		time.sleep(random.randint(1, 2))
 		driver.switch_to.frame("mainFrame")
 		ScrollDown(random.randint(1, 2), 'num')
-		time.sleep(random.randint(40, 65))
+		time.sleep(random.randint(20, 35))
+		try :
+			mecotine = driver.find_element(By.CSS_SELECTOR, "a[href*='item.mecotine.com']")
+			TargetClick(mecotine)
+			time.sleep(random.randint(2, 5))
+			driver.switch_to.window(driver.window_handles[-1])
+			time.sleep(random.randint(1, 2))
+			ScrollDown(random.uniform(0.5, 1), 'num')
+			conloop = random.randint(1, 3)
+			for l in range(conloop) :
+				time.sleep(random.randint(2, 5))
+				a_elements = driver.find_elements(By.CSS_SELECTOR, ".main_disp a[href*='shopdetail']")
+				a_emerand = random.randint(0, len(a_elements)-1)
+				a_emerand_target = a_elements[a_emerand]
+				TargetClick(a_emerand_target)
+				
+				time.sleep(random.randint(3, 7))
+				ScrollDown(random.uniform(0.5, 1), 'num')
+				time.sleep(random.randint(10, 22))
+				driver.execute_script("window.history.go(-1)")
+				time.sleep(random.randint(3, 7))
+				ScrollDown(random.uniform(0.5, 1), 'num')
+				time.sleep(random.randint(25, 40))
+		except :
+			pass
 	print("SUCCESS")
 except :
 	print("FALSE")
