@@ -200,7 +200,7 @@ try :
 			conloop = random.randint(1, 3)
 			for l in range(conloop) :
 				time.sleep(random.randint(2, 5))
-				a_elements = driver.find_elements(By.CSS_SELECTOR, ".main_disp a[href*='shopdetail']")
+				a_elements = driver.find_elements(By.CSS_SELECTOR, "a[href*='shopdetail']")
 				a_emerand = random.randint(0, len(a_elements)-1)
 				a_emerand_target = a_elements[a_emerand]
 				TargetClick(a_emerand_target)
