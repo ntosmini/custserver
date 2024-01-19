@@ -191,7 +191,7 @@ try :
 		ScrollDown(random.randint(1, 2), 'num')
 		time.sleep(random.randint(20, 35))
 		try :
-			mecotine = driver.find_element(By.CSS_SELECTOR, "a[href*='item.mecotine.com']")
+			mecotine = driver.find_element(By.CSS_SELECTOR, ".main_disp a[href*='shopdetail']")
 			TargetClick(mecotine)
 			time.sleep(random.randint(2, 5))
 			driver.switch_to.window(driver.window_handles[-1])
