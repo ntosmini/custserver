@@ -191,7 +191,7 @@ try :
 		ScrollDown(random.randint(1, 2), 'num')
 		time.sleep(random.randint(20, 35))
 		try :
-			mecotine = driver.find_element(By.CSS_SELECTOR, ".main_disp a[href*='shopdetail']")
+			mecotine = driver.find_element(By.CSS_SELECTOR, ".se-module-oglink a[href*='item.mecotine.com']")
 			TargetClick(mecotine)
 			time.sleep(random.randint(2, 5))
 			driver.switch_to.window(driver.window_handles[-1])
@@ -200,7 +200,7 @@ try :
 			conloop = random.randint(1, 3)
 			for l in range(conloop) :
 				time.sleep(random.randint(2, 5))
-				a_elements = driver.find_elements(By.CSS_SELECTOR, "a[href*='shopdetail']")
+				a_elements = driver.find_elements(By.CSS_SELECTOR, ".main_disp a[href*='shopdetail']")
 				a_emerand = random.randint(0, len(a_elements)-1)
 				a_emerand_target = a_elements[a_emerand]
 				TargetClick(a_emerand_target)
