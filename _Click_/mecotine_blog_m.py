@@ -192,7 +192,7 @@ try :
 		time.sleep(random.randint(20, 35))
 		try :
 			mecotines = driver.find_elements(By.CSS_SELECTOR, ".se-module-oglink a[href*='item.mecotine.com']")
-			TargetClick(mecotines[random.randint(0, len(mecotines)-1)])
+			TargetClick(mecotines[0])
 			time.sleep(random.randint(2, 5))
 			driver.switch_to.window(driver.window_handles[-1])
 			time.sleep(random.randint(1, 2))
