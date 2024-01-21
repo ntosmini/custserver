@@ -200,20 +200,18 @@ try :
 		ScrollDown(random.uniform(0.5, 1), 'num')
 		time.sleep(random.randint(10, 22))
 
-		conloop = random.randint(1, 3)
-		for l in range(conloop) :
-			a_elements = driver.find_elements(By.CSS_SELECTOR, "a[href*='shopdetail']")
-			a_emerand = random.randint(0, len(a_elements)-1)
-			a_emerand_target = a_elements[a_emerand]
-			TargetClick(a_emerand_target)
+		a_elements = driver.find_elements(By.CSS_SELECTOR, "a[href*='shopdetail']")
+		a_emerand = random.randint(0, len(a_elements)-1)
+		a_emerand_target = a_elements[a_emerand]
+		TargetClick(a_emerand_target)
 			
-			time.sleep(random.randint(3, 7))
-			ScrollDown(random.uniform(0.5, 1), 'num')
-			time.sleep(random.randint(10, 22))
-			driver.execute_script("window.history.go(-1)")
-			time.sleep(random.randint(3, 7))
-			ScrollDown(random.uniform(0.5, 1), 'num')
-			time.sleep(random.randint(25, 40))
+		time.sleep(random.randint(3, 7))
+		ScrollDown(random.uniform(0.5, 1), 'num')
+		time.sleep(random.randint(10, 22))
+		driver.execute_script("window.history.go(-1)")
+		time.sleep(random.randint(3, 7))
+		ScrollDown(random.uniform(0.5, 1), 'num')
+		time.sleep(random.randint(25, 40))
 	print("SUCCESS")
 
 except :
