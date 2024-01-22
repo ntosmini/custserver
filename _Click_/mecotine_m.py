@@ -219,7 +219,7 @@ try :
 	if MatchChk == "y" :
 		time.sleep(random.randint(3, 6))
 		ScrollDown(random.uniform(0.5, 1), 'num')
-		time.sleep(random.randint(10, 22))
+		time.sleep(random.randint(25, 35))
 
 		a_elements = driver.find_elements(By.CSS_SELECTOR, ".main_disp a[href*='shopdetail']")
 		a_emerand = random.randint(0, len(a_elements)-1)
