@@ -35,11 +35,11 @@ MConfig = json.loads(MConfigData)
 
 Type = MConfig['Type']
 SiteUrl = MConfig['SiteUrl']
-Search = MConfig['Search']	#메코틴
+Search = MConfig['Search']
 
-SearchChk1 = MConfig['SearchChk1']	#메코틴, 국내 유일 고품질의 의료용 RS 니코틴, 발암물질 0% 전자담배 액상
-SearchChk2 = MConfig['SearchChk2']	#item.mecotine.com
-Page = MConfig['Page']	#2 / 3
+SearchChk1 = MConfig['SearchChk1']
+SearchChk2 = MConfig['SearchChk2']
+Page = MConfig['Page']
 
 
 if Type == "server" :
