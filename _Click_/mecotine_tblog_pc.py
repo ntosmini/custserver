@@ -128,7 +128,6 @@ def chromeWebdriver():
 		driver = uc.Chrome(service=chrome_service, options=chrome_options, version_main=113)
 	else :
 		chrome_options = Options()
-		chrome_options = Options()
 		chrome_options.add_argument('--no-sandbox')
 		chrome_options.add_argument('--disable-dev-shm-usage')
 		chrome_options.add_argument('--disable-blink-features=AutomationControlled')
