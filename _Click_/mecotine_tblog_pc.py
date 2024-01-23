@@ -222,7 +222,7 @@ try :
 			ScrollDown(random.uniform(0.5, 1), 'num')
 			time.sleep(random.randint(25, 40))
 		except :
-			pass
+			print(str(traceback.format_exc()))
 	print("SUCCESS")
 except :
 	print("FALSE")
