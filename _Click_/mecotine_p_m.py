@@ -262,8 +262,9 @@ try :
 			ScrollDown(random.uniform(0.5, 1), 'num')
 			time.sleep(random.randint(25, 35))
 
-			h_elements = driver.find_elements(By.CSS_SELECTOR, "a[href='/']")
 			driver.execute_script("window.scrollTo(0, 0);")
+			time.sleep(random.randint(1, 2))
+			h_elements = driver.find_elements(By.CSS_SELECTOR, "a[href='/']")
 			time.sleep(random.randint(1, 3))
 			h_elements[1].click()
 				
