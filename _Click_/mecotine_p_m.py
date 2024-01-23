@@ -231,9 +231,9 @@ try :
 			ScrollDown(random.uniform(0.5, 1), 'num')
 			time.sleep(random.randint(2, 5))
 
-			mecotines = driver.find_elements(By.CSS_SELECTOR, "a[href*='"+str(SearchChk2)+"']")
-			mecotines_target = random.randint(0, len(mecotines)-1)
-			TargetClick(mecotines[mecotines_target])
+			mecotines1 = driver.find_elements(By.CSS_SELECTOR, "a[href*='"+str(SearchChk2)+"']")
+			mecotines1_target = random.randint(0, len(mecotines1)-1)
+			TargetClick(mecotines1[mecotines1_target])
 			MatchChk = "y"
 		except :
 			print(str(traceback.format_exc()))
@@ -248,9 +248,9 @@ try :
 			ScrollDown(random.uniform(0.5, 1), 'num')
 			time.sleep(random.randint(2, 5))
 
-			mecotines = driver.find_elements(By.CSS_SELECTOR, "a[href*='"+str(SearchChk2)+"']")
-			mecotines_target = random.randint(0, len(mecotines)-1)
-			TargetClick(mecotines[mecotines_target])
+			mecotines2 = driver.find_elements(By.CSS_SELECTOR, "a[href*='"+str(SearchChk2)+"']")
+			mecotines2_target = random.randint(0, len(mecotines2)-1)
+			TargetClick(mecotines2[mecotines2_target])
 			MatchChk = "y"
 		except :
 			print(str(traceback.format_exc()))
