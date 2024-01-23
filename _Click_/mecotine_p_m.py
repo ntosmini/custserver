@@ -254,6 +254,17 @@ try :
 			time.sleep(random.randint(3, 7))
 			ScrollDown(random.uniform(0.5, 1), 'num')
 			time.sleep(random.randint(20, 60))
+
+			conloop = random.randint(1, 2)
+			if conloop == 1 :
+				time.sleep(random.randint(2, 5))
+				a_elements = driver.find_elements(By.CSS_SELECTOR, "a[href*='shopdetail']")
+				a_emerand = random.randint(0, len(a_elements)-1)
+				a_emerand_target = a_elements[a_emerand]
+				TargetClick(a_emerand_target)
+				time.sleep(random.randint(2, 5))
+				ScrollDown(random.uniform(0.5, 1), 'num')
+				time.sleep(random.randint(10, 30))
 		except :
 			print(str(traceback.format_exc()))
 		print("SUCCESS")
