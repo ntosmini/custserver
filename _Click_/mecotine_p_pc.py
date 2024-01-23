@@ -216,6 +216,23 @@ try :
 		except :
 			print(str(traceback.format_exc()))
 
+	if MatchChk == "n" :
+		try :
+			time.sleep(random.randint(2, 5))
+			p_element = driver.find_element(By.CSS_SELECTOR, "a[href*='page=4']")
+			time.sleep(random.randint(2, 5))
+			TargetClick(p_element)
+			time.sleep(random.randint(2, 5))
+			ScrollDown(random.uniform(0.5, 1), 'num')
+			time.sleep(random.randint(2, 5))
+
+			mecotines = driver.find_elements(By.CSS_SELECTOR, "a[href*='"+str(SearchChk2)+"']")
+			mecotines_target = random.randint(0, len(mecotines)-1)
+			TargetClick(mecotines[mecotines_target])
+			MatchChk = "y"
+		except :
+			print(str(traceback.format_exc()))
+			
 	if MatchChk == "y" :
 		try :
 			time.sleep(random.randint(3, 6))
