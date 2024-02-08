@@ -266,7 +266,7 @@ try :
 			time.sleep(random.randint(1, 2))
 			h_elements = driver.find_elements(By.CSS_SELECTOR, "a[href='/']")
 			time.sleep(random.randint(1, 3))
-			h_elements[1].click()
+			TargetClick(h_elements[1])
 				
 			time.sleep(random.randint(3, 7))
 			ScrollDown(random.uniform(0.5, 1), 'num')
