@@ -225,9 +225,9 @@ try :
 		except :
 			driver.execute_script("window.scrollTo(0, 0);")
 			time.sleep(random.randint(1, 2))
-			h_element = driver.find_element(By.CSS_SELECTOR, "a[href='/']")
+			h_element = driver.find_elements(By.CSS_SELECTOR, "a[href='/']")
 			time.sleep(random.randint(1, 3))
-			TargetClick(h_element)
+			TargetClick(h_element[1])
 
 		
 		time.sleep(random.randint(3, 7))
