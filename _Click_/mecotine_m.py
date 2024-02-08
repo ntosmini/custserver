@@ -216,11 +216,20 @@ try :
 		ScrollDown(random.uniform(0.5, 1), 'num')
 		time.sleep(random.randint(25, 35))
 
-		a_elements = driver.find_elements(By.CSS_SELECTOR, ".main_disp a[href*='shopdetail']")
-		a_emerand = random.randint(0, len(a_elements)-1)
-		a_emerand_target = a_elements[a_emerand]
-		TargetClick(a_emerand_target)
-			
+
+		try :
+			a_elements = driver.find_elements(By.CSS_SELECTOR, "a[href*='shopdetail']")
+			a_emerand = random.randint(0, len(a_elements)-1)
+			a_emerand_target = a_elements[a_emerand]
+			TargetClick(a_emerand_target)
+		except :
+			driver.execute_script("window.scrollTo(0, 0);")
+			time.sleep(random.randint(1, 2))
+			h_element = driver.find_element(By.CSS_SELECTOR, "a[href='/']")
+			time.sleep(random.randint(1, 3))
+			TargetClick(h_element)
+
+		
 		time.sleep(random.randint(3, 7))
 		ScrollDown(random.uniform(0.5, 1), 'num')
 		time.sleep(random.randint(10, 60))
