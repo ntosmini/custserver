@@ -93,8 +93,8 @@ def TargetClick(Target) :
 	global ActionChains
 	actions = ActionChains(driver).move_to_element(Target)
 	actions.perform()
-	time.sleep(random.randint(1, 2))
-	driver.execute_script("window.scrollTo(0, 100);")
+	#time.sleep(random.randint(1, 2))
+	#driver.execute_script("window.scrollTo(0, 100);")
 	time.sleep(random.randint(1, 2))
 	Target.click()
 	
@@ -162,8 +162,6 @@ try :
 		if Val.text == SearchChk1 and SearchChk1 :
 			TargetClick(Val)
 			MatchChk = "y"
-			data = {'mode': 'up', 'type':'pc1', 'text':str(Val.text) }
-			requests.post(NtosUrl, data=data)
 			break
 
 	if MatchChk == "n" :
@@ -173,15 +171,13 @@ try :
 		TargetClick(mod_more_wrap[0])
 		ScrollDown(random.uniform(0.5, 1), 'num')
 		Search1_tags_ = driver.find_elements(By.TAG_NAME, "a")
-
+		"""
 		for Val_ in Search1_tags_ :
 			if Val_.text == SearchChk1 and SearchChk1 :
 				TargetClick(Val_)
 				MatchChk = "y"
-				data = {'mode': 'up', 'type':'pc2', 'text':str(Val.text) }
-				requests.post(NtosUrl, data=data)
 				break
-
+		"""
 	if MatchChk == "n" :	#page 이동
 		try :
 			time.sleep(random.randint(2, 5))
