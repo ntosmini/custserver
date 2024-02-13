@@ -57,7 +57,6 @@ Page = MConfig['Page']
 
 
 
-
 if Type == "server" :
 	sys.path.append(os.path.dirname("/home/ntosmini/public_html/_agent.py"))
 else :
@@ -113,8 +112,8 @@ def TargetClick(Target) :
 	actions = ActionChains(driver).move_to_element(Target)
 	actions.perform()
 	time.sleep(random.randint(1, 2))
-	driver.execute_script("window.scrollTo(0, 100);")
-	time.sleep(random.randint(1, 2))
+	#driver.execute_script("window.scrollTo(0, 100);")
+	#time.sleep(random.randint(1, 2))
 	Target.click()
 
 def chromeWebdriver():
@@ -184,8 +183,6 @@ try :
 		if Val.text == SearchChk1 and SearchChk1 :
 			TargetClick(Val)
 			MatchChk = "y"
-			data = {'mode': 'up', 'type':'m1', 'text':str(Val_.text) }
-			requests.post(NtosUrl, data=data)
 			break
 
 	if MatchChk == "n" :
@@ -195,14 +192,13 @@ try :
 		TargetClick(mod_more_wrap[0])
 		ScrollDown(random.uniform(0.5, 1), 'num')
 		Search1_tags_ = driver.find_elements(By.TAG_NAME, "a")
-
+		"""
 		for Val_ in Search1_tags_ :
 			if Val_.text == SearchChk1 and SearchChk1 :
 				TargetClick(Val_)
 				MatchChk = "y"
-				data = {'mode': 'up', 'type':'m2', 'text':str(Val_.text) }
-				requests.post(NtosUrl, data=data)
 				break
+		"""
 
 	if MatchChk == "n" :	#page 이동
 		try :
@@ -262,11 +258,9 @@ try :
 			ScrollDown(random.uniform(0.5, 1), 'num')
 			time.sleep(random.randint(25, 35))
 
-			driver.execute_script("window.scrollTo(0, 0);")
-			time.sleep(random.randint(1, 2))
 			h_elements = driver.find_elements(By.CSS_SELECTOR, "a[href='/']")
 			time.sleep(random.randint(1, 3))
-			TargetClick(h_elements[1])
+			TargetClick(h_elements[len(h_elements)-1])
 				
 			time.sleep(random.randint(3, 7))
 			ScrollDown(random.uniform(0.5, 1), 'num')
